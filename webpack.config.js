@@ -5,8 +5,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "bundle.js",
-    libraryTarget: "umd"
+    filename: "web-compiler.js",
+    libraryTarget: "umd",
+    globalObject: "globalThis"
   },
   resolve: {
     extensions: [".mjs", ".js", ".json", ".ts", ".tsx"]
