@@ -1,11 +1,13 @@
 {
   "name": "@mizchi/web-compiler",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "dist/web-compiler.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "prepare": "webpack --mode production"
+    "build": "webpack --mode production",
+    "prepare": "yarn build"
   },
   "dependencies": {
     "rollup": "^1.27.5",

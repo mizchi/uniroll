@@ -1,20 +1,12 @@
-// @ts-ignore
 import { rollup } from "rollup";
-// @ts-ignore
 import cdnResolver, { CDNCache } from "rollup-plugin-cdn-resolver";
-// @ts-ignore
 import commonjs from "rollup-plugin-commonjs";
 // @ts-ignore
 import json from "rollup-plugin-json";
-// @ts-ignore
 import terser from "terser";
-// @ts-ignore
 import { parseConfigFileTextToJson, transpileModule } from "typescript";
 import memfs from "./plugins/memfs";
-// @ts-ignore
 import replace from "rollup-plugin-replace";
-// @ts-ignore
-// import { compile as compileSvelte } from "svelte/compiler";
 
 export type CompileOptions = {
   entry: string;
