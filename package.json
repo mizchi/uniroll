@@ -1,8 +1,8 @@
 {
-  "name": "@mizchi/web-compiler",
+  "name": "@mizchi/browserpack",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/web-compiler.js",
+  "main": "dist/browserpack.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",

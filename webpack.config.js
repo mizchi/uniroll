@@ -5,7 +5,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "web-compiler.js",
+    filename: "browserpack.js",
     libraryTarget: "umd",
     globalObject: "globalThis"
   },
