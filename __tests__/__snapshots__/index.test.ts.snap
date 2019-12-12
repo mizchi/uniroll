@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`compile (no deps) 1`] = `
+"var index = 1;
+
+export default index;
+"
+`;
+
+exports[`compile ts 1`] = `
+"Object.defineProperty(exports, \\"__esModule\\", { value: true });
+var foo = 3;
+exports.default = foo;
+"
+`;
+
+exports[`compile tsx 1`] = `
+"Object.defineProperty(exports, \\"__esModule\\", { value: true });
+var h = function () { };
+exports.default = h();
+"
+`;
+
+exports[`compile with minify 1`] = `"var index=1;export default index;"`;
+
+exports[`compile with relational path 1`] = `
+"var foo = 2;
+
+export { foo };
+"
+`;
+
+exports[`compile with rollupConfig 1`] = `
+"(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global = global || self, global._1 = factory());
+}(this, (function () { 'use strict';
+
+	var index = 1;
+
+	return index;
+
+})));
+"
+`;
