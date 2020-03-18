@@ -1,0 +1,12 @@
+{
+  "name": "rollup-v2-play",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup src/index.js --file bundle.js --format iife"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "rollup": "^2.0.6"
+  }
+}
