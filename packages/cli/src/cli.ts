@@ -22,12 +22,7 @@ async function build(options: { type: "memory" | "local"; input: string }) {
     case "memory": {
       const target = path.join(process.cwd(), options.input);
       const dirname = path.basename(path.dirname(target));
-      console.log("target", process.cwd(), dirname);
-
       const files = createMemoryObject(process.cwd(), dirname);
-      // console.log(files);
-      // break;
-
       const out = await compile({
         useInMemory: true,
         files,

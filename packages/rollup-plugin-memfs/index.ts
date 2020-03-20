@@ -14,7 +14,7 @@ export const memfsPlugin = (fs: IPromisesAPI) => {
   return {
     name: "memfs",
     async resolveId(source: string, importer: string | undefined) {
-      console.log("[memfs.resolveId]", source, importer);
+      // console.log("[memfs.resolveId]", source, importer);
 
       // resolve relative path;
       if (importer && importer.startsWith("/") && source.startsWith(".")) {
@@ -58,7 +58,6 @@ class Resolver {
     return this.fs.access(id).then(() => true).catch(_err => false);
   }
   async resolveId(id: string): Promise<string | void> {
-    // console.log("[resolveId]", id);
     // [id][ext]
     for (const ext of this.extensions) {
       const s = id + ext;
