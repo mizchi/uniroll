@@ -6,6 +6,9 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "rollup-plugin-memfs": "0.0.1"
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "babel-plugin-transform-import-to-cdn": "0.0.1",
+    "rollup-plugin-memfs": "0.0.1",
+    "rollup-plugin-url-download": "0.0.1"
   }
 }

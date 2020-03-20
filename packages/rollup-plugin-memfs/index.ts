@@ -6,7 +6,7 @@ export type ResolverOptions = {
   extensions?: string[];
   searchDirectoryIndex?: boolean;
   searchDirectoryPackage?: boolean;
-}
+};
 
 const DEFALUT_EXTENSIONS = [".ts", ".tsx", ".js", ".mjs", ".json"];
 export const memfsPlugin = (fs: IPromisesAPI) => {
@@ -29,6 +29,12 @@ export const memfsPlugin = (fs: IPromisesAPI) => {
     async load(id: string) {
       const m = await fs.readFile(id, "utf-8");
       return m;
+
+      // if (id.startsWith("/")) {
+      //   const m = await fs.readFile(id, "utf-8");
+      //   return m;
+      // }
+      // console.log("[memfs]", "skip", id);
     }
   } as Plugin;
 };
@@ -55,7 +61,10 @@ class Resolver {
   }
 
   async exists(id: string): Promise<boolean> {
-    return this.fs.access(id).then(() => true).catch(_err => false);
+    return this.fs
+      .access(id)
+      .then(() => true)
+      .catch(_err => false);
   }
   async resolveId(id: string): Promise<string | void> {
     // [id][ext]
@@ -85,7 +94,7 @@ class Resolver {
     // [id]/package.json#main
     if (this.searchDirectoryPackage) {
       const pkgPath = path.join(id, "package.json");
-      if ((await this.exists(pkgPath))) {
+      if (await this.exists(pkgPath)) {
         return;
       }
       const pkgStr = await this.fs.readFile(pkgPath);

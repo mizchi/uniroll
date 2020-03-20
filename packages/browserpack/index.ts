@@ -1,10 +1,15 @@
-import type fs from 'fs';
+// TODO
+import "isomorphic-unfetch";
+
+import type fs from "fs";
 import { rollup, OutputOptions } from "rollup";
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
 import { vol } from "memfs";
 import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
 import { transform } from "./baseTranform";
+import { urlDownloadPlugin } from "rollup-plugin-url-download";
+import resolve from "@rollup/plugin-node-resolve";
 
 function createMemoryFs(files: { [k: string]: string }) {
   vol.fromJSON(files, "/");
@@ -12,33 +17,43 @@ function createMemoryFs(files: { [k: string]: string }) {
 }
 
 type BaseOptions = {
-  rollupOutputOptions: OutputOptions
-}
+  rollupOutputOptions: OutputOptions;
+};
 
 export async function compile(
-  options: BaseOptions & (
-      {
-        useInMemory: true;
-        input: string;
-        files: { [k: string]: string };
-      }
-    | {
-        useInMemory: false;
-        input: string;
-        cwd: string;
-        fs: typeof fs.promises;
-      })
+  options: BaseOptions &
+    (
+      | {
+          useInMemory: true;
+          input: string;
+          files: { [k: string]: string };
+        }
+      | {
+          useInMemory: false;
+          input: string;
+          cwd: string;
+          fs: typeof fs.promises;
+        }
+    )
 ) {
-
   // console.log("options", options);
-  const mfs = options.useInMemory ? createMemoryFs(options.files) : (options.fs as any);
+  const mfs = options.useInMemory
+    ? createMemoryFs(options.files)
+    : (options.fs as any);
   const input = options.useInMemory
     ? path.join("/", options.input)
     : path.join(options.cwd, options.input);
 
   const bundle = await rollup({
     input,
-    plugins: [memfsPlugin(mfs), { name: "base-transform", transform }]
+    plugins: [
+      urlDownloadPlugin(),
+      memfsPlugin(mfs),
+      { name: "base-transform", transform },
+      resolve({
+        browser: true
+      })
+    ]
   });
 
   const out = await bundle.generate(options.rollupOutputOptions);
