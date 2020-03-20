@@ -25,7 +25,7 @@ async function build(options: { type: "memory" | "local"; input: string }) {
       const target = path.join(process.cwd(), options.input);
       const dirname = path.basename(path.dirname(target));
       const files = createMemoryObject(process.cwd(), dirname);
-      const out = await compile({
+      const bundle = await compile({
         useInMemory: true,
         files,
         input: options.input,
@@ -33,7 +33,8 @@ async function build(options: { type: "memory" | "local"; input: string }) {
           format: "esm"
         }
       });
-      console.log(out);
+      const out = await bundle.generate({ format: "esm" });
+      console.log(out.output[0]);
       break;
     }
     case "local": {
@@ -51,4 +52,4 @@ async function build(options: { type: "memory" | "local"; input: string }) {
   }
 }
 
-build({ type: "local", input: "example_src/index.js" });
+build({ type: "memory", input: "example_src/index.js" });

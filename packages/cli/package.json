@@ -2,6 +2,6 @@
   "name": "browserpack-cli",
   "version": "0.0.1",
   "dependencies": {
-    "browserpack": "0.0.1"
+    "browserpack": "0.2.0"
   }
 }

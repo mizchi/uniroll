@@ -1,46 +1,19 @@
-import type fs from "fs";
-import { rollup, OutputOptions } from "rollup";
+import { Options } from "./index.d";
+// @ts-ignore
+import { rollup } from "rollup";
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
 import { vol } from "memfs";
 import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
 import { createTransformer } from "./baseTranform";
 import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
-import resolve from "@rollup/plugin-node-resolve";
 
 function createMemoryFs(files: { [k: string]: string }) {
   vol.fromJSON(files, "/");
   return createFs(vol) as IPromisesAPI;
 }
 
-export type Cache = {
-  get(key: string): Promise<string>;
-  set(key: string, content: string): Promise<void>;
-  clear(): Promise<void>
-}
-
-type BaseOptions = {
-  cache?: Cache,
-  rollupOutputOptions: OutputOptions;
-};
-
-export async function compile(
-  options: BaseOptions &
-    (
-      | {
-          useInMemory: true;
-          input: string;
-          files: { [k: string]: string };
-        }
-      | {
-          useInMemory: false;
-          input: string;
-          cwd: string;
-          fs: typeof fs.promises;
-        }
-    )
-) {
-  // console.log("options", options);
+export async function compile(options: Options) {
   const mfs = options.useInMemory
     ? createMemoryFs(options.files)
     : (options.fs as any);
@@ -51,15 +24,10 @@ export async function compile(
   const bundle = await rollup({
     input,
     plugins: [
-      pikaCDNResolver({cache: options.cache}),
+      pikaCDNResolver({ cache: options.cache }),
       memfsPlugin(mfs),
-      { name: "base-transform", transform: createTransformer() },
-      resolve({
-        browser: true
-      })
+      { name: "base-transform", transform: createTransformer() }
     ]
   });
-
-  const out = await bundle.generate(options.rollupOutputOptions);
-  return out;
+  return bundle;
 }

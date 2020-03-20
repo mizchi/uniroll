@@ -4,6 +4,7 @@
   "scripts": {
     "build": "webpack --mode production"
   },
+  "typings": "index.d.ts",
   "main": "dist/browserpack.js",
   "dependencies": {
     "@babel/core": "^7.8.7",
@@ -14,9 +15,13 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@rollup/plugin-json": "^4.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-plugin-transform-import-to-pika-cdn": "0.0.1",
+    "rollup": "^2.1.0",
     "rollup-plugin-memfs": "0.0.1",
-    "rollup-plugin-pika-cdn-resolver": "0.0.1"
-  }
+    "rollup-plugin-pika-cdn-resolver": "0.0.1",
+    "webpack": "^5.0.0-beta.14"
+  },
+  "files": [
+    "dist"
+  ]
 }

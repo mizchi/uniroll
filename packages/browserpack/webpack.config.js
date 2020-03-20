@@ -12,7 +12,10 @@ module.exports = {
     browserpack: path.join(__dirname, "index")
   },
   output: {
+    library: "Browserpack",
+    libraryTarget: "umd",
     filename: "[name].js",
+    globalObject: "globalThis",
     path: path.join(__dirname, "dist")
   },
   module: {
