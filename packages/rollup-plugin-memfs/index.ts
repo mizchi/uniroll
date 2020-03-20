@@ -1,5 +1,5 @@
-import type { Plugin } from "rollup";
-import type { IPromisesAPI } from "memfs/lib/promises";
+import { Plugin } from "rollup";
+import { IPromisesAPI } from "memfs/lib/promises";
 import path from "path";
 
 export type ResolverOptions = {

@@ -1,7 +1,7 @@
-import type { Plugin } from "rollup";
+import { Plugin } from "rollup";
 const PIKA_CDN_HOST = "https://cdn.pika.dev";
 
-export function pikaCDNResolver() {
+export function pikaCDNResolver({ cache = new Map() }: { cache: any }) {
   return {
     async resolveId(id: string, importer: string) {
       if (importer && importer.startsWith(PIKA_CDN_HOST)) {
@@ -11,6 +11,10 @@ export function pikaCDNResolver() {
     },
     async load(id: string) {
       if (id.startsWith(PIKA_CDN_HOST)) {
+        const cached = await cache.get(id);
+        if (cached) {
+          return cached;
+        }
         const res = await fetch(id);
         if (!res.ok) {
           throw res.statusText;

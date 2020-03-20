@@ -1,6 +1,10 @@
 {
   "name": "browserpack",
-  "version": "0.0.1",
+  "version": "0.2.0",
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "main": "dist/browserpack.js",
   "dependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -9,6 +13,7 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@rollup/plugin-json": "^4.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-plugin-transform-import-to-pika-cdn": "0.0.1",
     "rollup-plugin-memfs": "0.0.1",

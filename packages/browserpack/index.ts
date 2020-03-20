@@ -13,7 +13,14 @@ function createMemoryFs(files: { [k: string]: string }) {
   return createFs(vol) as IPromisesAPI;
 }
 
+export type Cache = {
+  get(key: string): Promise<string>;
+  set(key: string, content: string): Promise<void>;
+  clear(): Promise<void>
+}
+
 type BaseOptions = {
+  cache?: Cache,
   rollupOutputOptions: OutputOptions;
 };
 
@@ -44,7 +51,7 @@ export async function compile(
   const bundle = await rollup({
     input,
     plugins: [
-      pikaCDNResolver(),
+      pikaCDNResolver({cache: options.cache}),
       memfsPlugin(mfs),
       { name: "base-transform", transform: createTransformer() },
       resolve({

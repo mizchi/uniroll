@@ -1,4 +1,7 @@
 {
   "name": "babel-plugin-transform-import-to-pika-cdn",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "scripts": {
+    "prepare": "tsc -p ."
+  }
 }
