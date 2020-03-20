@@ -1,2 +1,2 @@
-/** @jsx document.createElement */
+/** @jsx h */
 export default <div>Hello</div>;

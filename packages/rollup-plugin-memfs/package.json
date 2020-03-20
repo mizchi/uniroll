@@ -1,0 +1,11 @@
+{
+  "name": "rollup-plugin-memfs",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "dependencies": {
+    "memfs": "^3.1.2"
+  },
+  "scripts": {
+    "build": ""
+  }
+}
