@@ -1,7 +1,7 @@
 import type { Plugin } from "rollup";
 const PIKA_CDN_HOST = "https://cdn.pika.dev";
 
-export function urlDownloadPlugin() {
+export function pikaCDNResolver() {
   return {
     async resolveId(id: string, importer: string) {
       if (importer && importer.startsWith(PIKA_CDN_HOST)) {

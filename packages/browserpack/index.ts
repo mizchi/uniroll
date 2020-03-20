@@ -1,14 +1,11 @@
-// TODO
-import "isomorphic-unfetch";
-
 import type fs from "fs";
 import { rollup, OutputOptions } from "rollup";
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
 import { vol } from "memfs";
 import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
-import { transform } from "./baseTranform";
-import { urlDownloadPlugin } from "rollup-plugin-url-download";
+import { createTransformer } from "./baseTranform";
+import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
 import resolve from "@rollup/plugin-node-resolve";
 
 function createMemoryFs(files: { [k: string]: string }) {
@@ -47,9 +44,9 @@ export async function compile(
   const bundle = await rollup({
     input,
     plugins: [
-      urlDownloadPlugin(),
+      pikaCDNResolver(),
       memfsPlugin(mfs),
-      { name: "base-transform", transform },
+      { name: "base-transform", transform: createTransformer() },
       resolve({
         browser: true
       })

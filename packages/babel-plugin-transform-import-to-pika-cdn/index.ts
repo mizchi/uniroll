@@ -1,4 +1,6 @@
-export function transformImportPathToCdn(versions: { [k: string]: string }) {
+export function transformImportPathToPikaCDN(versions: {
+  [k: string]: string;
+}) {
   return (_options: any) => {
     return {
       visitor: {

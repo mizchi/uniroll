@@ -1,3 +1,5 @@
+// TODO
+import "isomorphic-unfetch";
 import path from "path";
 import glob from "glob";
 import { compile } from "browserpack";
