@@ -1,17 +1,19 @@
 const path = require("path");
+const WorkerPlugin = require("worker-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
     devtools: path.join(__dirname, "src/devtools.ts"),
     popup: path.join(__dirname, "src/popup.ts"),
-    panel: path.join(__dirname, "src/panel.ts"),
+    panel: path.join(__dirname, "src/panel.tsx"),
     options: path.join(__dirname, "src/options.ts"),
     background: path.join(__dirname, "src/background.ts")
   },
   output: {
     path: path.join(__dirname, "build"),
-    filename: "[name].js"
+    filename: "[name].js",
+    chunkFilename: "[name].[id].[contenthash].js"
   },
   module: {
     rules: [
@@ -25,22 +27,30 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader",
-        exclude: /node_modules/
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.html$/,
-        loader: "html-loader",
-        exclude: /node_modules/
+        test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
+    alias: {
+      browserpack: path.join(__dirname, "../packages/browserpack")
+    },
     extensions: [".js", ".ts", ".tsx", ".json", ".mjs", ".wasm"]
   },
   plugins: [
-    // new CleanWebpackPlugin(),
+    new WorkerPlugin(),
     new CopyWebpackPlugin([
       {
         from: "assets/*",

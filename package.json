@@ -5,7 +5,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@chakra-ui/core": "^0.6.1",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "asar": "^3.0.1",
+    "emotion-theming": "^10.0.27",
     "glob": "^7.1.6",
     "logger": "^0.0.1",
     "react": "^16.13.0",
