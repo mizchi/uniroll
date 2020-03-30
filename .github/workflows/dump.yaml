@@ -1,4 +1,5 @@
-on: [push]
+name: Gen
+on: [push, pull_request]
 # on:
 #   push:
 #     branches:
