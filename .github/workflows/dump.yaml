@@ -16,12 +16,4 @@ jobs:
           node-version: 12
       - run: yarn install
       - run: yarn ts-node script/gen-template-dump.ts
-      - run: git add templates/gen
-      - run: |
-        git diff --exit-code --quiet templates/src
-        if [ 0 -ne $? ]; then
-          git config --global user.email "CI@github"
-          git config --global user.name "CI"
-          git commit -m "[CI] Gen templates/gen"
-          git push origin master
-        fi
+      - run: bash ./script/push-if-changed.bash
