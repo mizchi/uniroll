@@ -24,7 +24,7 @@ export function createTransformer(options?: TransformOptions) {
         nullishCoalescing,
         transformImportPathToPikaCDN({ preact: "10.3.4" })
       ],
-      presets: [[env, { modules: false }], react, ts],
+      presets: [[env, { modules: false, bugfixes: true }], react, ts],
       ...options
     });
     return ret && (ret.code as string);

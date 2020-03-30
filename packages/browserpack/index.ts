@@ -7,6 +7,7 @@ import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
 import { createTransformer } from "./baseTranform";
 import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
+import { css } from "rollup-plugin-browserpack-css";
 
 function createMemoryFs(files: { [k: string]: string }) {
   vol.fromJSON(files, "/");
@@ -24,6 +25,7 @@ export async function compile(options: Options) {
   const bundle = await rollup({
     input,
     plugins: [
+      css(),
       pikaCDNResolver({ cache: options.cache }),
       memfsPlugin(mfs),
       { name: "base-transform", transform: createTransformer() }

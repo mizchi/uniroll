@@ -11,6 +11,7 @@ module.exports = {
     background: path.join(__dirname, "src/background.ts")
   },
   output: {
+    globalObject: "globalThis",
     path: path.join(__dirname, "build"),
     filename: "[name].js",
     chunkFilename: "[name].[id].[contenthash].js"
