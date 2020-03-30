@@ -6,7 +6,8 @@
     "build": "rimraf build && webpack --mode production"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.100",
+    "@types/chrome": "^0.0.103",
+    "@types/jsoneditor": "^5.28.2",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "copy-webpack-plugin": "5.1.1",
@@ -27,6 +28,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "jsoneditor": "^8.6.4",
     "monaco-editor": "^0.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

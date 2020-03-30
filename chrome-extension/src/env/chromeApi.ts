@@ -1,4 +1,3 @@
-declare var chrome: any;
 export function evalCodeInActiveTab(code: string, inputJson: object) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs: any) => {
     var activeTab = tabs[0];
