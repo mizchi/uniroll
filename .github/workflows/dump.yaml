@@ -1,13 +1,12 @@
 name: Gen
-on: [push, pull_request]
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-    name: Greeting
+    name: Gen dump
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -16,12 +15,9 @@ jobs:
         with:
           node-version: 12
       - run: yarn install
-      - run: echo 1 > .dump
-      - run: git add .dump
-      - run: git config --global user.email "miz404@gmail.com"
+      - run: yarn ts-node script/gen-template-dump.ts
+      - run: git add templates/gen
+      - run: git config --global user.email "CI@github"
       - run: git config --global user.name "CI"
-      - run: git commit -m "Gen .dump"
-      - run: git remote set-url origin https://mizchi:${GITHUB_TOKEN}@github.com/mizchi/browserpack-v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git commit -m "[CI] Gen templates/gen"
       - run: git push origin master
