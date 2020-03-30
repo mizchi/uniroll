@@ -18,6 +18,8 @@ jobs:
       - run: yarn install
       - run: echo 1 > .dump
       - run: git add .dump
+      - run: git config --global user.email "miz404@gmail.com"
+      - run: git config --global user.name "CI"
       - run: git commit -m "Gen .dump"
       - run: git remote set-url origin https://mizchi:${GITHUB_TOKEN}@github.com/mizchi/browserpack-v2
         env:
