@@ -9,7 +9,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["activeTab", "tabs", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "activeTab", "tabs", "http://*/*", "https://*/*"],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
@@ -18,5 +18,5 @@
     "128": "icon-128.png"
   },
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

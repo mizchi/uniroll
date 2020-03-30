@@ -1,23 +1,18 @@
-import { useState, useCallback } from "react";
-import React from "react";
 import {
-  ThemeProvider,
-  CSSReset,
-  Flex,
   Button,
+  ButtonGroup,
+  CSSReset,
   DarkMode,
-  Divider,
-  ButtonGroup
+  Flex,
+  ThemeProvider
 } from "@chakra-ui/core";
-import { evalCodeInActiveTab } from "../env/chromeApi";
-import { compile } from "browserpack";
+import React, { useCallback, useEffect, useState } from "react";
 import { templateList } from "../constants";
-import { TemplatesPane } from "./panes/TemplatesPane";
-import { RunnerPane } from "./panes/RunnerPane";
-import { VariablesPane } from "./panes/VariablesPane";
-import { FileSelectorPane } from "./panes/FileSelectorPane";
 import { FileEditorPane } from "./panes/FileEditorPane";
-import { isInExtension } from "../helper/isInExtension";
+import { FileSelectorPane } from "./panes/FileSelectorPane";
+import { RunnerPane } from "./panes/RunnerPane";
+import { TemplatesPane } from "./panes/TemplatesPane";
+import { VariablesPane } from "./panes/VariablesPane";
 
 export type Files = { [key: string]: string };
 export const Editor = React.lazy(() => import("./editor/Editor"));
@@ -39,17 +34,41 @@ export function App() {
   );
 }
 
+// const STORAGE_KEY = "$current";
+
+type SavedState = {
+  files: { [k: string]: string };
+};
+
 type SCENE = "editor" | "template" | "run" | "variables";
 const firstFiles = templateList[0].files as any;
 function Internal() {
   const [currentScene, setCurrentScene] = useState<SCENE>("editor");
   const [files, setFiles] = useState<Files>(firstFiles);
   const [currentFilepath, setCurrentFilepath] = useState<string | null>(null);
+  useEffect(() => {
+    chrome.storage.sync.get(["$current"], result => {
+      const savedState = result.$current;
+      if (savedState != null) {
+        try {
+          const data = JSON.parse(savedState) as SavedState;
+          setFiles(data.files);
+        } catch (err) {
+          // throw err;
+          alert(err.message);
+        }
+      }
+    });
+  }, []);
+
   const onUpdate = useCallback(
     (filepath: string, value: string) => {
       console.log("onupdate", filepath, value);
       const newFiles = { ...files, [filepath]: value };
       setFiles(newFiles);
+      chrome.storage.sync.set({
+        $current: JSON.stringify({ files: newFiles })
+      });
     },
     [files]
   );

@@ -29,6 +29,7 @@
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
     "jsoneditor": "^8.6.4",
+    "kv-storage-polyfill": "^2.0.0",
     "monaco-editor": "^0.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -2133,6 +2133,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+kv-storage-polyfill@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/kv-storage-polyfill/-/kv-storage-polyfill-2.0.0.tgz#ae068ff3c5864dc336d126bee42a7c8d9308d5e8"
+  integrity sha512-K4tV8kYT2YNP00GN77pJ099cpwaYCOBGYY2NsfLjUtimE49YI9OYX+MGzOGHNOttUNCKC2Y3YZpV7P+HY2tgCQ==
+
 lcid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-2.0.0.tgz#6ef5d2df60e52f82eb228a4c373e8d1f397253cf"
