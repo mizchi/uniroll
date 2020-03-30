@@ -16,4 +16,10 @@ jobs:
         with:
           node-version: 12
       - run: yarn install
-      - run: echo 1
+      - run: echo 1 > .dump
+      - run: git add .dump
+      - run: git commit -m "Gen .dump"
+      - run: git remote set-url origin https://mizchi:${GITHUB_TOKEN}@github.com/mizchi/browserpack-v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: git push origin master
