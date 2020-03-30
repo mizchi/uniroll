@@ -106,13 +106,16 @@ function Internal() {
           )}
           {currentScene == "template" && (
             <TemplatesPane
-              onSelectTemplate={id => {
-                const template = templateList.find(t => t.id === id);
-                if (template) {
-                  setFiles(template.files as any);
-                  setCurrentFilepath(null);
-                  setCurrentScene("editor");
-                }
+              onSelectTemplate={async url => {
+                console.log("url");
+                const res = await fetch(url);
+                const data = await res.json();
+                // const template = templateList.find(t => t.id === id);
+                // if (template) {
+                setFiles(data.files);
+                setCurrentFilepath(null);
+                setCurrentScene("variables");
+                // }
               }}
             />
           )}
