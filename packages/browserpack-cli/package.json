@@ -1,6 +1,10 @@
 {
   "name": "browserpack-cli",
   "version": "0.0.1",
+  "scripts": {
+    "build": "echo wip",
+    "test": "echo wip"
+  },
   "dependencies": {
     "browserpack": "0.2.0"
   }

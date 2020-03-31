@@ -1,0 +1,39 @@
+{
+  "name": "browserpack-ui",
+  "version": "0.0.1",
+  "main": "dist/ui.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "demo": "webpack-dev-server --config webpack.demo.config.js",
+    "build": "webpack --mode production",
+    "test": "echo wip"
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^0.6.1",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "emotion-theming": "^10.0.27",
+    "jsoneditor": "^8.6.4"
+  },
+  "devDependencies": {
+    "@types/jsoneditor": "^8.6.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.3",
+    "monaco-editor": "^0.20.0",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "url-loader": "^4.0.0",
+    "webpack-dev-server": "^3.10.3",
+    "worker-plugin": "^4.0.2"
+  },
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "browserpack": "0.2.0"
+  }
+}

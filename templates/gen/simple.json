@@ -1,1 +1,1 @@
-{"files":{"index.tsx":"","package.json":"","style.css":"","variables.json":"{}\n"},"id":"simple","name":"simple"}
+{"files":{"index.tsx":"import { h, render } from \"preact\";\n\nrender(h(\"div\", {}, \"hello\"), document.body);\n","package.json":"{\n  \"name\": \"simple\",\n  \"version\": \"0.0.1\"\n}\n","style.css":"","variables.json":"{}\n"},"id":"simple","name":"simple"}

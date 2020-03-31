@@ -33,7 +33,21 @@ for (const target of targets) {
   );
 }
 
+let pkgList: Array<any> = [];
+for (const target of targets) {
+  try {
+    const pkg = fs.readFileSync(
+      path.join(process.cwd(), SRC_ROOT, target, "files/package.json"),
+      "utf-8"
+    );
+    pkgList.push(pkg);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+
 fs.writeFileSync(
   path.join(process.cwd(), OUT_ROOT, "list.json"),
-  JSON.stringify(targets)
+  JSON.stringify(pkgList)
 );

@@ -7,13 +7,13 @@ import {
   ThemeProvider
 } from "@chakra-ui/core";
 import React, { useCallback, useEffect, useState } from "react";
-import { templateList } from "../constants";
+import { templateList } from "./constants";
 import { FileEditorPane } from "./panes/FileEditorPane";
 import { FileSelectorPane } from "./panes/FileSelectorPane";
 import { RunnerPane } from "./panes/RunnerPane";
 import { TemplatesPane } from "./panes/TemplatesPane";
 import { VariablesPane } from "./panes/VariablesPane";
-import { save, load } from "../env/chromeApi";
+import { useEnv } from "./contexts";
 
 export type Files = { [key: string]: string };
 export const Editor = React.lazy(() => import("./editor/Editor"));
@@ -37,13 +37,14 @@ export function App() {
 type SCENE = "editor" | "template" | "run" | "variables";
 const firstFiles = templateList[0].files as any;
 function Internal() {
+  const env = useEnv();
   const [currentScene, setCurrentScene] = useState<SCENE>("editor");
   const [files, setFiles] = useState<Files>(firstFiles);
   const [currentFilepath, setCurrentFilepath] = useState<string | null>(null);
   useEffect(() => {
     (async () => {
       try {
-        const data = await load();
+        const data = await env.load();
         setFiles(data.files);
       } catch (err) {
         alert(err.message);
@@ -55,7 +56,7 @@ function Internal() {
     (filepath: string, value: string) => {
       const newFiles = { ...files, [filepath]: value };
       setFiles(newFiles);
-      save({
+      env.save({
         files: newFiles
       });
     },
@@ -88,8 +89,8 @@ function Internal() {
                 onUpdate={onUpdate}
               />
             ) : (
-              <FileSelectorPane files={files} onSelectFilepath={onSelectFile} />
-            ))}
+                <FileSelectorPane files={files} onSelectFilepath={onSelectFile} />
+              ))}
           {currentScene === "variables" && (
             <VariablesPane files={files} onUpdate={onUpdate} />
           )}

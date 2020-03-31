@@ -21,3 +21,36 @@ export function evalCodeInActiveTab(code: string, inputJson: object) {
     });
   });
 }
+
+export type SavedState = {
+  files: { [k: string]: string };
+};
+
+const SAVE_KEY = "$current";
+
+export function load(): Promise<SavedState> {
+  return new Promise(r => {
+    chrome.storage.sync.get([SAVE_KEY], result => {
+      const savedState = result.$current;
+      if (savedState != null) {
+        try {
+          const data = JSON.parse(savedState) as SavedState;
+          return data;
+        } catch (err) {
+          throw err;
+        }
+      }
+    });
+  });
+}
+
+export function save(savedState: SavedState): Promise<void> {
+  return new Promise(r => {
+    chrome.storage.sync.set(
+      {
+        [SAVE_KEY]: JSON.stringify(savedState)
+      },
+      r
+    );
+  });
+}

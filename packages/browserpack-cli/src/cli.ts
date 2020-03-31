@@ -28,10 +28,7 @@ async function build(options: { type: "memory" | "local"; input: string }) {
       const bundle = await compile({
         useInMemory: true,
         files,
-        input: options.input,
-        rollupOutputOptions: {
-          format: "esm"
-        }
+        input: options.input
       });
       const out = await bundle.generate({ format: "esm" });
       console.log(out.output[0]);
@@ -42,10 +39,7 @@ async function build(options: { type: "memory" | "local"; input: string }) {
         useInMemory: false,
         input: options.input,
         cwd: process.cwd(),
-        fs: fs.promises,
-        rollupOutputOptions: {
-          format: "esm"
-        }
+        fs: fs.promises
       });
       console.log(out);
     }
