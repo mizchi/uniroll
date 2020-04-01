@@ -1,1 +1,1 @@
-{"files":{"index.tsx":"console.log(\"hello world\");\n"},"id":"helloworld","name":"helloworld"}
+{"files":{"index.tsx":"console.log(\"hello world\");\n","package.json":"{\n  \"name\": \"helloworld\",\n  \"description\": \"hello, world!\"\n}"},"id":"helloworld","name":"helloworld"}

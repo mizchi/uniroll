@@ -1,1 +1,1 @@
-["helloworld","preact","react","simple","vue"]
+["{\n  \"name\": \"helloworld\",\n  \"description\": \"hello, world!\"\n}","{\n  \"name\": \"preact\",\n  \"description\": \"preact example\",\n  \"dependencies\": {\n    \"preact\": \"10.3.4\"\n  }\n}\n","","{\n  \"name\": \"simple\",\n  \"version\": \"0.0.1\"\n}\n","{\n  \"name\": \"vue\",\n  \"version\": \"0.0.1\",\n  \"dependencies\": {\n    \"vue\": \"2.6.11\"\n  }\n}\n"]

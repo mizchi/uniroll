@@ -13,7 +13,8 @@ import { FileSelectorPane } from "./panes/FileSelectorPane";
 import { RunnerPane } from "./panes/RunnerPane";
 import { TemplatesPane } from "./panes/TemplatesPane";
 import { VariablesPane } from "./panes/VariablesPane";
-import { useEnv } from "./contexts";
+import { useEnv, IsInMobileContext } from "./contexts";
+import { useWindowWidth } from "./hooks";
 
 export type Files = { [key: string]: string };
 export const Editor = React.lazy(() => import("./editor/Editor"));
@@ -25,13 +26,16 @@ export const extToLanguage: { [key: string]: string } = {
 };
 
 export function App() {
+  const width = useWindowWidth();
   return (
-    <DarkMode>
-      <ThemeProvider>
-        <CSSReset />
-        <Internal />
-      </ThemeProvider>
-    </DarkMode>
+    <IsInMobileContext.Provider value={width < 768}>
+      <DarkMode>
+        <ThemeProvider>
+          <CSSReset />
+          <Internal />
+        </ThemeProvider>
+      </DarkMode>
+    </IsInMobileContext.Provider>
   );
 }
 type SCENE = "editor" | "template" | "run" | "variables";
@@ -80,17 +84,15 @@ function Internal() {
         </Flex>
         <Flex h="calc(100% - 32px)">
           {currentScene == "run" && <RunnerPane files={files} />}
-          {currentScene == "editor" &&
-            (currentFilepath ? (
-              <FileEditorPane
-                filepath={currentFilepath}
-                value={files[currentFilepath]}
-                onBack={() => setCurrentFilepath(null)}
-                onUpdate={onUpdate}
-              />
-            ) : (
-                <FileSelectorPane files={files} onSelectFilepath={onSelectFile} />
-              ))}
+          {currentScene == "editor" && (
+            <WrappedEditor
+              filepath={currentFilepath}
+              files={files}
+              onBack={() => setCurrentFilepath(null)}
+              onUpdate={onUpdate}
+              onSelectFile={onSelectFile}
+            />
+          )}
           {currentScene === "variables" && (
             <VariablesPane files={files} onUpdate={onUpdate} />
           )}
@@ -129,4 +131,51 @@ function Header(props: { onClickTab: (scene: SCENE) => void }) {
       </Button>
     </ButtonGroup>
   );
+}
+
+import { useIsInMobile } from "./contexts";
+function WrappedEditor(props: {
+  filepath: string | null;
+  files: Files;
+  onBack: () => void;
+  onSelectFile: (filepath: string) => void;
+  onUpdate: (filepath: string, content: string) => void;
+}) {
+  const isInMobile = useIsInMobile();
+  if (isInMobile) {
+    return props.filepath ? (
+      <FileEditorPane
+        filepath={props.filepath}
+        value={props.files[props.filepath]}
+        onBack={props.onBack}
+        onUpdate={props.onUpdate}
+      />
+    ) : (
+      <FileSelectorPane
+        files={props.files}
+        onSelectFilepath={props.onSelectFile}
+      />
+    );
+  } else {
+    return (
+      <Flex w="100%" h="100%">
+        <Flex maxW="400px" h="100%" pl={3} pt={3}>
+          <FileSelectorPane
+            files={props.files}
+            onSelectFilepath={props.onSelectFile}
+          />
+        </Flex>
+        {props.filepath && (
+          <Flex flex={1} w="100%" h="100%">
+            <FileEditorPane
+              filepath={props.filepath}
+              value={props.files[props.filepath]}
+              onBack={props.onBack}
+              onUpdate={props.onUpdate}
+            />
+          </Flex>
+        )}
+      </Flex>
+    );
+  }
 }

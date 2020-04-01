@@ -1,3 +1,2 @@
-import { h, render } from "preact";
-
-render(h("div", {}, "hello"), document.body);
+import "./style.css";
+export default (props: any) => console.log("hello", props);
