@@ -1,11 +1,11 @@
 # Browserpack
 
-In browser rollup bundling via `cdn.pika.dev`
+Opinionated in browser compiler.
 
 ## How to use
 
 ```
-npm install browserpack --save
+npm install @mizchi/browserpack --save
 ```
 
 ```js
@@ -49,6 +49,15 @@ const el = document.createElement("div");
 render(<Popup value={text} />, el);
 document.body.appendChild(el);
 ```
+
+## How it works
+
+- mount files on virtual fs with `memfs`: `rollup-plugin-memfs`
+- transform with `@babel/preset-env`, `@babel/preset-typescript` and `browserpack/packages/babel-plugin-transform-import-to-pika-cdn`
+- load npm modules with `cdn.pika.dev` via `browserpack/packages/rollup-plugin-pika-cdn-resolver`
+- resolve ext with `.js` `.ts` `.tsx` `.json` `.mjs`
+- transform `.css` with `browserpack/packages/rollup-plugin-browserpack-css`(like style-loader, css-loader);
+- compile as `rollup(...)` and return `RollupOutput` object
 
 ## Chrome Extension
 
