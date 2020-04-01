@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "scripts": {
     "demo": "webpack-dev-server --config webpack.demo.config.js",
-    "build": "tsc -p .",
+    "build": "rimraf lib && tsc -p .",
     "test": "echo wip"
   },
   "dependencies": {},
@@ -31,7 +31,7 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "browserpack": "0.2.0",
+    "@mizchi/browserpack": "0.2.0",
     "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",

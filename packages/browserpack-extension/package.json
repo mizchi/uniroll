@@ -26,7 +26,7 @@
     "@chakra-ui/core": "^0.6.1",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "browserpack": "0.2.0",
+    "@mizchi/browserpack": "0.2.0",
     "browserpack-ui": "0.0.1",
     "emotion-theming": "^10.0.27",
     "jsoneditor": "^8.6.4",

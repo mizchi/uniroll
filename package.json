@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "yarn install && yarn build:ext",
-    "build:browserpack": "run-p build:pkg:* && yarn workspace browserpack build",
+    "build:browserpack": "run-p build:pkg:* && yarn build:output:browserpack",
     "build:cli": "run-s build:browserpack build:output:cli",
     "build:ext": "run-s build:browserpack build:output:ui build:output:ext",
     "build:ui": "run-s build:browserpack build:output:ui",
@@ -11,7 +11,8 @@
     "build:pkg:rollup-plugin-memfs": "yarn workspace rollup-plugin-memfs build",
     "build:output:cli": "yarn workspace browserpack-cli build",
     "build:output:ui": "yarn workspace browserpack-ui build",
-    "build:output:ext": "yarn workspace browserpack-extension build"
+    "build:output:ext": "yarn workspace browserpack-extension build",
+    "build:output:browserpack": "yarn workspace @mizchi/browserpack build"
   },
   "license": "MIT",
   "devDependencies": {

@@ -3,8 +3,8 @@ import "./initMonaco";
 import React from "react";
 import ReactDOM from "react-dom";
 import { App, EnvContext } from "./index";
-import { Env } from "..";
-import { compile, Options } from "browserpack";
+import { Env } from "./types";
+import { compile, Options } from "@mizchi/browserpack";
 
 const env: Env = {
   templateHost:

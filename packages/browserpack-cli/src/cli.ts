@@ -2,7 +2,7 @@
 import "isomorphic-unfetch";
 import path from "path";
 import glob from "glob";
-import { compile } from "browserpack";
+import { compile } from "@mizchi/browserpack";
 import fs from "fs";
 
 function createMemoryObject(cwd: string, baseDirectory: string) {

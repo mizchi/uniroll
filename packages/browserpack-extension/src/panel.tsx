@@ -3,7 +3,7 @@ import "./initMonaco";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { compile, Options } from "browserpack";
+import { compile, Options } from "@mizchi/browserpack";
 // @ts-ignore
 import { Env, State } from "browserpack-ui/lib";
 // @ts-ignore

@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/core";
 import { useIsInMobile } from "../../contexts";
-import { Files } from "../../../..";
+import { Files } from "../../../types";
 import { FileEditorPane } from "./FileEditorPane";
 import { FileSelectorPane } from "./FileSelectorPane";
 import React from "react";
