@@ -31,7 +31,7 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "@mizchi/browserpack": "0.2.0",
+    "@mizchi/browserpack": "0.2.1",
     "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",

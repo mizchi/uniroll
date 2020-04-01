@@ -2,6 +2,8 @@
 
 Opinionated in browser compiler.
 
+demo https://focused-raman-3ce115.netlify.com/
+
 ## Run in browser
 
 ```
