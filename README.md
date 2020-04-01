@@ -52,7 +52,7 @@ document.body.appendChild(el);
 
 ## Run in node
 
-## Run in browser
+Run compiler with same logics.
 
 ```bash
 $ npm install @mizchi/browserpack-cli --save
