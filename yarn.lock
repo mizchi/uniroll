@@ -988,6 +988,26 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@mizchi/browserpack@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@mizchi/browserpack/-/browserpack-0.2.0.tgz#11faab9f884ea53d1536b7eced18c3569deba919"
+  integrity sha512-SBXw4uKCcuhCFI8t2JilhSPnWt/Hj0MU7udeBbQ48qGXtvrwZDneg9bnQmtW3OvyuThNiarTQLjGzAWqITeR3w==
+  dependencies:
+    "@babel/core" "^7.8.7"
+    "@babel/plugin-proposal-class-properties" "^7.8.3"
+    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.8.3"
+    "@babel/plugin-proposal-object-rest-spread" "^7.8.3"
+    "@babel/preset-env" "^7.9.0"
+    "@babel/preset-react" "^7.8.3"
+    "@babel/preset-typescript" "^7.8.3"
+    "@rollup/plugin-json" "^4.0.2"
+    babel-plugin-transform-import-to-pika-cdn "0.0.1"
+    rollup "^2.1.0"
+    rollup-plugin-browserpack-css "0.0.1"
+    rollup-plugin-memfs "0.1.0"
+    rollup-plugin-pika-cdn-resolver "0.0.1"
+    ts-node "^8.6.2"
+
 "@reach/alert@^0.1.2":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@reach/alert/-/alert-0.1.5.tgz#4da79add0055fa4295f51e5295ed3b80257e9153"

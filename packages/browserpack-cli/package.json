@@ -1,6 +1,6 @@
 {
   "name": "@mizchi/browserpack-cli",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "bin": {
     "browserpack": "bin/browserpack"
   },
@@ -10,7 +10,9 @@
     "test": "echo wip"
   },
   "dependencies": {
-    "@mizchi/browserpack": "0.2.0",
+    "@mizchi/browserpack": "0.2.1",
+    "glob": "^7.1.6",
+    "isomorphic-unfetch": "^3.0.0",
     "meow": "^6.1.0"
   },
   "files": [

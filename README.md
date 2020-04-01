@@ -52,6 +52,13 @@ document.body.appendChild(el);
 
 ## Run in node
 
+## Run in browser
+
+```bash
+$ npm install @mizchi/browserpack-cli --save
+$ browserpack foo.js --out out.js
+```
+
 ## How it works
 
 - mount files on virtual fs with `memfs`: `rollup-plugin-memfs`
