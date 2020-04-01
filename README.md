@@ -24,7 +24,20 @@ const out = await bundle.generate({ format: "esm" });
 console.log(out.output[0]);
 ```
 
-## Example: You can import npm registry
+## via CDN
+
+```html
+<!-- NOTE: This is 2.3 MB -->
+<script
+  async
+  src="https://cdn.jsdelivr.net/npm/@mizchi/browserpack@0.2.1/dist/browserpack.js"
+></script>
+<script>
+  Browserpack.compile({...})
+</script>
+```
+
+## Example: import npm registry
 
 ```tsx
 import { h, render } from "preact";
