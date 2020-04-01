@@ -1,11 +1,16 @@
 {
-  "name": "browserpack-cli",
+  "name": "@mizchi/browserpack-cli",
   "version": "0.0.1",
+  "bin": {
+    "browserpack": "bin/browserpack"
+  },
   "scripts": {
-    "build": "echo wip",
+    "prepublishOnly": "yarn build",
+    "build": "tsc -p .",
     "test": "echo wip"
   },
   "dependencies": {
-    "@mizchi/browserpack": "0.2.0"
+    "@mizchi/browserpack": "0.2.0",
+    "meow": "^6.1.0"
   }
 }
