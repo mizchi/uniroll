@@ -1,15 +1,6 @@
 import * as monaco from "monaco-editor";
 import React, { useLayoutEffect, useRef } from "react";
 
-// // @ts-ignore
-// self.MonacoEnvironment = {
-//   getWorker(_moduleId: string, _label: string) {
-//     return new Worker("monaco-editor/esm/vs/editor/editor.worker.js", {
-//       type: "module"
-//     });
-//   }
-// };
-
 export default (props: {
   value: string;
   language?: "typescript" | "css" | "javascript";
@@ -19,19 +10,6 @@ export default (props: {
 
   useLayoutEffect(() => {
     if (editorRef.current) {
-      // monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-      //   noSemanticValidation: false,
-      //   noSyntaxValidation: false
-      // });
-      // monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      //   // jsx: 'react',
-      //   jsx: monaco.languages.typescript.JsxEmit.React,
-      //   jsxFactory: "React.createElement",
-      //   reactNamespace: "React",
-      //   allowNonTsExtensions: true,
-      //   allowJs: true,
-      //   target: monaco.languages.typescript.ScriptTarget.Latest
-      // });
       const newEditor = monaco.editor.create(editorRef.current, {
         value: props.value,
         language: props.language,

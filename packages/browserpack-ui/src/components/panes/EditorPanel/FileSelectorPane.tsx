@@ -8,8 +8,7 @@ import {
   Heading,
   Box
 } from "@chakra-ui/core";
-import { Files } from "../App";
-import styled from "@emotion/styled";
+import { Files } from "../../App";
 
 export function FileSelectorPane(props: {
   files: Files;

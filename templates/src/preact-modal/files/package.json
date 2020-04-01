@@ -1,0 +1,7 @@
+{
+  "name": "preact",
+  "description": "preact example",
+  "dependencies": {
+    "preact": "10.3.4"
+  }
+}

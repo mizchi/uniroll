@@ -12,6 +12,7 @@ import * as chromeApi from "./env/chromeApi";
 
 const env: Env = {
   inExtension: true,
+  evalCodeInActiveTab: chromeApi.evalCodeInActiveTab,
   async compile(options: Options) {
     return compile(options);
   },

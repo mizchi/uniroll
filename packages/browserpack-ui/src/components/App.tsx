@@ -8,16 +8,17 @@ import {
 } from "@chakra-ui/core";
 import React, { useCallback, useEffect, useState } from "react";
 import { templateList } from "./constants";
-import { FileEditorPane } from "./panes/FileEditorPane";
-import { FileSelectorPane } from "./panes/FileSelectorPane";
+import { FileEditorPane } from "./panes/EditorPanel/FileEditorPane";
+import { FileSelectorPane } from "./panes/EditorPanel/FileSelectorPane";
 import { RunnerPane } from "./panes/RunnerPane";
 import { TemplatesPane } from "./panes/TemplatesPane";
 import { VariablesPane } from "./panes/VariablesPane";
 import { useEnv, IsInMobileContext } from "./contexts";
 import { useWindowWidth } from "./hooks";
+import { EditorPanel } from "./panes/EditorPanel";
 
 export type Files = { [key: string]: string };
-export const Editor = React.lazy(() => import("./editor/Editor"));
+// export const Editor = React.lazy(() => import("./editor/Editor"));
 export const extToLanguage: { [key: string]: string } = {
   ".ts": "typescript",
   ".tsx": "typescript",
@@ -76,6 +77,7 @@ function Internal() {
       <Flex direction="column" w="100%" h="100%">
         <Flex h="32px">
           <Header
+            files={files}
             onClickTab={scene => {
               setCurrentScene(scene);
               setCurrentFilepath(null);
@@ -84,8 +86,12 @@ function Internal() {
         </Flex>
         <Flex h="calc(100% - 32px)">
           {currentScene == "run" && <RunnerPane files={files} />}
+          {currentScene === "variables" && (
+            <VariablesPane files={files} onUpdate={onUpdate} />
+          )}
+
           {currentScene == "editor" && (
-            <WrappedEditor
+            <EditorPanel
               filepath={currentFilepath}
               files={files}
               onBack={() => setCurrentFilepath(null)}
@@ -93,17 +99,18 @@ function Internal() {
               onSelectFile={onSelectFile}
             />
           )}
-          {currentScene === "variables" && (
-            <VariablesPane files={files} onUpdate={onUpdate} />
-          )}
           {currentScene == "template" && (
             <TemplatesPane
               onSelectTemplate={async url => {
                 const res = await fetch(url);
                 const data = await res.json();
                 setFiles(data.files);
-                setCurrentFilepath(null);
-                setCurrentScene("variables");
+                if (data.files["/variables.json"]) {
+                  setCurrentFilepath(null);
+                  setCurrentScene("variables");
+                } else {
+                  setCurrentScene("editor");
+                }
               }}
             />
           )}
@@ -113,68 +120,32 @@ function Internal() {
   );
 }
 
-function Header(props: { onClickTab: (scene: SCENE) => void }) {
+function Header(props: { files: Files; onClickTab: (scene: SCENE) => void }) {
   return (
-    <ButtonGroup pt={1} pl={1}>
-      <Button size="sm" onClick={() => props.onClickTab("run")}>
-        Run
-      </Button>
-      <Button size="sm" onClick={() => props.onClickTab("editor")}>
-        Files
-      </Button>
-      <Button size="sm" onClick={() => props.onClickTab("variables")}>
-        Variables
-      </Button>
-      <Button size="sm" onClick={() => props.onClickTab("template")}>
-        Templates
-      </Button>
-    </ButtonGroup>
-  );
-}
-
-import { useIsInMobile } from "./contexts";
-function WrappedEditor(props: {
-  filepath: string | null;
-  files: Files;
-  onBack: () => void;
-  onSelectFile: (filepath: string) => void;
-  onUpdate: (filepath: string, content: string) => void;
-}) {
-  const isInMobile = useIsInMobile();
-  if (isInMobile) {
-    return props.filepath ? (
-      <FileEditorPane
-        filepath={props.filepath}
-        value={props.files[props.filepath]}
-        onBack={props.onBack}
-        onUpdate={props.onUpdate}
-      />
-    ) : (
-      <FileSelectorPane
-        files={props.files}
-        onSelectFilepath={props.onSelectFile}
-      />
-    );
-  } else {
-    return (
-      <Flex w="100%" h="100%">
-        <Flex maxW="400px" h="100%" pl={3} pt={3}>
-          <FileSelectorPane
-            files={props.files}
-            onSelectFilepath={props.onSelectFile}
-          />
-        </Flex>
-        {props.filepath && (
-          <Flex flex={1} w="100%" h="100%">
-            <FileEditorPane
-              filepath={props.filepath}
-              value={props.files[props.filepath]}
-              onBack={props.onBack}
-              onUpdate={props.onUpdate}
-            />
-          </Flex>
-        )}
+    <Flex w="100%">
+      <Flex>
+        <ButtonGroup pt={1} pl={1}>
+          <Button size="sm" onClick={() => props.onClickTab("run")}>
+            Run
+          </Button>
+          {props.files["/variables.json"] && (
+            <Button size="sm" onClick={() => props.onClickTab("variables")}>
+              Variables
+            </Button>
+          )}
+          <Button size="sm" onClick={() => props.onClickTab("editor")}>
+            Files
+          </Button>
+        </ButtonGroup>
       </Flex>
-    );
-  }
+      <Flex flex={1} />
+      <Flex pr={1}>
+        <ButtonGroup pt={1} pl={1}>
+          <Button size="sm" onClick={() => props.onClickTab("template")}>
+            Templates
+          </Button>
+        </ButtonGroup>
+      </Flex>
+    </Flex>
+  );
 }
