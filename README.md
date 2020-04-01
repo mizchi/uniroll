@@ -71,7 +71,7 @@ document.body.appendChild(el);
    1. Access `chrome://extensions/`
    2. Check `Developer mode`
    3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
+   4. Select the `packages/browserpack-extension/build` folder.
 6. Have fun.
 
 See detail
