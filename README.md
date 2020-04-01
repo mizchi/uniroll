@@ -26,8 +26,28 @@ console.log(out.output[0]);
 
 ## Example: You can import npm registry
 
-```bash
+```js
+import { h, render } from "preact";
+import { styled, setPragma } from "goober";
 
+setPragma(h);
+
+const PopupWrapper = styled("div")`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 200px;
+  height: 100px;
+  background-color: wheat;
+`;
+
+function Popup() {
+  return <PopupWrapper>Hello!</PopupWrapper>;
+}
+
+const el = document.createElement("div");
+render(<Popup value={text} />, el);
+document.body.appendChild(el);
 ```
 
 ## Chrome Extension
