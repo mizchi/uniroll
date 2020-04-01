@@ -1,9 +1,4 @@
 import "jsoneditor/dist/jsoneditor.min.css";
-
-// @ts-ignore
-// import jsoneditor from "jsoneditor/dist/jsoneditor-minimalist";
-
-// --
 import jsoneditor from "jsoneditor";
 
 import React, { useState } from "react";
@@ -28,10 +23,9 @@ export default function JSONEditor(props: {
       setEditor(editor);
       editor.set(props.value);
     }
-
-    // if (editor) {
-    //   editor.set(props.value);
-    // }
-  }, [ref, props.value, editor]);
+    if (editor) {
+      editor.set(props.value);
+    }
+  });
   return <div style={{ width: "100%", height: "100%" }} ref={ref}></div>;
 }

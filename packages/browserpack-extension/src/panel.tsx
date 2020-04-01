@@ -1,13 +1,13 @@
+import "./__pre";
+import "./initMonaco";
+
 import React from "react";
 import ReactDOM from "react-dom";
 import { compile, Options } from "browserpack";
-import { Env, State } from "../../packages/browserpack-ui";
-import {
-  EnvContext,
-  App,
-  useEnv,
-  _react
-} from "../../packages/browserpack-ui/src";
+// @ts-ignore
+import { Env, State } from "browserpack-ui/lib";
+// @ts-ignore
+import { EnvContext, App, useEnv } from "browserpack-ui/lib";
 import * as chromeApi from "./env/chromeApi";
 
 const env: Env = {
@@ -23,17 +23,7 @@ const env: Env = {
   }
 };
 
-function Hoge() {
-  const env = useEnv();
-  return <>{String(React === _react)}: </>;
-}
-
 function Root() {
-  return (
-    <EnvContext.Provider value={env}>
-      <Hoge />
-    </EnvContext.Provider>
-  );
   return (
     <EnvContext.Provider value={env}>
       <App />

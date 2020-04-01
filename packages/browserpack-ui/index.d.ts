@@ -15,4 +15,3 @@ export type Env = {
 export const App: React.ComponentClass;
 export const EnvContext: React.Context<Env>;
 export function useEnv(): Env;
-export const _react: any;

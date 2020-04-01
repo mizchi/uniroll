@@ -45,10 +45,6 @@ module.exports = {
     ]
   },
   resolve: {
-    alias: {
-      browserpack: path.join(__dirname, "../packages/browserpack"),
-      "browserpack-ui": path.join(__dirname, "../packages/browserpack-ui")
-    },
     extensions: [".js", ".ts", ".tsx", ".json", ".mjs", ".wasm"]
   },
   plugins: [
@@ -58,13 +54,12 @@ module.exports = {
         from: "assets/*",
         flatten: true
       }
-    ]),
-    new CopyWebpackPlugin([
-      {
-        from: "../packages/browserpack-ui/dist",
-        flatten: true
-      }
     ])
-
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: "../packages/browserpack-ui/dist",
+    //     flatten: true
+    //   }
+    // ])
   ]
 };
