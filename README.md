@@ -2,7 +2,7 @@
 
 Opinionated in browser compiler.
 
-## How to use
+## Run in browser
 
 ```
 npm install @mizchi/browserpack --save
@@ -26,7 +26,7 @@ console.log(out.output[0]);
 
 ## Example: You can import npm registry
 
-```js
+```tsx
 import { h, render } from "preact";
 import { styled, setPragma } from "goober";
 
@@ -49,6 +49,8 @@ const el = document.createElement("div");
 render(<Popup value={text} />, el);
 document.body.appendChild(el);
 ```
+
+## Run in node
 
 ## How it works
 

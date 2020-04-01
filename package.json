@@ -9,7 +9,7 @@
     "build:pkg:babel-plugin-transform-import-to-pika-cdn": "yarn workspace babel-plugin-transform-import-to-pika-cdn build",
     "build:pkg:rollup-plugin-browserpack-css": "yarn workspace rollup-plugin-browserpack-css build",
     "build:pkg:rollup-plugin-memfs": "yarn workspace rollup-plugin-memfs build",
-    "build:output:cli": "yarn workspace browserpack-cli build",
+    "build:output:cli": "yarn workspace @mizchi/browserpack-cli build",
     "build:output:ui": "yarn workspace browserpack-ui build",
     "build:output:ext": "yarn workspace browserpack-extension build",
     "build:output:browserpack": "yarn workspace @mizchi/browserpack build"
