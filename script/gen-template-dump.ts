@@ -48,6 +48,7 @@ for (const target of targets) {
   }
 }
 
+console.log("list.json", pkgList);
 fs.writeFileSync(
   path.join(process.cwd(), OUT_ROOT, "list.json"),
   JSON.stringify(pkgList)
