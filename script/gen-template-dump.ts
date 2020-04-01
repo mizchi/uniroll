@@ -40,7 +40,7 @@ for (const target of targets) {
       path.join(process.cwd(), SRC_ROOT, target, "files/package.json"),
       "utf-8"
     );
-    pkgList.push(pkg);
+    pkgList.push(JSON.parse(pkg));
   } catch (err) {
     console.error(err);
     process.exit(1);

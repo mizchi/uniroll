@@ -7,6 +7,7 @@ export type State = {
 };
 
 export type Env = {
+  templateHost?: string;
   inExtension: boolean;
   compile(options: any): Promise<any>;
   save(state: State): Promise<void>;

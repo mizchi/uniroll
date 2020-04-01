@@ -1,33 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Text, Flex, Button, ListItem, List, Heading } from "@chakra-ui/core";
-import { templateList } from "../constants";
 import path from "path";
+import { useEnv } from "../contexts";
 
-const HOST =
-  "https://raw.githubusercontent.com/mizchi/browserpack-v2/master/templates/gen";
 export function TemplatesPane(props: {
   onSelectTemplate: (url: string) => any;
 }) {
-  const [templateDefs, setTemplateDefs] = useState<string[]>([]);
+  const {
+    templateHost = "https://raw.githubusercontent.com/mizchi/browserpack-v2/master/templates/gen"
+  } = useEnv();
+  const [templateDefs, setTemplateDefs] = useState<
+    Array<{ name: string; description?: string; dependencies?: object }>
+  >([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(path.join(HOST, "list.json"));
-      const list = (await res.json()) as string[];
-      setTemplateDefs(list.map((r: string) => path.join(HOST, `${r}.json`)));
+      const res = await fetch(path.join(templateHost, "list.json"));
+      const list = await res.json();
+      console.log(list);
+      setTemplateDefs(list);
     })();
   }, []);
   return (
     <Flex direction="column" p={8}>
       <Heading>Template</Heading>
       <List>
-        {templateDefs.map(t => {
+        {templateDefs.map(pkg => {
           return (
-            <ListItem key={t} pt={3}>
+            <ListItem key={pkg.name} pt={3}>
               <Flex display="inline-flex">
-                <Text fontSize="xl">{t}</Text>
-                <Button size="sm" onClick={() => props.onSelectTemplate(t)}>
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    props.onSelectTemplate(
+                      path.join(templateHost, pkg.name + ".json")
+                    )
+                  }
+                >
                   load
                 </Button>
+                <Text fontSize="xl">{`${pkg.name}`}</Text>
               </Flex>
             </ListItem>
           );

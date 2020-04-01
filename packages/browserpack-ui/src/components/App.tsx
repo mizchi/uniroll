@@ -99,7 +99,6 @@ function Internal() {
           {currentScene == "template" && (
             <TemplatesPane
               onSelectTemplate={async url => {
-                console.log("url");
                 const res = await fetch(url);
                 const data = await res.json();
                 setFiles(data.files);

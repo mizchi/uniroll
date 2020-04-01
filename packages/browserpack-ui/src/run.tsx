@@ -7,6 +7,8 @@ import { Env } from "..";
 import { compile, Options } from "browserpack";
 
 const env: Env = {
+  templateHost:
+    "https://raw.githubusercontent.com/mizchi/browserpack-v2/master/templates/gen/",
   inExtension: false,
   async compile(options: Options) {
     return compile(options);
