@@ -2,6 +2,9 @@
   "name": "uniroll-optimizer",
   "version": "1.0.3",
   "main": "lib/index",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "tsc -p ."
