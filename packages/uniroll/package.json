@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack --mode production"
@@ -18,13 +18,13 @@
     "@rollup/plugin-json": "^4.0.2",
     "@types/autoprefixer": "^9.7.2",
     "autoprefixer": "^9.7.5",
-    "babel-plugin-transform-import-to-pika-cdn": "^1.0.1",
+    "babel-plugin-transform-import-to-pika-cdn": "^1.0.3",
     "precss": "^4.0.0",
     "rollup": "^2.1.0",
-    "rollup-plugin-memfs": "^1.0.2",
-    "rollup-plugin-pika-cdn-resolver": "^1.0.2",
+    "rollup-plugin-memfs": "^1.0.3",
+    "rollup-plugin-pika-cdn-resolver": "^1.0.3",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-uniroll-css": "^1.0.2",
+    "rollup-plugin-uniroll-css": "^1.0.3",
     "terser": "^4.6.10"
   },
   "files": [

@@ -1,14 +1,14 @@
 {
   "name": "uniroll-optimizer",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "main": "lib/index",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "tsc -p ."
   },
   "dependencies": {
-    "uniroll-linter": "0.0.1",
     "cssnano": "^4.1.10",
-    "terser": "^4.6.10"
+    "terser": "^4.6.10",
+    "uniroll-linter": "^1.0.3"
   }
 }

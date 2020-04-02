@@ -1,7 +1,7 @@
 {
   "name": "uniroll-extension",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "dev": "rimraf build && webpack --mode development --watch",
     "build": "rimraf build && webpack --mode production"
@@ -34,7 +34,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "typescript": "^3.8.3",
-    "uniroll": "^1.0.2",
-    "uniroll-ui": "^1.0.1"
+    "uniroll": "^1.0.3",
+    "uniroll-ui": "^1.0.3"
   }
 }

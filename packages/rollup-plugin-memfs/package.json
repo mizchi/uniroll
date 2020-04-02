@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-memfs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "dependencies": {
     "memfs": "^3.1.2"
