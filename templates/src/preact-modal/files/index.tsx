@@ -2,6 +2,17 @@
 // @ts-ignore
 import { h, render } from "preact";
 // @ts-ignore
+import { useEffect, useState } from "preact/hooks";
+
+function Counter() {
+  const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    console.log("hello effect");
+  }, []);
+  return <div onClick={() => setCounter(s => s + 1)}>{counter}</div>;
+}
+
+// @ts-ignore
 import { styled, setPragma } from "goober";
 
 setPragma(h);
@@ -16,7 +27,12 @@ const PopupWrapper = styled("div")`
 `;
 
 function Popup(props: { value: string }) {
-  return <PopupWrapper>{props.value}</PopupWrapper>;
+  return (
+    <PopupWrapper>
+      <span>{props.value}</span>
+      <Counter />
+    </PopupWrapper>
+  );
 }
 
 export default (options: any) => {
