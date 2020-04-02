@@ -1,5 +1,6 @@
 {
   "name": "uniroll-extension",
+  "private": true,
   "version": "1.0.1",
   "scripts": {
     "dev": "rimraf build && webpack --mode development --watch",
