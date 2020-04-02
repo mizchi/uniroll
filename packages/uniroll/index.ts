@@ -26,9 +26,20 @@ export async function compile(options: Options) {
     input,
     plugins: [
       css(),
-      pikaCDNResolver({ cache: options.cache }),
+      pikaCDNResolver({
+        cache: options.cache,
+        onRequest: url => {
+          console.log("[pika-resolver] request", url);
+        },
+        onUseCache: url => {
+          console.log("[pika-resolver] useCache", url);
+        }
+      }),
       memfsPlugin(mfs),
-      { name: "base-transform", transform: createTransformer() }
+      {
+        name: "base-transform",
+        transform: createTransformer({}, options.versions)
+      }
     ]
   });
   return bundle;

@@ -8,11 +8,15 @@
     "build:ui": "run-s build:uniroll build:output:ui",
     "build:pkg:babel-plugin-transform-import-to-pika-cdn": "yarn workspace babel-plugin-transform-import-to-pika-cdn build",
     "build:pkg:rollup-plugin-uniroll-css": "yarn workspace rollup-plugin-uniroll-css build",
+    "build:pkg:rollup-plugin-pika-cdn-resolver": "yarn workspace rollup-plugin-pika-cdn-resolver build",
     "build:pkg:rollup-plugin-memfs": "yarn workspace rollup-plugin-memfs build",
     "build:output:cli": "yarn workspace uniroll-tools build",
     "build:output:ui": "yarn workspace uniroll-ui build",
     "build:output:ext": "yarn workspace uniroll-extension build",
-    "build:output:uniroll": "yarn workspace uniroll build"
+    "build:output:uniroll": "yarn workspace uniroll build",
+    "demo:watch": "run-p demo:watch:*",
+    "demo:watch:uniroll": "yarn build:uniroll -w --mode development",
+    "demo:watch:ui-demo": "yarn workspace uniroll-ui demo"
   },
   "license": "MIT",
   "devDependencies": {

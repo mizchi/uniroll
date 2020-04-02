@@ -2,6 +2,7 @@
   "name": "rollup-plugin-pika-cdn-resolver",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "tsc -p ."
+    "build": "tsc -p .",
+    "prepare": "yarn build"
   }
 }

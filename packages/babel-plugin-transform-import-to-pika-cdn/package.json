@@ -1,8 +1,13 @@
 {
   "name": "babel-plugin-transform-import-to-pika-cdn",
   "version": "0.0.1",
+  "main": "index.js",
   "scripts": {
     "build": "tsc -p .",
     "prepublishOnly": "yarn build"
-  }
+  },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ]
 }

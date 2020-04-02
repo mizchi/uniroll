@@ -8,6 +8,7 @@ export type Cache = {
 
 export type BaseOptions = {
   cache?: Cache;
+  versions?: { [library: string]: string };
 };
 
 export type InMemoryOption = BaseOptions & {

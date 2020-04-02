@@ -14,7 +14,10 @@ import nullishCoalescing from "@babel/plugin-proposal-nullish-coalescing-operato
 import { transform as transformBabel, TransformOptions } from "@babel/core";
 import { transformImportPathToPikaCDN } from "babel-plugin-transform-import-to-pika-cdn";
 
-export function createTransformer(options?: TransformOptions) {
+export function createTransformer(
+  options: TransformOptions = {},
+  versions: { [library: string]: string } = {}
+) {
   return async (code: string, id: string) => {
     const ret = transformBabel(code, {
       filename: id,
@@ -22,7 +25,7 @@ export function createTransformer(options?: TransformOptions) {
         classProperties,
         objectRestSpread,
         nullishCoalescing,
-        transformImportPathToPikaCDN({ preact: "10.3.4" })
+        transformImportPathToPikaCDN(versions)
       ],
       presets: [[env, { modules: false, bugfixes: true }], react, ts],
       ...options
