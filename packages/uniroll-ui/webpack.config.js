@@ -1,20 +1,17 @@
 const path = require("path");
 const WorkerPlugin = require("worker-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
-    devtools: path.join(__dirname, "src/devtools.ts"),
-    popup: path.join(__dirname, "src/popup.ts"),
-    panel: path.join(__dirname, "src/panel.tsx"),
-    options: path.join(__dirname, "src/options.ts"),
-    background: path.join(__dirname, "src/background.ts")
+    ui: path.join(__dirname, "src/index.tsx")
   },
   output: {
+    library: "unirollUI",
+    libraryTarget: "umd",
     globalObject: "globalThis",
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "dist"),
     filename: "[name].js",
-    chunkFilename: "[name].[id].[contenthash].js"
+    chunkFilename: "brui-[contenthash].js"
   },
   module: {
     rules: [
@@ -47,19 +44,6 @@ module.exports = {
   resolve: {
     extensions: [".js", ".ts", ".tsx", ".json", ".mjs", ".wasm"]
   },
-  plugins: [
-    new WorkerPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: "assets/*",
-        flatten: true
-      }
-    ])
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: "../packages/browserpack-ui/dist",
-    //     flatten: true
-    //   }
-    // ])
-  ]
+  plugins: [new WorkerPlugin()],
+  devtool: false
 };

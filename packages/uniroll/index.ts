@@ -7,7 +7,7 @@ import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
 import { createTransformer } from "./baseTranform";
 import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
-import { css } from "rollup-plugin-browserpack-css";
+import { css } from "rollup-plugin-uniroll-css";
 
 function createMemoryFs(files: { [k: string]: string }) {
   vol.fromJSON(files, "/");

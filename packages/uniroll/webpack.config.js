@@ -9,10 +9,10 @@ module.exports = {
     extensions: [".js", ".mjs", ".ts", ".tsx", ".json"]
   },
   entry: {
-    browserpack: path.join(__dirname, "index")
+    uniroll: path.join(__dirname, "index")
   },
   output: {
-    library: "Browserpack",
+    library: "uniroll",
     libraryTarget: "umd",
     filename: "[name].js",
     globalObject: "globalThis",

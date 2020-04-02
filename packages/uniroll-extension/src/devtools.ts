@@ -1,6 +1,6 @@
 console.log("dev tools");
 chrome.devtools.panels.create(
-  "Browserpack",
+  "uniroll",
   "", // icon画像を指定できる
   "./panel.html",
   panel => {

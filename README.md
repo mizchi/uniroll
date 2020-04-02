@@ -1,4 +1,4 @@
-# Browserpack
+# uniroll
 
 Opinionated in browser compiler.
 
@@ -7,11 +7,11 @@ demo https://focused-raman-3ce115.netlify.com/
 ## Run in browser
 
 ```
-npm install @mizchi/browserpack --save
+npm install uniroll --save
 ```
 
 ```js
-import { compile } from "@mizchi/browserpack";
+import { compile } from "uniroll";
 const files = {
   "/foo.tsx": "export default 1"
   "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)";
@@ -32,10 +32,10 @@ console.log(out.output[0]);
 <!-- NOTE: This is 2.3 MB -->
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/@mizchi/browserpack@0.2.1/dist/browserpack.js"
+  src="https://cdn.jsdelivr.net/npm/uniroll@0.2.1/dist/uniroll.js"
 ></script>
 <script>
-  Browserpack.compile({...})
+  uniroll.compile({...})
 </script>
 ```
 
@@ -70,17 +70,17 @@ document.body.appendChild(el);
 Run compiler with same logics.
 
 ```bash
-$ npm install @mizchi/browserpack-cli --save
-$ browserpack foo.js --out out.js
+$ npm install uniroll-tools --save
+$ uniroll foo.js --out out.js
 ```
 
 ## How it works
 
 - mount files on virtual fs with `memfs`: `rollup-plugin-memfs`
-- transform with `@babel/preset-env`, `@babel/preset-typescript` and `browserpack/packages/babel-plugin-transform-import-to-pika-cdn`
-- load npm modules with `cdn.pika.dev` via `browserpack/packages/rollup-plugin-pika-cdn-resolver`
+- transform with `@babel/preset-env`, `@babel/preset-typescript` and `uniroll/packages/babel-plugin-transform-import-to-pika-cdn`
+- load npm modules with `cdn.pika.dev` via `uniroll/packages/rollup-plugin-pika-cdn-resolver`
 - resolve ext with `.js` `.ts` `.tsx` `.json` `.mjs`
-- transform `.css` with `browserpack/packages/rollup-plugin-browserpack-css`(like style-loader, css-loader);
+- transform `.css` with `uniroll/packages/rollup-plugin-uniroll-css`(like style-loader, css-loader);
 - compile as `rollup(...)` and return `RollupOutput` object
 
 ## Chrome Extension
@@ -95,7 +95,7 @@ $ browserpack foo.js --out out.js
    1. Access `chrome://extensions/`
    2. Check `Developer mode`
    3. Click on `Load unpacked extension`
-   4. Select the `packages/browserpack-extension/build` folder.
+   4. Select the `packages/uniroll-extension/build` folder.
 6. Have fun.
 
 See detail
@@ -106,7 +106,7 @@ See detail
 ## How to develop
 
 ```
-yarn workspace browserpack-ui demo
+yarn workspace uniroll-ui demo
 ```
 
 ## LICENSE

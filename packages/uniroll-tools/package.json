@@ -1,8 +1,8 @@
 {
-  "name": "@mizchi/browserpack-cli",
+  "name": "uniroll-tools",
   "version": "0.0.4",
   "bin": {
-    "browserpack": "bin/browserpack"
+    "uniroll": "bin/uniroll"
   },
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -10,7 +10,7 @@
     "test": "echo wip"
   },
   "dependencies": {
-    "@mizchi/browserpack": "0.2.1",
+    "uniroll": "0.2.1",
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
     "meow": "^6.1.0"

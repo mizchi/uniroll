@@ -1,5 +1,5 @@
 {
-  "name": "browserpack-ui",
+  "name": "uniroll-ui",
   "version": "0.0.1",
   "main": "lib/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "@mizchi/browserpack": "0.2.1",
+    "uniroll": "0.2.1",
     "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",

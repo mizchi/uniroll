@@ -2,17 +2,17 @@
   "private": true,
   "scripts": {
     "build": "yarn install && yarn build:ext",
-    "build:browserpack": "run-p build:pkg:* && yarn build:output:browserpack",
-    "build:cli": "run-s build:browserpack build:output:cli",
-    "build:ext": "run-s build:browserpack build:output:ui build:output:ext",
-    "build:ui": "run-s build:browserpack build:output:ui",
+    "build:uniroll": "run-p build:pkg:* && yarn build:output:uniroll",
+    "build:cli": "run-s build:uniroll build:output:cli",
+    "build:ext": "run-s build:uniroll build:output:ui build:output:ext",
+    "build:ui": "run-s build:uniroll build:output:ui",
     "build:pkg:babel-plugin-transform-import-to-pika-cdn": "yarn workspace babel-plugin-transform-import-to-pika-cdn build",
-    "build:pkg:rollup-plugin-browserpack-css": "yarn workspace rollup-plugin-browserpack-css build",
+    "build:pkg:rollup-plugin-uniroll-css": "yarn workspace rollup-plugin-uniroll-css build",
     "build:pkg:rollup-plugin-memfs": "yarn workspace rollup-plugin-memfs build",
-    "build:output:cli": "yarn workspace @mizchi/browserpack-cli build",
-    "build:output:ui": "yarn workspace browserpack-ui build",
-    "build:output:ext": "yarn workspace browserpack-extension build",
-    "build:output:browserpack": "yarn workspace @mizchi/browserpack build"
+    "build:output:cli": "yarn workspace uniroll-tools build",
+    "build:output:ui": "yarn workspace uniroll-ui build",
+    "build:output:ext": "yarn workspace uniroll-extension build",
+    "build:output:uniroll": "yarn workspace uniroll build"
   },
   "license": "MIT",
   "devDependencies": {

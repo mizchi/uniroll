@@ -3,11 +3,11 @@ import "./initMonaco";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { compile, Options } from "@mizchi/browserpack";
+import { compile, Options } from "uniroll";
 // @ts-ignore
-import { Env, State } from "browserpack-ui/lib";
+import { Env, State } from "uniroll-ui/lib";
 // @ts-ignore
-import { EnvContext, App, useEnv } from "browserpack-ui/lib";
+import { EnvContext, App, useEnv } from "uniroll-ui/lib";
 import * as chromeApi from "./env/chromeApi";
 
 const env: Env = {

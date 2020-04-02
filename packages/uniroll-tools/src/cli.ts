@@ -2,7 +2,7 @@
 import "isomorphic-unfetch";
 import path from "path";
 import glob from "glob";
-import { compile } from "@mizchi/browserpack";
+import { compile } from "uniroll";
 import fs from "fs";
 import meow from "meow";
 
