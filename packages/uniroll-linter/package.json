@@ -1,0 +1,12 @@
+{
+  "name": "uniroll-linter",
+  "version": "0.0.1",
+  "main": "dist/uniroll-linter.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "webpack --mode production"
+  }
+}
