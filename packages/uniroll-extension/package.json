@@ -26,7 +26,7 @@
     "@chakra-ui/core": "^0.6.1",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "uniroll": "0.2.2",
+    "uniroll": "0.2.3",
     "uniroll-ui": "0.0.1",
     "emotion-theming": "^10.0.27",
     "jsoneditor": "^8.6.4",

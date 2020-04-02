@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack --mode production"
