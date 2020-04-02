@@ -1,6 +1,6 @@
 {
   "name": "uniroll-tools",
-  "version": "0.2.3",
+  "version": "1.0.1",
   "bin": {
     "uniroll": "bin/uniroll"
   },
@@ -10,10 +10,10 @@
     "test": "echo wip"
   },
   "dependencies": {
-    "uniroll": "0.2.3",
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
-    "meow": "^6.1.0"
+    "meow": "^6.1.0",
+    "uniroll": "^1.0.1"
   },
   "files": [
     "lib",

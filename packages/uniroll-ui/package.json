@@ -1,6 +1,6 @@
 {
   "name": "uniroll-ui",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "scripts": {
     "demo": "webpack-dev-server --config webpack.demo.config.js",
@@ -8,7 +8,6 @@
     "build": "rimraf lib && tsc -p .",
     "test": "echo wip"
   },
-  "dependencies": {},
   "devDependencies": {
     "@chakra-ui/core": "^0.6.1",
     "@emotion/core": "^10.0.28",
@@ -32,10 +31,10 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "uniroll": "0.2.3",
     "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "uniroll": "0.2.3"
   }
 }
