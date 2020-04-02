@@ -7,7 +7,7 @@ export function TemplatesPane(props: {
   onSelectTemplate: (url: string) => any;
 }) {
   const {
-    templateHost = "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen"
+    templateHost = "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen/"
   } = useEnv();
   const [templateDefs, setTemplateDefs] = useState<
     Array<{ name: string; description?: string; dependencies?: object }>

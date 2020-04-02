@@ -1,5 +1,5 @@
 {
-  "name": "mizchi-chrome-extension-webpack",
+  "name": "uniroll",
   "version": "0.0.1",
   "minimum_chrome_version": "10.0",
   "description": "A boilerplate to chrome extension with webpack",
