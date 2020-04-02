@@ -25,5 +25,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "autoprefixer": "^9.7.5",
+    "precss": "^4.0.0"
+  }
 }

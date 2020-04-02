@@ -20,7 +20,17 @@ function readDepenedenciesIfExists(
 }
 
 const inintialFiles = {
+  "/style.css": `
+.container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 120px 4fr 1fr;
+  grid-template-rows: 60px 1fr 40px;
+  grid-template-areas: 'header header header' 'left content right' 'footer footer footer';
+}`,
   "/index.tsx": `/** @jsx h */
+import "./style.css";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
 console.log(<div>hello</div>, useEffect);`,

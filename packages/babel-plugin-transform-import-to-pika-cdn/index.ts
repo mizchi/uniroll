@@ -47,7 +47,7 @@ function handleLibraryName(
 }
 
 function isLibraryPath(rawTarget: string) {
-  return !rawTarget.startsWith(".") || !rawTarget.startsWith("/");
+  return !rawTarget.startsWith(".") && !rawTarget.startsWith("/");
 }
 
 function getCdnPathWithVersion(
