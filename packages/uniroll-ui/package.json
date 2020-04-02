@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "scripts": {
     "demo": "webpack-dev-server --config webpack.demo.config.js",
+    "build:demo": "webpack --config webpack.demo.config.js --mode production",
     "build": "rimraf lib && tsc -p .",
     "test": "echo wip"
   },
