@@ -70,7 +70,7 @@ document.body.appendChild(el);
 Run compiler with same logics.
 
 ```bash
-$ npm install uniroll-tools --save
+$ npm install uniroll-tools -g
 $ uniroll foo.js --out out.js
 ```
 
