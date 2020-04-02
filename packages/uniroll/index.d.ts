@@ -1,4 +1,4 @@
-import { RollupBuild } from "rollup";
+import { RollupBuild, Plugin } from "rollup";
 
 export type Cache = {
   get(key: string): Promise<string>;
@@ -8,6 +8,7 @@ export type Cache = {
 
 export type BaseOptions = {
   cache?: Cache;
+  rollupPlugins?: Plugin[];
   versions?: { [library: string]: string };
 };
 

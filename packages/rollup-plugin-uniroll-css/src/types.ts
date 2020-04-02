@@ -1,3 +1,3 @@
 export type Options = {
-  postprocess?: (css: string) => string;
+  postprocess?: (css: string) => Promise<string>;
 };

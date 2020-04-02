@@ -7,13 +7,9 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "autoprefixer": "^9.7.5",
-    "cssnano": "^4.1.10",
     "string-hash": "^1.1.3"
   },
   "devDependencies": {
-    "@types/autoprefixer": "^9.7.1",
-    "@types/cssnano": "^4.0.0",
     "@types/string-hash": "^1.1.1"
   }
 }

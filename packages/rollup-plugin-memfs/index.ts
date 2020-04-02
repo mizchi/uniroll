@@ -14,9 +14,6 @@ export const memfsPlugin = (fs: IPromisesAPI) => {
   return {
     name: "memfs",
     async resolveId(source: string, importer: string | undefined) {
-      // console.log("[memfs.resolveId]", source, importer);
-
-      // resolve relative path;
       if (importer && importer.startsWith("/") && source.startsWith(".")) {
         const fullpath = importer
           ? path.resolve(path.dirname(importer), source)
@@ -29,12 +26,6 @@ export const memfsPlugin = (fs: IPromisesAPI) => {
     async load(id: string) {
       const m = await fs.readFile(id, "utf-8");
       return m;
-
-      // if (id.startsWith("/")) {
-      //   const m = await fs.readFile(id, "utf-8");
-      //   return m;
-      // }
-      // console.log("[memfs]", "skip", id);
     }
   } as Plugin;
 };

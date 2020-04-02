@@ -12,7 +12,7 @@ export function pikaCDNResolver({
 }) {
   return {
     async resolveId(id: string, importer: string) {
-      console.log(id, importer);
+      // console.log(id, importer);
       if (importer && importer.startsWith(PIKA_CDN_HOST)) {
         // load pika in pika
         if (id.startsWith(PIKA_CDN_HOST)) {
