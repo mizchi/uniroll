@@ -32,7 +32,7 @@ console.log(out.output[0]);
 <!-- NOTE: This is 2.3 MB -->
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/uniroll@0.2.1/dist/uniroll.js"
+  src="https://cdn.jsdelivr.net/npm/uniroll@0.2.2/dist/uniroll.js"
 ></script>
 <script>
   uniroll.compile({...})

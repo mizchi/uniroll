@@ -31,7 +31,7 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "uniroll": "0.2.1",
+    "uniroll": "0.2.2",
     "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",
