@@ -3,10 +3,7 @@ module.exports = {
     alias: {
       rollup: "rollup/dist/rollup.browser.js",
       path: "path-browserify",
-      stream: "stream-browserify",
-      fs: false,
-      net: false,
-      dns: false
+      stream: "stream-browserify"
     },
     extensions: [".js", ".mjs", ".ts", ".tsx", ".json"]
   },
@@ -29,5 +26,11 @@ module.exports = {
         ]
       }
     ]
+  },
+  node: {
+    fs: "empty",
+    net: "empty",
+    dns: "empty",
+    net: "empty"
   }
 };

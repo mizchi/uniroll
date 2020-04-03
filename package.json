@@ -38,7 +38,7 @@
     "ts-loader": "^6.2.2",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3",
-    "webpack": "^5.0.0-beta.14",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
   "workspaces": [
