@@ -14,5 +14,8 @@
     "cssnano": "^4.1.10",
     "terser": "^4.6.10",
     "uniroll-linter": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/cssnano": "^4.0.0"
   }
 }
