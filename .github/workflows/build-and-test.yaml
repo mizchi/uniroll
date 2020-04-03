@@ -1,0 +1,15 @@
+name: Test
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn install
+      - run: node_modules/.bin/uniroll packages/uniroll-tools/example_src/index.js --print
