@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "test": "cd packages/uniroll-tools && bin/uniroll example_src/index.js --print",
     "build": "yarn install && yarn build:ext",
     "build:uniroll": "run-p build:pkg:* && yarn build:output:uniroll",
     "build:cli": "run-s build:uniroll build:output:cli",

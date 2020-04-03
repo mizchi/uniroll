@@ -13,4 +13,4 @@ jobs:
           node-version: 12
       - run: yarn install
       - run: yarn build
-      - run: node_modules/.bin/uniroll packages/uniroll-tools/example_src/index.js --print
+      - run: yarn test
