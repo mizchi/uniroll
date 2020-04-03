@@ -5,6 +5,7 @@ import glob from "glob";
 import { compile } from "uniroll";
 import fs from "fs";
 import meow from "meow";
+import { optimizeJs } from "uniroll-optimizer";
 
 function createMemoryObject(cwd: string, baseDirectory: string) {
   const files = glob.sync(`${baseDirectory}/**`, {
@@ -27,6 +28,7 @@ async function run(
     print?: boolean;
     out?: string;
     outdir?: string;
+    minify?: boolean;
   }
 ) {
   switch (options.type || "local") {
@@ -51,7 +53,7 @@ async function run(
         fs: fs.promises
       });
       // console.log(out);
-      const { type, out, outdir, print, ...others } = options;
+      const { type, out, outdir, minify, print, ...others } = options;
       const o = await output.generate(others);
       if (print) {
         for (const i of o.output) {
@@ -74,7 +76,8 @@ async function run(
 
             if (out) {
               const outpath = path.join(process.cwd(), out);
-              fs.writeFileSync(outpath, i.code);
+              const code = minify ? await optimizeJs(i.code) : i.code;
+              fs.writeFileSync(outpath, code);
               // console.log(`// ${i.fileName}\n${i.code}`);
             }
           }
@@ -87,20 +90,23 @@ async function run(
 const cli = meow(
   `
     Usage
-      $ foo <input>
- 
+      $ uniroll <input>
+
     Options
-      --rainbow, -r  Include a rainbow
- 
+      --out, -o
+      --oudir, -d
+
     Examples
-      $ foo unicorns --rainbow
-      🌈 unicorns 🌈
+      $ uniroll css
 `,
   {
     flags: {
       type: {
         type: "boolean",
         alias: "t"
+      },
+      minify: {
+        type: "boolean"
       },
       print: {
         type: "boolean",

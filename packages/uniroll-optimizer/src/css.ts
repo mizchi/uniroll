@@ -4,8 +4,8 @@ import precss from "precss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
 
-export function optimize(css: string) {
-  return transformWithAutoprefixer(css);
+export async function optimize(css: string): Promise<string> {
+  return await transformWithAutoprefixer(css);
 }
 
 async function transformWithAutoprefixer(input: string) {
@@ -26,13 +26,14 @@ async function transformWithAutoprefixer(input: string) {
   return result.css;
 }
 
-async function main() {
-  try {
-    const ret = await optimize(`body { color: red;  }`);
-    console.log(ret);
-  } catch (err) {
-    console.error(err);
-  }
-}
+// How to use
+// async function main() {
+//   try {
+//     const ret = await optimize(`body { color: red;  }`);
+//     console.log(ret);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 
-main();
+// main();

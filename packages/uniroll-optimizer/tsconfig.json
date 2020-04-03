@@ -2,6 +2,7 @@
   "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "declaration": true,
     "outDir": "lib",
     "module": "commonjs"
   }

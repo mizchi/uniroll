@@ -11,6 +11,7 @@
     "build:pkg:rollup-plugin-pika-cdn-resolver": "yarn workspace rollup-plugin-pika-cdn-resolver build",
     "build:pkg:rollup-plugin-memfs": "yarn workspace rollup-plugin-memfs build",
     "build:pkg:uniroll-linter": "yarn workspace uniroll-linter build",
+    "build:pkg:uniroll-optimizer": "yarn workspace uniroll-optimizer build",
     "build:output:cli": "yarn workspace uniroll-tools build",
     "build:output:ui": "yarn workspace uniroll-ui build",
     "build:output:ext": "yarn workspace uniroll-extension build",
