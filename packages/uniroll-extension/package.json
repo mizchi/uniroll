@@ -2,6 +2,7 @@
   "name": "uniroll-extension",
   "private": true,
   "version": "1.0.3",
+  "license": "MIT",
   "scripts": {
     "dev": "rimraf build && webpack --mode development --watch",
     "build": "rimraf build && webpack --mode production"

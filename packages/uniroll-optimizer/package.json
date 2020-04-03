@@ -2,6 +2,7 @@
   "name": "uniroll-optimizer",
   "version": "1.0.3",
   "main": "lib/index",
+  "license": "MIT",
   "files": [
     "lib"
   ],

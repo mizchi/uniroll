@@ -1,6 +1,7 @@
 {
   "name": "rollup-plugin-uniroll-css",
   "version": "1.0.3",
+  "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -p .",

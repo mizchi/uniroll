@@ -1,6 +1,7 @@
 {
   "name": "uniroll",
   "version": "1.0.3",
+  "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack --mode production"

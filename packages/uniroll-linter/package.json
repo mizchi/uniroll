@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "main": "dist/uniroll-linter.js",
   "types": "index.d.ts",
+  "license": "MIT",
   "files": [
     "index.d.ts",
     "dist"
