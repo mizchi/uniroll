@@ -2,11 +2,20 @@
   "name": "uniroll-linter",
   "version": "1.0.3",
   "main": "dist/uniroll-linter.js",
+  "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "dist"
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "yarn ts-node -T -O '{\"module\":\"commonjs\"}' src/__tests__/index.test.ts"
+  },
+  "dependencies": {
+    "@types/eslint": "^6.1.9"
+  },
+  "devDependencies": {
+    "eslint4b": "^6.8.0"
   }
 }

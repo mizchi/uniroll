@@ -18,11 +18,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto"
-      },
-      {
         test: /\.tsx?$/,
         use: [
           {
@@ -34,12 +29,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  node: {
-    fs: "empty",
-    module: "empty",
-    dns: "empty",
-    net: "empty",
-    tls: "empty"
   }
 };
