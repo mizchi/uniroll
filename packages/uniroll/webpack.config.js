@@ -1,13 +1,9 @@
 // for modern browser
 const path = require("path");
+const shared = require("../../webpack.shared.config");
 
 module.exports = {
-  resolve: {
-    alias: {
-      rollup: "rollup/dist/rollup.browser.js"
-    },
-    extensions: [".js", ".mjs", ".ts", ".tsx", ".json"]
-  },
+  ...shared,
   entry: {
     "uniroll-baseline": path.join(__dirname, "src/baseline"),
     "uniroll-prod": path.join(__dirname, "src/prod"),
@@ -19,32 +15,5 @@ module.exports = {
     filename: "[name].js",
     globalObject: "globalThis",
     path: path.join(__dirname, "dist")
-  },
-  module: {
-    rules: [
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto"
-      },
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
-  },
-  node: {
-    fs: "empty",
-    module: "empty",
-    dns: "empty",
-    net: "empty",
-    tls: "empty"
   }
 };

@@ -1,10 +1,9 @@
 // for modern browser
 const path = require("path");
+const shared = require("../../webpack.shared.config");
 
 module.exports = {
-  resolve: {
-    extensions: [".js", ".mjs", ".ts", ".tsx", ".json"]
-  },
+  ...shared,
   entry: {
     "uniroll-linter": path.join(__dirname, "src/index")
   },
@@ -14,20 +13,5 @@ module.exports = {
     filename: "[name].js",
     globalObject: "globalThis",
     path: path.join(__dirname, "dist")
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
   }
 };
