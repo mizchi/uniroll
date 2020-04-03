@@ -1,7 +1,5 @@
-// for modern browser
 const path = require("path");
 const shared = require("../../webpack.shared.config");
-
 module.exports = {
   ...shared,
   entry: {
