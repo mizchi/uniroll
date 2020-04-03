@@ -16,9 +16,17 @@ export function lint(
         sourceType: "module"
       },
       env: {
+        es6: true,
         browser: true
       },
-      globals: { module: true },
+      globals: {
+        global: true,
+        globalThis: true,
+        module: true,
+        regeneratorRuntime: true,
+        __defineSetter__: true,
+        __defineGetter__: true
+      },
       rules: {
         "no-undef": "error"
       },

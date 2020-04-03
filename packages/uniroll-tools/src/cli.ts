@@ -6,6 +6,7 @@ import { compile } from "uniroll";
 import fs from "fs";
 import meow from "meow";
 import { optimizeJs } from "uniroll-optimizer";
+import { lint as linter } from "uniroll-linter";
 
 function createMemoryObject(cwd: string, baseDirectory: string) {
   const files = glob.sync(`${baseDirectory}/**`, {
@@ -29,6 +30,7 @@ async function run(
     out?: string;
     outdir?: string;
     minify?: boolean;
+    lint?: boolean;
   }
 ) {
   switch (options.type || "local") {
@@ -53,7 +55,7 @@ async function run(
         fs: fs.promises
       });
       // console.log(out);
-      const { type, out, outdir, minify, print, ...others } = options;
+      const { type, out, outdir, minify, print, lint, ...others } = options;
       const o = await output.generate(others);
       if (print) {
         for (const i of o.output) {
@@ -73,7 +75,10 @@ async function run(
               const outpath = path.join(process.cwd(), outdir, i.fileName);
               fs.writeFileSync(outpath, i.code);
             }
-
+            if (lint) {
+              const messages = linter(i.code);
+              console.log("lint result", messages);
+            }
             if (out) {
               const outpath = path.join(process.cwd(), out);
               const code = minify ? await optimizeJs(i.code) : i.code;
@@ -101,6 +106,10 @@ const cli = meow(
 `,
   {
     flags: {
+      lint: {
+        type: "boolean",
+        alias: "l"
+      },
       type: {
         type: "boolean",
         alias: "t"
