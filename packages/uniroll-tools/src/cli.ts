@@ -1,26 +1,12 @@
-// TODO
 import "isomorphic-unfetch";
 import path from "path";
 import glob from "glob";
 import { compile } from "uniroll";
 import fs from "fs";
 import meow from "meow";
+import { RollupOutput } from "rollup";
 import { optimizeJs } from "uniroll-optimizer";
 import { lint as linter } from "uniroll-linter";
-
-function createMemoryObject(cwd: string, baseDirectory: string) {
-  const files = glob.sync(`${baseDirectory}/**`, {
-    root: cwd,
-    cwd: cwd,
-    nodir: true
-  });
-  const fileMap = files.reduce((acc, fname) => {
-    const content = fs.readFileSync(path.join(process.cwd(), fname));
-    const pathname = path.join("/", fname);
-    return { ...acc, [pathname]: content.toString() };
-  }, {});
-  return fileMap;
-}
 
 async function run(
   input: string,
@@ -33,60 +19,60 @@ async function run(
     lint?: boolean;
   }
 ) {
+  const { type, out, outdir, minify, print, lint, ...others } = options;
+
+  let output: RollupOutput;
   switch (options.type || "local") {
     case "memory": {
-      const target = path.join(process.cwd(), input);
-      const dirname = path.basename(path.dirname(target));
-      const files = createMemoryObject(process.cwd(), dirname);
-      const bundle = await compile({
-        useInMemory: true,
-        files,
-        input: target
-      });
-      const out = await bundle.generate({ format: "esm" });
-      console.log(out.output[0]);
+      const bundle = await bundleOnMemory(input);
+      output = await bundle.generate(others);
       break;
     }
     case "local": {
-      const output = await compile({
+      const bundle = await compile({
         useInMemory: false,
         input: input,
         cwd: process.cwd(),
-        fs: fs.promises
+        fs: fs.promises,
       });
-      // console.log(out);
-      const { type, out, outdir, minify, print, lint, ...others } = options;
-      const o = await output.generate(others);
-      if (print) {
-        for (const i of o.output) {
-          if (i.type === "chunk") {
-            console.log(`// ${i.fileName}\n${i.code}`);
-          }
-        }
-      } else {
-        if (outdir) {
-          try {
-            fs.mkdirSync(path.join(process.cwd(), outdir));
-          } catch (err) {}
-        }
-        for (const i of o.output) {
-          if (i.type === "chunk") {
-            if (outdir) {
-              const outpath = path.join(process.cwd(), outdir, i.fileName);
-              fs.writeFileSync(outpath, i.code);
-            }
-            if (lint) {
-              const messages = linter(i.code);
-              console.log("lint result", messages);
-            }
-            if (out) {
-              const outpath = path.join(process.cwd(), out);
-              const code = minify ? await optimizeJs(i.code) : i.code;
-              fs.writeFileSync(outpath, code);
-              // console.log(`// ${i.fileName}\n${i.code}`);
-            }
-          }
-        }
+      output = await bundle.generate(others);
+      break;
+    }
+  }
+
+  if (output == null) {
+    throw new Error("bundle error");
+  }
+
+  if (outdir) {
+    try {
+      fs.mkdirSync(path.join(process.cwd(), outdir));
+    } catch (err) {}
+  }
+
+  if (print) {
+    for (const i of output.output) {
+      if (i.type === "chunk") {
+        console.log(`// ${i.fileName}\n${i.code}`);
+      }
+    }
+    return;
+  }
+
+  for (const i of output.output) {
+    if (i.type === "chunk") {
+      if (outdir) {
+        const outpath = path.join(process.cwd(), outdir, i.fileName);
+        fs.writeFileSync(outpath, i.code);
+      }
+      if (lint) {
+        const messages = linter(i.code);
+        console.log("lint result", messages);
+      }
+      if (out) {
+        const outpath = path.join(process.cwd(), out);
+        const code = minify ? await optimizeJs(i.code) : i.code;
+        fs.writeFileSync(outpath, code);
       }
     }
   }
@@ -105,26 +91,49 @@ const cli = meow(
       $ uniroll css
 `,
   {
+    autoHelp: true,
     flags: {
       lint: {
         type: "boolean",
-        alias: "l"
+        alias: "l",
       },
       type: {
-        type: "boolean",
-        alias: "t"
+        type: "string",
+        alias: "t",
       },
       minify: {
-        type: "boolean"
+        type: "boolean",
       },
       print: {
         type: "boolean",
-        alias: "p"
-      }
-    }
+        alias: "p",
+      },
+    },
   }
 );
 
-run(cli.input[0], cli.flags as any);
+async function bundleOnMemory(input: string) {
+  const entry = path.join(process.cwd(), input);
+  const basename = path.basename(entry);
+  const globdir = path.basename(path.dirname(entry));
+  const files = glob.sync(`${globdir}/**`, {
+    root: process.cwd(),
+    cwd: process.cwd(),
+    nodir: true,
+  });
+  const fileMap = files.reduce((acc, fname) => {
+    const content = fs.readFileSync(path.join(process.cwd(), fname));
+    const pathname = path.join(
+      "/",
+      fname.replace(new RegExp(`^(${globdir})`), "")
+    );
+    return { ...acc, [pathname]: content.toString() };
+  }, {});
+  return await compile({
+    useInMemory: true,
+    files: fileMap,
+    input: basename,
+  });
+}
 
-// build({ type: "local", input: "example_src/index.js" });
+run(cli.input[0], cli.flags as any);
