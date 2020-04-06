@@ -1,1 +1,0 @@
-[{"name":"helloworld","description":"hello, world!"},{"name":"modal-with-vars","description":"preact example","dependencies":{"preact":"10.3.4","goober":"1.7.1"}},{"name":"preact","description":"preact example","dependencies":{"preact":"10.3.4"}}]
