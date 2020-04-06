@@ -1,3 +1,4 @@
+import { TemplateDef } from "./../packages/uniroll-ui/src/components/editor/variables";
 import fs from "fs";
 import path from "path";
 import glob from "glob";
@@ -27,10 +28,24 @@ for (const target of targets) {
     );
     return { ...acc, [fpath]: data };
   }, {});
-  console.log(target, files);
+
+  const requiredPropsStr = fs.readFileSync(
+    path.join(process.cwd(), SRC_ROOT, target, "requiredProps.json"),
+    "utf-8"
+  );
+  const requiredProps = JSON.parse(requiredPropsStr);
+
+  const outpath = path.join(process.cwd(), OUT_ROOT, `${target}.json`);
+  console.log("write >", outpath);
+
   fs.writeFileSync(
-    path.join(process.cwd(), OUT_ROOT, `${target}.json`),
-    JSON.stringify({ files, id: target, name: target })
+    outpath,
+    JSON.stringify({
+      files,
+      id: target,
+      name: target,
+      requiredProps,
+    } as TemplateDef)
   );
 }
 
@@ -43,17 +58,10 @@ for (const target of targets) {
       "utf-8"
     );
 
-    const requiredProps = fs.readFileSync(
-      path.join(process.cwd(), SRC_ROOT, target, "requiredProps.json"),
-      "utf-8"
-    );
-
     console.log("pkg", target, pkg);
-    console.log("requiredProps", target, requiredProps);
 
     pkgList.push({
       ...JSON.parse(pkg),
-      requiredProps: JSON.parse(requiredProps),
     });
   } catch (err) {
     console.error(err);
@@ -61,7 +69,7 @@ for (const target of targets) {
   }
 }
 
-console.log("list.json", pkgList);
+console.log("write > list.json", pkgList);
 fs.writeFileSync(
   path.join(process.cwd(), OUT_ROOT, "list.json"),
   JSON.stringify(pkgList)
