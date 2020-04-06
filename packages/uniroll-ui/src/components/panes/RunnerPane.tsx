@@ -5,9 +5,10 @@ import {
   Heading,
   Stack,
   ButtonGroup,
-  Button
+  Button,
 } from "@chakra-ui/core";
 import { useEnv } from "../contexts";
+import { toVariables } from "../editor/VariablesEditor";
 export function RunnerPane(props: { files: { [k: string]: string } }) {
   const env = useEnv();
   const [builtCode, setBuiltCode] = useState<string | null>(null);
@@ -19,28 +20,28 @@ export function RunnerPane(props: { files: { [k: string]: string } }) {
     setLogs([]);
     (async () => {
       try {
-        setLogs(s => s.concat([{ type: "normal", message: "Build start" }]));
+        setLogs((s) => s.concat([{ type: "normal", message: "Build start" }]));
         const bundle = await env.compile({
           useInMemory: true,
           files: props.files,
-          input: "/index.tsx"
+          input: "/index.tsx",
         });
-        setLogs(s => s.concat([{ type: "normal", message: "Compiled" }]));
+        setLogs((s) => s.concat([{ type: "normal", message: "Compiled" }]));
         const out = await bundle.generate({ format: "esm" });
-        setLogs(s =>
+        setLogs((s) =>
           s.concat([
             {
               type: "normal",
-              message: `Generate: ${out.output[0].code.length} bytes`
-            }
+              message: `Generate: ${out.output[0].code.length} bytes`,
+            },
           ])
         );
         const code = out.output[0].code;
         setBuiltCode(code as string);
       } catch (err) {
-        setLogs(s =>
+        setLogs((s) =>
           s.concat([
-            { type: "error", message: `Compile Error: ${err.message}` }
+            { type: "error", message: `Compile Error: ${err.message}` },
           ])
         );
       }
@@ -48,46 +49,48 @@ export function RunnerPane(props: { files: { [k: string]: string } }) {
   }, [props.files, builtCode]);
 
   const onClickRun = useCallback(async () => {
-    let parsedJson: any = {};
+    let variables: any = {};
     try {
       const variablesRaw = props.files["/variables.json"];
-      parsedJson = JSON.parse(variablesRaw);
+      const parsedJson = JSON.parse(variablesRaw);
+      // TODO: Inject resolver
+      variables = toVariables(parsedJson);
     } catch (err) {}
     if (builtCode) {
       try {
-        setLogs(s =>
+        setLogs((s) =>
           s.concat([
             {
               type: "normal",
-              message: `Start evaluating`
-            }
+              message: `Start evaluating`,
+            },
           ])
         );
         if (env.inExtension && env.evalCodeInActiveTab) {
           env.evalCodeInActiveTab(builtCode, {
             inExtension: true,
-            variables: parsedJson
+            variables,
           });
         } else {
           setPreviewCode(
             iframeTemplate(builtCode, {
               inExtension: false,
-              variables: parsedJson
+              variables,
             })
           );
         }
-        setLogs(s =>
+        setLogs((s) =>
           s.concat([
             {
               type: "normal",
-              message: `Done`
-            }
+              message: `Done`,
+            },
           ])
         );
       } catch (err) {
-        setLogs(s =>
+        setLogs((s) =>
           s.concat([
-            { type: "error", message: `Running Error: ${err.message}` }
+            { type: "error", message: `Running Error: ${err.message}` },
           ])
         );
       }
@@ -135,7 +138,7 @@ function IframePreviewPane(props: { value: string }) {
         height: "100%",
         maxWidth: "100%",
         border: "none",
-        background: "#eee"
+        background: "#eee",
       }}
       ref={ref}
     ></iframe>

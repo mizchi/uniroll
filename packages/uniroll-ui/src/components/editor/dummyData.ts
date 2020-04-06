@@ -4,31 +4,29 @@ export const DUMMY_REFERENCE_DEFS: ReferenceDef[] = [
   {
     id: "$null",
     typeAnnotation: {
-      type: "null"
+      type: "null",
     },
-    manualTypeAnnotation: false
+    manualTypeAnnotation: false,
   },
-  {
-    id: "manual",
-    manualTypeAnnotation: true
-  }
 ];
 
 export const simpleTemplate: TemplateDef = {
   id: "simple",
+  files: {},
   requiredProps: [
     {
       key: "name",
       typeAnnotation: {
-        type: "string"
+        type: "string",
       },
-      defaultValue: "John Doe"
-    }
-  ]
+      defaultValue: "John Doe",
+    },
+  ],
 };
 
 export const complexTemplate: TemplateDef = {
   id: "complex",
+  files: {},
   requiredProps: [
     {
       key: "fixed-string",
@@ -36,42 +34,42 @@ export const complexTemplate: TemplateDef = {
       typeRequired: true,
       deletable: false,
       typeAnnotation: {
-        type: "string"
+        type: "string",
       },
-      defaultValue: "John Doe"
+      defaultValue: "John Doe",
     },
     {
       key: "b",
       typeAnnotation: {
-        type: "boolean"
-      }
+        type: "boolean",
+      },
     },
     {
       key: "n",
       typeAnnotation: {
-        type: "number"
+        type: "number",
       },
-      defaultValue: 10
+      defaultValue: 10,
     },
     {
       key: "N",
       typeAnnotation: {
-        type: "null"
-      }
+        type: "null",
+      },
     },
     {
       key: "obj",
       typeAnnotation: {
-        type: "object"
-      }
+        type: "object",
+      },
     },
     {
       key: "arr",
       typeAnnotation: {
-        type: "array"
-      }
-    }
-  ]
+        type: "array",
+      },
+    },
+  ],
 };
 
 export const DUMMY_TEMPLATES = [complexTemplate, simpleTemplate];

@@ -9,7 +9,7 @@ function Counter() {
   useEffect(() => {
     console.log("hello effect");
   }, []);
-  return <div onClick={() => setCounter(s => s + 1)}>{counter}</div>;
+  return <div onClick={() => setCounter((s) => s + 1)}>{counter}</div>;
 }
 
 // @ts-ignore
@@ -35,9 +35,9 @@ function Popup(props: { value: string }) {
   );
 }
 
-export default (options: any) => {
+export default (options: { variables: { title: string } }) => {
   console.log(options);
-  createModalElement(`hello`);
+  createModalElement(options.variables.title);
 };
 
 export function createModalElement(text: string) {

@@ -1,1 +1,0 @@
-{"files":{"index.tsx":"import \"./style.css\";\nexport default (props: any) => console.log(\"hello\", props);\n","package.json":"{\n  \"name\": \"simple\",\n  \"version\": \"0.0.1\"\n}\n","style.css":"span {\n  color: red;\n}\n","variables.json":"{\n  \"name\": \"simple\"\n}\n"},"id":"simple","name":"simple"}

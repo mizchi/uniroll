@@ -34,12 +34,12 @@ import "./style.css";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
 console.log(<div>hello</div>, useEffect);`,
-
+  "/variables.json": JSON.stringify([], null, 2),
   "/package.json": `{
   "dependencies": {
     "preact": "10.3.4"
   }
-}`
+}`,
 };
 
 const cache = new Map();
@@ -54,9 +54,9 @@ const env: Env = {
   async save() {},
   async load() {
     return {
-      files: inintialFiles
+      files: inintialFiles,
     };
-  }
+  },
 };
 
 ReactDOM.render(

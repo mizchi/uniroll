@@ -7,18 +7,19 @@ const OUT_ROOT = "templates/gen";
 
 const result = glob.sync(`${SRC_ROOT}/*`, {
   root: process.cwd(),
-  nodir: false
+  nodir: false,
 });
 
-const targets = result.map(r => r.replace(SRC_ROOT + "/", ""));
+const targets = result.map((r) => r.replace(SRC_ROOT + "/", ""));
 
+// gen/*.json
 for (const target of targets) {
   const fileNames = glob
     .sync(path.join(SRC_ROOT, target, "files", "/**"), {
       root: process.cwd(),
-      nodir: true
+      nodir: true,
     })
-    .map(r => r.replace(path.join(SRC_ROOT, target, "files") + "/", ""));
+    .map((r) => r.replace(path.join(SRC_ROOT, target, "files") + "/", ""));
   const files = fileNames.reduce((acc, fpath) => {
     const data = fs.readFileSync(
       path.join(process.cwd(), SRC_ROOT, target, "files", fpath),
@@ -33,6 +34,7 @@ for (const target of targets) {
   );
 }
 
+// gen/list.json
 let pkgList: Array<any> = [];
 for (const target of targets) {
   try {
@@ -40,8 +42,19 @@ for (const target of targets) {
       path.join(process.cwd(), SRC_ROOT, target, "files/package.json"),
       "utf-8"
     );
+
+    const requiredProps = fs.readFileSync(
+      path.join(process.cwd(), SRC_ROOT, target, "requiredProps.json"),
+      "utf-8"
+    );
+
     console.log("pkg", target, pkg);
-    pkgList.push(JSON.parse(pkg));
+    console.log("requiredProps", target, requiredProps);
+
+    pkgList.push({
+      ...JSON.parse(pkg),
+      requiredProps: JSON.parse(requiredProps),
+    });
   } catch (err) {
     console.error(err);
     process.exit(1);

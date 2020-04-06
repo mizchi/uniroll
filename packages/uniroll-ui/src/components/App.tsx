@@ -4,7 +4,7 @@ import {
   CSSReset,
   DarkMode,
   Flex,
-  ThemeProvider
+  ThemeProvider,
 } from "@chakra-ui/core";
 import React, { useCallback, useEffect, useState } from "react";
 import { templateList } from "./constants";
@@ -16,6 +16,8 @@ import { VariablesPane } from "./panes/VariablesPane";
 import { useEnv, IsInMobileContext } from "./contexts";
 import { useWindowWidth } from "./hooks";
 import { EditorPanel } from "./panes/EditorPanel";
+import { TemplateDef } from "./editor/variables";
+import { buildDefaultAssigns } from "./editor/VariablesEditor";
 
 export type Files = { [key: string]: string };
 // export const Editor = React.lazy(() => import("./editor/Editor"));
@@ -23,7 +25,7 @@ export const extToLanguage: { [key: string]: string } = {
   ".ts": "typescript",
   ".tsx": "typescript",
   ".js": "javascript",
-  ".css": "css"
+  ".css": "css",
 };
 
 export function App() {
@@ -62,7 +64,7 @@ function Internal() {
       const newFiles = { ...files, [filepath]: value };
       setFiles(newFiles);
       env.save({
-        files: newFiles
+        files: newFiles,
       });
     },
     [files]
@@ -78,7 +80,7 @@ function Internal() {
         <Flex h="32px">
           <Header
             files={files}
-            onClickTab={scene => {
+            onClickTab={(scene) => {
               setCurrentScene(scene);
               setCurrentFilepath(null);
             }}
@@ -101,11 +103,16 @@ function Internal() {
           )}
           {currentScene == "template" && (
             <TemplatesPane
-              onSelectTemplate={async url => {
+              onSelectTemplate={async (url) => {
                 const res = await fetch(url);
-                const data = await res.json();
-                setFiles(data.files);
-                if (data.files["/variables.json"]) {
+                const data = (await res.json()) as TemplateDef;
+                const assigns = buildDefaultAssigns(data.requiredProps);
+                const newFiles = {
+                  ...data.files,
+                  "/variables.json": JSON.stringify(assigns, null, 2),
+                };
+                setFiles(newFiles);
+                if (newFiles["/variables.json"]) {
                   setCurrentFilepath(null);
                   setCurrentScene("variables");
                 } else {
@@ -128,14 +135,14 @@ function Header(props: { files: Files; onClickTab: (scene: SCENE) => void }) {
           <Button size="sm" onClick={() => props.onClickTab("run")}>
             Run
           </Button>
+          <Button size="sm" onClick={() => props.onClickTab("editor")}>
+            Files
+          </Button>
           {props.files["/variables.json"] && (
             <Button size="sm" onClick={() => props.onClickTab("variables")}>
               Variables
             </Button>
           )}
-          <Button size="sm" onClick={() => props.onClickTab("editor")}>
-            Files
-          </Button>
         </ButtonGroup>
       </Flex>
       <Flex flex={1} />

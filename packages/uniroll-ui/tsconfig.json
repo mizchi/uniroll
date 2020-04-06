@@ -5,7 +5,9 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "lib",
+    "allowJs": false,
     "module": "esnext",
+    "target": "es2019",
     "jsx": "react"
   }
 }

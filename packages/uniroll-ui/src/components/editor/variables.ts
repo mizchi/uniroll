@@ -1,7 +1,7 @@
 export type TemplateDef = {
   id: string;
   requiredProps: RequiredProp[];
-  initialFiles?: { [filename: string]: string };
+  files: { [filename: string]: string };
 };
 
 export type RequiredProp = {
