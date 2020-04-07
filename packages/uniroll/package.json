@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -24,7 +24,7 @@
     "precss": "^4.0.0",
     "rollup": "^2.1.0",
     "rollup-plugin-memfs": "^1.0.4",
-    "rollup-plugin-pika-cdn-resolver": "^1.0.5",
+    "rollup-plugin-pika-cdn-resolver": "^1.0.6",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-uniroll-css": "^1.0.4",
     "terser": "^4.6.10"
