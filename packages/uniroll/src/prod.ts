@@ -25,6 +25,7 @@ import { baseline } from "./baseline";
 import precss from "precss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
+import replace from "@rollup/plugin-replace";
 
 export async function compile(
   options: Options & { cssPostprocess: (t: string) => string }
@@ -34,33 +35,29 @@ export async function compile(
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformImportPathToPikaCDN(options.versions || {}, warning => {
-        console.warn(warning);
-      })
+      transformImportPathToPikaCDN(options.versions || {}, (warning) => {
+        options.onWarn?.(warning);
+      }),
     ],
-    presets: [[env, { modules: false, bugfixes: true }], react, ts]
+    presets: [[env, { modules: false, bugfixes: true }], react, ts],
   };
 
   const baseTransformPlugin = {
     name: "base-transform",
-    transform: createTransformer(babelOptions)
+    transform: createTransformer(babelOptions),
   };
   return baseline({
     ...options,
     rollupPlugins: [
+      replace({ "process.env.NODE_ENV": "production" }),
       css({ postprocess: transformWithAutoprefixer }),
       pikaCDNResolver({
-        cache: new Map() as any,
-        onRequest: id => {
-          console.log("[pika-resolver] onRequest", id);
-        },
-        onUseCache: id => {
-          console.log("[pika-resolver] onUseCache", id);
-        }
+        cache: new Map(),
+        onRequest: options.onRequest,
+        onUseCache: options.onUseCache,
       }),
-      baseTransformPlugin
-      // terser()
-    ]
+      baseTransformPlugin,
+    ],
   });
 }
 
@@ -70,10 +67,10 @@ async function transformWithAutoprefixer(input: string) {
     autoprefixer({
       // @ts-ignore
       grid: true,
-      overrideBrowserslist: ["last 2 versions", "ie 11"]
-    })
+      overrideBrowserslist: ["last 2 versions", "ie 11"],
+    }),
   ]).process("/* autoprefixer grid: autoplace */\n" + input, {
-    from: undefined
+    from: undefined,
   });
   return result.css;
 }

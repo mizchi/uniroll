@@ -15,6 +15,7 @@ import objectRestSpread from "@babel/plugin-proposal-object-rest-spread";
 import nullishCoalescing from "@babel/plugin-proposal-nullish-coalescing-operator";
 
 import { baseline } from "./baseline";
+import replace from "@rollup/plugin-replace";
 
 export async function compile(options: Options) {
   const babelOptions = {
@@ -22,33 +23,30 @@ export async function compile(options: Options) {
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformImportPathToPikaCDN(options.versions || {}, warning => {
-        console.warn(warning);
-      })
+      transformImportPathToPikaCDN(options.versions || {}, (warning) => {
+        options.onWarn?.(warning);
+      }),
     ],
-    presets: [react, ts]
+    presets: [react, ts],
   };
 
   const baseTransformPlugin = {
     name: "base-transform",
-    transform: createTransformer(babelOptions)
+    transform: createTransformer(babelOptions),
   };
 
   const bundle = baseline({
     ...options,
     rollupPlugins: [
+      replace({ "process.env.NODE_ENV": "development" }),
       css(),
       pikaCDNResolver({
         cache: new Map() as any,
-        onRequest: id => {
-          console.log("[pika-resolver] onRequest", id);
-        },
-        onUseCache: id => {
-          console.log("[pika-resolver] onUseCache", id);
-        }
+        onRequest: options.onRequest,
+        onUseCache: options.onUseCache,
       }),
-      baseTransformPlugin
-    ]
+      baseTransformPlugin,
+    ],
   });
   return bundle;
 }

@@ -4,11 +4,11 @@ const PIKA_CDN_HOST = "https://cdn.pika.dev";
 export function pikaCDNResolver({
   cache = new Map(),
   onRequest,
-  onUseCache
+  onUseCache,
 }: {
   cache?: any;
   onRequest?: (url: string) => void;
-  onUseCache: (url: string) => void;
+  onUseCache?: (url: string) => void;
 }) {
   return {
     async resolveId(id: string, importer: string) {
@@ -38,6 +38,6 @@ export function pikaCDNResolver({
         await cache.set(id, code);
         return code;
       }
-    }
+    },
   } as Plugin;
 }

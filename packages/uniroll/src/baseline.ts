@@ -11,15 +11,13 @@ function createMemoryFs(files: { [k: string]: string }) {
 }
 
 export async function baseline(options: Options) {
-  const mfs = options.useInMemory
-    ? createMemoryFs(options.files)
-    : (options.fs as any);
+  const mfs = options.useInMemory ? createMemoryFs(options.files) : options.fs;
   const input = options.useInMemory
     ? path.join("/", options.input)
     : path.join(options.cwd, options.input);
   const bundle = await rollup({
     input,
-    plugins: [...(options.rollupPlugins || []), memfsPlugin(mfs)]
+    plugins: [...(options.rollupPlugins || []), memfsPlugin(mfs)],
   });
   return bundle;
 }
