@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-pika-cdn-resolver",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p .",
