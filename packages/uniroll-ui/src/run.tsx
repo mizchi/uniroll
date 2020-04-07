@@ -7,18 +7,6 @@ import { Env } from "./types";
 import { compile, InMemoryOption } from "uniroll";
 import { Files } from "..";
 
-function readDepenedenciesIfExists(
-  files: Files
-): { [library: string]: string } {
-  try {
-    const pkgStr = files["/package.json"];
-    const parsed = JSON.parse(pkgStr) as any;
-    return parsed.dependencies || {};
-  } catch (err) {
-    return {};
-  }
-}
-
 const inintialFiles = {
   "/style.css": `
 .container {
@@ -48,8 +36,17 @@ const env: Env = {
     "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
   inExtension: false,
   async compile(options: InMemoryOption) {
-    const versions = readDepenedenciesIfExists(options.files);
-    return compile({ ...options, versions, cache: cache as any });
+    return compile({
+      ...options,
+      cache,
+      onWarn: (mes) => console.log("[warn]", mes),
+      onRequest: (id) => {
+        console.log("[request]", id);
+      },
+      onUseCache: (id) => {
+        console.log("[cache]", id);
+      },
+    });
   },
   async save() {},
   async load() {

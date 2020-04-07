@@ -35,5 +35,6 @@
   "dependencies": {
     "@babel/parser": "^7.9.4",
     "@rollup/plugin-replace": "^2.3.1"
-  }
+  },
+  "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33"
 }

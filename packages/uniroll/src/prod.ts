@@ -26,18 +26,30 @@ import precss from "precss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
 import replace from "@rollup/plugin-replace";
+import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
+import path from "path";
+
+const defaultCache = new Map();
 
 export async function compile(
   options: Options & { cssPostprocess: (t: string) => string }
 ) {
+  const mfs = options.useInMemory ? createMemoryFs(options.files) : options.fs;
+  const rootpath = options.useInMemory
+    ? path.dirname(path.join(process.cwd(), options.input))
+    : "/";
+  const pkgPath = path.join(rootpath, "package.json");
+  const versions = await readPkgVersionsIfExists(mfs, pkgPath);
+
   const babelOptions = {
     plugins: [
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformImportPathToPikaCDN(options.versions || {}, (warning) => {
-        options.onWarn?.(warning);
-      }),
+      transformImportPathToPikaCDN(
+        versions ?? options.versions ?? {},
+        (warning) => options.onWarn?.(warning)
+      ),
     ],
     presets: [[env, { modules: false, bugfixes: true }], react, ts],
   };
@@ -48,11 +60,13 @@ export async function compile(
   };
   return baseline({
     ...options,
+    fs: mfs,
     rollupPlugins: [
       replace({ "process.env.NODE_ENV": "production" }),
       css({ postprocess: transformWithAutoprefixer }),
       pikaCDNResolver({
-        cache: new Map(),
+        ignorePolyfill: true,
+        cache: options.cache ?? defaultCache,
         onRequest: options.onRequest,
         onUseCache: options.onUseCache,
       }),

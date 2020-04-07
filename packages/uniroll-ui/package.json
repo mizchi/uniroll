@@ -37,5 +37,6 @@
     "react": "*",
     "react-dom": "*",
     "uniroll": "0.2.3"
-  }
+  },
+  "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33"
 }

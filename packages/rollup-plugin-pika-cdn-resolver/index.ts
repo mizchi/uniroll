@@ -5,8 +5,10 @@ export function pikaCDNResolver({
   cache = new Map(),
   onRequest,
   onUseCache,
+  ignorePolyfill = false,
 }: {
   cache?: any;
+  ignorePolyfill?: boolean;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
 }) {
@@ -23,6 +25,9 @@ export function pikaCDNResolver({
       }
     },
     async load(id: string) {
+      if (id.includes("@pika/polyfill")) {
+        return `// ignored: ${id}`;
+      }
       if (id.startsWith(PIKA_CDN_HOST)) {
         const cached = await cache.get(id);
         if (cached) {

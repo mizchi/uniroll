@@ -13,19 +13,33 @@ import classProperties from "@babel/plugin-proposal-class-properties";
 import objectRestSpread from "@babel/plugin-proposal-object-rest-spread";
 // @ts-ignore
 import nullishCoalescing from "@babel/plugin-proposal-nullish-coalescing-operator";
-
+import path from "path";
 import { baseline } from "./baseline";
+import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
 import replace from "@rollup/plugin-replace";
 
+const defaultCache = new Map();
+
 export async function compile(options: Options) {
+  const mfs = options.useInMemory ? createMemoryFs(options.files) : options.fs;
+  const rootpath = options.useInMemory
+    ? path.dirname(path.join(process.cwd(), options.input))
+    : "/";
+  const pkgPath = path.join(rootpath, "package.json");
+
+  const versions = await readPkgVersionsIfExists(mfs, pkgPath);
+
   const babelOptions = {
     plugins: [
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformImportPathToPikaCDN(options.versions || {}, (warning) => {
-        options.onWarn?.(warning);
-      }),
+      transformImportPathToPikaCDN(
+        versions ?? options.versions ?? {},
+        (warning) => {
+          options.onWarn?.(warning);
+        }
+      ),
     ],
     presets: [react, ts],
   };
@@ -37,11 +51,13 @@ export async function compile(options: Options) {
 
   const bundle = baseline({
     ...options,
+    fs: mfs,
     rollupPlugins: [
       replace({ "process.env.NODE_ENV": "development" }),
       css(),
       pikaCDNResolver({
-        cache: new Map() as any,
+        cache: options.cache ?? defaultCache,
+        ignorePolyfill: true,
         onRequest: options.onRequest,
         onUseCache: options.onUseCache,
       }),
