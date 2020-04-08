@@ -1,0 +1,10 @@
+{
+  "name": "uniroll-types",
+  "version": "0.0.1",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "variables.d.ts"
+  ],
+  "license": "MIT"
+}

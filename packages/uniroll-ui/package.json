@@ -24,6 +24,7 @@
     "monaco-editor": "^0.20.0",
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
+    "uniroll-types": "0.0.1",
     "url-loader": "^4.0.0",
     "webpack-dev-server": "^3.10.3",
     "worker-plugin": "^4.0.2"
@@ -33,11 +34,10 @@
     "index.d.ts"
   ],
   "peerDependencies": {
-    "json-editor": "*",
     "monaco-editor": "*",
     "react": "*",
     "react-dom": "*",
-    "uniroll": "0.2.3"
+    "uniroll": "*"
   },
   "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33"
 }

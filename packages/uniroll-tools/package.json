@@ -15,7 +15,8 @@
     "meow": "^6.1.0",
     "uniroll": "^1.0.6",
     "uniroll-linter": "^1.0.6",
-    "uniroll-optimizer": "^1.0.6"
+    "uniroll-optimizer": "^1.0.6",
+    "uniroll-types": "0.0.1"
   },
   "files": [
     "lib",

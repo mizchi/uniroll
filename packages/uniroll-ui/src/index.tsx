@@ -1,8 +1,8 @@
 import { Layout } from "../index.d";
-import { RunnerPane } from "./components/panes/RunnerPane";
-import { EditorPanel } from "./components/panes/EditorPanel";
-import { VariablesPane } from "./components/panes/VariablesPane";
-import { TemplatesPane } from "./components/panes/TemplatesPane";
+import { RunnerPane } from "./components/panels/RunnerPanel";
+import { EditorPanel } from "./components/panels/EditorPanel";
+import { VariablesPane } from "./components/panels/VariablesEditorPanel";
+import { TemplatesPane } from "./components/panels/TemplateLoaderPanel";
 
 export {
   EnvContext,
