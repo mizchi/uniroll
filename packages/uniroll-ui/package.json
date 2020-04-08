@@ -2,6 +2,7 @@
   "name": "uniroll-ui",
   "version": "1.0.6",
   "main": "lib/index.js",
+  "typings": "index.d.ts",
   "license": "MIT",
   "scripts": {
     "demo": "webpack-dev-server --config webpack.demo.config.js",

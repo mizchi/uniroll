@@ -7,9 +7,11 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/core";
-import { useEnv } from "../contexts";
+import { useEnv, useAppState } from "../contexts";
 import { toVariables } from "../editor/VariablesEditor";
-export function RunnerPane(props: { files: { [k: string]: string } }) {
+export function RunnerPane() {
+  const { files } = useAppState();
+
   const env = useEnv();
   const [builtCode, setBuiltCode] = useState<string | null>(null);
   const [previewCode, setPreviewCode] = useState<string | null>(null);
@@ -23,7 +25,7 @@ export function RunnerPane(props: { files: { [k: string]: string } }) {
         setLogs((s) => s.concat([{ type: "normal", message: "Build start" }]));
         const bundle = await env.compile({
           useInMemory: true,
-          files: props.files,
+          files: files,
           input: "/index.tsx",
         });
         setLogs((s) => s.concat([{ type: "normal", message: "Compiled" }]));
@@ -46,12 +48,12 @@ export function RunnerPane(props: { files: { [k: string]: string } }) {
         );
       }
     })();
-  }, [props.files, builtCode]);
+  }, [files, builtCode]);
 
   const onClickRun = useCallback(async () => {
     let variables: any = {};
     try {
-      const variablesRaw = props.files["/variables.json"];
+      const variablesRaw = files["/variables.json"];
       const parsedJson = JSON.parse(variablesRaw);
       // TODO: Inject resolver
       variables = toVariables(parsedJson);
@@ -95,7 +97,7 @@ export function RunnerPane(props: { files: { [k: string]: string } }) {
         );
       }
     }
-  }, [props.files, builtCode]);
+  }, [files, builtCode]);
 
   return (
     <Flex p={8} w="100%">

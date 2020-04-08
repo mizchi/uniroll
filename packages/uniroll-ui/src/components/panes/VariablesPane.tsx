@@ -10,15 +10,15 @@ import {
   Code,
   Divider,
 } from "@chakra-ui/core";
-import { Files } from "../App";
+
 import { VariablesEditor } from "../editor/VariablesEditor";
 import { AssignStatement } from "../editor/variables";
+import { useAppState } from "../contexts";
 
-export function VariablesPane(props: {
-  files: Files;
-  onUpdate: (filepath: string, value: string) => void;
-}) {
-  const raw = props.files["/variables.json"];
+export function VariablesPane() {
+  const { files, onUpdateFile } = useAppState();
+
+  const raw = files["/variables.json"];
 
   let parsed;
   try {
@@ -35,7 +35,7 @@ export function VariablesPane(props: {
       initialAssigns={parsed}
       onChange={(newAssigns) => {
         console.log(newAssigns);
-        props.onUpdate("/variables.json", JSON.stringify(newAssigns, null, 2));
+        onUpdateFile("/variables.json", JSON.stringify(newAssigns, null, 2));
         const variables = newAssigns.reduce((acc, next) => {
           return { ...acc, [next.lval.key]: next.rval.value };
         }, {});

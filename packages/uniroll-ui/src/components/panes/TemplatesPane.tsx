@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Text, Flex, Button, ListItem, List, Heading } from "@chakra-ui/core";
+import { Button, Flex, Heading, List, ListItem, Text } from "@chakra-ui/core";
 import path from "path";
-import { useEnv } from "../contexts";
+import React, { useEffect, useState } from "react";
+import { useAppState, useEnv } from "../contexts";
+import { TemplateDef } from "../editor/variables";
+import { buildDefaultAssigns } from "../editor/VariablesEditor";
 
-export function TemplatesPane(props: {
-  onSelectTemplate: (url: string) => any;
-}) {
+export function TemplatesPane() {
+  const { onSelectScene, onSetFiles, onSelectFilepath } = useAppState();
+
   const {
-    templateHost = "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen/"
+    templateHost = "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen/",
   } = useEnv();
   const [templateDefs, setTemplateDefs] = useState<
     Array<{ name: string; description?: string; dependencies?: object }>
@@ -24,17 +26,29 @@ export function TemplatesPane(props: {
     <Flex direction="column" p={8}>
       <Heading>Template</Heading>
       <List>
-        {templateDefs.map(pkg => {
+        {templateDefs.map((pkg) => {
           return (
             <ListItem key={pkg.name} pt={3}>
               <Flex display="inline-flex">
                 <Button
                   size="sm"
-                  onClick={() =>
-                    props.onSelectTemplate(
-                      path.join(templateHost, pkg.name + ".json")
-                    )
-                  }
+                  onClick={async () => {
+                    const url = path.join(templateHost, pkg.name + ".json");
+                    const res = await fetch(url);
+                    const data = (await res.json()) as TemplateDef;
+                    const assigns = buildDefaultAssigns(data.requiredProps);
+                    const newFiles = {
+                      ...data.files,
+                      "/variables.json": JSON.stringify(assigns, null, 2),
+                    };
+                    onSetFiles(newFiles);
+                    if (newFiles["/variables.json"]) {
+                      onSelectFilepath(null);
+                      onSelectScene("variables");
+                    } else {
+                      onSelectScene("editor");
+                    }
+                  }}
                 >
                   load
                 </Button>

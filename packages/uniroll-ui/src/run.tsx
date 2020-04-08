@@ -2,12 +2,12 @@ import "./initMonaco";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { App, EnvContext } from "./index";
-import { Env } from "./types";
+import { App, EnvContext, defaultLayout } from "./index";
+import { Env } from "../";
 import { compile, InMemoryOption } from "uniroll";
 import { Files } from "..";
 
-const inintialFiles = {
+const inintialFiles: Files = {
   "/style.css": `
 .container {
   width: 100%;
@@ -54,6 +54,7 @@ const env: Env = {
       files: inintialFiles,
     };
   },
+  layout: defaultLayout,
 };
 
 ReactDOM.render(

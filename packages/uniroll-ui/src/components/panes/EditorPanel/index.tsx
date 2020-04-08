@@ -1,48 +1,45 @@
 import { Flex } from "@chakra-ui/core";
-import { useIsInMobile } from "../../contexts";
+import { useIsInMobile, useAppState } from "../../contexts";
 import { Files } from "../../../types";
 import { FileEditorPane } from "./FileEditorPane";
 import { FileSelectorPane } from "./FileSelectorPane";
 import React from "react";
 
-export function EditorPanel(props: {
-  filepath: string | null;
-  files: Files;
-  onBack: () => void;
-  onSelectFile: (filepath: string) => void;
-  onUpdate: (filepath: string, content: string) => void;
-}) {
+export function EditorPanel() {
+  const {
+    scene,
+    files,
+    currentFilepath,
+    onSelectScene,
+    onUpdateFile,
+    onSelectFilepath,
+  } = useAppState();
+
   const isInMobile = useIsInMobile();
   if (isInMobile) {
-    return props.filepath ? (
+    return currentFilepath ? (
       <FileEditorPane
-        filepath={props.filepath}
-        value={props.files[props.filepath]}
-        onBack={props.onBack}
-        onUpdate={props.onUpdate}
+        filepath={currentFilepath}
+        value={files[currentFilepath]}
+        onBack={() => onSelectFilepath(null)}
+        onUpdate={onUpdateFile}
       />
     ) : (
-      <FileSelectorPane
-        files={props.files}
-        onSelectFilepath={props.onSelectFile}
-      />
+      <FileSelectorPane files={files} onSelectFilepath={onSelectFilepath} />
     );
   } else {
     return (
       <Flex w="100%" h="100%">
         <Flex maxW="400px" h="100%" pl={3} pt={3}>
-          <FileSelectorPane
-            files={props.files}
-            onSelectFilepath={props.onSelectFile}
-          />
+          <FileSelectorPane files={files} onSelectFilepath={onSelectFilepath} />
         </Flex>
-        {props.filepath && (
+        {currentFilepath && (
           <Flex flex={1} w="100%" h="100%">
             <FileEditorPane
-              filepath={props.filepath}
-              value={props.files[props.filepath]}
-              onBack={props.onBack}
-              onUpdate={props.onUpdate}
+              filepath={currentFilepath}
+              value={files[currentFilepath]}
+              onBack={() => onSelectFilepath(null)}
+              onUpdate={onUpdateFile}
             />
           </Flex>
         )}
