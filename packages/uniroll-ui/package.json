@@ -5,6 +5,7 @@
   "typings": "index.d.ts",
   "license": "MIT",
   "scripts": {
+    "prepublishOnly": "yarn build",
     "demo": "webpack-dev-server --config webpack.demo.config.js",
     "build:demo": "webpack --config webpack.demo.config.js --mode production",
     "build": "rimraf lib && tsc -p .",
@@ -30,7 +31,7 @@
     "worker-plugin": "^4.0.2"
   },
   "files": [
-    "dist",
+    "lib",
     "index.d.ts"
   ],
   "peerDependencies": {
