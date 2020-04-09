@@ -76,7 +76,6 @@ const env: Env = {
         reader.addEventListener(
           "load",
           () => {
-            // convert image file to base64 string
             const result = reader.result as string;
             const encoded = result.replace("data:application/json;base64,", "");
             const json = atob(encoded);
