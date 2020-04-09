@@ -7,9 +7,12 @@ export type Cache = {
 };
 
 export type BaseOptions = {
-  cache?: Cache;
+  cache?: Cache | Map<string, string>;
   rollupPlugins?: Plugin[];
   versions?: { [library: string]: string };
+  onRequest?: (id: string) => void;
+  onUseCache?: (id: string) => void;
+  onWarn?: (message: string) => void;
 };
 
 export type InMemoryOption = BaseOptions & {

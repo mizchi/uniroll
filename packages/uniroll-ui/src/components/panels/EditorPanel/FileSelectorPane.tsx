@@ -6,9 +6,9 @@ import {
   ListItem,
   List,
   Heading,
-  Box
+  Box,
 } from "@chakra-ui/core";
-import { Files } from "../../App";
+import { Files } from "../../../index";
 
 export function FileSelectorPane(props: {
   files: Files;

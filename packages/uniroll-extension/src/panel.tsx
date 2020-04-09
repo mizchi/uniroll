@@ -6,8 +6,7 @@ import ReactDOM from "react-dom";
 import { compile, Options, InMemoryOption } from "uniroll";
 // @ts-ignore
 import { Env, State } from "uniroll-ui/lib";
-// @ts-ignore
-import { EnvContext, App, useEnv } from "uniroll-ui/lib";
+import { EnvContext, App, useEnv, defaultLayout } from "uniroll-ui/lib";
 import * as chromeApi from "./env/chromeApi";
 
 function readDepenedenciesIfExists(files: any): { [library: string]: string } {
@@ -23,6 +22,7 @@ function readDepenedenciesIfExists(files: any): { [library: string]: string } {
 const cache = new Map();
 const env: Env = {
   inExtension: true,
+  layout: defaultLayout,
   templateHost:
     "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
 
@@ -36,7 +36,7 @@ const env: Env = {
   },
   async load() {
     return chromeApi.load();
-  }
+  },
 };
 
 function Root() {

@@ -4,11 +4,13 @@ const PIKA_CDN_HOST = "https://cdn.pika.dev";
 export function pikaCDNResolver({
   cache = new Map(),
   onRequest,
-  onUseCache
+  onUseCache,
+  ignorePolyfill = false,
 }: {
   cache?: any;
+  ignorePolyfill?: boolean;
   onRequest?: (url: string) => void;
-  onUseCache: (url: string) => void;
+  onUseCache?: (url: string) => void;
 }) {
   return {
     async resolveId(id: string, importer: string) {
@@ -23,6 +25,9 @@ export function pikaCDNResolver({
       }
     },
     async load(id: string) {
+      if (id.includes("@pika/polyfill")) {
+        return `// ignored: ${id}`;
+      }
       if (id.startsWith(PIKA_CDN_HOST)) {
         const cached = await cache.get(id);
         if (cached) {
@@ -38,6 +43,6 @@ export function pikaCDNResolver({
         await cache.set(id, code);
         return code;
       }
-    }
+    },
   } as Plugin;
 }

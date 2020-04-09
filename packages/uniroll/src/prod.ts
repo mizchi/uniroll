@@ -25,42 +25,53 @@ import { baseline } from "./baseline";
 import precss from "precss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
+import replace from "@rollup/plugin-replace";
+import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
+import path from "path";
+
+const defaultCache = new Map();
 
 export async function compile(
   options: Options & { cssPostprocess: (t: string) => string }
 ) {
+  const mfs = options.useInMemory ? createMemoryFs(options.files) : options.fs;
+  const rootpath = options.useInMemory
+    ? path.dirname(path.join(process.cwd(), options.input))
+    : "/";
+  const pkgPath = path.join(rootpath, "package.json");
+  const versions = await readPkgVersionsIfExists(mfs, pkgPath);
+
   const babelOptions = {
     plugins: [
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformImportPathToPikaCDN(options.versions || {}, warning => {
-        console.warn(warning);
-      })
+      transformImportPathToPikaCDN(
+        versions ?? options.versions ?? {},
+        (warning) => options.onWarn?.(warning)
+      ),
     ],
-    presets: [[env, { modules: false, bugfixes: true }], react, ts]
+    presets: [[env, { modules: false, bugfixes: true }], react, ts],
   };
 
   const baseTransformPlugin = {
     name: "base-transform",
-    transform: createTransformer(babelOptions)
+    transform: createTransformer(babelOptions),
   };
   return baseline({
     ...options,
+    fs: mfs,
     rollupPlugins: [
+      replace({ "process.env.NODE_ENV": "production" }),
       css({ postprocess: transformWithAutoprefixer }),
       pikaCDNResolver({
-        cache: new Map() as any,
-        onRequest: id => {
-          console.log("[pika-resolver] onRequest", id);
-        },
-        onUseCache: id => {
-          console.log("[pika-resolver] onUseCache", id);
-        }
+        ignorePolyfill: true,
+        cache: options.cache ?? defaultCache,
+        onRequest: options.onRequest,
+        onUseCache: options.onUseCache,
       }),
-      baseTransformPlugin
-      // terser()
-    ]
+      baseTransformPlugin,
+    ],
   });
 }
 
@@ -70,10 +81,10 @@ async function transformWithAutoprefixer(input: string) {
     autoprefixer({
       // @ts-ignore
       grid: true,
-      overrideBrowserslist: ["last 2 versions", "ie 11"]
-    })
+      overrideBrowserslist: ["last 2 versions", "ie 11"],
+    }),
   ]).process("/* autoprefixer grid: autoplace */\n" + input, {
-    from: undefined
+    from: undefined,
   });
   return result.css;
 }

@@ -3,8 +3,9 @@
   "exclude": ["lib"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
+    "rootDir": "src",
     "outDir": "lib",
+    "declaration": true,
     "allowJs": false,
     "module": "esnext",
     "target": "es2019",
