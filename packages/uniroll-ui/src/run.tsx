@@ -6,6 +6,7 @@ import { App, EnvContext, defaultLayout } from "./index";
 import { Env } from "../";
 import { compile, InMemoryOption } from "uniroll";
 import { Files } from "..";
+import { EditingDump } from "../../uniroll-types/variables";
 
 const inintialFiles: Files = {
   "/style.css": `
@@ -34,7 +35,9 @@ const cache = new Map();
 const env: Env = {
   templateHost:
     "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
+  layout: defaultLayout,
   inExtension: false,
+
   async compile(options: InMemoryOption) {
     return compile({
       ...options,
@@ -54,7 +57,39 @@ const env: Env = {
       files: inintialFiles,
     };
   },
-  layout: defaultLayout,
+  async downloadToLocal(dump: EditingDump) {
+    console.log("dowload", dump);
+    const anchor = document.createElement("a");
+    const blob = new Blob([JSON.stringify(dump)], { type: "text/plain" });
+    anchor.href = URL.createObjectURL(blob);
+    anchor.download = `${Date.now()}.json`;
+    anchor.click();
+  },
+  async uploadFromLocal() {
+    const input = document.createElement("input");
+    input.type = "file";
+    return new Promise((r) => {
+      input.onchange = () => {
+        // @ts-ignore
+        const file = input.files[0] as File;
+        const reader = new FileReader();
+        reader.addEventListener(
+          "load",
+          () => {
+            // convert image file to base64 string
+            const result = reader.result as string;
+            const encoded = result.replace("data:application/json;base64,", "");
+            const json = atob(encoded);
+            const data = JSON.parse(json);
+            r(data);
+          },
+          false
+        );
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    });
+  },
 };
 
 ReactDOM.render(

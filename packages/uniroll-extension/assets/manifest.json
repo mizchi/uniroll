@@ -9,7 +9,14 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["storage", "activeTab", "tabs", "http://*/*", "https://*/*"],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "downloads"
+  ],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"

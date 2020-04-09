@@ -4,6 +4,11 @@ export type TemplateDef = {
   files: { [filename: string]: string };
 };
 
+export type EditingDump = {
+  generatedBy?: string; // template id
+  files: { [filename: string]: string };
+};
+
 export type RequiredProp = {
   key: string;
   deletable?: false;
