@@ -3,10 +3,11 @@ import "./initMonaco";
 import React from "react";
 import ReactDOM from "react-dom";
 import { App, EnvContext, defaultLayout } from "./index";
-import { Env } from "../";
+import type { Env } from "../";
+import type { Files } from "..";
+import type { TemplateDef } from "uniroll-types";
+
 import { compile, InMemoryOption } from "uniroll";
-import { Files } from "..";
-import { EditingDump } from "../../uniroll-types/variables";
 
 const inintialFiles: Files = {
   "/style.css": `
@@ -57,7 +58,7 @@ const env: Env = {
       files: inintialFiles,
     };
   },
-  async downloadToLocal(dump: EditingDump) {
+  async downloadToLocal(dump: TemplateDef) {
     console.log("dowload", dump);
     const anchor = document.createElement("a");
     const blob = new Blob([JSON.stringify(dump)], { type: "text/plain" });

@@ -1,23 +1,13 @@
-import {
-  RequiredProp,
+import type {
   Source,
   TypeAnnotation,
-  RVal,
   LVal,
-  AssignStatement,
-} from "./variables";
+  RVal,
+  VariableStatement,
+} from "uniroll-types";
 import React, { useCallback, useState } from "react";
-import { DUMMY_REFERENCE_DEFS, DUMMY_TEMPLATES } from "./dummyData";
-import {
-  Flex,
-  Button,
-  Text,
-  Input,
-  Textarea,
-  Select,
-  Divider,
-  Code,
-} from "@chakra-ui/core";
+import { DUMMY_REFERENCE_DEFS } from "./dummyData";
+import { Flex, Button, Text, Input, Textarea, Select } from "@chakra-ui/core";
 
 // ----------
 // Constants
@@ -31,9 +21,8 @@ const SELECTABLE_SOURCES: Array<Source["type"]> = [
   "reference",
   "null",
 ];
-
-// @ts-ignore
-const DEFAULT_RVALUE_OF_SOURCES: { [key: Source["type"]]: RVal } = {
+// @ts-ignorea
+const DEFAULT_RIGHT_OF_SOURCES: { [key: Source["type"]]: RVal } = {
   null: {
     typeAnnotation: {
       type: "null",
@@ -98,50 +87,15 @@ const TYPES: Array<TypeAnnotation["type"]> = [
   "any",
 ];
 
-// 型ごとの初期値
-const INITIAL_VALUE_BY_TYPE: { [k: string]: any } = {
-  string: "",
-  number: 0,
-  boolean: false,
-  null: null,
-  object: {},
-  array: [],
-  any: null,
-  reference: "$null",
-};
-
-export function buildDefaultAssigns(
-  requiredProps: RequiredProp[]
-): AssignStatement[] {
-  return requiredProps.map((s) => {
-    return {
-      lval: {
-        key: s.key,
-        typeRequired: s.typeRequired,
-        keyFixed: s.keyFixed,
-        typeAnnotation: s.typeAnnotation,
-      },
-      rval: {
-        value:
-          s.defaultValue ||
-          INITIAL_VALUE_BY_TYPE[
-            (s.typeAnnotation && s.typeAnnotation.type) || "string"
-          ],
-        typeAnnotation: s.typeAnnotation,
-      },
-    } as AssignStatement;
-  });
-}
-
-export function toVariables(variables: AssignStatement[]) {
+export function toVariables(variables: VariableStatement[]) {
   return variables.reduce((acc, next) => {
-    return { ...acc, [next.lval.key]: next.rval.value };
+    return { ...acc, [next.left.key]: next.right.value };
   }, {});
 }
 
 export function VariablesEditor(props: {
-  assigns: AssignStatement[];
-  onChange: (newValues: AssignStatement[]) => void;
+  assigns: VariableStatement[];
+  onChange: (newValues: VariableStatement[]) => void;
 }) {
   return (
     <VariablesEditorList
@@ -153,8 +107,8 @@ export function VariablesEditor(props: {
 }
 
 function VariablesEditorList(props: {
-  values: AssignStatement[];
-  onChange: (values: AssignStatement[]) => void;
+  values: VariableStatement[];
+  onChange: (values: VariableStatement[]) => void;
 }) {
   return (
     <Flex paddingLeft={10} direction="column">
@@ -191,15 +145,15 @@ function VariablesEditorList(props: {
         <Button
           onClick={() => {
             const newSources = props.values.concat({
-              lval: {
+              left: {
                 key: `value-${props.values.length + 1}`,
               },
-              rval: {
+              right: {
                 type: "literal",
                 value: "",
                 typeAnnotation: { type: "string" },
               },
-            } as AssignStatement);
+            } as VariableStatement);
             props.onChange(newSources);
           }}
         >
@@ -212,8 +166,8 @@ function VariablesEditorList(props: {
 
 function KeyValuePairEditor(props: {
   index: number;
-  assign: AssignStatement;
-  onChange: (changed: AssignStatement, index: number) => void;
+  assign: VariableStatement;
+  onChange: (changed: VariableStatement, index: number) => void;
   onDelete: (index: number) => any;
 }) {
   return (
@@ -235,13 +189,13 @@ function KeyValuePairEditor(props: {
       </Flex>
       <Flex>
         <KeyEditor
-          lval={props.assign.lval}
+          left={props.assign.left}
           onChange={(newval) => {
             console.log("key editor update", newval);
             const newAssign = {
               ...props.assign,
-              lval: newval,
-            } as AssignStatement;
+              left: newval,
+            } as VariableStatement;
             props.onChange(newAssign, props.index);
           }}
         />
@@ -249,13 +203,13 @@ function KeyValuePairEditor(props: {
       <Flex>&nbsp;=&nbsp;</Flex>
       <Flex>
         <SourceSelector
-          key={props.assign.lval.typeAnnotation?.type}
-          rvalue={props.assign.rval}
+          key={props.assign.left.typeAnnotation?.type}
+          right={props.assign.right}
           onChange={(newval) => {
             const newAssign = {
               ...props.assign,
-              rval: newval,
-            } as AssignStatement;
+              right: newval,
+            } as VariableStatement;
             props.onChange(newAssign, props.index);
           }}
         />
@@ -265,18 +219,18 @@ function KeyValuePairEditor(props: {
 }
 
 // Key Editor
-function KeyEditor(props: { lval: LVal; onChange: (lval: LVal) => void }) {
+function KeyEditor(props: { left: LVal; onChange: (left: LVal) => void }) {
   return (
     <>
       <Input
-        isDisabled={props.lval.keyFixed}
-        value={props.lval.key}
+        isDisabled={props.left.keyFixed}
+        value={props.left.key}
         onChange={(ev: any) => {
-          props.onChange({ ...props.lval, key: ev.target.value });
+          props.onChange({ ...props.left, key: ev.target.value as string });
         }}
       />
-      {props.lval.typeRequired && (
-        <TypeDisplay type={props.lval.typeAnnotation} />
+      {props.left.typeRequired && (
+        <TypeDisplay type={props.left.typeAnnotation} />
       )}
     </>
   );
@@ -284,7 +238,7 @@ function KeyEditor(props: { lval: LVal; onChange: (lval: LVal) => void }) {
 
 // Value Editor
 function ValueEditor(props: {
-  // rval: RVal,
+  // right: right,
   value: RVal;
   type: Source["type"];
   onChange: (value: RVal) => any;
@@ -366,7 +320,7 @@ function ValueEditor(props: {
     case "reference": {
       return (
         <ReferenceEditor
-          rvalue={props.value}
+          right={props.value}
           onChange={(ref) => {
             props.onChange(ref);
           }}
@@ -419,8 +373,8 @@ function JSONEditor(props: {
 }
 
 function ReferenceEditor(props: {
-  rvalue: RVal;
-  onChange: (rval: RVal) => void;
+  right: RVal;
+  onChange: (right: RVal) => void;
 }) {
   const defs = DUMMY_REFERENCE_DEFS;
   return (
@@ -431,7 +385,7 @@ function ReferenceEditor(props: {
           const hit = defs.find((r) => r.id === ev.target.value);
           if (hit) {
             props.onChange({
-              ...props.rvalue,
+              ...props.right,
               value: ev.target.value,
               type: "reference",
               manualTypeAnnotation: hit.manualTypeAnnotation,
@@ -450,11 +404,11 @@ function ReferenceEditor(props: {
           );
         })}
       </Select>
-      {props.rvalue.type === "reference" && props.rvalue.manualTypeAnnotation && (
+      {props.right.type === "reference" && props.right.manualTypeAnnotation && (
         <TypeEditor
-          type={props.rvalue.typeAnnotation || { type: "null" }}
+          type={props.right.typeAnnotation || { type: "null" }}
           onChange={(type) => {
-            props.onChange({ ...props.rvalue, typeAnnotation: type });
+            props.onChange({ ...props.right, typeAnnotation: type });
           }}
         />
       )}
@@ -463,11 +417,11 @@ function ReferenceEditor(props: {
 }
 
 function SourceSelector(props: {
-  rvalue: RVal;
+  right: RVal;
   onChange: (newval: RVal) => void;
 }) {
   const sourceType =
-    DEFAULT_SOURCE_BY_TYPE[props.rvalue.typeAnnotation?.type || "string"];
+    DEFAULT_SOURCE_BY_TYPE[props.right.typeAnnotation?.type || "string"];
 
   const [selectedSource, setSelecetedSource] = useState<Source["type"]>(
     sourceType
@@ -479,8 +433,8 @@ function SourceSelector(props: {
         onChange={(event) => {
           const nextType = event.target.value as Source["type"];
           // @ts-ignore
-          const nextRvalue = DEFAULT_RVALUE_OF_SOURCES[nextType];
-          props.onChange(nextRvalue);
+          const nextRight = DEFAULT_RIGHT_OF_SOURCES[nextType];
+          props.onChange(nextRight);
           setSelecetedSource(nextType);
         }}
       >
@@ -494,7 +448,7 @@ function SourceSelector(props: {
       </Select>
       <ValueEditor
         key={selectedSource}
-        value={props.rvalue}
+        value={props.right}
         type={selectedSource}
         onChange={props.onChange}
       />

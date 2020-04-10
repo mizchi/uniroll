@@ -1,11 +1,5 @@
 export type TemplateDef = {
   id: string;
-  requiredProps: RequiredProp[];
-  files: { [filename: string]: string };
-};
-
-export type EditingDump = {
-  generatedBy?: string; // template id
   files: { [filename: string]: string };
 };
 
@@ -158,9 +152,9 @@ export type RVal =
       manualTypeAnnotation?: boolean;
     };
 
-export type AssignStatement = {
-  lval: LVal;
-  rval: RVal;
+export type VariableStatement = {
+  left: LVal;
+  right: RVal;
 };
 
-export type VariablesJsonType = AssignStatement[];
+export type VariablesJsonType = VariableStatement[];

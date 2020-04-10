@@ -10,9 +10,7 @@ import {
 import path from "path";
 import React, { useEffect, useState } from "react";
 import { useAppState, useEnv } from "../contexts";
-import { TemplateDef } from "../editor/variables";
-import { buildDefaultAssigns } from "../editor/VariablesEditor";
-import { EditingDump } from "../../../../uniroll-types/variables";
+import { TemplateDef } from "uniroll-types";
 
 export function TemplatesPane() {
   const { onSelectScene, onSetFiles, onSelectFilepath, files } = useAppState();
@@ -44,7 +42,7 @@ export function TemplatesPane() {
                 const dump = {
                   files,
                   id: Date.now().toString(),
-                } as EditingDump;
+                } as TemplateDef;
                 downloadToLocal(dump);
               }}
             >
@@ -57,7 +55,6 @@ export function TemplatesPane() {
                 const local = await uploadFromLocal();
                 debugger;
                 onSetFiles(local.files);
-
                 onSelectScene("editor");
               }}
             >
@@ -77,10 +74,8 @@ export function TemplatesPane() {
                     const url = path.join(templateHost, pkg.name + ".json");
                     const res = await fetch(url);
                     const data = (await res.json()) as TemplateDef;
-                    const assigns = buildDefaultAssigns(data.requiredProps);
                     const newFiles = {
                       ...data.files,
-                      "/variables.json": JSON.stringify(assigns, null, 2),
                     };
                     onSetFiles(newFiles);
                     if (newFiles["/variables.json"]) {

@@ -1,4 +1,4 @@
-import { EditingDump } from "./../uniroll-types/variables.d";
+import { TemplateDef } from "uniroll-types";
 export type Files = {
   [key: string]: string;
 };
@@ -15,8 +15,8 @@ export type Env = {
   save(state: State): Promise<void>;
   load(): Promise<State>;
   layout: Layout;
-  downloadToLocal?: (dump: EditingDump) => Promise<void>;
-  uploadFromLocal?: () => Promise<EditingDump>;
+  downloadToLocal?: (dump: TemplateDef) => Promise<void>;
+  uploadFromLocal?: () => Promise<TemplateDef>;
 };
 export const App: React.ComponentClass;
 export const EnvContext: React.Context<Env>;

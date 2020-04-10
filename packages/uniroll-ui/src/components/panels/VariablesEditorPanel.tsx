@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/core";
 
 import { VariablesEditor } from "../editor/VariablesEditor";
-import { AssignStatement } from "../editor/variables";
 import { useAppState } from "../contexts";
+import { VariableStatement } from "uniroll-types";
 
 export function VariablesPane() {
   const { files, onUpdateFile } = useAppState();
@@ -37,7 +37,7 @@ export function VariablesPane() {
         console.log(newAssigns);
         onUpdateFile("/variables.json", JSON.stringify(newAssigns, null, 2));
         const variables = newAssigns.reduce((acc, next) => {
-          return { ...acc, [next.lval.key]: next.rval.value };
+          return { ...acc, [next.left.key]: next.right.value };
         }, {});
         // setCompiledValues(variables);
         console.log("compiled variables", variables);
@@ -48,9 +48,8 @@ export function VariablesPane() {
 
 // VariablesEditor
 export function VariableDefsEditor(props: {
-  // initialRequiredProps: RequiredProp[];
-  initialAssigns: AssignStatement[];
-  onChange: (defs: AssignStatement[]) => void;
+  initialAssigns: VariableStatement[];
+  onChange: (defs: VariableStatement[]) => void;
 }) {
   const [editingValues, setEditingValues] = useState(props.initialAssigns);
   return (
