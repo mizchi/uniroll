@@ -1,6 +1,6 @@
 {
   "name": "uniroll-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "lib/index.js",
   "typings": "index.d.ts",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "monaco-editor": "^0.20.0",
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
-    "uniroll-types": "^1.0.9",
+    "uniroll-types": "^1.0.10",
     "url-loader": "^4.0.0",
     "webpack-dev-server": "^3.10.3",
     "worker-plugin": "^4.0.2"
