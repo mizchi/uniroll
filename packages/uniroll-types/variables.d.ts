@@ -3,14 +3,30 @@ export type TemplateDef = {
   files: { [filename: string]: string };
 };
 
-export type RequiredProp = {
+export type VariableStatement = {
+  left: LVal;
+  right: RVal;
+};
+
+export type LVal = {
   key: string;
-  deletable?: false;
+  typeAnnotation: TypeAnnotation;
   keyFixed?: boolean;
   typeRequired?: boolean;
-  typeAnnotation?: TypeAnnotation;
-  defaultValue?: any;
 };
+
+export type RVal =
+  | {
+      type: "literal";
+      value: Literal;
+      typeAnnotation?: TypeAnnotation;
+    }
+  | {
+      type: "reference";
+      value: Reference;
+      typeAnnotation?: TypeAnnotation;
+      manualTypeAnnotation?: boolean;
+    };
 
 // VariableDef
 export type TextInputSource = { type: "text-input"; value: string };
@@ -131,30 +147,5 @@ export type NumberType = {
 };
 
 export type Literal = string | number | boolean | object | Array<any>;
-
-export type LVal = {
-  key: string;
-  typeAnnotation: TypeAnnotation;
-  keyFixed?: boolean;
-  typeRequired?: boolean;
-};
-
-export type RVal =
-  | {
-      type: "literal";
-      value: Literal;
-      typeAnnotation?: TypeAnnotation;
-    }
-  | {
-      type: "reference";
-      value: Reference;
-      typeAnnotation?: TypeAnnotation;
-      manualTypeAnnotation?: boolean;
-    };
-
-export type VariableStatement = {
-  left: LVal;
-  right: RVal;
-};
 
 export type VariablesJsonType = VariableStatement[];

@@ -1,0 +1,18 @@
+[
+  {
+    "lval": {
+      "key": "title",
+      "typeRequired": true,
+      "keyFixed": true,
+      "typeAnnotation": {
+        "type": "string"
+      }
+    },
+    "rval": {
+      "value": "John Doe",
+      "typeAnnotation": {
+        "type": "string"
+      }
+    }
+  }
+]

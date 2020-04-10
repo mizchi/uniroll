@@ -1,4 +1,3 @@
-import { TemplateDef } from "./../packages/uniroll-ui/src/components/editor/variables";
 import fs from "fs";
 import path from "path";
 import glob from "glob";
@@ -16,24 +15,18 @@ const targets = result.map((r) => r.replace(SRC_ROOT + "/", ""));
 // gen/*.json
 for (const target of targets) {
   const fileNames = glob
-    .sync(path.join(SRC_ROOT, target, "files", "/**"), {
+    .sync(path.join(SRC_ROOT, target, "/**"), {
       root: process.cwd(),
       nodir: true,
     })
-    .map((r) => r.replace(path.join(SRC_ROOT, target, "files") + "/", ""));
+    .map((r) => r.replace(path.join(SRC_ROOT, target) + "/", ""));
   const files = fileNames.reduce((acc, fpath) => {
     const data = fs.readFileSync(
-      path.join(process.cwd(), SRC_ROOT, target, "files", fpath),
+      path.join(process.cwd(), SRC_ROOT, target, fpath),
       "utf-8"
     );
     return { ...acc, [fpath]: data };
   }, {});
-
-  const requiredPropsStr = fs.readFileSync(
-    path.join(process.cwd(), SRC_ROOT, target, "requiredProps.json"),
-    "utf-8"
-  );
-  const requiredProps = JSON.parse(requiredPropsStr);
 
   const outpath = path.join(process.cwd(), OUT_ROOT, `${target}.json`);
   console.log("write >", outpath);
@@ -44,8 +37,7 @@ for (const target of targets) {
       files,
       id: target,
       name: target,
-      requiredProps,
-    } as TemplateDef)
+    })
   );
 }
 
@@ -54,7 +46,7 @@ let pkgList: Array<any> = [];
 for (const target of targets) {
   try {
     const pkg = fs.readFileSync(
-      path.join(process.cwd(), SRC_ROOT, target, "files/package.json"),
+      path.join(process.cwd(), SRC_ROOT, target, "package.json"),
       "utf-8"
     );
 

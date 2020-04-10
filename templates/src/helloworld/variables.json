@@ -1,0 +1,88 @@
+[
+  {
+    "left": {
+      "key": "fixed-string",
+      "typeRequired": true,
+      "keyFixed": true,
+      "typeAnnotation": {
+        "type": "string"
+      }
+    },
+    "right": {
+      "value": "John Doe",
+      "typeAnnotation": {
+        "type": "string"
+      }
+    }
+  },
+  {
+    "left": {
+      "key": "b",
+      "typeAnnotation": {
+        "type": "boolean"
+      }
+    },
+    "right": {
+      "value": false,
+      "typeAnnotation": {
+        "type": "boolean"
+      }
+    }
+  },
+  {
+    "left": {
+      "key": "n",
+      "typeAnnotation": {
+        "type": "number"
+      }
+    },
+    "right": {
+      "value": 10,
+      "typeAnnotation": {
+        "type": "number"
+      }
+    }
+  },
+  {
+    "left": {
+      "key": "N",
+      "typeAnnotation": {
+        "type": "null"
+      }
+    },
+    "right": {
+      "value": null,
+      "typeAnnotation": {
+        "type": "null"
+      }
+    }
+  },
+  {
+    "left": {
+      "key": "obj",
+      "typeAnnotation": {
+        "type": "object"
+      }
+    },
+    "right": {
+      "value": {},
+      "typeAnnotation": {
+        "type": "object"
+      }
+    }
+  },
+  {
+    "left": {
+      "key": "arr",
+      "typeAnnotation": {
+        "type": "array"
+      }
+    },
+    "right": {
+      "value": [],
+      "typeAnnotation": {
+        "type": "array"
+      }
+    }
+  }
+]
