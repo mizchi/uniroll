@@ -1,6 +1,6 @@
 {
   "name": "uniroll-tools",
-  "version": "1.0.10",
+  "version": "1.0.13",
   "bin": {
     "uniroll": "bin/uniroll"
   },
@@ -16,7 +16,7 @@
     "uniroll": "^1.0.9",
     "uniroll-linter": "^1.0.9",
     "uniroll-optimizer": "^1.0.9",
-    "uniroll-types": "^1.0.10"
+    "uniroll-types": "^1.0.13"
   },
   "files": [
     "lib",
