@@ -2,6 +2,7 @@ import { EnvInput } from "../..";
 import React, { useContext } from "react";
 import { Env, Files } from "../..";
 import { defaultLayout } from "..";
+import { toVariables } from "./editor/VariablesEditor";
 
 // env
 const EnvContext = React.createContext<Env>(null as any);
@@ -12,6 +13,7 @@ export function UnirollEnvProvider(props: { value: EnvInput; children: any }) {
     inExtension: props.value.inExtension ?? false,
     templateHost:
       "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
+    resolveVariables: toVariables,
     ...props.value,
   } as Env;
   return (
