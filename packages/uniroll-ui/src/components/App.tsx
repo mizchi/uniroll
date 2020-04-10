@@ -7,7 +7,6 @@ import {
   ThemeProvider,
 } from "@chakra-ui/core";
 import React, { useCallback, useEffect, useState, useContext } from "react";
-import { templateList } from "./constants";
 import {
   useEnv,
   IsInMobileContext,
@@ -17,7 +16,6 @@ import {
 import { useWindowWidth } from "./hooks";
 
 export type Files = { [key: string]: string };
-// export const Editor = React.lazy(() => import("./editor/Editor"));
 export const extToLanguage: { [key: string]: string } = {
   ".ts": "typescript",
   ".tsx": "typescript",
@@ -39,18 +37,18 @@ export function App() {
   );
 }
 
-const firstFiles = templateList[0].files as any;
-
 function AppContainer() {
   const env = useEnv();
   const [scene, onSelectScene] = useState<string>("editor");
-  const [files, onSetFiles] = useState<Files>(firstFiles);
+  const [files, onSetFiles] = useState<Files>({});
   const [currentFilepath, setCurrentFilepath] = useState<string | null>(null);
   useEffect(() => {
     (async () => {
       try {
-        const data = await env.load();
-        onSetFiles(data.files);
+        const data = await env.loadLastState?.();
+        if (data) {
+          onSetFiles(data.files);
+        }
       } catch (err) {
         alert(err.message);
       }
@@ -61,7 +59,7 @@ function AppContainer() {
     (filepath: string, value: string) => {
       const newFiles = { ...files, [filepath]: value };
       onSetFiles(newFiles);
-      env.save({
+      env.saveCurrentState?.({
         files: newFiles,
       });
     },

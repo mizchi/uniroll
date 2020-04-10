@@ -1,19 +1,8 @@
-import React, { useState, useCallback } from "react";
-import {
-  Flex,
-  Text,
-  Textarea,
-  Button,
-  LightMode,
-  Box,
-  Select,
-  Code,
-  Divider,
-} from "@chakra-ui/core";
-
-import { VariablesEditor } from "../editor/VariablesEditor";
-import { useAppState } from "../contexts";
+import { Flex, Text } from "@chakra-ui/core";
+import React, { useState } from "react";
 import { VariableStatement } from "uniroll-types";
+import { useAppState } from "../contexts";
+import { VariablesEditor } from "../editor/VariablesEditor";
 
 export function VariablesPane() {
   const { files, onUpdateFile } = useAppState();
@@ -23,9 +12,7 @@ export function VariablesPane() {
   let parsed;
   try {
     parsed = JSON.parse(raw);
-  } catch (err) {
-    // invalid
-  }
+  } catch (err) {}
 
   if (!parsed || !(parsed instanceof Array)) {
     return <Text>Variables are invalid syntax. Fix it by files directly.</Text>;
@@ -34,13 +21,7 @@ export function VariablesPane() {
     <VariableDefsEditor
       initialAssigns={parsed}
       onChange={(newAssigns) => {
-        console.log(newAssigns);
         onUpdateFile("/variables.json", JSON.stringify(newAssigns, null, 2));
-        const variables = newAssigns.reduce((acc, next) => {
-          return { ...acc, [next.left.key]: next.right.value };
-        }, {});
-        // setCompiledValues(variables);
-        console.log("compiled variables", variables);
       }}
     />
   );

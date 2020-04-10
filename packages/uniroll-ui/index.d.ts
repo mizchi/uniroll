@@ -1,4 +1,11 @@
+import { VariableStatement } from "./../uniroll-types/variables.d";
 import { TemplateDef } from "uniroll-types";
+
+export const App: React.ComponentClass;
+export const UnirollEnvProvider: React.ComponentClass<EnvInput>;
+export const EnvContext: React.Context<Env>;
+export function useEnv(): Env;
+
 export type Files = {
   [key: string]: string;
 };
@@ -7,20 +14,28 @@ export type State = {
   files: Files;
 };
 
-export type Env = {
+export type OptionalEnv = {
   templateHost?: string;
-  inExtension: boolean;
+  resolveVariables?: (variables: VariableStatement[]) => Promise<any>;
   evalCodeInActiveTab?: (code: string, options: any) => void;
-  compile(options: any): Promise<any>;
-  save(state: State): Promise<void>;
-  load(): Promise<State>;
-  layout: Layout;
   downloadToLocal?: (dump: TemplateDef) => Promise<void>;
-  uploadFromLocal?: () => Promise<TemplateDef>;
+  loadFromLocal?: () => Promise<TemplateDef>;
+  saveCurrentState?: (state: State) => Promise<void>;
+  loadLastState?: () => Promise<State>;
 };
-export const App: React.ComponentClass;
-export const EnvContext: React.Context<Env>;
-export function useEnv(): Env;
+
+export type EnvInput = {
+  inExtension?: boolean;
+  layout?: Layout;
+  compile(options: any): Promise<any>;
+} & OptionalEnv;
+
+export type Env = OptionalEnv & {
+  templateHost: string;
+  inExtension: boolean;
+  compile(options: any): Promise<any>;
+  layout: Layout;
+};
 
 export type TabComponent = {
   id: string;

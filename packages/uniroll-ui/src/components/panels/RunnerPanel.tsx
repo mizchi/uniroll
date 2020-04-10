@@ -8,7 +8,6 @@ import {
   Button,
 } from "@chakra-ui/core";
 import { useEnv, useAppState } from "../contexts";
-import { toVariables } from "../editor/VariablesEditor";
 export function RunnerPane() {
   const { files } = useAppState();
 
@@ -56,7 +55,9 @@ export function RunnerPane() {
       const variablesRaw = files["/variables.json"];
       const parsedJson = JSON.parse(variablesRaw);
       // TODO: Inject resolver
-      variables = toVariables(parsedJson);
+      if (env.resolveVariables) {
+        variables = await env.resolveVariables?.(parsedJson);
+      }
     } catch (err) {}
     if (builtCode) {
       try {

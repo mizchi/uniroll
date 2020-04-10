@@ -8,7 +8,7 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/core";
-import { Files } from "../../../index";
+import { Files } from "../../../../index";
 
 export function FileSelectorPane(props: {
   files: Files;

@@ -5,13 +5,12 @@ import { VariablesPane } from "./components/panels/VariablesEditorPanel";
 import { TemplatesPane } from "./components/panels/TemplateLoaderPanel";
 
 export {
-  EnvContext,
+  UnirollEnvProvider,
   useEnv,
   useAppState,
   useIsInMobile,
 } from "./components/contexts";
 export { App } from "./components/App";
-export * from "./types";
 
 export const defaultLayout: Layout = {
   leftTabs: [

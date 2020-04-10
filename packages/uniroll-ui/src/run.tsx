@@ -2,12 +2,12 @@ import "./initMonaco";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { App, EnvContext, defaultLayout } from "./index";
-import type { Env } from "../";
-import type { Files } from "..";
-import type { TemplateDef } from "uniroll-types";
-
 import { compile, InMemoryOption } from "uniroll";
+import type { Files } from "..";
+import type { EnvInput } from "../";
+import { UnirollEnvProvider } from "./components/contexts";
+import { downloadToLocal, loadFromLocal } from "./helpers";
+import { App, defaultLayout } from "./index";
 
 const inintialFiles: Files = {
   "/style.css": `
@@ -33,12 +33,9 @@ console.log(<div>hello</div>, useEffect);`,
 };
 
 const cache = new Map();
-const env: Env = {
-  templateHost:
-    "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
+const env: EnvInput = {
   layout: defaultLayout,
   inExtension: false,
-
   async compile(options: InMemoryOption) {
     return compile({
       ...options,
@@ -52,49 +49,18 @@ const env: Env = {
       },
     });
   },
-  async save() {},
-  async load() {
+  async loadLastState() {
     return {
       files: inintialFiles,
     };
   },
-  async downloadToLocal(dump: TemplateDef) {
-    console.log("dowload", dump);
-    const anchor = document.createElement("a");
-    const blob = new Blob([JSON.stringify(dump)], { type: "text/plain" });
-    anchor.href = URL.createObjectURL(blob);
-    anchor.download = `${Date.now()}.json`;
-    anchor.click();
-  },
-  async uploadFromLocal() {
-    const input = document.createElement("input");
-    input.type = "file";
-    return new Promise((r) => {
-      input.onchange = () => {
-        // @ts-ignore
-        const file = input.files[0] as File;
-        const reader = new FileReader();
-        reader.addEventListener(
-          "load",
-          () => {
-            const result = reader.result as string;
-            const encoded = result.replace("data:application/json;base64,", "");
-            const json = atob(encoded);
-            const data = JSON.parse(json);
-            r(data);
-          },
-          false
-        );
-        reader.readAsDataURL(file);
-      };
-      input.click();
-    });
-  },
+  downloadToLocal,
+  loadFromLocal,
 };
 
 ReactDOM.render(
-  <EnvContext.Provider value={env}>
+  <UnirollEnvProvider value={env}>
     <App />
-  </EnvContext.Provider>,
+  </UnirollEnvProvider>,
   document.querySelector("#root")
 );

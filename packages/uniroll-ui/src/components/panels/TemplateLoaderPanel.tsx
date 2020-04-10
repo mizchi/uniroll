@@ -17,7 +17,7 @@ export function TemplatesPane() {
 
   const {
     downloadToLocal,
-    uploadFromLocal,
+    loadFromLocal,
     templateHost = "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen/",
   } = useEnv();
   const [templateDefs, setTemplateDefs] = useState<
@@ -49,11 +49,10 @@ export function TemplatesPane() {
               Save to local
             </Button>
           )}
-          {uploadFromLocal && (
+          {loadFromLocal && (
             <Button
               onClick={async () => {
-                const local = await uploadFromLocal();
-                debugger;
+                const local = await loadFromLocal();
                 onSetFiles(local.files);
                 onSelectScene("editor");
               }}

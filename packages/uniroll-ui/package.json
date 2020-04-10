@@ -2,7 +2,7 @@
   "name": "uniroll-ui",
   "version": "1.0.10",
   "main": "lib/index.js",
-  "typings": "index.d.ts",
+  "types": "index.d.ts",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",

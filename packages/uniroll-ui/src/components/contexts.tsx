@@ -1,8 +1,26 @@
+import { EnvInput } from "../..";
 import React, { useContext } from "react";
-import { Env, Files } from "../../index.d";
+import { Env, Files } from "../..";
+import { defaultLayout } from "..";
 
 // env
-export const EnvContext = React.createContext<Env>(null as any);
+const EnvContext = React.createContext<Env>(null as any);
+
+export function UnirollEnvProvider(props: { value: EnvInput; children: any }) {
+  const resolvedEnv = {
+    layout: defaultLayout,
+    inExtension: props.value.inExtension ?? false,
+    templateHost:
+      "https://raw.githubusercontent.com/mizchi/uniroll/master/templates/gen",
+    ...props.value,
+  } as Env;
+  return (
+    <EnvContext.Provider value={resolvedEnv}>
+      {props.children}
+    </EnvContext.Provider>
+  );
+}
+
 export function useEnv() {
   return useContext(EnvContext);
 }
