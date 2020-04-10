@@ -151,7 +151,7 @@ function VariablesEditorList(props: {
                 key: `value-${props.values.length + 1}`,
               },
               right: {
-                type: "literal",
+                resolverType: "literal",
                 value: "",
                 typeAnnotation: { type: "string" },
               },
@@ -259,7 +259,7 @@ function ValueEditor(props: {
             props.onChange({
               typeAnnotation: { type: "string" },
               value: ev.target.value,
-              type: "literal",
+              resolverType: "literal",
             });
           }}
         />
@@ -275,7 +275,7 @@ function ValueEditor(props: {
             props.onChange({
               typeAnnotation: { type: "number" },
               value: Number(ev.target.value),
-              type: "literal",
+              resolverType: "literal",
             });
           }}
         />
@@ -290,7 +290,7 @@ function ValueEditor(props: {
             props.onChange({
               typeAnnotation: { type: "boolean" },
               value: Boolean(ev.target.checked),
-              type: "literal",
+              resolverType: "literal",
             });
           }}
         />
@@ -313,7 +313,7 @@ function ValueEditor(props: {
             props.onChange({
               typeAnnotation: { type: "string" },
               value: ev.target.value,
-              type: "literal",
+              resolverType: "literal",
             });
           }}
         />
@@ -363,7 +363,7 @@ function JSONEditor(props: {
             props.onChange({
               typeAnnotation: props.requiredType,
               value: json,
-              type: "literal",
+              resolverType: "literal",
             });
           } catch (e) {
             setParseable(false);
@@ -389,7 +389,7 @@ function ReferenceEditor(props: {
             props.onChange({
               ...props.right,
               value: ev.target.value,
-              type: "reference",
+              resolverType: "reference",
               manualTypeAnnotation: hit.manualTypeAnnotation,
               typeAnnotation: hit.manualTypeAnnotation
                 ? { type: "null" }
@@ -406,14 +406,15 @@ function ReferenceEditor(props: {
           );
         })}
       </Select>
-      {props.right.type === "reference" && props.right.manualTypeAnnotation && (
-        <TypeEditor
-          type={props.right.typeAnnotation || { type: "null" }}
-          onChange={(type) => {
-            props.onChange({ ...props.right, typeAnnotation: type });
-          }}
-        />
-      )}
+      {props.right.resolverType === "reference" &&
+        props.right.manualTypeAnnotation && (
+          <TypeEditor
+            type={props.right.typeAnnotation || { type: "null" }}
+            onChange={(type) => {
+              props.onChange({ ...props.right, typeAnnotation: type });
+            }}
+          />
+        )}
     </>
   );
 }

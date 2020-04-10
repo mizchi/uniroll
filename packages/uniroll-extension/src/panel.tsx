@@ -3,10 +3,10 @@ import "./initMonaco";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { compile, Options, InMemoryOption } from "uniroll";
+import { compile, InMemoryOption } from "uniroll";
+import { App, EnvInput, UnirollEnvProvider } from "uniroll-ui";
 // @ts-ignore
-import { Env, State } from "uniroll-ui/lib";
-import { EnvContext, App, UnirollEnvProvider, EnvInput } from "uniroll-ui";
+import { State } from "uniroll-ui/lib";
 import * as chromeApi from "./env/chromeApi";
 
 function readDepenedenciesIfExists(files: any): { [library: string]: string } {
@@ -39,6 +39,7 @@ const env: EnvInput = {
 
 function Root() {
   return (
+    // @ts-ignore
     <UnirollEnvProvider value={env}>
       <App />
     </UnirollEnvProvider>

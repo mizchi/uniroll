@@ -17,13 +17,13 @@ export type LVal = {
 
 export type RVal =
   | {
-      type: "literal";
+      resolverType?: "literal";
       value: Literal;
       typeAnnotation?: TypeAnnotation;
     }
   | {
-      type: "reference";
-      value: Reference;
+      resolverType: string;
+      value: any;
       typeAnnotation?: TypeAnnotation;
       manualTypeAnnotation?: boolean;
     };
