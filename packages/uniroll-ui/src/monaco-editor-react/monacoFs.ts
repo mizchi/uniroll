@@ -10,7 +10,7 @@ const extToLang: {
   ".tsx": "typescript",
   ".json": "json",
   ".svelte": "html",
-  ".vue": "html"
+  ".vue": "html",
 };
 
 export function getMonaco() {
@@ -18,7 +18,7 @@ export function getMonaco() {
 }
 
 export function findModel(filepath: string): monaco.editor.IModel | void {
-  return monaco.editor.getModels().find(model => {
+  return monaco.editor.getModels().find((model) => {
     return model.uri.path === filepath;
   });
 }
@@ -36,7 +36,7 @@ export function renameFile(
 }
 
 export function updateFile(filepath: string, content: string) {
-  const m = monaco.editor.getModels().find(m => m.uri.path === filepath);
+  const m = monaco.editor.getModels().find((m) => m.uri.path === filepath);
   if (m && m.getValue() !== content) {
     m.setValue(content);
   }
@@ -48,7 +48,7 @@ export function deleteFile(filepath: string) {
   if (!confirmed) {
     return;
   }
-  const m = monaco.editor.getModels().find(m => m.uri.path === filepath);
+  const m = monaco.editor.getModels().find((m) => m.uri.path === filepath);
   if (m) {
     m.dispose();
     console.log("disposed", filepath);
@@ -63,23 +63,21 @@ export function createFile(
 ): monaco.editor.ITextModel {
   const extname = path.extname(filepath);
   const lang = extToLang[extname as any];
-  console.log(extname, lang);
+  // console.log(extname, lang);
   const newModel = monaco.editor.createModel(
     content || "",
     lang,
     monaco.Uri.from({
       scheme: "file",
-      path: filepath
+      path: filepath,
     })
   );
   newModel.updateOptions({
     tabSize: 2,
-    insertSpaces: true
+    insertSpaces: true,
   });
   if (filepath === "/tsconfig.json" && content) {
     const conf = parseConfigFileTextToJson(filepath, content);
-    // debugger;
-
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions(
       conf.config.compilerOptions
     );
@@ -88,6 +86,7 @@ export function createFile(
       "decls.d.ts"
     );
   }
+  console.log("createFile", filepath, content);
   return newModel;
 }
 
@@ -104,6 +103,7 @@ export function toJSON(): SerializedFS {
 }
 
 export function restoreFromJSON(serialized: SerializedFS): void {
+  disposeAll();
   Object.entries(serialized).map(([k, v]) => {
     createFile(k, v);
   });

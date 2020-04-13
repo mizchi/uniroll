@@ -99,7 +99,11 @@ function AppLayout() {
         <Flex h="32px">
           <Header />
         </Flex>
-        <Flex h="calc(100% - 32px)">{selected && <selected.component />}</Flex>
+        <Flex h="calc(100% - 32px)">
+          {selected && <selected.component />}
+          {/* <FileSelectorPane />
+          <MonacoFilesEditor /> */}
+        </Flex>
       </Flex>
     </>
   );
@@ -114,7 +118,11 @@ function Header() {
         <ButtonGroup pt={1} pl={1}>
           {layout.leftTabs.map((tab) => {
             return (
-              <Button size="sm" onClick={() => onSelectScene(tab.id)}>
+              <Button
+                key={tab.id}
+                size="sm"
+                onClick={() => onSelectScene(tab.id)}
+              >
                 {tab.displayName}
               </Button>
             );
@@ -126,7 +134,11 @@ function Header() {
         <ButtonGroup pt={1} pl={1}>
           {layout.rightTabs.map((tab) => {
             return (
-              <Button size="sm" onClick={() => onSelectScene(tab.id)}>
+              <Button
+                key={tab.id}
+                size="sm"
+                onClick={() => onSelectScene(tab.id)}
+              >
                 {tab.displayName}
               </Button>
             );

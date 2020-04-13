@@ -8,12 +8,12 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/core";
-import { Files } from "../../../../index";
+// import { Files } from "../../../../index";
+import { useAppState } from "../../contexts";
 
-export function FileSelectorPane(props: {
-  files: Files;
-  onSelectFilepath: (filepath: string) => void;
-}) {
+export function FileSelectorPane() {
+  const { files, onSelectFilepath } = useAppState();
+
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     const w = window.innerWidth;
@@ -31,7 +31,7 @@ export function FileSelectorPane(props: {
           <Box>
             <Heading>Files</Heading>
             <List>
-              {Object.entries(props.files).map(([filepath, _value]) => {
+              {Object.entries(files).map(([filepath, _value]) => {
                 return (
                   <ListItem key={filepath} pt={3}>
                     <Flex display="inline-flex">
@@ -39,7 +39,7 @@ export function FileSelectorPane(props: {
                       <Button
                         size="sm"
                         onClick={() => {
-                          props.onSelectFilepath(filepath);
+                          onSelectFilepath(filepath);
                         }}
                       >
                         edit
@@ -54,7 +54,7 @@ export function FileSelectorPane(props: {
           <Box p={8}>
             <Heading>Files</Heading>
             <List>
-              {Object.entries(props.files).map(([filepath, _value]) => {
+              {Object.entries(files).map(([filepath, _value]) => {
                 return (
                   <ListItem key={filepath} pt={3}>
                     <Flex display="inline-flex">
@@ -62,7 +62,7 @@ export function FileSelectorPane(props: {
                       <Button
                         size="sm"
                         onClick={() => {
-                          props.onSelectFilepath(filepath);
+                          onSelectFilepath(filepath);
                         }}
                       >
                         edit

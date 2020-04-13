@@ -1,27 +1,26 @@
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import React from "react";
 import { Flex, Button, Text } from "@chakra-ui/core";
-import path from "path";
-const MonacoEditor = React.lazy(() => import("../../editor/MonacoEditor"));
+import { useAppState } from "../../contexts";
 
-const extToLang: { [key: string]: string } = {
-  ".ts": "typescript",
-  ".tsx": "typescript",
-  ".js": "javascript",
-  ".css": "css",
-  ".json": "json"
-};
-export function FileEditorPane(props: {
-  onBack: () => void;
-  onUpdate: (filepath: string, value: string) => void;
-  filepath: string;
-  value: string;
-}) {
-  const lang = extToLang[path.extname(props.filepath || "")];
+let _cache: any = null;
+const MonacoWorkspaceEditor = React.lazy(() => {
+  if (_cache) {
+    return _cache;
+  }
+  _cache = import("../../../monaco-editor-react/MonacoWorkspaceEditor");
+  return _cache;
+});
+
+export function FileEditorPane() {
+  const { currentFilepath, onSelectFilepath } = useAppState();
+  const onBack = useCallback(() => {
+    onSelectFilepath(null);
+  }, []);
   return (
     <Flex h="100%" w="100%" direction="column">
       <Flex h="36px" w="100%">
-        <Button size="sm" onClick={props.onBack}>
+        <Button size="sm" onClick={onBack}>
           &lt;
         </Button>
         <Text
@@ -31,17 +30,12 @@ export function FileEditorPane(props: {
           d="inline-flex"
           h="100%"
         >
-          {props.filepath}
+          {currentFilepath}
         </Text>
       </Flex>
       <Flex h="calc(100% - 36px)" w="100%">
         <Suspense fallback="..">
-          <MonacoEditor
-            key={props.filepath}
-            value={props.value}
-            language={lang as any}
-            onChangeValue={value => props.onUpdate(props.filepath, value)}
-          />
+          <MonacoWorkspaceEditor />
         </Suspense>
       </Flex>
     </Flex>
