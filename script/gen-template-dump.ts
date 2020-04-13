@@ -25,7 +25,8 @@ for (const target of targets) {
       path.join(process.cwd(), SRC_ROOT, target, fpath),
       "utf-8"
     );
-    return { ...acc, [fpath]: data };
+    const absPath = path.join("/", fpath);
+    return { ...acc, [absPath]: data };
   }, {});
 
   const outpath = path.join(process.cwd(), OUT_ROOT, `${target}.json`);

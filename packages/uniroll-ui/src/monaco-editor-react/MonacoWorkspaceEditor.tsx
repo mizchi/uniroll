@@ -2,28 +2,33 @@ import "./initMonaco";
 import * as monaco from "monaco-editor";
 
 import React, { useRef, useState, useEffect } from "react";
-import { restoreFromJSON, findModel, disposeAll } from "./monacoFs";
+import { restoreFromJSON, findModel, disposeAll, readModel } from "./monacoFs";
 import { useAppState } from "../components/contexts";
 
+const viewStateCache = new Map();
 export default React.memo(() => {
-  const { files, currentFilepath, onSetFiles } = useAppState();
+  const { files: initialFiles, currentFilepath, onSetFiles } = useAppState();
+  useEffect(() => {
+    // console.log("remount");
+    viewStateCache.clear();
+    restoreFromJSON(initialFiles);
+    // debugger;
+  }, []);
+
+  const [files, setFiles] = useState(initialFiles);
+  // const [age, setAge] = useState(0);
 
   const editorRef = useRef<HTMLDivElement>(null as any);
 
   const [
-    currrentEditor,
+    currentEditor,
     setCurrentEditor,
   ] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  useEffect(() => {
-    console.log("remount");
-    restoreFromJSON(files);
-  }, [files]);
-
   // initialize once
   useEffect(() => {
-    let newEditor = currrentEditor;
-    if (editorRef.current && currrentEditor == null) {
+    let newEditor = currentEditor;
+    if (editorRef.current && currentEditor == null) {
       newEditor = monaco.editor.create(editorRef.current, {
         value: "",
         theme: "vs-dark",
@@ -36,30 +41,52 @@ export default React.memo(() => {
         lineNumbers: "off",
       });
       newEditor.updateOptions({ tabSize: 2 });
-      const rect = editorRef.current.getBoundingClientRect();
-      newEditor.layout({ width: rect.width, height: rect.height });
       setCurrentEditor(newEditor);
     }
+  }, [editorRef.current]);
 
-    if (currrentEditor) {
-      if (currentFilepath) {
-        const m = findModel(currentFilepath);
-        if (m) {
-          currrentEditor.setModel(m);
-          const rect = editorRef.current.getBoundingClientRect();
-          currrentEditor.layout({ width: rect.width, height: rect.height });
-          currrentEditor.focus();
-          return;
-        }
-      }
-      currrentEditor.setModel(null);
+  // reload file
+  useEffect(() => {
+    if (!currentEditor) {
       return;
     }
-  }, [editorRef.current, currrentEditor, currentFilepath]);
+    if (currentFilepath) {
+      const m = readModel(currentFilepath);
+      currentEditor.setModel(m);
+
+      if (viewStateCache.has(currentFilepath)) {
+        currentEditor.restoreViewState(viewStateCache.get(currentFilepath));
+      }
+
+      const disposer = currentEditor.onDidChangeModelContent((changes) => {
+        console.log("change", currentFilepath, currentEditor.getValue());
+        const newFiles = {
+          ...files,
+          [currentFilepath]: currentEditor.getValue(),
+        };
+        setFiles(newFiles);
+        onSetFiles(newFiles);
+        viewStateCache.set(currentFilepath, currentEditor.saveViewState());
+      });
+
+      const rect = editorRef.current.getBoundingClientRect();
+      currentEditor.layout({ width: rect.width, height: rect.height });
+      currentEditor.focus();
+      return () => {
+        console.log("dispose onDidChange", currentFilepath);
+        disposer.dispose();
+      };
+    } else {
+      currentEditor.setModel(null);
+    }
+  }, [currentFilepath, currentEditor]);
 
   useEffect(() => {
     return () => {
-      currrentEditor?.dispose();
+      console.log("dispose all");
+      viewStateCache.clear();
+      currentEditor?.dispose();
+      disposeAll();
     };
   }, []);
   return (

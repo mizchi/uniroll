@@ -76,9 +76,9 @@ export function TemplatesPane() {
                     const newFiles = {
                       ...data.files,
                     };
+                    onSelectFilepath(null);
                     onSetFiles(newFiles);
                     if (newFiles["/variables.json"]) {
-                      onSelectFilepath(null);
                       onSelectScene("variables");
                     } else {
                       onSelectScene("editor");

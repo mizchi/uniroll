@@ -18,9 +18,19 @@ export function getMonaco() {
 }
 
 export function findModel(filepath: string): monaco.editor.IModel | void {
+  // TODO: Fix path
+  if (!filepath.startsWith("/")) filepath = path.join("/", filepath);
   return monaco.editor.getModels().find((model) => {
     return model.uri.path === filepath;
   });
+}
+
+export function readModel(filepath: string): monaco.editor.IModel {
+  const m = findModel(filepath);
+  if (m == null) {
+    throw new Error(`[monacoFs] Model not found: ${filepath}`);
+  }
+  return m;
 }
 
 export function renameFile(
@@ -62,6 +72,7 @@ export function createFile(
   content?: string
 ): monaco.editor.ITextModel {
   const extname = path.extname(filepath);
+  // debugger;
   const lang = extToLang[extname as any];
   // console.log(extname, lang);
   const newModel = monaco.editor.createModel(
@@ -69,7 +80,8 @@ export function createFile(
     lang,
     monaco.Uri.from({
       scheme: "file",
-      path: filepath,
+      // TODO: filepath must be absolute
+      path: path.join("/", filepath),
     })
   );
   newModel.updateOptions({

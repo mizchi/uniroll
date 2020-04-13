@@ -8,7 +8,6 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/core";
-// import { Files } from "../../../../index";
 import { useAppState } from "../../contexts";
 
 export function FileSelectorPane() {
@@ -16,7 +15,6 @@ export function FileSelectorPane() {
 
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    const w = window.innerWidth;
     const onResize = () => {
       setWidth(window.innerWidth);
     };
