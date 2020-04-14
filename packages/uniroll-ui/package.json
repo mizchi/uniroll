@@ -40,5 +40,8 @@
     "react-dom": "*",
     "uniroll": "*"
   },
-  "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33"
+  "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33",
+  "dependencies": {
+    "monaco-workspace-editor-react": "^0.0.1"
+  }
 }

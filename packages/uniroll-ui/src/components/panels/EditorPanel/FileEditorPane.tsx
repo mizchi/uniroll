@@ -8,12 +8,18 @@ const MonacoWorkspaceEditor = React.lazy(() => {
   if (_cache) {
     return _cache;
   }
-  _cache = import("../../../monaco-editor-react/MonacoWorkspaceEditor");
+  // _cache = import("../../../../../monaco-editor-react/MonacoWorkspaceEditor");
+  _cache = import("monaco-workspace-editor-react/lib/index");
   return _cache;
 });
 
 export function FileEditorPane() {
-  const { currentFilepath, onSelectFilepath } = useAppState();
+  const {
+    currentFilepath,
+    files,
+    onSelectFilepath,
+    onSetFiles,
+  } = useAppState();
   const onBack = useCallback(() => {
     onSelectFilepath(null);
   }, []);
@@ -35,7 +41,11 @@ export function FileEditorPane() {
       </Flex>
       <Flex h="calc(100% - 36px)" w="100%">
         <Suspense fallback="..">
-          <MonacoWorkspaceEditor />
+          <MonacoWorkspaceEditor
+            currentFilepath={currentFilepath}
+            initialFiles={files}
+            onChangeFiles={onSetFiles}
+          />
         </Suspense>
       </Flex>
     </Flex>

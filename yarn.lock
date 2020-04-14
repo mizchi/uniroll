@@ -7075,6 +7075,11 @@ monaco-editor@^0.20.0:
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.20.0.tgz#5d5009343a550124426cb4d965a4d27a348b4dea"
   integrity sha512-hkvf4EtPJRMQlPC3UbMoRs0vTAFAYdzFQ+gpMb8A+9znae1c43q8Mab9iVsgTcg/4PNiLGGn3SlDIa8uvK1FIQ==
 
+monaco-workspace-editor-react@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/monaco-workspace-editor-react/-/monaco-workspace-editor-react-0.0.1.tgz#b71dc930b17177010cfa4f5af8d083194de75f3e"
+  integrity sha512-Yd+5Lh9j1q3518It0cD08UamUozh5zRi0xjrx0HeSLh4u/Su1WL/qk2m4+nVukPpbtHoF0gJx8hG93KAhMaVfA==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
