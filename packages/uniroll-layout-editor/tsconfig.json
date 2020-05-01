@@ -1,0 +1,15 @@
+{
+  "exclude": ["lib"],
+  "include": ["src", "webpack.config.js"],
+  "compilerOptions": {
+    "declaration": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "module": "esnext",
+    "strict": true,
+    "moduleResolution": "node",
+    "target": "es2019",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  }
+}

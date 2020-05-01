@@ -8,13 +8,13 @@ module.exports = {
     popup: path.join(__dirname, "src/popup.ts"),
     panel: path.join(__dirname, "src/panel.tsx"),
     options: path.join(__dirname, "src/options.ts"),
-    background: path.join(__dirname, "src/background.ts")
+    background: path.join(__dirname, "src/background.ts"),
   },
   output: {
     globalObject: "globalThis",
     path: path.join(__dirname, "build"),
     filename: "[name].js",
-    chunkFilename: "[name].[id].[contenthash].js"
+    chunkFilename: "[name].[id].[contenthash].js",
   },
   module: {
     rules: [
@@ -23,13 +23,13 @@ module.exports = {
         use: {
           loader: "ts-loader",
           options: {
-            transpileOnly: true
-          }
-        }
+            transpileOnly: true,
+          },
+        },
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
@@ -37,29 +37,29 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
-    ]
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx", ".json", ".mjs", ".wasm"]
+    extensions: [".js", ".ts", ".tsx", ".json", ".mjs", ".wasm"],
   },
   plugins: [
     new WorkerPlugin(),
     new CopyWebpackPlugin([
       {
         from: "assets/*",
-        flatten: true
-      }
-    ])
+        flatten: true,
+      },
+    ]),
     // new CopyWebpackPlugin([
     //   {
     //     from: "../packages/uniroll-ui/dist",
     //     flatten: true
     //   }
     // ])
-  ]
+  ],
 };

@@ -17,6 +17,7 @@ import path from "path";
 import { baseline } from "./baseline";
 import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
 import replace from "@rollup/plugin-replace";
+import json from "@rollup/plugin-json";
 
 const defaultCache = new Map();
 
@@ -54,6 +55,7 @@ export async function compile(options: Options) {
     fs: mfs,
     rollupPlugins: [
       replace({ "process.env.NODE_ENV": "development" }),
+      json(),
       css(),
       pikaCDNResolver({
         cache: options.cache ?? defaultCache,

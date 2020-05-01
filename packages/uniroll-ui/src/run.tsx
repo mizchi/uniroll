@@ -1,5 +1,3 @@
-// import "./initMonaco";
-
 import React from "react";
 import ReactDOM from "react-dom";
 import { compile, InMemoryOption } from "uniroll";
@@ -8,6 +6,7 @@ import type { EnvInput } from "../";
 import { UnirollEnvProvider } from "./components/contexts";
 import { downloadToLocal, loadFromLocal } from "./helpers";
 import { App, defaultLayout } from "./index";
+import { LayoutEditorPanel } from "./components/panels/LayoutEditorPanel";
 
 const inintialFiles: Files = {
   "/style.css": `
@@ -31,6 +30,12 @@ console.log(<div>hello</div>, useEffect);`,
   }
 }`,
 };
+
+defaultLayout.leftTabs.push({
+  id: "layout",
+  displayName: "Layout",
+  component: LayoutEditorPanel,
+})
 
 const cache = new Map();
 const env: EnvInput = {
