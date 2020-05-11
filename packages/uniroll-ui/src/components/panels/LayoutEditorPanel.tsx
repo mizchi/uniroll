@@ -3,7 +3,7 @@ import {
   LayoutEditor,
   ElementSource,
   ElementTree,
-} from "@mizchi/layout-editor";
+} from "uniroll-layout-editor";
 import { Flex, LightMode } from "@chakra-ui/core";
 import { useAppState } from "../contexts";
 

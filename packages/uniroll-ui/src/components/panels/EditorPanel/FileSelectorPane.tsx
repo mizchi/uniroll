@@ -31,17 +31,20 @@ export function FileSelectorPane() {
             <List>
               {Object.entries(files).map(([filepath, _value]) => {
                 return (
-                  <ListItem key={filepath} pt={3}>
-                    <Flex display="inline-flex">
+                  <ListItem
+                    key={filepath}
+                    pt={3}
+                    cursor="pointer"
+                    textDecoration="underline"
+                    userSelect="none"
+                  >
+                    <Flex
+                      display="inline-flex"
+                      onClick={() => {
+                        onSelectFilepath(filepath);
+                      }}
+                    >
                       <Text fontSize="xl">{filepath}</Text>
-                      <Button
-                        size="sm"
-                        onClick={() => {
-                          onSelectFilepath(filepath);
-                        }}
-                      >
-                        edit
-                      </Button>
                     </Flex>
                   </ListItem>
                 );

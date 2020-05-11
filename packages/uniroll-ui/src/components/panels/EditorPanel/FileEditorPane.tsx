@@ -8,8 +8,8 @@ const MonacoWorkspaceEditor = React.lazy(() => {
   if (_cache) {
     return _cache;
   }
-  // _cache = import("../../../../../monaco-editor-react/MonacoWorkspaceEditor");
-  _cache = import("monaco-workspace-editor-react/lib/index");
+  _cache = import("../../editor/MonacoEditor");
+  // _cache = import("monaco-workspace-editor-react/lib/index");
   return _cache;
 });
 
@@ -26,7 +26,7 @@ export function FileEditorPane() {
   return (
     <Flex h="100%" w="100%" direction="column">
       <Flex h="36px" w="100%">
-        <Button size="sm" onClick={onBack}>
+        <Button size="xs" onClick={onBack}>
           &lt;
         </Button>
         <Text
