@@ -1,6 +1,6 @@
 {
   "name": "uniroll-tools",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "bin": {
     "uniroll": "bin/uniroll"
   },
@@ -13,10 +13,10 @@
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
     "meow": "^6.1.0",
-    "uniroll": "^1.0.9",
-    "uniroll-linter": "^1.0.9",
-    "uniroll-optimizer": "^1.0.9",
-    "uniroll-types": "^1.0.13"
+    "uniroll": "^1.0.14",
+    "uniroll-linter": "^1.0.14",
+    "uniroll-optimizer": "^1.0.14",
+    "uniroll-types": "^1.0.14"
   },
   "files": [
     "lib",

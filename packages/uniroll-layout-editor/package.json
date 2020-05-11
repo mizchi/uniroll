@@ -1,6 +1,6 @@
 {
   "name": "uniroll-layout-editor",
-  "version": "0.0.3",
+  "version": "1.0.14",
   "license": "MIT",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",

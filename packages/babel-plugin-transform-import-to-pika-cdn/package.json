@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-import-to-pika-cdn",
-  "version": "1.0.9",
+  "version": "1.0.14",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
