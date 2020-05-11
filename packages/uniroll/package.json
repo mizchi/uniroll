@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "1.0.14",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -19,13 +19,13 @@
     "@types/autoprefixer": "^9.7.2",
     "@types/babel__parser": "^7.1.1",
     "autoprefixer": "^9.7.5",
-    "babel-plugin-transform-import-to-pika-cdn": "^1.0.14",
+    "babel-plugin-transform-import-to-pika-cdn": "^1.1.0",
     "precss": "^4.0.0",
     "rollup": "^2.1.0",
-    "rollup-plugin-memfs": "^1.0.14",
-    "rollup-plugin-pika-cdn-resolver": "^1.0.14",
+    "rollup-plugin-memfs": "^1.1.0",
+    "rollup-plugin-pika-cdn-resolver": "^1.1.0",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-uniroll-css": "^1.0.14",
+    "rollup-plugin-uniroll-css": "^1.1.0",
     "terser": "^4.6.10"
   },
   "files": [
@@ -36,5 +36,5 @@
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-replace": "^2.3.1"
   },
-  "gitHead": "1c1461b3b0eab38e2945e440e537c7492ca64f33"
+  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
 }
