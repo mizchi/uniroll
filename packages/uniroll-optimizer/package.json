@@ -12,7 +12,9 @@
     "build": "tsc -p ."
   },
   "dependencies": {
+    "autoprefixer": "^9.7.6",
     "cssnano": "^4.1.10",
+    "precss": "^4.0.0",
     "terser": "^4.6.10",
     "uniroll-linter": "^1.0.9"
   },
