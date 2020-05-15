@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -19,7 +19,7 @@
     "@types/autoprefixer": "^9.7.2",
     "@types/babel__parser": "^7.1.1",
     "autoprefixer": "^9.7.5",
-    "babel-plugin-transform-import-to-pika-cdn": "^1.1.1",
+    "babel-plugin-transform-import-to-pika-cdn": "^1.1.2",
     "precss": "^4.0.0",
     "rollup": "^2.1.0",
     "rollup-plugin-memfs": "^1.1.0",

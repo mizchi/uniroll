@@ -1,7 +1,7 @@
 {
   "name": "uniroll-extension",
   "private": true,
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "MIT",
   "scripts": {
     "dev": "rimraf build && webpack --mode development --watch",
@@ -33,7 +33,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "typescript": "^3.8.3",
-    "uniroll": "^1.1.1",
-    "uniroll-ui": "^1.1.1"
+    "uniroll": "^1.1.2",
+    "uniroll-ui": "^1.1.2"
   }
 }
