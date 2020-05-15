@@ -3,7 +3,7 @@ export function transformImportPathToPikaCDN(
   versions: {
     [libraryName: string]: string | void;
   },
-  onwarn?: (message: string) => void
+  onwarn?: (message: string) => void,
 ) {
   return (_options: any) => {
     return {
@@ -23,8 +23,8 @@ export function transformImportPathToPikaCDN(
           if (newPath) {
             path_.node.source.value = newPath;
           }
-        }
-      }
+        },
+      },
     };
   };
 }
@@ -32,14 +32,17 @@ export function transformImportPathToPikaCDN(
 function handleLibraryName(
   target: string,
   versions: { [libraryName: string]: string | void },
-  onwarn?: any
+  onwarn?: any,
 ): string | void {
+  if (target.startsWith("http")) {
+    return target;
+  }
   if (isLibraryPath(target)) {
     const [libraryName] = target.split("/");
     const explicitVersion = versions[libraryName];
     if (onwarn && explicitVersion == null) {
       onwarn(
-        `[transform-import-path-to-pika-cdn] ${target}'s version is not found in dependencies.`
+        `[transform-import-path-to-pika-cdn] ${target}'s version is not found in dependencies.`,
       );
     }
     return getCdnPathWithVersion(target, explicitVersion);
@@ -52,7 +55,7 @@ function isLibraryPath(rawTarget: string) {
 
 function getCdnPathWithVersion(
   rawTarget: string,
-  explicitVersion: string | void
+  explicitVersion: string | void,
 ) {
   const [libraryName, ...libraryInternalPaths] = rawTarget.split("/");
   const libraryNameWithVersion = explicitVersion
