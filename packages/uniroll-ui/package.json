@@ -1,6 +1,6 @@
 {
   "name": "uniroll-ui",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "lib/index.js",
   "types": "index.d.ts",
   "license": "MIT",
@@ -45,8 +45,8 @@
   },
   "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261",
   "dependencies": {
-    "uniroll-layout-editor": "1.1.0",
     "monaco-workspace-editor-react": "^0.0.1",
-    "react-shadow-root": "^5.0.2"
+    "react-shadow-root": "^5.0.2",
+    "uniroll-layout-editor": "^1.1.1"
   }
 }
