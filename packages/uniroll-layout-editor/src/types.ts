@@ -54,19 +54,20 @@ export interface ImageNode extends NodeBase {
 export type WysiwygAttrs = {
   data: any;
 };
+
 export interface WysiwygNode extends NodeBase {
   elementType: "wysiwyg";
   attrs: WysiwygAttrs;
 }
 
-type CodeAttrs = {
-  name: string;
-  files: { [k: string]: string };
+export type PreactComponentAttrs = {
+  component: any;
 };
-export interface CodeNode extends NodeBase {
-  elementType: "code";
-  attrs: CodeAttrs;
-}
+
+export type PreactComponentNode = {
+  elementType: "preact-component";
+  attrs: PreactComponentAttrs;
+};
 
 export type ElementData =
   | RootNode
@@ -76,7 +77,7 @@ export type ElementData =
   | TextNode
   | ImageNode
   | WysiwygNode
-  | CodeNode;
+  | PreactComponentNode;
 
 export type ElementTree = TreeNode<ElementData>;
 
@@ -108,8 +109,8 @@ export type ElementSource =
     }
   | {
       displayName: string;
-      sourceType: "code";
-      attrs: CodeNode;
+      sourceType: "preact-component";
+      attrs: PreactComponentAttrs;
     };
 
 export type DragType = SourceDragType | ElementDragType;

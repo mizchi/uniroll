@@ -51,7 +51,10 @@ export function EditableView(props: { tree: ElementTree; depth: number }) {
                     c.data.elementType === "grid-area" &&
                     c.data.attrs.gridArea === gridArea
                   );
-                })!;
+                });
+                if (hit == null) {
+                  return <>Nothing for {gridArea}</>;
+                }
                 return (
                   <Pane gridArea={gridArea} key={gridArea}>
                     <EditableView
@@ -130,6 +133,17 @@ export function EditableView(props: { tree: ElementTree; depth: number }) {
 
     // element
     case "text": {
+      return (
+        <EditableBox
+          showHeader={showElementHeader}
+          tree={props.tree}
+          depth={props.depth + 1}
+        >
+          <View tree={props.tree} />
+        </EditableBox>
+      );
+    }
+    case "image": {
       return (
         <EditableBox
           showHeader={showElementHeader}

@@ -1,5 +1,5 @@
 import { ElementTree, ElementSource } from "../../src/types";
-import uniqueId from "lodash-es/uniqueId";
+import { ulid } from "ulid";
 import range from "lodash-es/range";
 
 export const sources: ElementSource[] = [
@@ -67,7 +67,7 @@ export const sampleTree: ElementTree = {
   data: { elementType: "root", attrs: {} },
   children: [
     {
-      id: uniqueId(),
+      id: ulid(),
       data: {
         elementType: "grid",
         attrs: {
@@ -81,7 +81,7 @@ export const sampleTree: ElementTree = {
       },
       children: [
         {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "grid-area",
             attrs: {
@@ -90,14 +90,14 @@ export const sampleTree: ElementTree = {
           },
           children: [
             {
-              id: uniqueId(),
+              id: ulid(),
               data: { elementType: "text", attrs: { value: "foo" } },
               children: [],
             },
           ],
         },
         {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "grid-area",
             attrs: {
@@ -107,7 +107,7 @@ export const sampleTree: ElementTree = {
           children: [],
         },
         {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "grid-area",
             attrs: {
@@ -116,7 +116,7 @@ export const sampleTree: ElementTree = {
           },
           children: [
             {
-              id: uniqueId(),
+              id: ulid(),
               data: {
                 elementType: "grid",
                 attrs: {
@@ -127,7 +127,7 @@ export const sampleTree: ElementTree = {
               },
               children: [
                 {
-                  id: uniqueId(),
+                  id: ulid(),
                   data: {
                     elementType: "grid-area",
                     attrs: {
@@ -136,7 +136,7 @@ export const sampleTree: ElementTree = {
                   },
                   children: [
                     {
-                      id: uniqueId(),
+                      id: ulid(),
                       data: {
                         elementType: "flex",
                         attrs: {
@@ -148,7 +148,7 @@ export const sampleTree: ElementTree = {
                   ],
                 },
                 {
-                  id: uniqueId(),
+                  id: ulid(),
                   data: {
                     elementType: "grid-area",
                     attrs: {
@@ -157,7 +157,7 @@ export const sampleTree: ElementTree = {
                   },
                   children: [
                     {
-                      id: uniqueId(),
+                      id: ulid(),
                       data: {
                         elementType: "text",
                         attrs: {
@@ -173,7 +173,7 @@ export const sampleTree: ElementTree = {
           ],
         },
         {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "grid-area",
             attrs: {
@@ -182,7 +182,7 @@ export const sampleTree: ElementTree = {
           },
           children: [
             {
-              id: uniqueId(),
+              id: ulid(),
               data: {
                 elementType: "image",
                 attrs: {
@@ -210,7 +210,7 @@ export const flexTree: ElementTree = {
   data: { elementType: "root", attrs: {} },
   children: [
     {
-      id: uniqueId(),
+      id: ulid(),
       data: {
         elementType: "flex",
         attrs: {
@@ -219,7 +219,7 @@ export const flexTree: ElementTree = {
       },
       children: [
         {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "text",
             attrs: {
@@ -238,7 +238,7 @@ export const gridTree: ElementTree = {
   data: { elementType: "root", attrs: {} },
   children: [
     {
-      id: uniqueId(),
+      id: ulid(),
       data: {
         elementType: "grid",
         attrs: {
@@ -254,7 +254,7 @@ export const gridTree: ElementTree = {
       children: range(9).map((i) => {
         console.log("area", String.fromCharCode(97 + i));
         return {
-          id: uniqueId(),
+          id: ulid(),
           data: {
             elementType: "grid-area",
             attrs: {
@@ -274,7 +274,7 @@ export const wysiwigTree: ElementTree = {
   data: { elementType: "root", attrs: {} },
   children: [
     {
-      id: uniqueId(),
+      id: ulid(),
       data: {
         elementType: "wysiwyg",
         attrs: {

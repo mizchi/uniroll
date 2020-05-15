@@ -6,7 +6,10 @@
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "yarn build",
-    "demo": "webpack-dev-server --config webpack.demo.config.js",
+    "dev": "run-p dev:*",
+    "dev:layout-demo": "yarn --cwd ../uniroll-layout-editor run demo --port 4000",
+    "dev:layout": "yarn --cwd ../uniroll-layout-editor run dev",
+    "dev:demo": "webpack-dev-server --config webpack.demo.config.js",
     "build:demo": "webpack --config webpack.demo.config.js --mode production",
     "build": "rimraf lib && tsc -p .",
     "test": "echo wip"
@@ -26,7 +29,6 @@
     "react-dnd-html5-backend": "^10.0.2",
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
-    "uniroll-layout-editor": "^1.1.0",
     "uniroll-types": "^1.1.0",
     "url-loader": "^4.0.0",
     "worker-plugin": "^4.0.2"
@@ -43,7 +45,8 @@
   },
   "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261",
   "dependencies": {
-    "@mizchi/layout-editor": "^0.0.3",
-    "monaco-workspace-editor-react": "^0.0.1"
+    "uniroll-layout-editor": "1.1.0",
+    "monaco-workspace-editor-react": "^0.0.1",
+    "react-shadow-root": "^5.0.2"
   }
 }

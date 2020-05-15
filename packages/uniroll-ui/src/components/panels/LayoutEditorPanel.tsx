@@ -4,7 +4,7 @@ import {
   ElementSource,
   ElementTree,
 } from "uniroll-layout-editor";
-import { Flex, LightMode } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/core";
 import { useAppState } from "../contexts";
 
 const rootTree: ElementTree = {
@@ -74,14 +74,41 @@ const sources: ElementSource[] = [
 ];
 
 const LAYOUT_FILEPATH = "/layout.json";
+import uniq from "lodash-es/uniq";
 
 export function LayoutEditorPanel() {
   const { files, onSetFiles } = useAppState();
-  const initialTree = files[LAYOUT_FILEPATH]
-    ? JSON.parse(files[LAYOUT_FILEPATH])
-    : rootTree;
+  let initialTree;
+  try {
+    if (files[LAYOUT_FILEPATH]) {
+      initialTree = JSON.parse(files[LAYOUT_FILEPATH]);
+    } else {
+      initialTree = rootTree;
+    }
+  } catch (err) {
+    initialTree = rootTree;
+  }
+  const keys = Object.keys(files).filter((f) => f.startsWith("/components"));
+  const componentNames = uniq(keys.map((f) => f.split("/")[2]));
+  const customSources = componentNames.map((n) => {
+    // return {
+    //   displayName: "Code:" + n,
+    //   sourceType: "text",
+    //   attrs: {
+    //     value: n,
+    //   },
+    // } as ElementSource;
+    return {
+      displayName: "Code:" + n,
+      sourceType: "code",
+      attrs: {
+        builtCode: n,
+      },
+    } as ElementSource;
+  });
+
   return (
-    <>
+    <Flex w="100%" h="100%">
       <style
         dangerouslySetInnerHTML={{
           __html: ".le { color: black; background: #fff; }",
@@ -89,7 +116,7 @@ export function LayoutEditorPanel() {
       />
       <Flex p={10} w="100%" h="100%" className="le">
         <LayoutEditor
-          sources={sources}
+          sources={[...sources, ...customSources]}
           initialTree={initialTree}
           onChange={(tree) => {
             const layout = JSON.stringify(tree, null, 2);
@@ -99,6 +126,7 @@ export function LayoutEditorPanel() {
           }}
         />
       </Flex>
-    </>
+      {/* </ReactShadowRoot> */}
+    </Flex>
   );
 }

@@ -4,9 +4,7 @@ import { ElementData, ElementTree, GridAreaNode } from "./types";
 import actionCreatorFactory from "typescript-fsa";
 import * as invUtils from "./tree-api/inverted";
 import * as treeUtils from "./tree-api";
-
-// import { ulid } from "ulid";
-import uniqueId from "lodash-es/uniqueId";
+import { ulid } from "ulid";
 
 export enum TreeEditMode {
   ALL = "ALL",
@@ -29,7 +27,7 @@ export const getInitialState = (tree: ElementTree): TreeState => {
     inv: toInvertedTree(tree),
     selectedId: null,
     // editMode: TreeEditMode.ELEMENT,
-    editMode: TreeEditMode.LAYOUT,
+    editMode: TreeEditMode.ELEMENT,
   };
 };
 
@@ -66,7 +64,7 @@ export type TreeAction =
 export const reducer = reducerWithoutInitialState<TreeState>()
   .case(addChild, (state, payload) => {
     const newNode: ElementTree = {
-      id: uniqueId(),
+      id: ulid(),
       data: payload.data,
       children: payload.children ?? [],
     };

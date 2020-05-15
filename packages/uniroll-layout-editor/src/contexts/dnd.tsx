@@ -5,23 +5,14 @@ import {
   DropType,
   ElementTree,
   SourceDragType,
-  NodeBase,
   GridNode,
-  GridAreaAttrs,
-  GridAreaNode,
 } from "../types";
 import { useTreeDispatch } from "./tree";
 import { swapNodes, moveNode, addChild } from "../reducer";
 import { ulid } from "ulid";
 import { uniqueId, flatten } from "lodash-es";
-// import { ElementData, TreeNode } from "./types";
 
 export const DND_CONTEXT = "dnd-context";
-
-type DragSpec<T> = {
-  canDrag?: () => boolean;
-  collect?: (monitor: DragSourceMonitor) => T;
-};
 
 type DragState = {
   isDragging: boolean;
@@ -64,6 +55,7 @@ export function useDropOnTree(drop: DropType) {
       };
     },
     drop(drag, _monitor) {
+      console.log("[layout-drop]", drop);
       // console.log("drag", drag, ": drop to", drop);
       switch (drag.dragType) {
         case "source": {
@@ -155,6 +147,16 @@ function createElementDataBySourceType(
         children: [],
       };
     }
+    case "preact-component": {
+      return {
+        data: {
+          elementType: "preact-component",
+          attrs: drag.source.attrs,
+        },
+        children: [],
+      };
+    }
+
     case "grid": {
       const childData = {
         elementType: "grid",

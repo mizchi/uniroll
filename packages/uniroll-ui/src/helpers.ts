@@ -1,7 +1,7 @@
-import { TemplateDef } from "../../uniroll-types/variables";
+import { TemplateDef } from "uniroll-types/variables";
 
 export async function downloadToLocal(dump: TemplateDef) {
-  console.log("dowload", dump);
+  console.log("download", dump);
   const anchor = document.createElement("a");
   const blob = new Blob([JSON.stringify(dump)], { type: "text/plain" });
   anchor.href = URL.createObjectURL(blob);
