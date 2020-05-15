@@ -104,7 +104,7 @@ export function LayoutEditorPanel() {
       attrs: {
         builtCode: n,
       },
-    } as ElementSource;
+    } as any;
   });
 
   return (

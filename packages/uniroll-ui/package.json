@@ -43,7 +43,7 @@
     "react-dom": "*",
     "uniroll": "*"
   },
-  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261",
+  "gitHead": "0aef2e76442749e6d40651b3ecc02593031f4f49",
   "dependencies": {
     "monaco-workspace-editor-react": "^0.0.1",
     "react-shadow-root": "^5.0.2",
