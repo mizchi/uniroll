@@ -10,6 +10,7 @@
     "dev:layout-demo": "yarn --cwd ../uniroll-layout-editor run demo --port 4000",
     "dev:layout": "yarn --cwd ../uniroll-layout-editor run dev",
     "dev:demo": "webpack-dev-server --config webpack.demo.config.js",
+    "dev:templates": "http-server -p 9000 -c-1 --cors='*' ../../templates/gen/",
     "build:demo": "webpack --config webpack.demo.config.js --mode production",
     "build": "rimraf lib && tsc -p .",
     "test": "echo wip"
@@ -23,6 +24,7 @@
     "css-loader": "^3.4.2",
     "emotion-theming": "^10.0.27",
     "file-loader": "^6.0.0",
+    "http-server": "^0.12.3",
     "jsoneditor": "^8.6.4",
     "monaco-editor": "^0.20.0",
     "react-dnd": "^10.0.2",

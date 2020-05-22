@@ -25,7 +25,10 @@ export function TemplatesPane() {
   >([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch(path.join(templateHost, "list.json"));
+      const parsed = new URL(templateHost);
+      const url = parsed.protocol + "//" + path.join(parsed.host, "list.json");
+      console.log("fetch", url);
+      const res = await fetch(url);
       const list = await res.json();
       console.log(list);
       setTemplateDefs(list);
@@ -70,7 +73,11 @@ export function TemplatesPane() {
                 <Button
                   size="sm"
                   onClick={async () => {
-                    const url = path.join(templateHost, pkg.name + ".json");
+                    const parsed = new URL(templateHost);
+                    const url =
+                      parsed.protocol +
+                      "//" +
+                      path.join(parsed.host, pkg.name + ".json");
                     const res = await fetch(url);
                     const data = (await res.json()) as TemplateDef;
                     const newFiles = {

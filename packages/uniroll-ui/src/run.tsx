@@ -131,6 +131,7 @@ defaultLayout.leftTabs.push({
 
 const cache = new Map();
 const env: EnvInput = {
+  templateHost: "http://localhost:9000/",
   layout: defaultLayout,
   inExtension: false,
   async compile(options: InMemoryOption) {
