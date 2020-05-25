@@ -29,6 +29,7 @@
     "terser": "^4.6.10"
   },
   "files": [
+    "index.d.ts",
     "dist"
   ],
   "dependencies": {
