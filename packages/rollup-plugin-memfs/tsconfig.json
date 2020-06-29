@@ -1,8 +1,12 @@
 {
-  "include": ["index.ts"],
+  "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
-    "declaration": true
+    "rootDir": "src",
+    "outDir": "lib",
+    "module": "commonjs",
+    "allowJs": true,
+    "declaration": true,
+    "skipLibCheck": true
   }
 }

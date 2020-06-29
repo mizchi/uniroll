@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`optimize 1`] = `
+Object {
+  "index.js": "console.log(!0);",
+  "sytle.css": "div{-webkit-box-sizing:border-box;box-sizing:border-box}",
+}
+`;

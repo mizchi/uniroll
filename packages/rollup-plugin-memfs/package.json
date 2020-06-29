@@ -1,10 +1,11 @@
 {
   "name": "rollup-plugin-memfs",
   "version": "1.2.0",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "memfs": "^3.1.2"
+    "memfs": "^3.2.0"
   },
   "scripts": {
     "test": "jest",
@@ -16,7 +17,6 @@
     "index.d.ts"
   ],
   "devDependencies": {
-    "typescript": "^3.8.3"
-  },
-  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
+    "typescript": "^3.9.5"
+  }
 }

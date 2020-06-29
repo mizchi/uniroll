@@ -10,34 +10,34 @@
   "typings": "index.d.ts",
   "main": "dist/uniroll.js",
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/preset-typescript": "^7.8.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
     "@types/autoprefixer": "^9.7.2",
     "@types/babel__parser": "^7.1.1",
-    "autoprefixer": "^9.7.5",
+    "autoprefixer": "^9.8.4",
     "babel-plugin-transform-import-to-pika-cdn": "^1.2.0",
     "precss": "^4.0.0",
-    "rollup": "^2.1.0",
+    "rollup": "^2.18.1",
     "rollup-plugin-memfs": "^1.2.0",
     "rollup-plugin-pika-cdn-resolver": "^1.2.0",
-    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-uniroll-css": "^1.2.0",
-    "terser": "^4.6.10"
+    "terser": "^4.8.0"
   },
   "files": [
     "index.d.ts",
     "dist"
   ],
   "dependencies": {
-    "@babel/parser": "^7.9.4",
+    "@babel/parser": "^7.10.3",
     "@rollup/plugin-html": "^0.2.0",
-    "@rollup/plugin-json": "^4.0.3",
-    "@rollup/plugin-replace": "^2.3.1"
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-replace": "^2.3.3"
   },
   "gitHead": "b726c1734e3c5f6088c6efb619430b793ba2304a"
 }
