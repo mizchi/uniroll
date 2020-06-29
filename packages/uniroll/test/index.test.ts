@@ -5,7 +5,9 @@ const files = {
   "/foo.tsx": "export default 1",
   "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)",
 };
-test("build", async () => {
+jest.setTimeout(150000);
+
+test.skip("build", async () => {
   const bundle = await compile({
     useInMemory: true,
     files,

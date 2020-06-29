@@ -3,7 +3,7 @@
   "version": "1.2.1",
   "license": "MIT",
   "scripts": {
-    "test": "jest --testTimeout 8000",
+    "test": "jest --testTimeout 15000",
     "prepublishOnly": "yarn build",
     "build": "webpack --mode production"
   },
