@@ -7,12 +7,12 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "tsc -p .",
-    "test": "echo wip"
+    "test": "jest"
   },
   "dependencies": {
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
-    "meow": "^7.0.1",
+    "meow": "^6.1.0",
     "uniroll": "^1.2.1",
     "uniroll-linter": "^1.2.0",
     "uniroll-optimizer": "^1.2.0",

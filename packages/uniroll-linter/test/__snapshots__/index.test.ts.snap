@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`run 1`] = `
+Array [
+  Object {
+    "column": 17,
+    "endColumn": 29,
+    "endLine": 3,
+    "line": 3,
+    "message": "'someFunction' is not defined.",
+    "messageId": "undef",
+    "nodeType": "Identifier",
+    "ruleId": "no-undef",
+    "severity": 2,
+  },
+  Object {
+    "column": 17,
+    "endColumn": 18,
+    "endLine": 4,
+    "line": 4,
+    "message": "'a' is not defined.",
+    "messageId": "undef",
+    "nodeType": "Identifier",
+    "ruleId": "no-undef",
+    "severity": 2,
+  },
+]
+`;

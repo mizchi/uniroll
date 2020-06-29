@@ -2,7 +2,7 @@ import transformImportMap from "../index";
 import * as babel from "@babel/core";
 import assert from "assert";
 
-test("wip", () => {
+test("rewirte with import map", () => {
   const code = `import preact from "preact";`;
   const transformed = babel.transform(code, {
     plugins: [

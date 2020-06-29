@@ -11,7 +11,6 @@ test("build", async () => {
     files,
     input: "/index.tsx",
   });
-  // return rollup object
   const out = await bundle.generate({ format: "es" });
-  console.log(out.output[0]);
+  expect(out.output[0]).toMatchSnapshot();
 });
