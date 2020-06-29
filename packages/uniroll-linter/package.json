@@ -11,7 +11,7 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack --mode production",
-    "test": "yarn ts-node -T -O '{\"module\":\"commonjs\"}' src/__tests__/index.test.ts"
+    "test": "jest"
   },
   "dependencies": {
     "@types/eslint": "^6.1.9"

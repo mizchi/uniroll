@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
+    "test": "jest",
     "build": "tsc -p .",
     "prepublishOnly": "yarn build"
   },

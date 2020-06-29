@@ -2,10 +2,13 @@
   "name": "uniroll-types",
   "version": "1.2.0",
   "types": "index.d.ts",
+  "scripts": {
+    "build": "echo ok",
+    "test": "echo ok"
+  },
   "files": [
     "index.d.ts",
     "variables.d.ts"
   ],
-  "license": "MIT",
-  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
+  "license": "MIT"
 }

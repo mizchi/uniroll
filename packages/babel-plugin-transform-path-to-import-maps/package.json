@@ -1,11 +1,11 @@
 {
-  "name": "babel-plugin-transform-import-to-pika-cdn",
+  "name": "babel-plugin-transform-path-to-import-maps",
   "version": "1.2.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "tsc -p .",
+    "build": "echo 'ok'",
     "prepublishOnly": "yarn build"
   },
   "files": [
