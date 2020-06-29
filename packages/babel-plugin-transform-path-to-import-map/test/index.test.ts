@@ -1,6 +1,17 @@
-// @ts-ignore
-import plugin from "../index";
+import transformImportMap from "../index";
+import * as babel from "@babel/core";
+import assert from "assert";
 
-test("ok", () => {
-  // @ts-ignore
+test("rewirte with import map", () => {
+  const code = `import preact from "preact";`;
+  const transformed = babel.transform(code, {
+    plugins: [
+      transformImportMap({
+        imports: {
+          preact: "https://cdn.pika.dev/preact@10.4.4",
+        },
+      }),
+    ],
+  });
+  assert.ok(transformed!.code!.includes("https://cdn.pika.dev/preact@10.4.4"));
 });

@@ -7,7 +7,7 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "tsc -p .",
-    "test": "echo wip"
+    "test": "jest"
   },
   "dependencies": {
     "glob": "^7.1.6",

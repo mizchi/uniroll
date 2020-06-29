@@ -1,7 +1,9 @@
 {
-  "include": ["index.ts"],
+  "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
     "module": "commonjs",
     "declaration": true
   }

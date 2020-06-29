@@ -11,5 +11,5 @@ test("run", () => {
   `;
 
   const messages = lint(code);
-  console.log(messages);
+  expect(messages).toMatchSnapshot();
 });

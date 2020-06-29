@@ -2,6 +2,8 @@
   "name": "rollup-plugin-pika-cdn-resolver",
   "version": "1.2.0",
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc -p .",
