@@ -1,9 +1,7 @@
 import { Options } from "../index.d";
-
 import { createTransformer } from "./baseTranform";
 import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
 import { css } from "rollup-plugin-uniroll-css";
-// import { terser } from "rollup-plugin-terser";
 
 import { transformImportPathToPikaCDN } from "babel-plugin-transform-import-to-pika-cdn";
 // @ts-ignore

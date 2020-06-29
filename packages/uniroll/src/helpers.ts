@@ -1,9 +1,9 @@
 import type fs from "fs";
-import { vol } from "memfs";
+import { Volume } from "memfs";
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
 
 export function createMemoryFs(files: { [k: string]: string }): IPromisesAPI {
-  vol.fromJSON(files, "/");
+  const vol = Volume.fromJSON(files, "/");
   return createFs(vol) as IPromisesAPI;
 }
 
