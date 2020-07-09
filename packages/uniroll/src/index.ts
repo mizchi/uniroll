@@ -39,7 +39,6 @@ export async function compile(options: Options) {
 
   const versions = await readPkgVersionsIfExists(mfs, pkgPath);
   const importMap = await readImportMapIfExists(mfs, importMapPath);
-  console.log(importMapPath, importMap);
 
   const babelOptions = {
     plugins: [
