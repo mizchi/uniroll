@@ -4,6 +4,9 @@ import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
 import { css } from "rollup-plugin-uniroll-css";
 import { transformImportPathToPikaCDN } from "babel-plugin-transform-import-to-pika-cdn";
 // @ts-ignore
+import transformPathToImportMap from "babel-plugin-transform-path-to-import-map";
+
+// @ts-ignore
 import ts from "@babel/preset-typescript";
 // @ts-ignore
 import react from "@babel/preset-react";
@@ -15,7 +18,11 @@ import objectRestSpread from "@babel/plugin-proposal-object-rest-spread";
 import nullishCoalescing from "@babel/plugin-proposal-nullish-coalescing-operator";
 import path from "path";
 import { baseline } from "./baseline";
-import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
+import {
+  createMemoryFs,
+  readPkgVersionsIfExists,
+  readImportMapIfExists,
+} from "./helpers";
 import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 
@@ -23,18 +30,23 @@ const defaultCache = new Map();
 
 export async function compile(options: Options) {
   const mfs = options.useInMemory ? createMemoryFs(options.files) : options.fs;
-  const rootpath = options.useInMemory
-    ? path.dirname(path.join(process.cwd(), options.input))
-    : "/";
+
+  // TODO: Fix me
+  const rootpath = options.useInMemory ? "/" : "/";
+
   const pkgPath = path.join(rootpath, "package.json");
+  const importMapPath = path.join(rootpath, "import-map.json");
 
   const versions = await readPkgVersionsIfExists(mfs, pkgPath);
+  const importMap = await readImportMapIfExists(mfs, importMapPath);
+  console.log(importMapPath, importMap);
 
   const babelOptions = {
     plugins: [
       classProperties,
       objectRestSpread,
       nullishCoalescing,
+      transformPathToImportMap(importMap),
       transformImportPathToPikaCDN(
         versions ?? options.versions ?? {},
         (warning) => {

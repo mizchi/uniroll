@@ -2,7 +2,8 @@ import { Options } from "../index.d";
 import { createTransformer } from "./baseTranform";
 import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
 import { css } from "rollup-plugin-uniroll-css";
-
+// @ts-ignore
+import transformPathToImportMap from "babel-plugin-transform-path-to-import-map";
 import { transformImportPathToPikaCDN } from "babel-plugin-transform-import-to-pika-cdn";
 // @ts-ignore
 import env from "@babel/preset-env";
@@ -24,7 +25,11 @@ import precss from "precss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
 import replace from "@rollup/plugin-replace";
-import { createMemoryFs, readPkgVersionsIfExists } from "./helpers";
+import {
+  createMemoryFs,
+  readPkgVersionsIfExists,
+  readImportMapIfExists,
+} from "./helpers";
 import path from "path";
 
 const defaultCache = new Map();
@@ -37,13 +42,17 @@ export async function compile(
     ? path.dirname(path.join(process.cwd(), options.input))
     : "/";
   const pkgPath = path.join(rootpath, "package.json");
+  const importMapPath = path.join(rootpath, "import-map.json");
+
   const versions = await readPkgVersionsIfExists(mfs, pkgPath);
+  const importMap = await readImportMapIfExists(mfs, importMapPath);
 
   const babelOptions = {
     plugins: [
       classProperties,
       objectRestSpread,
       nullishCoalescing,
+      transformPathToImportMap(importMap),
       transformImportPathToPikaCDN(
         versions ?? options.versions ?? {},
         (warning) => options.onWarn?.(warning)

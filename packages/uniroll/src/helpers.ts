@@ -19,3 +19,15 @@ export async function readPkgVersionsIfExists(
     return null;
   }
 }
+
+export async function readImportMapIfExists(
+  fs_: typeof fs.promises,
+  importMapPath: string
+): Promise<{ [key: string]: string } | null> {
+  try {
+    const importMapStr = await fs_.readFile(importMapPath, "utf-8");
+    return JSON.parse(importMapStr);
+  } catch (err) {
+    return null;
+  }
+}
