@@ -60,7 +60,11 @@ export async function compile(
     ...options,
     fs: mfs,
     rollupPlugins: [
-      replace({ "process.env.NODE_ENV": "production" }),
+      replace({
+        "process.env.NODE_ENV": "production",
+        delimiters: ["", ""],
+        ...options.replaceMap,
+      }),
       css({ postprocess: transformWithAutoprefixer }),
       pikaCDNResolver({
         ignorePolyfill: true,

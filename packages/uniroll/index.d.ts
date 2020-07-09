@@ -9,6 +9,7 @@ export type Cache = {
 export type BaseOptions = {
   cache?: Cache | Map<string, string>;
   rollupPlugins?: Plugin[];
+  replaceMap?: { [k: string]: string };
   versions?: { [library: string]: string };
   onRequest?: (id: string) => void;
   onUseCache?: (id: string) => void;
