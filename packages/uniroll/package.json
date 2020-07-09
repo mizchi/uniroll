@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "license": "MIT",
   "scripts": {
     "test": "jest --testTimeout 15000",
@@ -20,13 +20,13 @@
     "@types/autoprefixer": "^9.7.2",
     "@types/babel__parser": "^7.1.1",
     "autoprefixer": "^9.8.4",
-    "babel-plugin-transform-import-to-pika-cdn": "^1.2.0",
+    "babel-plugin-transform-import-to-pika-cdn": "^1.3.0",
     "precss": "^4.0.0",
     "rollup": "^2.18.1",
-    "rollup-plugin-memfs": "^1.2.0",
-    "rollup-plugin-pika-cdn-resolver": "^1.2.0",
+    "rollup-plugin-memfs": "^1.3.0",
+    "rollup-plugin-pika-cdn-resolver": "^1.3.0",
     "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-uniroll-css": "^1.2.0",
+    "rollup-plugin-uniroll-css": "^1.3.0",
     "terser": "^4.8.0"
   },
   "files": [
