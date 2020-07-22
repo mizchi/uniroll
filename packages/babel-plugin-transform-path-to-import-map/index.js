@@ -19,7 +19,8 @@ module.exports = function transformWithImportMap(
         },
         ImportDeclaration(path_) {
           const target = path_.node.source.value;
-          const newPath = importMap.imports[target];
+          const newPath =
+            importMap && importMap.imports && importMap.imports[target];
           if (newPath) {
             path_.node.source.value = newPath;
           }

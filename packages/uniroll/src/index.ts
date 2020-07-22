@@ -65,6 +65,7 @@ export async function compile(options: Options) {
     ...options,
     fs: mfs,
     rollupPlugins: [
+      ...(options.rollupPlugins ?? []),
       replace({ "process.env.NODE_ENV": "development", ...options.replaceMap }),
       json(),
       css(),

@@ -18,7 +18,6 @@ test("build", async () => {
       },
     });
     const out = await bundle.generate({ format: "es" });
-    // console.log(out.output[0]);
     expect(out.output[0]).toMatchSnapshot();
   } catch (err) {
     console.log(err);

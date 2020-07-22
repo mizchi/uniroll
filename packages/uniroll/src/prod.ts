@@ -69,6 +69,7 @@ export async function compile(
     ...options,
     fs: mfs,
     rollupPlugins: [
+      ...(options.rollupPlugins ?? []),
       replace({
         "process.env.NODE_ENV": "production",
         delimiters: ["", ""],
