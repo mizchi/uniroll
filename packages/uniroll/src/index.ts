@@ -45,7 +45,7 @@ export async function compile(options: Options) {
       classProperties,
       objectRestSpread,
       nullishCoalescing,
-      transformPathToImportMap(importMap),
+      transformPathToImportMap(importMap ?? { imports: {} }),
       transformImportPathToPikaCDN(
         versions ?? options.versions ?? {},
         (warning) => {
