@@ -340,6 +340,7 @@ console.log(h('div'));
     },
   },
   "name": "index",
+  "referencedFiles": Array [],
   "type": "chunk",
 }
 `;

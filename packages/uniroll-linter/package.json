@@ -17,7 +17,7 @@
     "@types/eslint": "^7.2.0"
   },
   "devDependencies": {
-    "eslint4b": "^7.3.1"
+    "eslint4b": "^7.5.0"
   },
   "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
 }

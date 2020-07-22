@@ -33,6 +33,7 @@ console.log('hello', foo);
     },
   },
   "name": "index",
+  "referencedFiles": Array [],
   "type": "chunk",
 }
 `;
