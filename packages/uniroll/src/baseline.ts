@@ -3,7 +3,7 @@ import { rollup } from "rollup";
 import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
 // @ts-ignore
-import omt from "@surma/rollup-plugin-off-main-thread";
+import omt from "./plugins/omt";
 
 export async function baseline(options: Options & { fs: any }) {
   const fs = options.fs;

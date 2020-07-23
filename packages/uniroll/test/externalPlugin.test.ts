@@ -43,6 +43,7 @@ test("build worker", async () => {
     });
     const out = await bundle.generate({ format: "es" });
     assert.ok(out.output[0].code.includes('new Worker("./worker-'));
+    console.log(out.output);
   } catch (err) {
     console.log(err);
   }
