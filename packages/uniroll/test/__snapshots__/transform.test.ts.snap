@@ -316,7 +316,7 @@ console.log(h('div'));
       "renderedExports": Array [],
       "renderedLength": 22,
     },
-    "https://cdn.pika.dev/-/preact@v10.4.3-GXXSkhrI5BhkliimmQOn/dist=es2017/preact.js": Object {
+    "https://cdn.skypack.dev/-/preact@v10.4.3-GXXSkhrI5BhkliimmQOn/dist=es2017/preact.js": Object {
       "originalLength": 12985,
       "removedExports": Array [
         "cloneElement",

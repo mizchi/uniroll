@@ -1,1 +1,1 @@
-# babel-plugin-transform-import-to-pika-cdn
+# babel-plugin-transform-import-to-skypack-cdn

@@ -8,10 +8,10 @@ test("rewirte with import map", () => {
     plugins: [
       transformImportMap({
         imports: {
-          preact: "https://cdn.pika.dev/preact@10.4.4",
+          preact: "https://cdn.skypack.dev/preact@10.4.4",
         },
       }),
     ],
   });
-  assert.ok(transformed!.code!.includes("https://cdn.pika.dev/preact@10.4.4"));
+  assert.ok(transformed!.code!.includes("https://cdn.skypack.dev/preact@10.4.4"));
 });

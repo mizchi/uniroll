@@ -1,8 +1,8 @@
 import { Options } from "../index.d";
 import { createTransformer } from "./baseTranform";
-import { pikaCDNResolver } from "rollup-plugin-pika-cdn-resolver";
+import { skypackCDNResolver } from "rollup-plugin-skypack-cdn-resolver";
 import { css } from "rollup-plugin-uniroll-css";
-import { transformImportPathToPikaCDN } from "babel-plugin-transform-import-to-pika-cdn";
+import { transformImportPathToSkypackCDN } from "babel-plugin-transform-import-to-skypack-cdn";
 // @ts-ignore
 import transformPathToImportMap from "babel-plugin-transform-path-to-import-map";
 
@@ -46,7 +46,7 @@ export async function compile(options: Options) {
       objectRestSpread,
       nullishCoalescing,
       transformPathToImportMap(importMap ?? { imports: {} }),
-      transformImportPathToPikaCDN(
+      transformImportPathToSkypackCDN(
         versions ?? options.versions ?? {},
         (warning) => {
           options.onWarn?.(warning);
@@ -69,7 +69,7 @@ export async function compile(options: Options) {
       replace({ "process.env.NODE_ENV": "development", ...options.replaceMap }),
       json(),
       css(),
-      pikaCDNResolver({
+      skypackCDNResolver({
         cache: options.cache ?? defaultCache,
         ignorePolyfill: true,
         onRequest: options.onRequest,

@@ -13,8 +13,8 @@ npm install uniroll --save
 ```js
 import { compile } from "uniroll";
 const files = {
-  "/foo.tsx": "export default 1"
-  "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)";
+  "/foo.tsx": "export default 1",
+  "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)"
 };
 const bundle = await compile({
   useInMemory: true,
@@ -77,8 +77,8 @@ $ uniroll foo.js --out out.js
 ## How it works
 
 - mount files on virtual fs with `memfs`: `rollup-plugin-memfs`
-- transform with `@babel/preset-env`, `@babel/preset-typescript` and `uniroll/packages/babel-plugin-transform-import-to-pika-cdn`
-- load npm modules with `cdn.pika.dev` via `uniroll/packages/rollup-plugin-pika-cdn-resolver`
+- transform with `@babel/preset-env`, `@babel/preset-typescript` and `uniroll/packages/babel-plugin-transform-import-to-skypack-cdn`
+- load npm modules with `ev` via `uniroll/packages/rollup-plugin-skypack-cdn-resolver`
 - resolve ext with `.js` `.ts` `.tsx` `.json` `.mjs`
 - transform `.css` with `uniroll/packages/rollup-plugin-uniroll-css`(like style-loader, css-loader);
 - compile as `rollup(...)` and return `RollupOutput` object
