@@ -2,7 +2,6 @@ import { Options } from "..";
 import { rollup } from "rollup";
 import path from "path";
 import { memfsPlugin } from "rollup-plugin-memfs";
-// @ts-ignore
 import omt from "./plugins/omt";
 
 export async function baseline(options: Options & { fs: any }) {

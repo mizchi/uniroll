@@ -155,7 +155,6 @@ function P(n, l, u) {
 
 function C(n, l, u, i, t) {
   var o, r, f, e, c;
-
   if (t ? \\"className\\" === l && (l = \\"class\\") : \\"class\\" === l && (l = \\"className\\"), \\"style\\" === l) {
     if (o = n.style, \\"string\\" == typeof u) o.cssText = u;else {
       if (\\"string\\" == typeof i && (o.cssText = \\"\\", i = null), i) for (e in i) u && e in u || P(o, e, \\"\\");
@@ -316,8 +315,8 @@ console.log(h('div'));
       "renderedExports": Array [],
       "renderedLength": 22,
     },
-    "https://cdn.skypack.dev/-/preact@v10.4.3-GXXSkhrI5BhkliimmQOn/dist=es2017/preact.js": Object {
-      "originalLength": 12985,
+    "https://cdn.skypack.dev/-/preact@v10.4.3-BXvmuwzYQGWjP4zjZQ2E/dist=es2020/preact.js": Object {
+      "originalLength": 9713,
       "removedExports": Array [
         "cloneElement",
         "createContext",
@@ -327,6 +326,7 @@ console.log(h('div'));
         "render",
         "toChildArray",
         "default",
+        "__esModule",
       ],
       "renderedExports": Array [
         "Component",
@@ -336,7 +336,7 @@ console.log(h('div'));
         "h",
         "options",
       ],
-      "renderedLength": 11107,
+      "renderedLength": 11106,
     },
   },
   "name": "index",
