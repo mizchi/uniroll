@@ -4,7 +4,7 @@ import { compile } from "../src/index";
 const files = {
   "/import-map.json": JSON.stringify({
     imports: {
-      preact: "https://cdn.pika.dev/preact@10.4.3",
+      preact: "https://cdn.skypack.dev/preact@10.4.3",
     },
   }),
   "/index.tsx": "import { h } from 'preact'; console.log(h('div'));",

@@ -1,7 +1,7 @@
 import "isomorphic-unfetch";
 
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
-import { pikaCDNResolver } from "../src/index";
+import { skypackCDNResolver } from "../src/index";
 import { memfsPlugin } from "rollup-plugin-memfs";
 
 import { rollup } from "rollup";
@@ -11,7 +11,7 @@ import assert from "assert";
 
 const vol = Volume.fromJSON({
   "/index.js": `
-  import {h} from "https://cdn.pika.dev/preact";
+  import {h} from "https://cdn.skypack.dev/preact";
   console.log(h);
   `,
 });
@@ -23,7 +23,7 @@ test("build", async () => {
   const rolled = await rollup({
     input: "/index.js",
     plugins: [
-      pikaCDNResolver({
+      skypackCDNResolver({
         cache,
       }),
       memfsPlugin(memfs),

@@ -1,5 +1,5 @@
 import path from "path";
-export function transformImportPathToPikaCDN(
+export function transformImportPathToSkypackCDN(
   versions: {
     [libraryName: string]: string | void;
   },
@@ -43,7 +43,7 @@ function handleLibraryName(
     const explicitVersion = versions[libraryName];
     if (onwarn && explicitVersion == null) {
       onwarn(
-        `[transform-import-path-to-pika-cdn] ${target}'s version is not found in dependencies.`
+        `[transform-import-path-to-skypack-cdn] ${target}'s version is not found in dependencies.`
       );
     }
     return getCdnPathWithVersion(target, explicitVersion);
@@ -63,5 +63,5 @@ function getCdnPathWithVersion(
     ? `${libraryName}@${explicitVersion}`
     : libraryName;
   const finalPath = path.join(libraryNameWithVersion, ...libraryInternalPaths);
-  return `https://cdn.pika.dev/${finalPath}`;
+  return `https://cdn.skypack.dev/${finalPath}`;
 }

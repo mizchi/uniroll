@@ -1,5 +1,5 @@
 {
-  "name": "rollup-plugin-pika-cdn-resolver",
+  "name": "rollup-plugin-skypack-cdn-resolver",
   "version": "1.3.0",
   "license": "MIT",
   "main": "lib/index.js",

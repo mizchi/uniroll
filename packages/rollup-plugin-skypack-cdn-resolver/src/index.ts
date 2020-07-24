@@ -1,7 +1,7 @@
 import { Plugin } from "rollup";
-const PIKA_CDN_HOST = "https://cdn.pika.dev";
+const SKYPACK_CDN_HOST = "https://cdn.skypack.dev";
 
-export function pikaCDNResolver({
+export function skypackCDNResolver({
   cache = new Map(),
   onRequest,
   onUseCache,
@@ -15,12 +15,12 @@ export function pikaCDNResolver({
   return {
     async resolveId(id: string, importer: string) {
       // console.log(id, importer);
-      if (importer && importer.startsWith(PIKA_CDN_HOST)) {
-        // load pika in pika
-        if (id.startsWith(PIKA_CDN_HOST)) {
+      if (importer && importer.startsWith(SKYPACK_CDN_HOST)) {
+        // load Skypack in Skypack
+        if (id.startsWith(SKYPACK_CDN_HOST)) {
           return id;
         }
-        const newId = PIKA_CDN_HOST + id;
+        const newId = SKYPACK_CDN_HOST + id;
         return newId;
       }
     },
@@ -28,7 +28,7 @@ export function pikaCDNResolver({
       if (id.includes("@pika/polyfill")) {
         return `// ignored: ${id}`;
       }
-      if (id.startsWith(PIKA_CDN_HOST)) {
+      if (id.startsWith(SKYPACK_CDN_HOST)) {
         const cached = await cache.get(id);
         if (cached) {
           onUseCache && onUseCache(id);
