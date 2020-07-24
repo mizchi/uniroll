@@ -114,4 +114,5 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
     },
   };
 };
+
 export default plugin
