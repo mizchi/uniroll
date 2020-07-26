@@ -1,27 +1,27 @@
 import { Plugin } from "rollup";
 import path from "path";
-const SKYPACK_CDN_HOST = "https://cdn.skypack.dev";
+
+function isHttpProtocol(id: string) {
+  return id.startsWith("http://") || id.startsWith("https://");
+}
 
 export function skypackCDNResolver({
   cache = new Map(),
   onRequest,
   onUseCache,
-  ignorePolyfill = false,
+  fetcher,
 }: {
   cache?: any;
-  ignorePolyfill?: boolean;
+  fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
 }) {
   return {
     async resolveId(id: string, importer: string) {
-      // console.log(id, importer);
-      if (importer && importer.startsWith(SKYPACK_CDN_HOST)) {
-        // load Skypack in Skypack
-        if (id.startsWith(SKYPACK_CDN_HOST)) {
+      if (importer && isHttpProtocol(importer)) {
+        if (id.startsWith("https://")) {
           return id;
         }
-
         const { pathname, protocol, host } = new URL(importer);
         if (id.startsWith("/")) {
           return `${protocol}//${host}${id}`;
@@ -33,23 +33,26 @@ export function skypackCDNResolver({
       }
     },
     async load(id: string) {
-      if (id.includes("@pika/polyfill")) {
-        return `// ignored: ${id}`;
-      }
-      if (id.startsWith(SKYPACK_CDN_HOST)) {
+      if (isHttpProtocol(id)) {
         const cached = await cache.get(id);
         if (cached) {
-          onUseCache && onUseCache(id);
+          onUseCache?.(id);
           return cached;
         }
-        onRequest && onRequest(id);
-        const res = await fetch(id);
-        if (!res.ok) {
-          throw res.statusText;
+        onRequest?.(id);
+        if (fetcher) {
+          const code = await fetcher(id);
+          await cache.set(id, code);
+          return code;
+        } else {
+          const res = await fetch(id);
+          if (!res.ok) {
+            throw res.statusText;
+          }
+          const code = await res.text();
+          await cache.set(id, code);
+          return code;
         }
-        const code = await res.text();
-        await cache.set(id, code);
-        return code;
       }
     },
   } as Plugin;
