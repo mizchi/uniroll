@@ -1,4 +1,5 @@
 import { Plugin } from "rollup";
+import path from "path";
 const SKYPACK_CDN_HOST = "https://cdn.skypack.dev";
 
 export function skypackCDNResolver({
@@ -20,8 +21,15 @@ export function skypackCDNResolver({
         if (id.startsWith(SKYPACK_CDN_HOST)) {
           return id;
         }
-        const newId = SKYPACK_CDN_HOST + id;
-        return newId;
+
+        const { pathname, protocol, host } = new URL(importer);
+        if (id.startsWith("/")) {
+          return `${protocol}//${host}${id}`;
+        } else {
+          const resolvedPathname = path.join(path.dirname(pathname), id);
+          const newId = `${protocol}//${host}${resolvedPathname}`;
+          return newId;
+        }
       }
     },
     async load(id: string) {
