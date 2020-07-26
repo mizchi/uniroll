@@ -1,7 +1,7 @@
 import "isomorphic-unfetch";
 
 import createFs, { IPromisesAPI } from "memfs/lib/promises";
-import { skypackCDNResolver } from "../src/index";
+import { httpResolve } from "../src/index";
 import { memfsPlugin } from "rollup-plugin-memfs";
 
 import { rollup } from "rollup";
@@ -22,7 +22,7 @@ test("build with skypack", async () => {
   const rolled = await rollup({
     input: "/index.js",
     plugins: [
-      skypackCDNResolver({
+      httpResolve({
         cache,
       }),
       memfsPlugin(memfs),
@@ -54,7 +54,7 @@ test("build nested with skypack", async () => {
   const rolled = await rollup({
     input: "/index.js",
     plugins: [
-      skypackCDNResolver({
+      httpResolve({
         cache,
       }),
       memfsPlugin(memfs),

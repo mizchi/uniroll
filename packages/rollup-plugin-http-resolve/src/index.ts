@@ -5,7 +5,7 @@ function isHttpProtocol(id: string) {
   return id.startsWith("http://") || id.startsWith("https://");
 }
 
-export function skypackCDNResolver({
+export function httpResolve({
   cache = new Map(),
   onRequest,
   onUseCache,
@@ -26,6 +26,7 @@ export function skypackCDNResolver({
         if (id.startsWith("/")) {
           return `${protocol}//${host}${id}`;
         } else {
+          // relative path
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
           return newId;

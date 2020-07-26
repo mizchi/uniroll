@@ -1,6 +1,6 @@
 import { Options } from "../index.d";
 import { createTransformer } from "./baseTranform";
-import { skypackCDNResolver } from "rollup-plugin-skypack-cdn-resolver";
+import { httpResolve } from "rollup-plugin-http-resolve";
 import { css } from "rollup-plugin-uniroll-css";
 // @ts-ignore
 import transformPathToImportMap from "babel-plugin-transform-path-to-import-map";
@@ -76,8 +76,7 @@ export async function compile(
         ...options.replaceMap,
       }),
       css({ postprocess: transformWithAutoprefixer }),
-      skypackCDNResolver({
-        ignorePolyfill: true,
+      httpResolve({
         cache: options.cache ?? defaultCache,
         onRequest: options.onRequest,
         onUseCache: options.onUseCache,

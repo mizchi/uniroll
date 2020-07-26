@@ -1,5 +1,5 @@
 {
-  "name": "rollup-plugin-skypack-cdn-resolver",
+  "name": "rollup-plugin-http-resolve",
   "version": "1.5.1",
   "license": "MIT",
   "main": "lib/index.js",
@@ -8,6 +8,5 @@
     "test": "jest",
     "build": "tsc -p .",
     "prepare": "yarn build"
-  },
-  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
+  }
 }

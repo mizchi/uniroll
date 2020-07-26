@@ -1,6 +1,6 @@
 import { Options } from "../index.d";
 import { createTransformer } from "./baseTranform";
-import { skypackCDNResolver } from "rollup-plugin-skypack-cdn-resolver";
+import { httpResolve } from "rollup-plugin-http-resolve";
 import { css } from "rollup-plugin-uniroll-css";
 import { transformImportPathToSkypackCDN } from "babel-plugin-transform-import-to-skypack-cdn";
 // @ts-ignore
@@ -69,9 +69,8 @@ export async function compile(options: Options) {
       replace({ "process.env.NODE_ENV": "development", ...options.replaceMap }),
       json(),
       css(),
-      skypackCDNResolver({
+      httpResolve({
         cache: options.cache ?? defaultCache,
-        ignorePolyfill: true,
         onRequest: options.onRequest,
         onUseCache: options.onUseCache,
       }),
