@@ -1,5 +1,5 @@
 import { Options } from "../index.d";
-import { createTransformer } from "./baseTranform";
+import { createTransformer } from "./transformer";
 import { httpResolve } from "rollup-plugin-http-resolve";
 import { css } from "rollup-plugin-uniroll-css";
 // @ts-ignore
@@ -49,16 +49,13 @@ export async function compile(
 
   const babelOptions = {
     plugins: [
-      classProperties,
-      objectRestSpread,
-      nullishCoalescing,
       transformPathToImportMap(importMap),
       transformImportPathToSkypackCDN(
         versions ?? options.versions ?? {},
         (warning) => options.onWarn?.(warning)
       ),
     ],
-    presets: [[env, { modules: false, bugfixes: true }], react, ts],
+    presets: [[env, { modules: false, bugfixes: true }]],
   };
 
   const baseTransformPlugin = {

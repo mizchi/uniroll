@@ -1,21 +1,10 @@
 import { Options } from "../index.d";
-import { createTransformer } from "./baseTranform";
+import { createTransformer } from "./transformer";
 import { httpResolve } from "rollup-plugin-http-resolve";
 import { css } from "rollup-plugin-uniroll-css";
 import { transformImportPathToSkypackCDN } from "babel-plugin-transform-import-to-skypack-cdn";
 // @ts-ignore
 import transformPathToImportMap from "babel-plugin-transform-path-to-import-map";
-
-// @ts-ignore
-import ts from "@babel/preset-typescript";
-// @ts-ignore
-import react from "@babel/preset-react";
-// @ts-ignore
-import classProperties from "@babel/plugin-proposal-class-properties";
-// @ts-ignore
-import objectRestSpread from "@babel/plugin-proposal-object-rest-spread";
-// @ts-ignore
-import nullishCoalescing from "@babel/plugin-proposal-nullish-coalescing-operator";
 import path from "path";
 import { baseline } from "./baseline";
 import {
@@ -42,9 +31,6 @@ export async function compile(options: Options) {
 
   const babelOptions = {
     plugins: [
-      classProperties,
-      objectRestSpread,
-      nullishCoalescing,
       transformPathToImportMap(importMap ?? { imports: {} }),
       transformImportPathToSkypackCDN(
         versions ?? options.versions ?? {},
@@ -53,7 +39,7 @@ export async function compile(options: Options) {
         }
       ),
     ],
-    presets: [react, ts],
+    presets: [],
   };
 
   const baseTransformPlugin = {

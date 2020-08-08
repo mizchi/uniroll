@@ -1,6 +1,6 @@
 import { transform as transformBabel, TransformOptions } from "@babel/core";
 
-export function createTransformer(options: TransformOptions = {}) {
+export function createTransformerx(options: TransformOptions = {}) {
   return async (code: string, id: string) => {
     const ret = transformBabel(code, {
       filename: id,
