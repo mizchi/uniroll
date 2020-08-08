@@ -5,13 +5,13 @@ module.exports = {
   entry: {
     "uniroll-baseline": path.join(__dirname, "src/baseline"),
     "uniroll-prod": path.join(__dirname, "src/prod"),
-    uniroll: path.join(__dirname, "src/index")
+    uniroll: path.join(__dirname, "src/index"),
   },
   output: {
     library: "uniroll",
     libraryTarget: "umd",
     filename: "[name].js",
     globalObject: "globalThis",
-    path: path.join(__dirname, "dist")
-  }
+    path: path.join(__dirname, "dist"),
+  },
 };

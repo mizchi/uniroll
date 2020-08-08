@@ -1,18 +1,23 @@
+const path = require("path");
 module.exports = {
   resolve: {
     alias: {
       rollup: "rollup/dist/rollup.browser.js",
       path: "path-browserify",
-      stream: "stream-browserify"
+      fs: false,
+      // url: path.join(__dirname, "shim/url.js"),
+      url: "url",
+      stream: "stream-browserify",
+      querystring: "querystring-es3",
     },
-    extensions: [".js", ".mjs", ".ts", ".tsx", ".json"]
+    extensions: [".js", ".mjs", ".ts", ".tsx", ".json"],
   },
   module: {
     rules: [
       {
         test: /\.mjs$/,
         include: /node_modules/,
-        type: "javascript/auto"
+        type: "javascript/auto",
       },
       {
         test: /\.tsx?$/,
@@ -20,17 +25,17 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
+              transpileOnly: true,
+            },
+          },
+        ],
+      },
+    ],
   },
-  node: {
-    fs: "empty",
-    net: "empty",
-    dns: "empty",
-    net: "empty"
-  }
+  // node: {
+  //   fs: "empty",
+  //   net: "empty",
+  //   dns: "empty",
+  //   net: "empty"
+  // }
 };
