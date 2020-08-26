@@ -8,5 +8,6 @@
     "test": "jest",
     "build": "tsc -p .",
     "prepare": "yarn build"
-  }
+  },
+  "gitHead": "56083fe8100bf4d3d511cb1e965a948e968a8708"
 }
