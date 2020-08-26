@@ -11,6 +11,7 @@ console.log('hello', foo);
   "facadeModuleId": "/index.tsx",
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
+  "importedBindings": Object {},
   "imports": Array [],
   "isDynamicEntry": false,
   "isEntry": true,

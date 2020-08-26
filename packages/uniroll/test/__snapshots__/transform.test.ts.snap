@@ -303,6 +303,7 @@ console.log(h('div'));
   "facadeModuleId": "/index.tsx",
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
+  "importedBindings": Object {},
   "imports": Array [],
   "isDynamicEntry": false,
   "isEntry": true,

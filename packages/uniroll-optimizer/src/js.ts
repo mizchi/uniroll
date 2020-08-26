@@ -1,7 +1,7 @@
 import terser from "terser";
 
 export async function optimize(js: string): Promise<string> {
-  return terser.minify(js, { module: true }).code as string;
+  return (await terser.minify(js, { module: true })).code as string;
 }
 
 // How to use

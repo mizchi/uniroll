@@ -12,7 +12,7 @@
   "dependencies": {
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
-    "meow": "^7.0.1",
+    "meow": "^7.1.0",
     "uniroll": "^1.6.0",
     "uniroll-linter": "^1.5.1",
     "uniroll-optimizer": "^1.5.1",
