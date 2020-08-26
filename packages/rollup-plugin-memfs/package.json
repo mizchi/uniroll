@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-memfs",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
