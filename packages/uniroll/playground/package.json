@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  }
+}

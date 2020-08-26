@@ -5,10 +5,12 @@
   "scripts": {
     "test": "jest --testTimeout 15000",
     "prepublishOnly": "yarn build",
+    "compile": "tsc -p .",
     "build": "webpack --mode production"
   },
   "typings": "index.d.ts",
-  "main": "dist/uniroll.js",
+  "main": "lib/index",
+  "browser": "dist/uniroll.js",
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -33,7 +35,8 @@
   },
   "files": [
     "index.d.ts",
-    "dist"
+    "dist",
+    "lib"
   ],
   "dependencies": {
     "@babel/parser": "^7.11.4",
