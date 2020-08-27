@@ -15,12 +15,18 @@
 import { PluginImpl } from "rollup";
 import MagicString from "magic-string";
 
+type Options = {
+  workerRegexp?: RegExp;
+  urlLoaderScheme?: "omt";
+  inlineWorker?: boolean;
+  importScripts?: boolean;
+};
 const defaultOpts = {
   workerRegexp: /new Worker\((["'])(.+?)\1(,[^)]+)?\)/g,
   urlLoaderScheme: "omt",
 };
 
-const plugin: PluginImpl<Partial<typeof defaultOpts>> = function (opts = {}) {
+const plugin: PluginImpl<Options> = function (opts: Options = {}) {
   const optsWithDefault: typeof defaultOpts = Object.assign(
     {},
     defaultOpts,
@@ -33,7 +39,7 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>> = function (opts = {}) {
   return {
     name: "off-main-thread",
 
-    async buildStart(options) {
+    async buildStart() {
       workerFiles = [];
     },
 
@@ -94,7 +100,6 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>> = function (opts = {}) {
           id: resolvedWorkerFile,
           type: "chunk",
         });
-
         const workerParametersStartIndex = match.index + "new Worker(".length;
         const workerParametersEndIndex =
           match.index + match[0].length - ")".length;
