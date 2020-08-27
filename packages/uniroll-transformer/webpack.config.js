@@ -3,11 +3,10 @@ const shared = require("../../webpack.shared.config");
 module.exports = {
   ...shared,
   entry: {
-    "uniroll-prod": path.join(__dirname, "src/prod"),
-    uniroll: path.join(__dirname, "src/index"),
+    "uniroll-transformer": path.join(__dirname, "src/createTransformer"),
   },
   output: {
-    library: "uniroll",
+    library: "UnirollTransfomer",
     libraryTarget: "umd",
     filename: "[name].js",
     globalObject: "globalThis",
