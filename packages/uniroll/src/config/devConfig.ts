@@ -1,15 +1,18 @@
+import { WithTranspileOptions, WithTranspileResult } from "../types";
 import { createScriptTransformer } from "uniroll-transformer/src/createTransformer";
-import { baseWithTranspile, WithTranspileOptions } from "./baseWithTranspile";
+import { baseConfigBuilderWithTranspile } from "./baseConfigWithTranspile";
 
-export function dev(opts: WithTranspileOptions) {
+export function devConfigBuilder(
+  opts: WithTranspileOptions
+): WithTranspileResult {
   const transform = createScriptTransformer({
     resolver: opts.resolver,
   });
-  const scriptPlugin = {
+  const scriptPlugin: any = {
     name: "script-transform",
     transform,
   };
-  const config = baseWithTranspile(opts);
+  const config = baseConfigBuilderWithTranspile(opts);
   return {
     scriptTransform: transform,
     plugins: [...config.plugins, scriptPlugin],

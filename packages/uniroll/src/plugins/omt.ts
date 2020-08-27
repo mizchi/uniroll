@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { PluginImpl } from "rollup";
+import type { PluginImpl } from "rollup";
 import MagicString from "magic-string";
 
 type Options = {

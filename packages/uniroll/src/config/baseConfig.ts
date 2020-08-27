@@ -18,7 +18,7 @@ const defaultReplace: RollupReplaceOptions = {
 
 const defaultCache = new Map();
 
-export function base({
+export function baseConfigBuilder({
   fs,
   cache = defaultCache,
   define = {},

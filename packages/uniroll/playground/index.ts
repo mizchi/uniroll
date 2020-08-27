@@ -1,8 +1,9 @@
+import type { Plugin } from "rollup";
+
 import "regenerator-runtime";
 import { rollup } from "rollup";
-import { dev } from "../src/config/dev";
-import { createMemoryFs } from "../src/index";
-import { Plugin } from "rollup";
+import { devConfigBuilder } from "../src/config/devConfig";
+import { createMemoryFs } from "../src/dev";
 import { compile as svelteCompile, preprocess } from "svelte/compiler";
 import { PreprocessorGroup } from "svelte/types/compiler/preprocess";
 
@@ -54,7 +55,7 @@ export const sveltePlugin: (opts: {
     "/app.svelte": svelteTsCode,
   };
   const memfs = createMemoryFs(files);
-  const { scriptTransform, plugins } = dev({ fs: memfs });
+  const { scriptTransform, plugins } = devConfigBuilder({ fs: memfs });
 
   // const transform = createScriptTransformer({});
   const plugin = sveltePlugin({

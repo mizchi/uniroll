@@ -1,3 +1,5 @@
+import { WithTranspileOptions, WithTranspileResult } from "../types";
+import { TransformOptions } from "@babel/core";
 // import { Options } from "../../index";
 // import { createTransformer } from "uniroll-transformer";
 // import { httpResolve } from "rollup-plugin-http-resolve";
@@ -91,16 +93,13 @@
 
 // @ts-ignore
 import env from "@babel/preset-env";
-import { createTransformer } from "uniroll-transformer";
-import { base, BaseOptions } from "./base";
-export type ProdOptions = BaseOptions & {
-  importMap?: { imports: { [k: string]: string } };
-  npmVersions?: { [k: string]: string };
-};
-
-export function dev(opts: ProdOptions) {
-  const transform = createTransformer({
-    babel: (config) => {
+import { createScriptTransformer } from "uniroll-transformer/src/createTransformer";
+import { baseConfigBuilderWithTranspile } from "./baseConfigWithTranspile";
+export function prodConfigBuilder(
+  opts: WithTranspileOptions
+): WithTranspileResult {
+  const transform = createScriptTransformer({
+    babel: (config: TransformOptions) => {
       return {
         presets: [
           [env, { modules: false, bugfixes: true }],
@@ -109,18 +108,13 @@ export function dev(opts: ProdOptions) {
         ...config,
       };
     },
-    resolver: {
-      npmVersions: opts.npmVersions,
-      importMap: opts.importMap,
-      onWarn: opts.onWarn,
-    },
+    resolver: opts.resolver,
   });
-  const scriptPlugin = {
+  const scriptPlugin: any = {
     name: "base-transform",
     transform,
   };
-
-  const config = base(opts);
+  const config = baseConfigBuilderWithTranspile(opts);
   return {
     scriptTransform: transform,
     plugins: [...config.plugins, scriptPlugin],
