@@ -1,19 +1,18 @@
 # uniroll
 
-Opinionated rollup wrapper to work in browser.
-
-demo https://focused-raman-3ce115.netlify.com/
+Opinionated frontend compiler.
 
 ## Features
 
-- Run in browser and worker
-- TypeScript compile
+- Run in browser and webworker.
+- TypeScript Support
+- Resolve `http://...` url modules like `deno`.
 
 ## How it works
 
 - Create virtual fs with `memfs` by `rollup-plugin-memfs`
-- Load npm modules via `rollup-plugin-http-resolver`
-- Compile with `rollup`.
+- Load npm modules via `rollup-plugin-http-resolve`
+- Compile with `rollup`
 
 ## Run in browser
 
@@ -35,7 +34,7 @@ const out = await bundle.generate({ format: "esm" });
 console.log(out.output[0]);
 ```
 
-## as rollup plugin usage
+As rollup plugin usage.
 
 ```ts
 import { rollup } from "rollup";
@@ -64,7 +63,7 @@ const importMap = {
     "goober": "https://cdn.skypack.dev/goober@2"
   }
 }
-compile({fs, importMap})
+const rolled = await compile({fs, importMap})
 ```
 
 ```tsx
