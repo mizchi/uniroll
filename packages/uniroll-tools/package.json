@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "name": "uniroll-tools",
-  "version": "1.6.2",
+  "version": "2.0.0",
   "bin": {
     "uniroll": "bin/uniroll"
   },
@@ -15,10 +15,10 @@
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
     "meow": "^7.1.0",
-    "uniroll": "^1.6.2",
-    "uniroll-linter": "^1.6.2",
-    "uniroll-optimizer": "^1.6.2",
-    "uniroll-types": "^1.5.1"
+    "uniroll": "^2.0.0",
+    "uniroll-linter": "^2.0.0",
+    "uniroll-optimizer": "^2.0.0",
+    "uniroll-types": "^2.0.0"
   },
   "files": [
     "lib",

@@ -15,7 +15,7 @@ module.exports = {
     uniroll: path.join(__dirname, "src"),
   },
   output: {
-    library: "uniroll",
+    library: "Uniroll",
     libraryTarget: "umd",
     filename: "[name].js",
     globalObject: "globalThis",
