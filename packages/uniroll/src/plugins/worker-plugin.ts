@@ -19,7 +19,7 @@ type Options = {
   workerRegexp?: RegExp;
   urlLoaderScheme?: "omt";
   inlineWorker?: boolean;
-  importScripts?: boolean;
+  inlineImportScripts?: boolean;
 };
 const defaultOpts = {
   workerRegexp: /new Worker\((["'])(.+?)\1(,[^)]+)?\)/g,
@@ -32,12 +32,10 @@ const plugin: PluginImpl<Options> = function (opts: Options = {}) {
     defaultOpts,
     opts
   );
-
   const urlLoaderPrefix = optsWithDefault.urlLoaderScheme + ":";
-
   let workerFiles;
   return {
-    name: "off-main-thread",
+    name: "worker",
 
     async buildStart() {
       workerFiles = [];

@@ -2,6 +2,8 @@ const path = require("path");
 module.exports = {
   resolve: {
     alias: {
+      // process: "process/browser",
+      process: false,
       rollup: "rollup/dist/rollup.browser.js",
       path: "path-browserify",
       fs: false,

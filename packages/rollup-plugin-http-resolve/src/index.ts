@@ -5,19 +5,26 @@ function isHttpProtocol(id: string) {
   return id.startsWith("http://") || id.startsWith("https://");
 }
 
+const defaultCache = new Map();
 export function httpResolve({
-  cache = new Map(),
+  cache = defaultCache,
   onRequest,
   onUseCache,
   fetcher,
+  rewriter,
 }: {
   cache?: any;
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
+  rewriter?: (
+    id: string,
+    importer: string
+  ) => string | void | Promise<string | void>;
 }) {
   return {
     async resolveId(id: string, importer: string) {
+      // on network resolve
       if (importer && isHttpProtocol(importer)) {
         if (id.startsWith("https://")) {
           return id;
@@ -30,6 +37,11 @@ export function httpResolve({
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
           return newId;
+        }
+      } else if (rewriter) {
+        const rewriten = await rewriter(id, importer);
+        if (rewriten) {
+          return rewriten;
         }
       }
     },

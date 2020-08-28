@@ -2,8 +2,8 @@ import type { Plugin } from "rollup";
 
 import "regenerator-runtime";
 import { rollup } from "rollup";
-import { devConfigBuilder } from "../src/config/devConfig";
-import { createMemoryFs } from "../src/dev";
+import { getBaseConfig } from "../src/config/base";
+import { createMemoryFs } from "../src";
 import { compile as svelteCompile, preprocess } from "svelte/compiler";
 import { PreprocessorGroup } from "svelte/types/compiler/preprocess";
 
@@ -29,7 +29,7 @@ const svelteTsCode = `
 </main>
 `;
 
-export const sveltePlugin: (opts: {
+export const getSveltePlugin: (opts: {
   preprocess: PreprocessorGroup[];
 }) => Plugin = (opts) => {
   return {
@@ -49,16 +49,36 @@ export const sveltePlugin: (opts: {
   };
 };
 
+const tsRaw = `
+// import { h, render } from "https://cdn.skypack.dev/preact";
+import foo from "./foo";
+import { h, render } from "preact";
+import { useState, useEffect } from "preact/hooks";
+
+function App() {
+  useEffect(() => {
+    console.log("xxx");
+  }, [])
+  return h("h1", null, "hello");
+}
+
+console.log(foo);
+render(h(App), document.body);
+`;
+
 (async () => {
   const files = {
-    "/index.ts": appCode,
+    // "/foo.tsx": "export default 1",
+    // "/index.tsx": tsRaw,
+    "/index.tsx": appCode,
     "/app.svelte": svelteTsCode,
   };
   const memfs = createMemoryFs(files);
-  const { scriptTransform, plugins } = devConfigBuilder({ fs: memfs });
-
-  // const transform = createScriptTransformer({});
-  const plugin = sveltePlugin({
+  const { scriptTransform, plugins } = getBaseConfig({
+    fs: memfs,
+  });
+  // const transform = createScriptTransform({});
+  const svelte = getSveltePlugin({
     preprocess: [
       {
         async script({ content, attributes, filename }) {
@@ -67,13 +87,16 @@ export const sveltePlugin: (opts: {
             const ret = await scriptTransform(content, filename + "$.tsx");
             return ret;
           }
+          return {
+            code: content,
+          };
         },
       },
     ],
   });
   const rolled = await rollup({
-    input: "/index.ts",
-    plugins: [plugin, ...plugins],
+    input: "/index.tsx",
+    plugins: [svelte, ...plugins],
   });
   const out = await rolled.generate({
     file: "index.js",

@@ -3,7 +3,7 @@ const shared = require("../../webpack.shared.config");
 module.exports = {
   ...shared,
   entry: {
-    "uniroll-prod": path.join(__dirname, "src/prod"),
+    // "uniroll-prod": path.join(__dirname, "src/prod"),
     uniroll: path.join(__dirname, "src/index"),
   },
   output: {
