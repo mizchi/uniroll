@@ -93,12 +93,12 @@
 
 // @ts-ignore
 // import env from "@babel/preset-env";
-// import { createScriptTransformer } from "uniroll-transformer/src/createTransformer";
+// import { createtransformScripter } from "uniroll-transformer/src/createTransformer";
 // import { baseConfigBuilderWithTranspile } from "./baseConfigWithTranspile";
 // export function prodConfigBuilder(
 //   opts: WithTranspileOptions
 // ): WithTranspileResult {
-//   const transform = createScriptTransformer({
+//   const transform = createtransformScripter({
 //     resolver: opts.resolver,
 //   });
 //   const scriptPlugin: any = {
@@ -107,7 +107,7 @@
 //   };
 //   const config = baseConfigBuilderWithTranspile(opts);
 //   return {
-//     scriptTransform: transform,
+//     transformScript: transform,
 //     plugins: [...config.plugins, scriptPlugin],
 //   };
 // }

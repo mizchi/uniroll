@@ -1,6 +1,6 @@
 # uniroll
 
-Opinionated in browser compiler.
+Opinionated rollup wrapper to work in browser.
 
 demo https://focused-raman-3ce115.netlify.com/
 
@@ -22,6 +22,25 @@ const bundle = await compile({
 });
 const out = await bundle.generate({ format: "esm" });
 console.log(out.output[0]);
+```
+
+## as rollup plugin usage
+
+```ts
+import { rollup } from "rollup";
+import { getBaseConfig } from "uniroll";
+
+const files = {
+  "/foo.ts": "export default 1",
+  "/index.tsx": 'import foo from "./foo";console.log(foo);',
+};
+const memfs = createMemoryFs(files);
+const { plugins } = getBaseConfig({ fs: memfs });
+const rolled = await rollup({
+  input: "/index.tsx",
+  plugins,
+});
+// use it as rollup modules
 ```
 
 ## via CDN
@@ -68,42 +87,21 @@ Run compiler with same logics.
 
 ```bash
 $ npm install uniroll-tools -g
-$ uniroll foo.js --out out.js
+$ uniroll foo.js -o out.js
 ```
 
 ## How it works
 
-- mount files on virtual fs with `memfs`: `rollup-plugin-memfs`
-- transform with `@babel/preset-env`, `@babel/preset-typescript` and `uniroll/packages/babel-plugin-transform-import-to-skypack-cdn`
-- load npm modules with `ev` via `uniroll/packages/rollup-plugin-skypack-cdn-resolver`
-- resolve ext with `.js` `.ts` `.tsx` `.json` `.mjs`
-- transform `.css` with `uniroll/packages/rollup-plugin-uniroll-css`(like style-loader, css-loader);
-- compile as `rollup(...)` and return `RollupOutput` object
-
-## Chrome Extension
-
-![](https://i.gyazo.com/2654174b726b6d396cfdec004cb42199.gif)
-
-1. Check if your Node.js version is >= 12.
-2. Clone this repository.
-3. Install [yarn](https://yarnpkg.com/lang/en/docs/install/).
-4. Run `yarn build`
-5. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `packages/uniroll-extension/build` folder.
-6. Have fun.
-
-See detail
-
-- [Webpack docs](https://webpack.js.org)
-- [Chrome Extension](https://developer.chrome.com/extensions/getstarted)
+- Create virtulas fs with `memfs`: `rollup-plugin-memfs`
+- Load npm modules via `rollup-plugin-http-resolver`
+- Compile with `rollup`.
 
 ## How to develop
 
 ```
-yarn workspace uniroll-ui demo
+yarn install
+yarn build
+yarn test
 ```
 
 ## LICENSE

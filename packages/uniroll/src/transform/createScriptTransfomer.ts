@@ -8,7 +8,7 @@ const defaultCompilerOptions: ts.CompilerOptions = {
   jsx: ts.JsxEmit.React,
 };
 
-export const createScriptTransformer = ({
+export const createtransformScripter = ({
   tsconfig,
 }: {
   tsconfig?: object | string;

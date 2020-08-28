@@ -75,17 +75,17 @@ render(<App />, document.body);
     // "/app.svelte": svelteTsCode,
   };
   const memfs = createMemoryFs(files);
-  const { scriptTransform, plugins } = getBaseConfig({
+  const { transformScript, plugins } = getBaseConfig({
     fs: memfs,
   });
-  // const transform = createScriptTransform({});
+  // const transform = createtransformScript({});
   const svelte = getSveltePlugin({
     preprocess: [
       {
         async script({ content, attributes, filename }) {
           if (attributes.lang === "ts") {
             // 内部的に tsx 拡張子ということにする
-            const ret = await scriptTransform(content, filename + "$.tsx");
+            const ret = await transformScript(content, filename + "$.tsx");
             return ret;
           }
           return {
