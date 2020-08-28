@@ -2,9 +2,17 @@ const path = require("path");
 const shared = require("../../webpack.shared.config");
 module.exports = {
   ...shared,
+  resolve: {
+    ...shared.resolve,
+    alias: {
+      ...shared.resolve.alias,
+      "rollup-plugin-http-resolve": "rollup-plugin-http-resolve/src",
+      "rollup-plugin-memfs": "rollup-plugin-memfs/src",
+      "rollup-plugin-uniroll-css": "rollup-plugin-memfs/src",
+    },
+  },
   entry: {
-    // "uniroll-prod": path.join(__dirname, "src/prod"),
-    uniroll: path.join(__dirname, "src/index"),
+    uniroll: path.join(__dirname, "src"),
   },
   output: {
     library: "uniroll",

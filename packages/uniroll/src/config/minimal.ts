@@ -1,6 +1,6 @@
 import type { ImportMap } from "../types";
 import { memfsPlugin, FS } from "rollup-plugin-memfs";
-import { httpResolve } from "rollup-plugin-http-resolve/src/index";
+import { httpResolve } from "rollup-plugin-http-resolve";
 import replace, { RollupReplaceOptions } from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import workerPlugin from "../plugins/worker-plugin";

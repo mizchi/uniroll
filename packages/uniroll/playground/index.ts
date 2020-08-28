@@ -50,7 +50,8 @@ export const getSveltePlugin: (opts: {
 };
 
 const tsRaw = `
-// import { h, render } from "https://cdn.skypack.dev/preact";
+/** @jsx h */
+
 import foo from "./foo";
 import { h, render } from "preact";
 import { useState, useEffect } from "preact/hooks";
@@ -59,19 +60,19 @@ function App() {
   useEffect(() => {
     console.log("xxx");
   }, [])
-  return h("h1", null, "hello");
+  return <h1>Hello</h1>;
 }
 
 console.log(foo);
-render(h(App), document.body);
+render(<App />, document.body);
 `;
 
 (async () => {
   const files = {
-    // "/foo.tsx": "export default 1",
-    // "/index.tsx": tsRaw,
-    "/index.tsx": appCode,
-    "/app.svelte": svelteTsCode,
+    "/foo.tsx": "export default 1",
+    "/index.tsx": tsRaw,
+    // "/index.tsx": appCode,
+    // "/app.svelte": svelteTsCode,
   };
   const memfs = createMemoryFs(files);
   const { scriptTransform, plugins } = getBaseConfig({

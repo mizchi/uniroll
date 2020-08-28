@@ -1,8 +1,11 @@
 import ts from "typescript";
 
-const defaultCompilerOptions = {
+const defaultCompilerOptions: ts.CompilerOptions = {
   target: ts.ScriptTarget.ES2019,
   module: ts.ModuleKind.ESNext,
+  moduleResolution: ts.ModuleResolutionKind.NodeJs,
+  esModuleInterop: true,
+  jsx: ts.JsxEmit.React,
 };
 
 export const createScriptTransformer = ({

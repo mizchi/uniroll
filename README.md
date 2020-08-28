@@ -14,14 +14,12 @@ npm install uniroll --save
 import { compile } from "uniroll";
 const files = {
   "/foo.tsx": "export default 1",
-  "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)"
+  "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)",
 };
 const bundle = await compile({
-  useInMemory: true,
   files,
-  input: "/index.tsx"
+  input: "/index.tsx",
 });
-// return rollup object
 const out = await bundle.generate({ format: "esm" });
 console.log(out.output[0]);
 ```
@@ -29,13 +27,12 @@ console.log(out.output[0]);
 ## via CDN
 
 ```html
-<!-- NOTE: This is 2.3 MB -->
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/uniroll@1.0.1/dist/uniroll.js"
+  src="https://cdn.jsdelivr.net/npm/uniroll@2.0.0/dist/uniroll.js"
 ></script>
 <script>
-  uniroll.compile({...})
+  Uniroll.compile({...})
 </script>
 ```
 
