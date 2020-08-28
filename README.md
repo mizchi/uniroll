@@ -4,6 +4,17 @@ Opinionated rollup wrapper to work in browser.
 
 demo https://focused-raman-3ce115.netlify.com/
 
+## Features
+
+- Run in browser and worker
+- TypeScript compile
+
+## How it works
+
+- Create virtual fs with `memfs` by `rollup-plugin-memfs`
+- Load npm modules via `rollup-plugin-http-resolver`
+- Compile with `rollup`.
+
 ## Run in browser
 
 ```
@@ -43,19 +54,18 @@ const rolled = await rollup({
 // use it as rollup modules
 ```
 
-## via CDN
+## Example: import npm modules via import-map.
 
-```html
-<script
-  async
-  src="https://cdn.jsdelivr.net/npm/uniroll@2.0.0/dist/uniroll.js"
-></script>
-<script>
-  Uniroll.compile({...})
-</script>
+```ts
+import {compile} from "uniroll";
+const importMap = {
+  imports: {
+    "preact": "https://cdn.skypack.dev/preact"
+    "goober": "https://cdn.skypack.dev/goober@2"
+  }
+}
+compile({fs, importMap})
 ```
-
-## Example: import npm registry
 
 ```tsx
 import { h, render } from "preact";
@@ -81,7 +91,7 @@ render(<Popup value={text} />, el);
 document.body.appendChild(el);
 ```
 
-## Run in node
+## CLI
 
 Run compiler with same logics.
 
@@ -90,11 +100,7 @@ $ npm install uniroll-tools -g
 $ uniroll foo.js -o out.js
 ```
 
-## How it works
-
-- Create virtulas fs with `memfs`: `rollup-plugin-memfs`
-- Load npm modules via `rollup-plugin-http-resolver`
-- Compile with `rollup`.
+TODO: Options Documentation
 
 ## How to develop
 
@@ -103,6 +109,23 @@ yarn install
 yarn build
 yarn test
 ```
+
+## ChangeLog
+
+### v1 => v2
+
+TBD
+
+- Use `typescript` compiler instead of `@babel/core` and dorp babel plugins.
+- No more `useInMemory: true` option. Just take `fs` or `memfs`.
+- Drop `package.json` reading. Use `importMap` [WICG/import\-maps: How to control the behavior of JavaScript imports](https://github.com/WICG/import-maps)
+
+## TODO
+
+- Documentation
+- CSS Loader / Optimizer
+- Svelte usages
+- include tslib
 
 ## LICENSE
 
