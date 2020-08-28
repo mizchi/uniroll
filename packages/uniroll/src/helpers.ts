@@ -1,5 +1,5 @@
-import { BaseConfigResult } from "./config/base";
-import { BaseOptions } from "./config/base";
+import { UnirollConfigBuilderResult } from "./config/base";
+import { UnirollOptions } from "./config/base";
 import { rollup, RollupOptions } from "rollup";
 import type fs from "fs";
 import { Volume } from "memfs";
@@ -42,11 +42,11 @@ export function createUrlRewriter(opts: {
 }
 
 export type CompileOptions = RollupOptions &
-  Omit<BaseOptions, "fs"> & {
+  Omit<UnirollOptions, "fs"> & {
     files: { [k: string]: string };
   };
 export function createCompilerOptionBuilder(
-  configBuilder: (opts: BaseOptions) => BaseConfigResult
+  configBuilder: (opts: UnirollOptions) => UnirollConfigBuilderResult
 ) {
   return async function (opts: CompileOptions) {
     const memfs = createMemoryFs(opts.files);
@@ -66,7 +66,7 @@ export function createCompilerOptionBuilder(
 }
 
 export function createCompiler(
-  getConfig: (opts: BaseOptions) => BaseConfigResult
+  getConfig: (opts: UnirollOptions) => UnirollConfigBuilderResult
 ) {
   const buildConfig = createCompilerOptionBuilder(getConfig);
   return async function (opts: CompileOptions) {
