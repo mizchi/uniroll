@@ -14,12 +14,12 @@ test("transform preact", async () => {
   // check transformPathToImportMap before transformImportToPikaCdn
   try {
     const bundle = await compile({
-      useInMemory: true,
+      // useInMemory: true,
       files,
       input: "/index.tsx",
-      onRequest: (url) => {
-        console.log("url", url);
-      },
+      // onRequest: (url) => {
+      //   console.log("url", url);
+      // },
       onWarn: (message) => {
         console.log("onwarn", message);
       },

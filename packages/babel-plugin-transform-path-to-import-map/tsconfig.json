@@ -1,8 +1,0 @@
-{
-  "include": ["index.js", "test"],
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "noEmit": true
-  }
-}

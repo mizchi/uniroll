@@ -1,6 +1,6 @@
 import "isomorphic-unfetch";
 import assert from "assert";
-import { compile } from "../src/prod";
+import { compile } from "../src";
 
 test("replace", async () => {
   const files = {
@@ -26,8 +26,7 @@ console.log(x);
   };
   try {
     const bundle = await compile({
-      useInMemory: true,
-      replaceMap: {
+      define: {
         "$props.useFoo": JSON.stringify(false),
       },
       files,
@@ -35,7 +34,7 @@ console.log(x);
       onWarn: (message) => {
         console.log("onwarn", message);
       },
-      cssPostprocess: (t) => t,
+      // cssPostprocess: (t) => t,
     });
     const out = await bundle.generate({ format: "es" });
     const code = out.output[0].code;
@@ -69,8 +68,8 @@ console.log($props.obj.foo);
   };
   try {
     const bundle = await compile({
-      useInMemory: true,
-      replaceMap: {
+      // useInMemory: true,
+      define: {
         "$props.obj": JSON.stringify({ foo: 1, bar: 2 }),
       },
       files,
@@ -78,7 +77,7 @@ console.log($props.obj.foo);
       onWarn: (message) => {
         console.log("onwarn", message);
       },
-      cssPostprocess: (t) => t,
+      // cssPostprocess: (t) => t,
     });
     const out = await bundle.generate({ format: "es" });
     const code = out.output[0].code;

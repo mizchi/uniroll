@@ -1,6 +1,5 @@
 import "isomorphic-unfetch";
-
-import { compile } from "../src/index";
+import { compile } from "../src";
 const files = {
   "/foo.tsx": "export default 1",
   "/index.tsx": "import foo from './foo';\nconsole.log('hello', foo)",
@@ -10,11 +9,10 @@ jest.setTimeout(150000);
 test("build", async () => {
   try {
     const bundle = await compile({
-      useInMemory: true,
       files,
       input: "/index.tsx",
       onWarn: (message) => {
-        console.log("onwarn", message);
+        console.log("[warn]", message);
       },
     });
     const out = await bundle.generate({ format: "es" });

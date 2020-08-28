@@ -1,44 +1,50 @@
 import "isomorphic-unfetch";
 import path from "path";
-import glob from "glob";
-import { compile } from "uniroll";
+import { rollup } from "rollup";
 import fs from "fs";
 import meow from "meow";
-import { RollupOutput } from "rollup";
 import { optimizeJs } from "uniroll-optimizer";
 import { lint as linter } from "uniroll-linter";
+import { getBaseConfig } from "uniroll";
 
-async function run(
-  input: string,
-  options: {
-    type: "memory" | "local";
-    print?: boolean;
-    out?: string;
-    outdir?: string;
-    minify?: boolean;
-    lint?: boolean;
-  }
-) {
-  const { type, out, outdir, minify, print, lint, ...others } = options;
+type BundleOptions = {
+  input: string;
+  config: string;
+  type: "memory" | "local";
+  print?: boolean;
+  out?: string;
+  outdir?: string;
+  minify?: boolean;
+  lint?: boolean;
+};
 
-  let output: RollupOutput;
-  switch (options.type || "local") {
-    case "memory": {
-      const bundle = await bundleOnMemory(input);
-      output = await bundle.generate(others);
-      break;
-    }
-    case "local": {
-      const bundle = await compile({
-        useInMemory: false,
-        input: input,
-        cwd: process.cwd(),
-        fs: fs.promises,
-      });
-      output = await bundle.generate(others);
-      break;
-    }
+async function bundle(options: BundleOptions) {
+  const {
+    input,
+    type,
+    out,
+    outdir,
+    minify,
+    print,
+    lint,
+    config: configPath = "uniroll.config.js",
+    ...others
+  } = options;
+
+  let config;
+  try {
+    const fpath = path.join(process.cwd(), configPath);
+    config = require(fpath);
+  } catch (err) {
+    config = {};
   }
+  const { plugins } = getBaseConfig({ fs: fs.promises, ...config });
+  const rolled = await rollup({
+    input,
+    plugins,
+  });
+
+  const output = await rolled.generate(others);
 
   if (output == null) {
     throw new Error("bundle error");
@@ -78,6 +84,23 @@ async function run(
   }
 }
 
+async function run(args: [cmd: string, input: string], options: BundleOptions) {
+  const [cmd, input] = args.length > 1 ? args : ["bundle", args[0]];
+  switch (cmd) {
+    case "bundle": {
+      return bundle({ ...options, input });
+    }
+    case "lint": {
+      console.log("WIP");
+      return;
+    }
+    case "pack": {
+      console.log("WIP");
+      return;
+    }
+  }
+}
+
 const cli = meow(
   `
     Usage
@@ -93,6 +116,14 @@ const cli = meow(
   {
     autoHelp: true,
     flags: {
+      config: {
+        type: "string",
+        alias: "c",
+      },
+      out: {
+        type: "string",
+        alias: "o",
+      },
       lint: {
         type: "boolean",
         alias: "l",
@@ -112,28 +143,4 @@ const cli = meow(
   }
 );
 
-async function bundleOnMemory(input: string) {
-  const entry = path.join(process.cwd(), input);
-  const basename = path.basename(entry);
-  const globdir = path.basename(path.dirname(entry));
-  const files = glob.sync(`${globdir}/**`, {
-    root: process.cwd(),
-    cwd: process.cwd(),
-    nodir: true,
-  });
-  const fileMap = files.reduce((acc, fname) => {
-    const content = fs.readFileSync(path.join(process.cwd(), fname));
-    const pathname = path.join(
-      "/",
-      fname.replace(new RegExp(`^(${globdir})`), "")
-    );
-    return { ...acc, [pathname]: content.toString() };
-  }, {});
-  return await compile({
-    useInMemory: true,
-    files: fileMap,
-    input: basename,
-  });
-}
-
-run(cli.input[0], cli.flags as any);
+run(cli.input as [string, string], cli.flags as any);

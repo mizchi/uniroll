@@ -1,4 +1,5 @@
 {
+  "license": "MIT",
   "name": "uniroll-tools",
   "version": "1.6.2",
   "bin": {
@@ -6,10 +7,11 @@
   },
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "tsc -p .",
+    "build": "yarn --cwd ../uniroll run build:lib && tsc -p .",
     "test": "jest"
   },
   "dependencies": {
+    "esm": "^3.2.25",
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.0.0",
     "meow": "^7.1.0",
@@ -21,6 +23,5 @@
   "files": [
     "lib",
     "bin"
-  ],
-  "gitHead": "56083fe8100bf4d3d511cb1e965a948e968a8708"
+  ]
 }

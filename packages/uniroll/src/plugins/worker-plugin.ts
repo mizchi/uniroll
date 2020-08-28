@@ -1,3 +1,4 @@
+// Drop amd
 /**
  * Copyright 2018 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,24 +12,32 @@
  * limitations under the License.
  */
 
-import { PluginImpl } from "rollup";
+import type { PluginImpl } from "rollup";
 import MagicString from "magic-string";
 
+type Options = {
+  workerRegexp?: RegExp;
+  urlLoaderScheme?: "omt";
+  inlineWorker?: boolean;
+  inlineImportScripts?: boolean;
+};
 const defaultOpts = {
   workerRegexp: /new Worker\((["'])(.+?)\1(,[^)]+)?\)/g,
   urlLoaderScheme: "omt",
 };
 
-const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
-  const optsWithDefault: typeof defaultOpts = Object.assign({}, defaultOpts, opts);
-
+const plugin: PluginImpl<Options> = function (opts: Options = {}) {
+  const optsWithDefault: typeof defaultOpts = Object.assign(
+    {},
+    defaultOpts,
+    opts
+  );
   const urlLoaderPrefix = optsWithDefault.urlLoaderScheme + ":";
-
   let workerFiles;
   return {
-    name: "off-main-thread",
+    name: "worker",
 
-    async buildStart(options) {
+    async buildStart() {
       workerFiles = [];
     },
 
@@ -50,8 +59,8 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
     async transform(code, id) {
       // Copy the regexp as they are stateful and this hook is async.
       const workerRegexp = new RegExp(
-          optsWithDefault.workerRegexp.source,
-          optsWithDefault.workerRegexp.flags
+        optsWithDefault.workerRegexp.source,
+        optsWithDefault.workerRegexp.flags
       );
       if (!workerRegexp.test(code)) {
         return;
@@ -75,7 +84,7 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
         }
         if (!new RegExp("^.*/").test(workerFile)) {
           this.warn(
-              `Paths passed to the Worker constructor must be relative or absolute, i.e. start with /, ./ or ../ (just like dynamic import!). Ignoring "${workerFile}".`
+            `Paths passed to the Worker constructor must be relative or absolute, i.e. start with /, ./ or ../ (just like dynamic import!). Ignoring "${workerFile}".`
           );
           continue;
         }
@@ -89,17 +98,16 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
           id: resolvedWorkerFile,
           type: "chunk",
         });
-
         const workerParametersStartIndex = match.index + "new Worker(".length;
         const workerParametersEndIndex =
-            match.index + match[0].length - ")".length;
+          match.index + match[0].length - ")".length;
 
         ms.overwrite(
-            workerParametersStartIndex,
-            workerParametersEndIndex,
-            `import.meta.ROLLUP_FILE_URL_${chunkRefId}, ${JSON.stringify(
-                optionsObject
-            )}`
+          workerParametersStartIndex,
+          workerParametersEndIndex,
+          `import.meta.ROLLUP_FILE_URL_${chunkRefId}, ${JSON.stringify(
+            optionsObject
+          )}`
         );
       }
 
@@ -115,4 +123,4 @@ const plugin: PluginImpl<Partial<typeof defaultOpts>>  = function (opts = {}) {
   };
 };
 
-export default plugin
+export default plugin;

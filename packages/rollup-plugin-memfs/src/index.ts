@@ -1,6 +1,9 @@
-import { Plugin } from "rollup";
-import { IPromisesAPI } from "memfs/lib/promises";
+import type _fs from "fs";
+import type { Plugin } from "rollup";
+import type { IPromisesAPI } from "memfs/lib/promises";
 import path from "path";
+
+export type FS = IPromisesAPI | typeof _fs["promises"];
 
 export type ResolverOptions = {
   extensions?: string[];
@@ -9,7 +12,7 @@ export type ResolverOptions = {
 };
 
 const DEFALUT_EXTENSIONS = [".ts", ".tsx", ".js", ".mjs", ".json"];
-export const memfsPlugin = (fs: IPromisesAPI) => {
+export const memfsPlugin = (fs: FS) => {
   const resolver = new Resolver(fs);
   return {
     name: "memfs",
@@ -26,7 +29,7 @@ export const memfsPlugin = (fs: IPromisesAPI) => {
     async load(id: string) {
       const m = await fs.readFile(id, "utf-8");
       return m;
-    }
+    },
   } as Plugin;
 };
 
@@ -35,11 +38,11 @@ class Resolver {
   private searchDirectoryIndex: boolean;
   private searchDirectoryPackage: boolean;
   constructor(
-    private fs: IPromisesAPI,
+    private fs: FS,
     {
       extensions = DEFALUT_EXTENSIONS,
       searchDirectoryIndex = true,
-      searchDirectoryPackage = false
+      searchDirectoryPackage = false,
     }: ResolverOptions = {}
   ) {
     this.extensions = extensions;
@@ -55,7 +58,7 @@ class Resolver {
     return this.fs
       .access(id)
       .then(() => true)
-      .catch(_err => false);
+      .catch((_err) => false);
   }
   async resolveId(id: string): Promise<string | void> {
     // [id][ext]

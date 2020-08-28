@@ -4,6 +4,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "module": "commonjs"
+    "module": "commonjs",
+    "declaration": true
   }
 }

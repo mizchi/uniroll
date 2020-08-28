@@ -111,3 +111,4 @@ dist
 
 .netlify
 .vscode
+.DS_Store
