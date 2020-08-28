@@ -5,7 +5,7 @@ import fs from "fs";
 import meow from "meow";
 import { optimizeJs } from "uniroll-optimizer";
 import { lint as linter } from "uniroll-linter";
-import { getBaseConfig } from "uniroll/lib/config/base";
+import { getBaseConfig } from "uniroll";
 
 type BundleOptions = {
   input: string;
