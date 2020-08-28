@@ -1,6 +1,6 @@
 {
   "name": "uniroll-linter",
-  "version": "1.6.2",
+  "version": "2.0.0",
   "main": "dist/uniroll-linter.js",
   "types": "index.d.ts",
   "license": "MIT",
