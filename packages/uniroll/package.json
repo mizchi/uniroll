@@ -13,8 +13,9 @@
   "scripts": {
     "test": "jest --testTimeout 15000",
     "prepublishOnly": "yarn build",
-    "compile": "tsc -p .",
-    "build": "webpack --mode production"
+    "build": "run-p build:*",
+    "build:dist": "webpack --mode production",
+    "build:lib": "tsc -p ."
   },
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
