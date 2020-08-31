@@ -57,13 +57,13 @@ const rolled = await rollup({
 
 ```ts
 import {compile} from "uniroll";
-const importMap = {
+const importmaps = {
   imports: {
     "preact": "https://cdn.skypack.dev/preact"
     "goober": "https://cdn.skypack.dev/goober@2"
   }
 }
-const rolled = await compile({fs, importMap})
+const rolled = await compile({fs, importmaps})
 ```
 
 ```tsx
@@ -117,7 +117,7 @@ TBD
 
 - Use `typescript` compiler instead of `@babel/core` and dorp babel plugins.
 - No more `useInMemory: true` option. Just take `fs` or `memfs`.
-- Drop `package.json` reading. Use `importMap` [WICG/import\-maps: How to control the behavior of JavaScript imports](https://github.com/WICG/import-maps)
+- Drop `package.json` reading. Use `importmaps` [WICG/import\-maps: How to control the behavior of JavaScript imports](https://github.com/WICG/import-maps)
 
 ## TODO
 

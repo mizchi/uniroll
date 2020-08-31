@@ -9,5 +9,9 @@
     "build": "tsc -p .",
     "prepare": "yarn build"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "gitHead": "56083fe8100bf4d3d511cb1e965a948e968a8708"
 }

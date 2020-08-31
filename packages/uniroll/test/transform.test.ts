@@ -10,14 +10,11 @@ const files = {
   "/index.tsx": "import { h } from 'preact'; console.log(h('div'));",
 };
 
-test.skip("transform preact", async () => {
+test("transform preact", async () => {
   try {
     const bundle = await compile({
       files,
       input: "/index.tsx",
-      // onRequest: (url) => {
-      //   console.log("url", url);
-      // },
       onWarn: (message) => {
         console.log("onwarn", message);
       },
@@ -32,7 +29,7 @@ test.skip("transform preact", async () => {
 test.only("transform nested", async () => {
   try {
     const bundle = await compile({
-      importMap: {
+      importmaps: {
         imports: {
           preact: "https://cdn.skypack.dev/preact",
           "preact/hooks": "https://cdn.skypack.dev/preact/hooks",
@@ -53,6 +50,7 @@ console.log(sdk);
       },
     });
     const out = await bundle.generate({ format: "es" });
+    // console.log(out.output[0]);
     expect(out.output[0]).toMatchSnapshot();
   } catch (err) {
     console.log(err);

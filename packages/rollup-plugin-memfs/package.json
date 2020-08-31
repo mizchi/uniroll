@@ -13,8 +13,8 @@
     "prepare": "yarn build"
   },
   "files": [
-    "index.js",
-    "index.d.ts"
+    "src",
+    "lib"
   ],
   "devDependencies": {
     "typescript": "^4.0.2"
