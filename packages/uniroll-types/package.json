@@ -1,6 +1,6 @@
 {
   "name": "uniroll-types",
-  "version": "2.0.0",
+  "version": "2.1.1",
   "types": "index.d.ts",
   "scripts": {
     "build": "echo ok",
