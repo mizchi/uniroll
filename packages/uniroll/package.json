@@ -8,7 +8,8 @@
   "browser": "dist/uniroll.js",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "test": "jest --testTimeout 15000",

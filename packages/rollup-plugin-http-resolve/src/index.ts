@@ -5,6 +5,10 @@ function isHttpProtocol(id: string) {
   return id.startsWith("http://") || id.startsWith("https://");
 }
 
+const DEBUG = false;
+
+const log = (...args: any) => DEBUG && console.log(...args);
+
 const defaultCache = new Map();
 export function httpResolve({
   cache = defaultCache,
@@ -24,28 +28,52 @@ export function httpResolve({
 }) {
   return {
     async resolveId(id: string, importer: string) {
+      log(
+        "[http-resolve:resolveId:enter]",
+        id,
+        "from",
+        importer
+        // rewriter?.toString()
+      );
+
       // on network resolve
       if (importer && isHttpProtocol(importer)) {
         if (id.startsWith("https://")) {
+          log("[http-reslove:end] return with https", id);
           return id;
         }
         const { pathname, protocol, host } = new URL(importer);
         if (id.startsWith("/")) {
+          // /_/...
+          log(
+            "[http-reslove:end] return with host root",
+            `${protocol}//${host}${id}`
+          );
           return `${protocol}//${host}${id}`;
-        } else {
+        } else if (id.startsWith(".")) {
+          // ./xxx/yyy
           // relative path
+
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
+          log("[http-reslove:end] return with relativePath", newId);
           return newId;
         }
-      } else if (rewriter) {
+      }
+      if (rewriter) {
+        log("[http-reslove:end] use rewrite to", id);
+        // @ts-ignore
         const rewriten = await rewriter(id, importer);
         if (rewriten) {
+          console.log("rewrite", rewriten, "from", id);
           return rewriten;
         }
       }
+
+      log("[http-reslove:end] no rewrite to", id);
     },
     async load(id: string) {
+      log("[http-resolve:load]", id);
       if (isHttpProtocol(id)) {
         const cached = await cache.get(id);
         if (cached) {
