@@ -1,18 +1,21 @@
-import type { ImportMap } from "../types";
-import { memfsPlugin, FS } from "rollup-plugin-memfs";
-import { httpResolve } from "rollup-plugin-http-resolve";
+import { memfsPlugin, FS, FS_API } from "rollup-plugin-memfs";
+import {
+  httpResolve,
+  createFallback,
+  ImportMaps,
+} from "rollup-plugin-http-resolve";
 import replace, { RollupReplaceOptions } from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import workerPlugin from "../plugins/worker-plugin";
-import { createUrlRewriter } from "../helpers";
+// import { createUrlRewriter } from "../helpers";
 
 export type MinimalOptions = {
   fs: FS;
   cache?: Map<string, string> | any;
   define?: RollupReplaceOptions;
   onWarn?: (...args: any) => void;
-  importMapPath?: string;
-  importMap?: ImportMap;
+  importmaps?: ImportMaps;
+  importMapsPath?: string;
 };
 
 const defaultReplace: RollupReplaceOptions = {
@@ -27,20 +30,25 @@ export function getMinimalConfig({
   cache = defaultCache,
   define = {},
   onWarn = () => {},
-  importMapPath,
-  importMap,
-}: MinimalOptions) {
-  const rewriter = createUrlRewriter({
+  importmaps: importmaps_,
+  importMapsPath,
+}: // importMap,
+MinimalOptions) {
+  const fallback = createFallback({
     onWarn,
-    async getImportMap() {
-      if (importMap) {
-        return importMap;
+    async importmaps() {
+      if (importmaps_) {
+        return importmaps_;
       }
-      if (importMapPath == null) {
-        return;
+      if (importMapsPath) {
+        // @ts-ignore
+        const rawstr = await fs.readFile(importMapsPath, "utf-8");
+        return JSON.parse(rawstr as string) as ImportMaps;
+      } else {
+        return {
+          imports: {},
+        };
       }
-      const rawstr = await fs.readFile(importMapPath, "utf-8");
-      return JSON.parse(rawstr as string) as ImportMap;
     },
   });
   return {
@@ -50,7 +58,7 @@ export function getMinimalConfig({
       json(),
       httpResolve({
         cache,
-        rewriter,
+        fallback,
       }),
       memfsPlugin(fs),
     ],

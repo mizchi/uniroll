@@ -1,6 +1,7 @@
 import type _fs from "fs";
 import type { Plugin } from "rollup";
 import type { IPromisesAPI } from "memfs/lib/promises";
+
 import path from "path";
 
 export type FS = IPromisesAPI | typeof _fs["promises"];
@@ -11,11 +12,31 @@ export type ResolverOptions = {
   searchDirectoryPackage?: boolean;
 };
 
+export type FS_API = {
+  readFile(filepath: string): Promise<string>;
+  exists(filepath: string): Promise<boolean>;
+};
+
+export function wrapFs(fs: FS) {
+  return {
+    async readFile(filepath: string) {
+      return (await fs.readFile(filepath, "utf-8")) as string;
+    },
+    async exists(filepath: string) {
+      return await fs
+        .access(filepath)
+        .then(() => true)
+        .catch(() => false);
+    },
+  };
+}
+
 const DEFALUT_EXTENSIONS = [".ts", ".tsx", ".js", ".mjs", ".json"];
-export const memfsPlugin = (fs: FS) => {
+
+export const altfsPlugin = (fs: FS_API) => {
   const resolver = new Resolver(fs);
   return {
-    name: "memfs",
+    name: "altfs",
     async resolveId(source: string, importer: string | undefined) {
       if (importer && importer.startsWith("/") && source.startsWith(".")) {
         const fullpath = importer
@@ -27,10 +48,15 @@ export const memfsPlugin = (fs: FS) => {
       return source;
     },
     async load(id: string) {
-      const m = await fs.readFile(id, "utf-8");
+      const m = await fs.readFile(id);
       return m;
     },
   } as Plugin;
+};
+
+export const memfsPlugin = (fs: FS) => {
+  const wrappedFs = wrapFs(fs);
+  return altfsPlugin(wrappedFs);
 };
 
 class Resolver {
@@ -38,7 +64,7 @@ class Resolver {
   private searchDirectoryIndex: boolean;
   private searchDirectoryPackage: boolean;
   constructor(
-    private fs: FS,
+    private fs: FS_API,
     {
       extensions = DEFALUT_EXTENSIONS,
       searchDirectoryIndex = true,
@@ -55,10 +81,7 @@ class Resolver {
   }
 
   async exists(id: string): Promise<boolean> {
-    return this.fs
-      .access(id)
-      .then(() => true)
-      .catch((_err) => false);
+    return this.fs.exists(id);
   }
   async resolveId(id: string): Promise<string | void> {
     // [id][ext]
@@ -94,7 +117,7 @@ class Resolver {
       const pkgStr = await this.fs.readFile(pkgPath);
       let json;
       try {
-        json = JSON.parse(pkgStr.toString());
+        json = JSON.parse(pkgStr);
       } catch (err) {
         console.warn(err);
         // through parse error
