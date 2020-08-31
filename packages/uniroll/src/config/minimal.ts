@@ -1,12 +1,9 @@
-// import { FS_API } from "./../../../rollup-plugin-memfs/src/index";
-// import { ImportMaps } from './../../../rollup-plugin-http-resolve/src/index';
-// import type { ImportMap } from "../types";
 import { memfsPlugin, FS, FS_API } from "rollup-plugin-memfs";
 import {
   httpResolve,
   createFallback,
   ImportMaps,
-} from "rollup-plugin-http-resolve/src/index";
+} from "rollup-plugin-http-resolve";
 import replace, { RollupReplaceOptions } from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import workerPlugin from "../plugins/worker-plugin";
