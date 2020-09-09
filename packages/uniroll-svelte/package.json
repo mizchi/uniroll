@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "MIT",
   "main": "lib/index",
   "browser": "dist/uniroll-svelte.js",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "svelte": "3.24.1",
-    "uniroll": "^2.1.1"
+    "uniroll": "^2.1.2"
   },
   "files": [
     "dist",
