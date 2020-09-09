@@ -22,11 +22,14 @@ if ($props.useFoo) {
 }
 
 console.log(x);
+console.log($props.selector);
   `,
   };
   try {
     const bundle = await compile({
       define: {
+        // "$props.selector": JSON.stringify(".selector"),
+        "$props.selector": ".selector",
         "$props.useFoo": JSON.stringify(false),
       },
       files,
@@ -46,7 +49,8 @@ console.log(x);
     assert.ok(code.includes("bar"));
     assert.ok(code.includes("Bar"));
 
-    expect(code).toMatchSnapshot();
+    console.log(code);
+    // expect(code).toMatchSnapshot();
   } catch (err) {
     console.log(err);
     throw err;

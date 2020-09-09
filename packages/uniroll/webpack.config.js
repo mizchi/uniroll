@@ -2,6 +2,22 @@ const path = require("path");
 const shared = require("../../webpack.shared.config");
 module.exports = {
   ...shared,
+  module: {
+    rules: [
+      {
+        test: /\.ts/,
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              configFile: "tsconfig.webpack.json",
+            },
+          },
+        ],
+      },
+    ],
+  },
   resolve: {
     ...shared.resolve,
     alias: {

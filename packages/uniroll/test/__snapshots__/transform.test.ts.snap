@@ -1903,7 +1903,7 @@ console.log(sdk);
       ],
       "renderedLength": 537,
     },
-    "https://cdn.skypack.dev/-/goober@v2.0.5-Rdf4wp6mqNCOUFJQ826N/dist=es2020/goober.js": Object {
+    "https://cdn.skypack.dev/-/goober@v2.0.5-7UqlRSG4br6hdhlC9qyf/dist=es2020/goober.js": Object {
       "originalLength": 2024,
       "removedExports": Array [
         "extractCss",

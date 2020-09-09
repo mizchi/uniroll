@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`replace 1`] = `
-"var Bar = 'bar';
-
-let x;
-{
-    x = Bar;
-}
-console.log(x);
-"
-`;
-
 exports[`replace object 1`] = `
 "console.log({ \\"foo\\": 1, \\"bar\\": 2 }.foo);
 "
