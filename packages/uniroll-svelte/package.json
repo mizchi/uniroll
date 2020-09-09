@@ -3,6 +3,7 @@
   "version": "2.1.1",
   "license": "MIT",
   "main": "lib/index",
+  "browser": "dist/uniroll-svelte.js",
   "scripts": {
     "test": "echo wip",
     "prepublishOnly": "yarn build",
