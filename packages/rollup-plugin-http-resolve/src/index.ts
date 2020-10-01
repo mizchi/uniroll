@@ -67,7 +67,7 @@ export function httpResolve({
         log("[http-reslove:end] use fallback to", id);
         const rewriten = await fallback(id, importer);
         if (rewriten) {
-          console.log("rewrite", rewriten, "from", id);
+          log("rewrite", rewriten, "from", id);
           return rewriten;
         }
       }
