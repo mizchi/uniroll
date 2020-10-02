@@ -26,7 +26,7 @@ test("build with memfs", async () => {
 
 test("build with fs/promises", async () => {
   const rolled = await rollup({
-    input: path.join(__dirname, "fixtures/dummy.js"),
+    input: path.join(__dirname, "fixtures/dummy.ts"),
     plugins: [memfsPlugin(fs as any)],
   });
   const result = await rolled.generate({

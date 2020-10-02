@@ -17,17 +17,40 @@ export type FS_API = {
   exists(filepath: string): Promise<boolean>;
 };
 
+const SEARCH_EXTENSIONS = [
+  "/index.tsx",
+  "/index.ts",
+  "/index.js",
+  ".tsx",
+  ".ts",
+  ".json",
+  ".js",
+];
 export function wrapFs(fs: FS) {
+  const exists = async (filepath: string) => {
+    return await fs
+      .access(filepath)
+      .then(() => true)
+      .catch(() => false);
+  };
+
   return {
     async readFile(filepath: string) {
-      return (await fs.readFile(filepath, "utf-8")) as string;
+      // search .tsx , .ts
+      let target = filepath;
+      if (await exists(target)) {
+        // itself
+      } else {
+        for (const ext of SEARCH_EXTENSIONS) {
+          if (await exists(filepath + ext)) {
+            target = filepath + ext;
+            break;
+          }
+        }
+      }
+      return (await fs.readFile(target, "utf-8")) as string;
     },
-    async exists(filepath: string) {
-      return await fs
-        .access(filepath)
-        .then(() => true)
-        .catch(() => false);
-    },
+    exists,
   };
 }
 

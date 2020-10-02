@@ -1,6 +1,6 @@
 {
   "include": ["src"],
-  "exclude": ["example_src"],
+  "exclude": ["example_src", "example_project"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
