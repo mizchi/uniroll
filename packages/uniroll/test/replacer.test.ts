@@ -34,7 +34,7 @@ console.log($props.selector);
       },
       files,
       input: "/index.tsx",
-      onWarn: (message) => {
+      onwarn: (message) => {
         console.log("onwarn", message);
       },
       // cssPostprocess: (t) => t,
@@ -78,9 +78,6 @@ console.log($props.obj.foo);
       },
       files,
       input: "/index.tsx",
-      onWarn: (message) => {
-        console.log("onwarn", message);
-      },
       // cssPostprocess: (t) => t,
     });
     const out = await bundle.generate({ format: "es" });

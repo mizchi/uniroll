@@ -16,6 +16,22 @@ export type CompileOptions = RollupOptions &
   Omit<UnirollOptions, "fs"> & {
     files: { [k: string]: string };
   };
+
+export function getRawRollupOptions(
+  fullOpts: RollupOptions & UnirollOptions
+): RollupOptions {
+  const {
+    fs,
+    // @ts-ignore
+    files,
+    cache,
+    define,
+    importMapsPath,
+    importmaps,
+    ...others
+  } = fullOpts;
+  return others;
+}
 export function createCompilerOptionBuilder(
   configBuilder: (opts: UnirollOptions) => UnirollConfigBuilderResult
 ) {
@@ -42,7 +58,8 @@ export function createCompiler(
   const buildConfig = createCompilerOptionBuilder(getConfig);
   return async function (opts: CompileOptions) {
     const config = await buildConfig(opts);
-    return rollup(config);
+    const rawConfig = getRawRollupOptions(config as any);
+    return rollup(rawConfig);
   };
 }
 

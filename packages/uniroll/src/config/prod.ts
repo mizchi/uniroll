@@ -46,7 +46,6 @@
 //     cdnConfig: {
 //       npmVersions: npmVersions ?? undefined,
 //       importMap: importMap ?? undefined,
-//       onWarn: options.onWarn,
 //     },
 //   });
 

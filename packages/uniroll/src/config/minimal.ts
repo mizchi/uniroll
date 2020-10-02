@@ -1,3 +1,4 @@
+import type { RollupWarning } from "rollup";
 import { memfsPlugin, FS, FS_API } from "rollup-plugin-memfs";
 import {
   httpResolve,
@@ -7,13 +8,11 @@ import {
 import replace, { RollupReplaceOptions } from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import workerPlugin from "../plugins/worker-plugin";
-// import { createUrlRewriter } from "../helpers";
 
 export type MinimalOptions = {
   fs: FS;
   cache?: Map<string, string> | any;
   define?: RollupReplaceOptions;
-  onWarn?: (...args: any) => void;
   importmaps?: ImportMaps;
   importMapsPath?: string;
 };
@@ -29,13 +28,11 @@ export function getMinimalConfig({
   fs,
   cache = defaultCache,
   define = {},
-  onWarn = () => {},
   importmaps: importmaps_,
   importMapsPath,
 }: // importMap,
 MinimalOptions) {
   const fallback = createFallback({
-    onWarn,
     async importmaps() {
       if (importmaps_) {
         return importmaps_;

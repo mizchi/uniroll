@@ -12,14 +12,7 @@ function isHttpProtocol(id: string) {
 const DEBUG = false;
 const log = (...args: any) => DEBUG && console.log(...args);
 
-const defaultCache = new Map();
-export function httpResolve({
-  cache = defaultCache,
-  onRequest,
-  onUseCache,
-  fetcher,
-  fallback,
-}: {
+type HttpResolveOptions = {
   cache?: any;
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
@@ -28,8 +21,17 @@ export function httpResolve({
     id: string,
     importer: string
   ) => string | void | Promise<string | void>;
-}) {
+};
+const defaultCache = new Map();
+export const httpResolve = function httpResolve_({
+  cache = defaultCache,
+  onRequest,
+  onUseCache,
+  fetcher,
+  fallback,
+}: HttpResolveOptions) {
   return {
+    name: "http-resolve",
     async resolveId(id: string, importer: string) {
       log(
         "[http-resolve:resolveId:enter]",
@@ -59,15 +61,15 @@ export function httpResolve({
 
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
-          log("[http-reslove:end] return with relativePath", newId);
+          log("[http-resolve:end] return with relativePath", newId);
           return newId;
         }
       }
       if (fallback) {
-        log("[http-reslove:end] use fallback to", id);
+        log("[http-resolve:end] use fallback to", id);
         const rewriten = await fallback(id, importer);
         if (rewriten) {
-          log("rewrite", rewriten, "from", id);
+          this.warn(`[http-resolve:fallback] ${id} => ${rewriten}`);
           return rewriten;
         }
       }
@@ -97,14 +99,12 @@ export function httpResolve({
       }
     },
   } as Plugin;
-}
+};
 
 export function createFallback(opts: {
   importmaps?: ImportMaps | (() => Promise<ImportMaps> | ImportMaps);
-  onWarn?: (arg: any) => void;
 }) {
   return async (id: string, importer: string | void = undefined) => {
-    // TODO: handle npm versions
     if (importer == null) {
       return;
     }
@@ -122,12 +122,12 @@ export function createFallback(opts: {
         : opts.importmaps ?? { imports: {} };
     const mapped = importMap && importMap?.imports[id];
     if (mapped) {
-      return mapped;
+      return [mapped];
     }
 
-    // fallback to skypack
     const ret = `https://cdn.skypack.dev/${id}`;
-    opts.onWarn?.(`[http-resolver]: fallback ${id} to ${ret}`);
     return ret;
   };
 }
+
+// export default httpResolve;

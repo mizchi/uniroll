@@ -15,9 +15,6 @@ test("transform preact", async () => {
     const bundle = await compile({
       files,
       input: "/index.tsx",
-      onWarn: (message) => {
-        console.log("onwarn", message);
-      },
     });
     const out = await bundle.generate({ format: "es" });
     expect(out.output[0]).toMatchSnapshot();
@@ -45,9 +42,6 @@ console.log(sdk);
 `,
       },
       input: "/index.tsx",
-      onWarn: (message) => {
-        console.log("onwarn", message);
-      },
     });
     const out = await bundle.generate({ format: "es" });
     // console.log(out.output[0]);
