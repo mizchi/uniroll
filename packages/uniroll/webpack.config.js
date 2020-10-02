@@ -4,6 +4,12 @@ module.exports = {
   ...shared,
   module: {
     rules: [
+      // for rollup
+      {
+        test: /\.js$/,
+        include: /pluginutils/,
+        type: "javascript/auto",
+      },
       {
         test: /\.ts/,
         use: [

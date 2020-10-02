@@ -4,9 +4,9 @@ module.exports = {
     alias: {
       // process: "process/browser",
       process: false,
+      fs: false,
       rollup: "rollup/dist/rollup.browser.js",
       path: "path-browserify",
-      fs: false,
       // url: path.join(__dirname, "shim/url.js"),
       url: "url",
       stream: "stream-browserify",
