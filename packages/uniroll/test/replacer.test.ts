@@ -49,8 +49,7 @@ console.log($props.selector);
     assert.ok(code.includes("bar"));
     assert.ok(code.includes("Bar"));
 
-    console.log(code);
-    // expect(code).toMatchSnapshot();
+    expect(code).toMatchSnapshot();
   } catch (err) {
     console.log(err);
     throw err;
@@ -72,13 +71,11 @@ console.log($props.obj.foo);
   };
   try {
     const bundle = await compile({
-      // useInMemory: true,
       define: {
         "$props.obj": JSON.stringify({ foo: 1, bar: 2 }),
       },
       files,
       input: "/index.tsx",
-      // cssPostprocess: (t) => t,
     });
     const out = await bundle.generate({ format: "es" });
     const code = out.output[0].code;
