@@ -19,5 +19,8 @@
     "dist",
     "lib"
   ],
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
 }

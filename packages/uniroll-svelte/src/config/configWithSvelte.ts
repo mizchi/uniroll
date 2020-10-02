@@ -11,21 +11,34 @@ type Transform = (
   filename: string
 ) => Promise<{ code: string }>;
 
-const createSveltePreprocessor = (transform: Transform) => {
+const createSveltePreprocessor = (transformers: {
+  script: Transform;
+  style: Transform;
+}) => {
   const script: Preprocessor = async ({ content, attributes, filename }) => {
     if (attributes.lang === "ts") {
       // 内部的に tsx 拡張子ということにする
-      const ret = await transform(content, filename + "$.tsx");
+      const ret = (await transformers.script(content, filename + "$.tsx")) ?? {
+        code: content,
+      };
       return ret;
     }
     return {
       code: content,
     };
   };
+  const style: Preprocessor = async ({ content, attributes, filename }) => {
+    const ret = (await transformers.style?.(content, filename + "$.tsx")) ?? {
+      code: content,
+    };
+    return ret;
+  };
+
   return {
     preprocess: [
       {
         script,
+        style,
       },
     ],
   };
@@ -34,12 +47,16 @@ const createSveltePreprocessor = (transform: Transform) => {
 export const getConfigWithSvelte = (
   opts: UnirollOptions
 ): UnirollConfigBuilderResult => {
-  const { transformScript, plugins } = getBaseConfig(opts);
+  const { transformScript, transformStyle, plugins } = getBaseConfig(opts);
   const svelte: any = sveltePlugin(
-    createSveltePreprocessor(transformScript as Transform)
+    createSveltePreprocessor({
+      script: transformScript as Transform,
+      style: transformStyle as Transform,
+    })
   );
   return {
     transformScript,
+    transformStyle,
     plugins: [svelte, ...plugins],
   };
 };

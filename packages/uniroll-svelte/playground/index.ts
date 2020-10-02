@@ -18,6 +18,13 @@ const svelteTsCode = `
   export let counter: number = 0;
   setInterval(() => counter++, 1000);
 </script>
+<style>
+  span {
+    display: grid;
+    place-items: center;
+    color: red;
+  }
+</style>
 <main>
   <span>Hello {name} {counter}</span>
 </main>
@@ -28,7 +35,15 @@ const svelteTsCode = `
     "/index.tsx": appCode,
     "/app.svelte": svelteTsCode,
   };
-  const rolled = await compile({ files, input: "/index.tsx" });
+  const rolled = await compile({
+    files,
+    input: "/index.tsx",
+    // importmaps: {
+    //   imports: {
+    //     "svelte/internal": "https://cdn.skypack.dev/svelte@3.29.0/internal",
+    //   },
+    // },
+  });
   const out = await rolled.generate({
     file: "index.js",
     format: "iife",
@@ -36,4 +51,6 @@ const svelteTsCode = `
   });
   const code = out.output[0].code;
   eval(code);
-})();
+})().catch((err) => {
+  console.error(err);
+});

@@ -8,20 +8,22 @@ export type UnirollOptions = MinimalOptions & {
 
 export type UnirollConfigBuilderResult = {
   transformScript: (code: string, id: string) => Promise<{ code: string }>;
+  transformStyle?: (code: string, id: string) => Promise<{ code: string }>;
   plugins: Plugin[];
 };
 
 export function getBaseConfig(
   opts: UnirollOptions
 ): UnirollConfigBuilderResult {
-  const transform = createTransformScript({ tsconfig: opts.tsconfig });
+  const transformScript = createTransformScript({ tsconfig: opts.tsconfig });
   const scriptPlugin: any = {
     name: "uniroll-script-transform",
-    transform,
+    transform: transformScript,
   };
   const config = getMinimalConfig(opts);
   return {
-    transformScript: transform,
+    transformScript,
+    // transformStyle,
     plugins: [...config.plugins, scriptPlugin],
   };
 }
