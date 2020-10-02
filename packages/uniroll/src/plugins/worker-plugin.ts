@@ -1,4 +1,5 @@
 // Drop amd
+
 /**
  * Copyright 2018 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +51,8 @@ const plugin: PluginImpl<Options> = function (opts: Options = {}) {
     },
 
     load(id) {
+      // console.log("[worker:load]id", id);
+      if (id == null) return;
       if (!id.startsWith(urlLoaderPrefix)) return;
       const realId = id.slice(urlLoaderPrefix.length);
       const chunkRef = this.emitFile({ id: realId, type: "chunk" });

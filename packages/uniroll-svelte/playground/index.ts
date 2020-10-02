@@ -38,11 +38,12 @@ const svelteTsCode = `
   const rolled = await compile({
     files,
     input: "/index.tsx",
-    // importmaps: {
-    //   imports: {
-    //     "svelte/internal": "https://cdn.skypack.dev/svelte@3.29.0/internal",
-    //   },
-    // },
+    importmaps: {
+      imports: {
+        "svelte/internal":
+          "https://cdn.skypack.dev/-/svelte@v3.29.0-f16TxK8jvl5AwEZa88Ws/dist=es2020/svelte/internal.js",
+      },
+    },
   });
   const out = await rolled.generate({
     file: "index.js",

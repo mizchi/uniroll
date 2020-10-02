@@ -13,7 +13,6 @@ export type MinimalOptions = {
   cache?: Map<string, string> | any;
   define?: RollupReplaceOptions;
   importmaps?: ImportMaps;
-  importMapsPath?: string;
 };
 
 const defaultReplace: RollupReplaceOptions = {
@@ -27,25 +26,10 @@ export function getMinimalConfig({
   fs,
   cache = defaultCache,
   define = {},
-  importmaps: importmaps_,
-  importMapsPath,
-}: // importMap,
-MinimalOptions) {
+  importmaps = { imports: {} },
+}: MinimalOptions) {
   const fallback = createFallback({
-    async importmaps() {
-      if (importmaps_) {
-        return importmaps_;
-      }
-      if (importMapsPath) {
-        // @ts-ignore
-        const rawstr = await fs.readFile(importMapsPath, "utf-8");
-        return JSON.parse(rawstr as string) as ImportMaps;
-      } else {
-        return {
-          imports: {},
-        };
-      }
-    },
+    importmaps,
   });
   return {
     plugins: [

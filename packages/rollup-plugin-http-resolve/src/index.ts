@@ -20,7 +20,7 @@ type HttpResolveOptions = {
   fallback?: (
     id: string,
     importer: string
-  ) => string | void | Promise<string | void>;
+  ) => Promise<{ rewriten: string; warning: boolean } | void>;
 };
 const defaultCache = new Map();
 export const httpResolve = function httpResolve_({
@@ -33,13 +33,7 @@ export const httpResolve = function httpResolve_({
   return {
     name: "http-resolve",
     async resolveId(id: string, importer: string) {
-      log(
-        "[http-resolve:resolveId:enter]",
-        id,
-        "from",
-        importer
-        // rewriter?.toString()
-      );
+      log("[http-resolve:resolveId:enter]", id, "from", importer);
 
       // on network resolve
       if (importer && isHttpProtocol(importer)) {
@@ -67,15 +61,23 @@ export const httpResolve = function httpResolve_({
       }
       if (fallback) {
         log("[http-resolve:end] use fallback to", id);
-        const rewriten = await fallback(id, importer);
-        if (rewriten) {
-          this.warn(`[http-resolve:fallback] ${id} => ${rewriten}`);
-          return rewriten;
+        const fallbacked = await fallback(id, importer);
+        if (fallbacked && fallbacked.rewriten) {
+          if (fallbacked.warning) {
+            this.warn(
+              `[http-resolve:fallback] ${id} => ${fallbacked.rewriten}`
+            );
+          }
+          return fallbacked.rewriten;
         }
       }
     },
     async load(id: string) {
       log("[http-resolve:load]", id);
+      if (id === null) {
+        this.warn("irregular missing id");
+        return;
+      }
       if (isHttpProtocol(id)) {
         const cached = await cache.get(id);
         if (cached) {
@@ -101,10 +103,11 @@ export const httpResolve = function httpResolve_({
   } as Plugin;
 };
 
-export function createFallback(opts: {
-  importmaps?: ImportMaps | (() => Promise<ImportMaps> | ImportMaps);
-}) {
-  return async (id: string, importer: string | void = undefined) => {
+export function createFallback({ importmaps }: { importmaps?: ImportMaps }) {
+  return async (
+    id: string,
+    importer: string | void = undefined
+  ): Promise<void | { rewriten: string; warning: boolean }> => {
     if (importer == null) {
       return;
     }
@@ -115,18 +118,12 @@ export function createFallback(opts: {
       return;
     }
 
-    // handle importMap
-    const importMap =
-      opts.importmaps instanceof Function
-        ? await opts.importmaps()
-        : opts.importmaps ?? { imports: {} };
-    const mapped = importMap && importMap?.imports[id];
+    const mapped = importmaps?.imports[id];
     if (mapped) {
-      return [mapped];
+      return { rewriten: mapped, warning: false };
     }
 
-    const ret = `https://cdn.skypack.dev/${id}`;
-    return ret;
+    return { rewriten: `https://cdn.skypack.dev/${id}`, warning: true };
   };
 }
 
