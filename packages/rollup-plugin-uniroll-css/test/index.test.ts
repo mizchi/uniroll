@@ -1,6 +1,9 @@
+// import { postcss } from 'postcss';
 // @ts-ignore
 import precss from "precss";
 import postcss from "postcss";
+// import {postcss} from "postcss"
+
 import autoprefixer from "autoprefixer";
 import nano from "cssnano";
 

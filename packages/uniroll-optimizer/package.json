@@ -20,7 +20,8 @@
     "uniroll-linter": "^2.1.4"
   },
   "devDependencies": {
-    "@types/cssnano": "^4.0.0"
+    "@types/cssnano": "^4.0.0",
+    "postcss": "^8.1.1"
   },
   "gitHead": "56083fe8100bf4d3d511cb1e965a948e968a8708"
 }
