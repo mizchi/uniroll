@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uniroll-css",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
@@ -15,5 +15,5 @@
   "devDependencies": {
     "@types/string-hash": "^1.1.1"
   },
-  "gitHead": "454cd6e21af966dbf4e3b6beeb9de427e9983261"
+  "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
 }

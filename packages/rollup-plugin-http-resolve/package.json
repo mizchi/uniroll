@@ -1,10 +1,11 @@
 {
   "name": "rollup-plugin-http-resolve",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
+    "prepublishOnly": "yarn build",
     "test": "jest",
     "build": "tsc -p .",
     "prepare": "yarn build"
@@ -13,5 +14,5 @@
     "lib",
     "src"
   ],
-  "gitHead": "56083fe8100bf4d3d511cb1e965a948e968a8708"
+  "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
 }
