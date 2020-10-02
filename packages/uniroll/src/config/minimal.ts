@@ -1,5 +1,4 @@
-import type { RollupWarning } from "rollup";
-import { memfsPlugin, FS, FS_API } from "rollup-plugin-memfs";
+import { memfsPlugin, FS } from "rollup-plugin-memfs";
 import {
   httpResolve,
   createFallback,
@@ -55,6 +54,7 @@ MinimalOptions) {
       json(),
       httpResolve({
         cache,
+        // @ts-ignore
         fallback,
       }),
       memfsPlugin(fs),
