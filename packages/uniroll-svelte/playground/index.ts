@@ -40,8 +40,7 @@ const svelteTsCode = `
     input: "/index.tsx",
     importmaps: {
       imports: {
-        "svelte/internal":
-          "https://cdn.skypack.dev/-/svelte@v3.29.0-f16TxK8jvl5AwEZa88Ws/dist=es2020/svelte/internal.js",
+        "svelte/internal": "https://cdn.skypack.dev/svelte/internal",
       },
     },
   });
