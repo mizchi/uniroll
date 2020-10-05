@@ -24,6 +24,7 @@ export function getRawRollupOptions(
     cache,
     define,
     importmaps,
+    tsconfig,
     ...others
   } = fullOpts;
   return others;

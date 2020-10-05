@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transform with tsconfig 1`] = `
+Object {
+  "code": "const x = 1;
+console.log(x);
+",
+  "dynamicImports": Array [],
+  "exports": Array [],
+  "facadeModuleId": "/index.tsx",
+  "fileName": "index.js",
+  "implicitlyLoadedBefore": Array [],
+  "importedBindings": Object {},
+  "imports": Array [],
+  "isDynamicEntry": false,
+  "isEntry": true,
+  "isImplicitEntry": false,
+  "map": null,
+  "modules": Object {
+    "/index.tsx": Object {
+      "originalLength": 26,
+      "removedExports": Array [],
+      "renderedExports": Array [],
+      "renderedLength": 28,
+    },
+  },
+  "name": "index",
+  "referencedFiles": Array [],
+  "type": "chunk",
+}
+`;

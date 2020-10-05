@@ -13,14 +13,14 @@ export const createTransformScript = ({
 }: {
   tsconfig?: object | string;
 }) => {
-  const opts = tsconfig
-    ? getCompilerOptionsFromConfig(tsconfig)
+  const compilerOptions = tsconfig
+    ? { ...defaultCompilerOptions, ...getCompilerOptionsFromConfig(tsconfig) }
     : defaultCompilerOptions;
 
   return async (code: string, filename: string): Promise<{ code: string }> => {
     const out = ts.transpileModule(code, {
       fileName: filename,
-      compilerOptions: opts,
+      compilerOptions,
     });
     return {
       code: out.outputText,
