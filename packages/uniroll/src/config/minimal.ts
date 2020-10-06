@@ -5,7 +5,6 @@ import {
   ImportMaps,
 } from "rollup-plugin-http-resolve";
 import replace, { RollupReplaceOptions } from "@rollup/plugin-replace";
-import json from "@rollup/plugin-json";
 import workerPlugin from "../plugins/worker-plugin";
 
 export type MinimalOptions = {
