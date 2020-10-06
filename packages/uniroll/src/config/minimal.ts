@@ -35,7 +35,7 @@ export function getMinimalConfig({
     plugins: [
       replace({ ...defaultReplace, ...define }),
       workerPlugin(),
-      json(),
+      // json(),
       httpResolve({
         cache,
         // @ts-ignore

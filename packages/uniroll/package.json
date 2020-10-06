@@ -19,10 +19,8 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-replace": "^2.3.3",
     "querystring-es3": "^0.2.1",
-    "rollup": "^2.28.2",
     "rollup-plugin-http-resolve": "^2.3.0",
     "rollup-plugin-memfs": "^2.3.0",
     "url": "^0.11.0"
@@ -32,12 +30,14 @@
     "@types/autoprefixer": "^9.7.2",
     "autoprefixer": "^10.0.1",
     "precss": "^4.0.0",
+    "rollup": "^2.28.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-uniroll-css": "^2.3.0",
     "terser": "^5.3.3"
   },
   "peerDependencies": {
-    "typescript": "*"
+    "typescript": "*",
+    "rollup": "*"
   },
   "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
 }

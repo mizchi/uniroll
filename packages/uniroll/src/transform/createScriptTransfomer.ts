@@ -6,6 +6,7 @@ const defaultCompilerOptions: ts.CompilerOptions = {
   moduleResolution: ts.ModuleResolutionKind.NodeJs,
   esModuleInterop: true,
   jsx: ts.JsxEmit.React,
+  resolveJsonModule: true,
 };
 
 export const createTransformScript = ({
@@ -18,6 +19,11 @@ export const createTransformScript = ({
     : defaultCompilerOptions;
 
   return async (code: string, filename: string): Promise<{ code: string }> => {
+    if (filename.endsWith(".json")) {
+      return {
+        code: "export default " + JSON.stringify(JSON.parse(code)),
+      };
+    }
     const out = ts.transpileModule(code, {
       fileName: filename,
       compilerOptions,

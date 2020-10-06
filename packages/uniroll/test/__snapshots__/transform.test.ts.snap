@@ -1787,7 +1787,7 @@ console.log(sdk);
       ],
       "renderedLength": 2517,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.3-frIVR8lo9aIr60wdG9PA/dist=es2020/preact.js": Object {
+    "https://cdn.skypack.dev/-/preact@v10.5.4-qgHtyEvF8JpWxHJcD0pk/dist=es2020/preact.js": Object {
       "originalLength": 10272,
       "removedExports": Array [
         "Component",
@@ -1810,7 +1810,7 @@ console.log(sdk);
       ],
       "renderedLength": 1303,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.3-frIVR8lo9aIr60wdG9PA/dist=es2020/preact/hooks.js": Object {
+    "https://cdn.skypack.dev/-/preact@v10.5.4-qgHtyEvF8JpWxHJcD0pk/dist=es2020/preact/hooks.js": Object {
       "originalLength": 2635,
       "removedExports": Array [
         "useCallback",
