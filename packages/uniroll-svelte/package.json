@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
@@ -11,15 +11,15 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "uniroll": "^2.3.1"
+    "uniroll": "^2.4.0"
   },
   "devDependencies": {
     "svelte": "3.29.0"
   },
   "peerDependencies": {
+    "rollup": "*",
     "svelte": "3.*",
-    "typescript": "*",
-    "rollup": "*"
+    "typescript": "*"
   },
   "files": [
     "dist",
