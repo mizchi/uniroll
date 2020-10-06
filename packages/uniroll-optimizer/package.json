@@ -16,7 +16,7 @@
     "autoprefixer": "^10.0.1",
     "cssnano": "^4.1.10",
     "precss": "^4.0.0",
-    "terser": "^5.3.3",
+    "terser": "^5.3.4",
     "uniroll-linter": "^2.3.0"
   },
   "devDependencies": {
