@@ -2,6 +2,12 @@ const path = require("path");
 const shared = require("../../webpack.shared.config");
 module.exports = {
   ...shared,
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
   module: {
     ...shared.module,
     rules: [
