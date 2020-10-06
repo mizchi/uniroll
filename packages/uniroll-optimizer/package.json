@@ -1,6 +1,6 @@
 {
   "name": "uniroll-optimizer",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "main": "lib/index",
   "license": "MIT",
   "files": [
@@ -17,11 +17,11 @@
     "cssnano": "^4.1.10",
     "precss": "^4.0.0",
     "terser": "^5.3.4",
-    "uniroll-linter": "^2.3.0"
+    "uniroll-linter": "^2.4.1"
   },
   "devDependencies": {
     "@types/cssnano": "^4.0.0",
     "postcss": "^8.1.1"
   },
-  "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
+  "gitHead": "d408b0d83b4146c339235976965ca234980f927f"
 }

@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "uniroll": "^2.4.0"
+    "uniroll": "^2.4.1"
   },
   "devDependencies": {
     "svelte": "3.29.0"
@@ -28,5 +28,5 @@
   "browserslist": [
     "last 2 Chrome versions"
   ],
-  "gitHead": "f21bea006a14fa8eeaaaf651cc8de2b6e6422853"
+  "gitHead": "d408b0d83b4146c339235976965ca234980f927f"
 }
