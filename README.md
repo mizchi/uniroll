@@ -109,6 +109,31 @@ yarn build
 yarn test
 ```
 
+## How to build your uniroll
+
+```bash
+yarn add uniroll typescript rollup
+# If you want to use uniroll-svelte, add svelte
+```
+
+Add this wepback rules
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      // ...
+      {
+        test: /\.js$/,
+        include: /pluginutils/, // for @rollup/pluginutils
+        type: "javascript/auto",
+      },
+    ],
+  },
+};
+```
+
 ## ChangeLog
 
 ### v1 => v2

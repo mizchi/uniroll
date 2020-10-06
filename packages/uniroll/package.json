@@ -5,7 +5,6 @@
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "main": "lib/index",
-  "browser": "dist/uniroll.js",
   "files": [
     "dist",
     "lib",
