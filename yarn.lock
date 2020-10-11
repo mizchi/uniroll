@@ -2246,10 +2246,18 @@
     "@types/eslint" "*"
     "@types/estree" "*"
 
-"@types/eslint@*", "@types/eslint@^7.2.3":
+"@types/eslint@*":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.3.tgz#a3731b7584fe1a847a34e67ac57a556afd9b0c0e"
   integrity sha512-SPBkpC+awgFfyAn4sjt0JBZ3vzACoSp2zhGBJkkrs09EzPqLbxkzaE8kJs3EsRRgkZwWk9zyXT/swvhnJYX8pQ==
+  dependencies:
+    "@types/estree" "*"
+    "@types/json-schema" "*"
+
+"@types/eslint@^7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.4.tgz#d12eeed7741d2491b69808576ac2d20c14f74c41"
+  integrity sha512-YCY4kzHMsHoyKspQH+nwSe+70Kep7Vjt2X+dZe5Vs2vkRudqtoFoUIv1RlJmZB8Hbp7McneupoZij4PadxsK5Q==
   dependencies:
     "@types/estree" "*"
     "@types/json-schema" "*"
@@ -4969,16 +4977,21 @@ eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
 
-eslint4b@^7.10.0:
-  version "7.10.0"
-  resolved "https://registry.yarnpkg.com/eslint4b/-/eslint4b-7.10.0.tgz#3f6b0e3c697fc50019c009595e0d4edff51a8d4e"
-  integrity sha512-d7bVdjf8utCw16zrxqwX7XzhMbdekALjPejYYODQxzVQ7DFzt03cPt2buMu9XJpLP988s/wTImDx7gvHzQiIEA==
+eslint-visitor-keys@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
+  integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
+
+eslint4b@^7.11.0:
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/eslint4b/-/eslint4b-7.11.0.tgz#e252c7a0514dddbdabde2810e8192feca3506cbb"
+  integrity sha512-eR2GmjiPSWdhqe9L98idYGtQkCX6JcqIX24CtKLu82CYoJVR+tDaDpDW5Ak1HnG68t+Z7T6XBlRf9yix/kAX4Q==
   dependencies:
     debug "^4.0.1"
     doctrine "^3.0.0"
     eslint-scope "^5.1.1"
     eslint-utils "^2.1.0"
-    eslint-visitor-keys "^1.3.0"
+    eslint-visitor-keys "^2.0.0"
     espree "^7.3.0"
     esquery "^1.2.0"
     esutils "^2.0.2"
