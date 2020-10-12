@@ -1,7 +1,7 @@
 import "regenerator-runtime";
 import { compile } from "../src";
 
-const appCode = `import App from './app.svelte';
+const appCode = `import App from './App.svelte';
 const app = new App({
 	target: document.body,
 	props: {
@@ -33,7 +33,7 @@ const svelteTsCode = `
 (async () => {
   const files = {
     "/index.tsx": appCode,
-    "/app.svelte": svelteTsCode,
+    "/App.svelte": svelteTsCode,
   };
   const rolled = await compile({
     files,
