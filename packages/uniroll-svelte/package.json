@@ -11,6 +11,7 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
+    "@tsconfig/svelte": "^1.0.10",
     "uniroll": "^2.4.1"
   },
   "devDependencies": {

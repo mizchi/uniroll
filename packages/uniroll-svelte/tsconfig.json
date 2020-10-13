@@ -5,6 +5,7 @@
     "module": "commonjs",
     "outDir": "lib",
     "rootDir": "src",
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true
   }
 }

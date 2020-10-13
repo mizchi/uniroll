@@ -5,30 +5,58 @@ import {
   UnirollConfigBuilderResult,
 } from "uniroll";
 import { Preprocessor } from "svelte/types/compiler/preprocess";
+import tsconfig from "@tsconfig/svelte/tsconfig.json";
+import ts from "typescript";
 
 type Transform = (
   content: string,
   filename: string
 ) => Promise<{ code: string }>;
 
+// https://github.com/sveltejs/svelte-preprocess/blob/master/src/transformers/typescript.ts#L35-L54
+const importTransformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
+  const visit: ts.Visitor = (node) => {
+    if (ts.isImportDeclaration(node)) {
+      if (node.importClause?.isTypeOnly) {
+        return ts.createEmptyStatement();
+      }
+      return ts.createImportDeclaration(
+        node.decorators,
+        node.modifiers,
+        node.importClause,
+        node.moduleSpecifier,
+      );
+    }
+    return ts.visitEachChild(node, (child) => visit(child), context);
+  };
+  return (node) => ts.visitNode(node, visit);
+};
+
 const createSveltePreprocessor = (transformers: {
-  script: Transform;
   style: Transform;
 }) => {
   const script: Preprocessor = async ({ content, attributes, filename }) => {
     if (attributes.lang === "ts") {
       // 内部的に tsx 拡張子ということにする
-      const ret = (await transformers.script(content, filename + "$.tsx")) ?? {
-        code: content,
-      };
-      return ret;
+      const opts = ts.convertCompilerOptionsFromJson({
+        ...tsconfig.compilerOptions,
+        importsNotUsedAsValues: "error",
+      }, '/', '/tsconfig.json')
+      const out = ts.transpileModule(content, {
+        fileName: '/index.tsx',
+        compilerOptions: opts.options,
+        transformers: {
+          before: [importTransformer],
+        },
+      })
+      return {code: out.outputText};
     }
     return {
       code: content,
     };
   };
   const style: Preprocessor = async ({ content, attributes, filename }) => {
-    const ret = (await transformers.style?.(content, filename + "$.tsx")) ?? {
+    const ret = (await transformers.style?.(content, filename + "$$.tsx")) ?? {
       code: content,
     };
     return ret;
@@ -50,7 +78,6 @@ export const getConfigWithSvelte = (
   const { transformScript, transformStyle, plugins } = getBaseConfig(opts);
   const svelte: any = sveltePlugin(
     createSveltePreprocessor({
-      script: transformScript as Transform,
       style: transformStyle as Transform,
     })
   );
