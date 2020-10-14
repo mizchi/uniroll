@@ -103,7 +103,8 @@ TODO: Options Documentation
 
 ## How to develop
 
-```
+```bash
+# If you are not on MacOS try running `yarn --ignore-platform` instead of `yarn install`.
 yarn install
 yarn build
 yarn test
