@@ -1,10 +1,40 @@
-import "regenerator-runtime";
 import { compile } from "../src";
 
-const appCode = `window.alert("hello uniroll vue!");
+const appCode = `import { createApp } from "vue";
+import App from "./App.vue";
+
+createApp(App).mount("#app");
 `;
 
-const vueTsCode = `
+const vueTsCode = `<script lang="ts">
+import { defineComponent, ref, computed } from "vue";
+export default defineComponent({
+  name: "App",
+  setup() {
+    const count = ref(0);
+    const msg = computed(() => "hello world " + count.value.toString());
+    const onClick = () => count.value++;
+    return {
+      count,
+      msg,
+      onClick
+    };
+  }
+});
+</script>
+
+<template>
+  <div class="container">
+    <h1>Count: {{ count }}</h1>
+    <button @click="onClick">Count</button>
+  </div>
+</template>
+
+<style scoped>
+h1 {
+  color: red;
+}
+</style>
 `;
 
 (async () => {

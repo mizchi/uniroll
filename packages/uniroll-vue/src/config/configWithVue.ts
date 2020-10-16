@@ -1,5 +1,5 @@
 import UnirollVuePlugin from "../plugins/vue-plugin";
-// import RollupVuePlugin from "rollup-plugin-vue";
+import RollupVuePlugin from "rollup-plugin-vue";
 import {
   getBaseConfig,
   UnirollOptions,
@@ -14,7 +14,7 @@ export const getConfigWithVue = (
     transformScript,
     transformStyle,
     plugins: [
-      // RollupVuePlugin(),
+      RollupVuePlugin(),
       UnirollVuePlugin(),
       ...plugins
     ],

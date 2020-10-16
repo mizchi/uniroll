@@ -11,8 +11,6 @@ export default function UnirollVuePlugin() {
   return {
     name: "uniroll-plugin-vue",
     async transform(code: string, id: string): Promise<TransformResult> {
-      return code;
-      /*
       const isVueStyle = /\?vue&type=style/.test(id);
 
       if (isVueStyle) {
@@ -31,7 +29,6 @@ export default function UnirollVuePlugin() {
       } else {
         return code;
       }
-      */
     }
   } as Plugin;
 }

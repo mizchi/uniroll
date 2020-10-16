@@ -11,12 +11,18 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "uniroll": "^2.4.1"
+    "uniroll": "^2.4.1",
+    "rollup-plugin-vue": "^6.0.0-beta.10"
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0",
+    "process": "^0.11.10",
+    "querystring-browser": "^1.0.4",
+    "crypto-browserify": "^3.12.0"
   },
   "peerDependencies": {
     "rollup": "*",
+    "@vue/compiler-sfc": "3.*",
     "typescript": "*"
   },
   "files": [
@@ -25,6 +31,5 @@
   ],
   "browserslist": [
     "last 2 Chrome versions"
-  ],
-  "gitHead": "d408b0d83b4146c339235976965ca234980f927f"
+  ]
 }
