@@ -1,10 +1,6 @@
-const webpack = require('webpack');
 const path = require("path");
-const shared = require("../../../webpack.shared.config");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  ...shared,
   cache: {
     type: "filesystem",
     buildDependencies: {
@@ -17,24 +13,13 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    ...shared.resolve,
+    extensions: [".js", ".mjs", ".ts", ".tsx", ".json"],
     alias: {
-      // ...shared.resolve.alias,
-      querystring: require.resolve("querystring-browser"),
-      consolidate: false,
-      '@vue/compiler-core': require.resolve("@vue/compiler-core/dist/compiler-core.cjs.prod.js"),
-    },
-    fallback: {
-      path: require.resolve("path-browserify"),
-      stream: require.resolve("stream-browserify"),
-      crypto: require.resolve("crypto-browserify"),
-      fs: false,
+      "uniroll-vue": "../dist/uniroll-vue.js"
     }
   },
   module: {
-    ...shared.module,
     rules: [
-      ...shared.module.rules,
       {
         test: /\.tsx?$/,
         use: {
@@ -53,14 +38,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      process: "process/browser.js",
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, "index.html")
-    }),
-  ],
   devServer: {
     inline: true,
     hot: true,

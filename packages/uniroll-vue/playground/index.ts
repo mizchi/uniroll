@@ -1,4 +1,4 @@
-import { compile } from "../src";
+import { compile } from "uniroll-vue";
 
 const appCode = `import { createApp } from "vue";
 import App from "./App.vue";
