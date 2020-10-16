@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html --no-source-maps"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  },
+  "dependencies": {
+    "typescript": "^4.0.3"
+  }
+}

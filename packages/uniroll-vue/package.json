@@ -1,0 +1,30 @@
+{
+  "name": "uniroll-vue",
+  "version": "2.4.1",
+  "license": "MIT",
+  "main": "lib/index",
+  "scripts": {
+    "test": "echo wip",
+    "prepublishOnly": "yarn build",
+    "build": "run-p build:*",
+    "build:dist": "webpack --mode production",
+    "build:lib": "tsc -p ."
+  },
+  "dependencies": {
+    "uniroll": "^2.4.1"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "rollup": "*",
+    "typescript": "*"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
+  "gitHead": "d408b0d83b4146c339235976965ca234980f927f"
+}
