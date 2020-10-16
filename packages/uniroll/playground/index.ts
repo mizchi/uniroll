@@ -1,6 +1,6 @@
 // import type { Plugin } from "rollup";
 
-import "regenerator-runtime";
+import "../../uniroll-vue/playground1/node_modules/regenerator-runtime";
 import { rollup } from "rollup";
 import { getBaseConfig } from "../src/config/base";
 import { createMemoryFs } from "../src";

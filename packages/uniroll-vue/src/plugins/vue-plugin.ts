@@ -7,7 +7,7 @@ const cssInjectionMarker = "__UNIROLL_VUE_CSS__";
 // const cssModuleRE = /\.module\.(less|sass|scss|styl|stylus|postcss|css)$/;
 // const isCSSRequest = (file: string) => file.endsWith(".css") || cssPreprocessLangRE.test(file);
 
-export default function UnirollVuePlugin() {
+export function UnirollVue() {
   return {
     name: "uniroll-plugin-vue",
     async transform(code: string, id: string): Promise<TransformResult> {

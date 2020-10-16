@@ -1,4 +1,10 @@
+import { UnirollVue } from "./plugins/vue-plugin";
 import { getConfigWithVue } from "./config/configWithVue";
 import { createCompiler } from "uniroll";
 
-export const compile = createCompiler(getConfigWithVue);
+const compile = createCompiler(getConfigWithVue);
+
+export {
+  UnirollVue,
+  compile
+};
