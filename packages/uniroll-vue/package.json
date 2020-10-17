@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
-    "test": "echo wip",
+    "test": "jest",
     "prepublishOnly": "yarn build",
     "build": "run-p build:*",
     "build:dist": "webpack --mode production",

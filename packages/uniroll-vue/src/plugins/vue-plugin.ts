@@ -23,8 +23,7 @@ export function UnirollVue() {
           `document.head.appendChild(${cssInjectionMarker});`
         return {
           code: genCode,
-          map: null,
-          moduleSideEffects: true
+          map: null, // TODO:
         };
       } else {
         return code;

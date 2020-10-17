@@ -36,15 +36,12 @@ At the moment, there are the following limitations for Vue:
 
 
 ## :white_check_mark: TODOs
-- [ ] unit testing
-- [ ] documentation
 - [ ] template preprocessor supporting
 - [ ] style preprocessor supporting
+- [ ] documentation
 - [ ] and more!
 
 
 ## :copyright: License
 
-[MIT](http://opensource.org/licenses/MIT)
-
-- Kazuya Kawaguchi - [@kazu_pon](https://twitter.com/kazu_pon)
+[MIT](http://opensource.org/licenses/MIT) :copyright: [@kazu_pon](https://twitter.com/kazu_pon)
