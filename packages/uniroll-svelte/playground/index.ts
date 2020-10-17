@@ -1,7 +1,8 @@
 import "regenerator-runtime";
 import { compile } from "../src";
 
-const appCode = `import App from './app.svelte';
+const appCode = `import App from './App.svelte';
+
 const app = new App({
 	target: document.body,
 	props: {
@@ -14,9 +15,15 @@ export default app;
 
 const svelteTsCode = `
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { FaTimes } from "serialized-svg-icons/fa";
+  // import { FaTimes as FaTimes$ } from "serialized-svg-icons/fa";
+  // const FaTimes = FaTimes$;
   export let name: string;
   export let counter: number = 0;
-  setInterval(() => counter++, 1000);
+  onMount(() => {
+    setInterval(() => counter++, 1000);
+  })
 </script>
 <style>
   span {
@@ -26,6 +33,17 @@ const svelteTsCode = `
   }
 </style>
 <main>
+  <svg
+    width={16}
+    height={16}
+    viewBox={FaTimes.attr.viewBox}
+    stroke="currentColor"
+    fill="currentColor"
+    stroke-width="0"
+  >
+    <path d={FaTimes.child[0].attr.d} />
+  </svg>
+
   <span>Hello {name} {counter}</span>
 </main>
 `;
@@ -33,14 +51,16 @@ const svelteTsCode = `
 (async () => {
   const files = {
     "/index.tsx": appCode,
-    "/app.svelte": svelteTsCode,
+    "/App.svelte": svelteTsCode,
   };
   const rolled = await compile({
     files,
     input: "/index.tsx",
     importmaps: {
       imports: {
-        "svelte/internal": "https://cdn.skypack.dev/svelte/internal",
+        "svelte": "https://cdn.skypack.dev/svelte@3.29.0",
+        "svelte/internal": "https://cdn.skypack.dev/svelte@3.29.0/internal",
+        "serialized-svg-icons/fa": "https://cdn.jsdelivr.net/npm/serialized-svg-icons@4.1.0/fa/index.js"
       },
     },
   });
