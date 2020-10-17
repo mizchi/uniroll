@@ -1,6 +1,6 @@
 {
   "name": "uniroll-vue",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "uniroll": "^2.4.1",
+    "uniroll": "^2.4.2",
     "rollup-plugin-vue": "^6.0.0-beta.10"
   },
   "devDependencies": {
