@@ -26,12 +26,12 @@ function v$1(t, r) { n.__h && n.__h(u, t, o || r), o = 0; var i = u.__H || (u.__
 function m(n) { return o = 1, p$1(k, n); }
 function p$1(n, r, o) { var i = v$1(t++, 2); return i.t = n, i.__c || (i.__ = [o ? o(r) : k(void 0, r), function (n) { var t = i.t(i.__[0], n); i.__[0] !== t && (i.__ = [t, i.__[1]], i.__c.setState({})); }], i.__c = u), i.__; }
 function y(r, o) { var i = v$1(t++, 3); !n.__s && j(i.__H, o) && (i.__ = r, i.__H = o, u.__H.__h.push(i)); }
-function q() { i$1.some(function (t) { if (t.__P)
+function q() { i$1.forEach(function (t) { if (t.__P)
     try {
         t.__H.__h.forEach(b), t.__H.__h.forEach(g), t.__H.__h = [];
     }
     catch (u) {
-        return t.__H.__h = [], n.__e(u, t.__v), !0;
+        t.__H.__h = [], n.__e(u, t.__v);
     } }), i$1 = []; }
 n.__r = function (n) { c && c(n), t = 0; var r = (u = n.__c).__H; r && (r.__h.forEach(b), r.__h.forEach(g), r.__h = []); }, n.diffed = function (t) { f && f(t); var u = t.__c; u && u.__H && u.__H.__h.length && (1 !== i$1.push(u) && r$1 === n.requestAnimationFrame || ((r$1 = n.requestAnimationFrame) || function (n) { var t, u = function () { clearTimeout(r), x && cancelAnimationFrame(t), setTimeout(n); }, r = setTimeout(u, 100); x && (t = requestAnimationFrame(u)); })(q)); }, n.__c = function (t, u) { u.some(function (t) { try {
     t.__h.forEach(b), t.__h = t.__h.filter(function (n) { return !n.__ || g(n); });
@@ -46,8 +46,8 @@ catch (r) {
         n.__e(t, u.__v);
     } };
 var x = \\"function\\" == typeof requestAnimationFrame;
-function b(n) { \\"function\\" == typeof n.u && n.u(); }
-function g(n) { n.u = n.__(); }
+function b(n) { \\"function\\" == typeof n.__c && n.__c(); }
+function g(n) { n.__c = n.__(); }
 function j(n, t) { return !n || n.length !== t.length || t.some(function (t, u) { return t !== n[u]; }); }
 function k(n, t) { return \\"function\\" == typeof t ? t(n) : t; }
 
@@ -55,10 +55,10 @@ let e$1 = { data: \\"\\" }, t$1 = t => { try {
     let e = t ? t.querySelector(\\"#_goober\\") : self._goober;
     return e || (e = (t || document.head).appendChild(document.createElement(\\"style\\")), e.innerHTML = \\" \\", e.id = \\"_goober\\"), e.firstChild;
 }
-catch (e) { } return t || e$1; }, a$1 = /(?:([a-z0-9-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(})/gi, l = /\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/|\\\\s{2,}|\\\\n/gm, o$1 = (e, t, r) => { let a, l = \\"\\", n = \\"\\", c = \\"\\"; for (let s in e) {
-    let p = e[s];
-    \\"object\\" == typeof p ? (a = t.replace(/([^,])+/g, \\"$& \\" + s) || s, /&/g.test(s) && (a = s.replace(/&/g, t)), n += \\"@\\" == s[0] ? \\"f\\" == s[1] ? o$1(p, s) : s + \\"{\\" + o$1(p, \\"k\\" == s[1] ? \\"\\" : t) + \\"}\\" : o$1(p, a, r)) : \\"@\\" == s[0] && \\"i\\" == s[1] ? l = s + \\" \\" + p + \\";\\" : c += o$1.p ? o$1.p(s.replace(/[A-Z]/g, \\"-$&\\").toLowerCase(), p) : s.replace(/[A-Z]/g, \\"-$&\\").toLowerCase() + \\":\\" + p + \\";\\";
-} return c[0] ? (a = t + \\"{\\" + c + \\"}\\", r ? n + r + \\"{\\" + (\\"@\\" == r[0] ? a : t + c) + \\"}\\" : l + a + n) : l + n; }, n$1 = {}, c$1 = e => { let t = \\"\\"; for (let r in e)
+catch (e) { } return t || e$1; }, a$1 = /(?:([a-z0-9-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(})/gi, l = /\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/|\\\\s{2,}|\\\\n/gm, o$1 = (e, t) => { let r, a = \\"\\", l = \\"\\", n = \\"\\"; for (let c in e) {
+    let s = e[c];
+    \\"object\\" == typeof s ? (r = t ? t.replace(/([^,])+/g, e => c.replace(/([^,])+/g, t => /&/g.test(t) ? t.replace(/&/g, e) : e ? e + \\" \\" + t : t)) : c, l += \\"@\\" == c[0] ? \\"f\\" == c[1] ? o$1(s, c) : c + \\"{\\" + o$1(s, \\"k\\" == c[1] ? \\"\\" : t) + \\"}\\" : o$1(s, r)) : \\"@\\" == c[0] && \\"i\\" == c[1] ? a = c + \\" \\" + s + \\";\\" : n += o$1.p ? o$1.p(c.replace(/[A-Z]/g, \\"-$&\\").toLowerCase(), s) : c.replace(/[A-Z]/g, \\"-$&\\").toLowerCase() + \\":\\" + s + \\";\\";
+} return n[0] ? (r = t ? t + \\"{\\" + n + \\"}\\" : n, a + r + l) : a + l; }, n$1 = {}, c$1 = e => { let t = \\"\\"; for (let r in e)
     t += r + (\\"object\\" == typeof e[r] ? c$1(e[r]) : e[r]); return t; }, s = (e, t, r, s, p) => { let i = \\"object\\" == typeof e ? c$1(e) : e, u = n$1[i] || (n$1[i] = \\"go\\" + i.split(\\"\\").reduce((e, t) => 101 * e + t.charCodeAt(0) >>> 0, 11)); if (!n$1[u]) {
     let t = \\"object\\" == typeof e ? e : (e => { let t, r = [{}]; for (; t = a$1.exec(e.replace(l, \\"\\"));)
         t[4] && r.shift(), t[3] ? r.unshift(r[0][t[3]] = r[0][t[3]] || {}) : t[4] || (r[0][t[1]] = t[2]); return r[0]; })(e);
@@ -1771,8 +1771,8 @@ console.log(sdk);
       ],
       "renderedLength": 537,
     },
-    "https://cdn.skypack.dev/-/goober@v2.0.6-qyigYWFFUVdBiyTPkinq/dist=es2020/goober.js": Object {
-      "originalLength": 2121,
+    "https://cdn.skypack.dev/-/goober@v2.0.8-RSwy1f2WcyBNakqddiH2/dist=es2020/goober.js": Object {
+      "originalLength": 2117,
       "removedExports": Array [
         "extractCss",
         "setup",
@@ -1785,9 +1785,9 @@ console.log(sdk);
         "keyframes",
         "styled",
       ],
-      "renderedLength": 2517,
+      "renderedLength": 2507,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.4-qgHtyEvF8JpWxHJcD0pk/dist=es2020/preact.js": Object {
+    "https://cdn.skypack.dev/-/preact@v10.5.5-zWGbvQRMya5StgDc7dPs/dist=es2020/preact.js": Object {
       "originalLength": 10272,
       "removedExports": Array [
         "Component",
@@ -1810,7 +1810,7 @@ console.log(sdk);
       ],
       "renderedLength": 1303,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.4-qgHtyEvF8JpWxHJcD0pk/dist=es2020/preact/hooks.js": Object {
+    "https://cdn.skypack.dev/-/preact@v10.5.5-zWGbvQRMya5StgDc7dPs/dist=es2020/preact/hooks.js": Object {
       "originalLength": 2635,
       "removedExports": Array [
         "useCallback",
@@ -1829,7 +1829,7 @@ console.log(sdk);
         "useReducer",
         "useState",
       ],
-      "renderedLength": 2049,
+      "renderedLength": 2047,
     },
   },
   "name": "index",
