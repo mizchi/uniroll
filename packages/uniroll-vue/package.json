@@ -1,0 +1,35 @@
+{
+  "name": "uniroll-vue",
+  "version": "2.4.2",
+  "license": "MIT",
+  "main": "lib/index",
+  "scripts": {
+    "test": "jest",
+    "prepublishOnly": "yarn build",
+    "build": "run-p build:*",
+    "build:dist": "webpack --mode production",
+    "build:lib": "tsc -p ."
+  },
+  "dependencies": {
+    "uniroll": "^2.4.2",
+    "rollup-plugin-vue": "^6.0.0-beta.10"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0",
+    "process": "^0.11.10",
+    "querystring-browser": "^1.0.4",
+    "crypto-browserify": "^3.12.0"
+  },
+  "peerDependencies": {
+    "rollup": "*",
+    "@vue/compiler-sfc": "3.*",
+    "typescript": "*"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
+}

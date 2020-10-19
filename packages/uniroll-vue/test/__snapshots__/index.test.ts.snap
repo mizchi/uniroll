@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rollup-plugin-vue parsed style query 1`] = `"let __UNIROLL_VUE_CSS__ = document.createElement('style');__UNIROLL_VUE_CSS__.innerHTML = \\"p[data-v-72300062] { color: red; }\\";document.head.appendChild(__UNIROLL_VUE_CSS__);"`;
