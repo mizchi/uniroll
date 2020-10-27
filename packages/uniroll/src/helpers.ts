@@ -29,15 +29,18 @@ export function getRawRollupOptions(
   } = fullOpts;
   return others;
 }
-export function createCompilerOptionBuilder(
-  configBuilder: (opts: UnirollOptions) => UnirollConfigBuilderResult
+
+type CustomOptionsType<T> = Omit<T, keyof UnirollOptions>;
+
+export function createCompilerOptionBuilder<ExtendableUnirollOptions extends UnirollOptions>(
+  configBuilder: (opts: ExtendableUnirollOptions) => UnirollConfigBuilderResult
 ) {
-  return async function (opts: CompileOptions) {
+  return async function (opts: CompileOptions & CustomOptionsType<Parameters<typeof configBuilder>[0]>) {
     const memfs = createMemoryFs(opts.files);
     const { plugins } = configBuilder({
       fs: memfs,
       ...opts,
-    });
+    } as ExtendableUnirollOptions);
     return {
       ...opts,
       plugins: [...(opts.plugins ?? []), ...plugins],
@@ -45,11 +48,11 @@ export function createCompilerOptionBuilder(
   };
 }
 
-export function createCompiler(
-  getConfig: (opts: UnirollOptions) => UnirollConfigBuilderResult
+export function createCompiler<ExtendableUnirollOptions extends UnirollOptions<CustomeOptions>, CustomeOptions = {}>(
+  getConfig: (opts: ExtendableUnirollOptions) => UnirollConfigBuilderResult
 ) {
-  const buildConfig = createCompilerOptionBuilder(getConfig);
-  return async function (opts: CompileOptions) {
+  const buildConfig = createCompilerOptionBuilder(getConfig)
+  return async function (opts: CompileOptions & CustomOptionsType<Parameters<typeof getConfig>[0]>) {
     const config = await buildConfig(opts);
     const rawConfig = getRawRollupOptions(config as any);
     return rollup(rawConfig);
