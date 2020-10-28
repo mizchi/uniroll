@@ -2,9 +2,9 @@ import { getMinimalConfig, MinimalOptions } from "./minimal";
 import { createTransformScript } from "../transform/createScriptTransfomer";
 import { Plugin } from "rollup";
 
-export type UnirollOptions = MinimalOptions & {
+export type UnirollOptions<CustomOptions = {}> = MinimalOptions & {
   tsconfig?: object | string;
-};
+} & { [key in keyof CustomOptions]: CustomOptions[key] };
 
 export type UnirollConfigBuilderResult = {
   transformScript: (code: string, id: string) => Promise<{ code: string }>;
