@@ -14,7 +14,7 @@
     "esm": "^3.2.25",
     "glob": "^7.1.6",
     "isomorphic-unfetch": "^3.1.0",
-    "meow": "^7.1.1",
+    "meow": "^8.0.0",
     "uniroll": "^2.6.0",
     "uniroll-linter": "^2.5.0",
     "uniroll-optimizer": "^2.5.0",

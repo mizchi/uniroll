@@ -3,73 +3,184 @@
 exports[`transform nested 1`] = `
 Object {
   "code": "var n, i, r;
-function h(n, l, u) { var i, t, o, r = arguments, f = {}; for (o in l)
-    \\"key\\" == o ? i = l[o] : \\"ref\\" == o ? t = l[o] : f[o] = l[o]; if (arguments.length > 3)
-    for (u = [u], o = 3; o < arguments.length; o++)
-        u.push(r[o]); if (null != u && (f.children = u), \\"function\\" == typeof n && null != n.defaultProps)
-    for (o in n.defaultProps)
-        void 0 === f[o] && (f[o] = n.defaultProps[o]); return v(n, f, i, t, null); }
-function v(l, u, i, t, o) { var r = { type: l, props: u, key: i, ref: t, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o }; return null == o && (r.__v = r), null != n.vnode && n.vnode(r), r; }
-function p(n) { return n.children; }
-n = { __e: function (n, l) { for (var u, i, t, o = l.__h; l = l.__;)
-        if ((u = l.__c) && !u.__)
+function v(n2, l2, u2) {
+    var i2, t2, o2, r2 = arguments, f2 = {};
+    for (o2 in l2)
+        o2 == \\"key\\" ? i2 = l2[o2] : o2 == \\"ref\\" ? t2 = l2[o2] : f2[o2] = l2[o2];
+    if (arguments.length > 3)
+        for (u2 = [u2], o2 = 3; o2 < arguments.length; o2++)
+            u2.push(r2[o2]);
+    if (u2 != null && (f2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
+        for (o2 in n2.defaultProps)
+            f2[o2] === void 0 && (f2[o2] = n2.defaultProps[o2]);
+    return h(n2, f2, i2, t2, null);
+}
+function h(l2, u2, i2, t2, o2) {
+    var r2 = { type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o2 == null ? ++n.__v : o2 };
+    return n.vnode != null && n.vnode(r2), r2;
+}
+function p(n2) {
+    return n2.children;
+}
+n = { __e: function (n2, l2) {
+        for (var u2, i2, t2, o2 = l2.__h; l2 = l2.__;)
+            if ((u2 = l2.__c) && !u2.__)
+                try {
+                    if ((i2 = u2.constructor) && i2.getDerivedStateFromError != null && (u2.setState(i2.getDerivedStateFromError(n2)), t2 = u2.__d), u2.componentDidCatch != null && (u2.componentDidCatch(n2), t2 = u2.__d), t2)
+                        return l2.__h = o2, u2.__E = u2;
+                }
+                catch (l3) {
+                    n2 = l3;
+                }
+        throw n2;
+    }, __v: 0 }, i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
+
+var t, u, r$1, o = 0, i$1 = [], c = n.__b, f = n.__r, e = n.diffed, a = n.__c, v$1 = n.unmount;
+function m(t2, r2) {
+    n.__h && n.__h(u, t2, o || r2), o = 0;
+    var i2 = u.__H || (u.__H = { __: [], __h: [] });
+    return t2 >= i2.__.length && i2.__.push({}), i2.__[t2];
+}
+function l(n2) {
+    return o = 1, p$1(w, n2);
+}
+function p$1(n2, r2, o2) {
+    var i2 = m(t++, 2);
+    return i2.t = n2, i2.__c || (i2.__ = [o2 ? o2(r2) : w(void 0, r2), function (n3) {
+            var t2 = i2.t(i2.__[0], n3);
+            i2.__[0] !== t2 && (i2.__ = [t2, i2.__[1]], i2.__c.setState({}));
+        }], i2.__c = u), i2.__;
+}
+function y(r2, o2) {
+    var i2 = m(t++, 3);
+    !n.__s && k(i2.__H, o2) && (i2.__ = r2, i2.__H = o2, u.__H.__h.push(i2));
+}
+function x() {
+    i$1.forEach(function (t2) {
+        if (t2.__P)
             try {
-                if ((i = u.constructor) && null != i.getDerivedStateFromError && (u.setState(i.getDerivedStateFromError(n)), t = u.__d), null != u.componentDidCatch && (u.componentDidCatch(n), t = u.__d), t)
-                    return l.__h = o, u.__E = u;
+                t2.__H.__h.forEach(g), t2.__H.__h.forEach(j), t2.__H.__h = [];
             }
-            catch (l) {
-                n = l;
-            } throw n; } }, i = \\"function\\" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
-
-var t, u, r$1, o = 0, i$1 = [], c = n.__r, f = n.diffed, e = n.__c, a = n.unmount;
-function v$1(t, r) { n.__h && n.__h(u, t, o || r), o = 0; var i = u.__H || (u.__H = { __: [], __h: [] }); return t >= i.__.length && i.__.push({}), i.__[t]; }
-function m(n) { return o = 1, p$1(k, n); }
-function p$1(n, r, o) { var i = v$1(t++, 2); return i.t = n, i.__c || (i.__ = [o ? o(r) : k(void 0, r), function (n) { var t = i.t(i.__[0], n); i.__[0] !== t && (i.__ = [t, i.__[1]], i.__c.setState({})); }], i.__c = u), i.__; }
-function y(r, o) { var i = v$1(t++, 3); !n.__s && j(i.__H, o) && (i.__ = r, i.__H = o, u.__H.__h.push(i)); }
-function q() { i$1.forEach(function (t) { if (t.__P)
-    try {
-        t.__H.__h.forEach(b), t.__H.__h.forEach(g), t.__H.__h = [];
-    }
-    catch (u) {
-        t.__H.__h = [], n.__e(u, t.__v);
-    } }), i$1 = []; }
-n.__r = function (n) { c && c(n), t = 0; var r = (u = n.__c).__H; r && (r.__h.forEach(b), r.__h.forEach(g), r.__h = []); }, n.diffed = function (t) { f && f(t); var u = t.__c; u && u.__H && u.__H.__h.length && (1 !== i$1.push(u) && r$1 === n.requestAnimationFrame || ((r$1 = n.requestAnimationFrame) || function (n) { var t, u = function () { clearTimeout(r), x && cancelAnimationFrame(t), setTimeout(n); }, r = setTimeout(u, 100); x && (t = requestAnimationFrame(u)); })(q)); }, n.__c = function (t, u) { u.some(function (t) { try {
-    t.__h.forEach(b), t.__h = t.__h.filter(function (n) { return !n.__ || g(n); });
+            catch (u2) {
+                t2.__H.__h = [], n.__e(u2, t2.__v);
+            }
+    }), i$1 = [];
 }
-catch (r) {
-    u.some(function (n) { n.__h && (n.__h = []); }), u = [], n.__e(r, t.__v);
-} }), e && e(t, u); }, n.unmount = function (t) { a && a(t); var u = t.__c; if (u && u.__H)
-    try {
-        u.__H.__.forEach(b);
-    }
-    catch (t) {
-        n.__e(t, u.__v);
-    } };
-var x = \\"function\\" == typeof requestAnimationFrame;
-function b(n) { \\"function\\" == typeof n.__c && n.__c(); }
-function g(n) { n.__c = n.__(); }
-function j(n, t) { return !n || n.length !== t.length || t.some(function (t, u) { return t !== n[u]; }); }
-function k(n, t) { return \\"function\\" == typeof t ? t(n) : t; }
-
-let e$1 = { data: \\"\\" }, t$1 = t => { try {
-    let e = t ? t.querySelector(\\"#_goober\\") : self._goober;
-    return e || (e = (t || document.head).appendChild(document.createElement(\\"style\\")), e.innerHTML = \\" \\", e.id = \\"_goober\\"), e.firstChild;
+n.__b = function (n2) {
+    u = null, c && c(n2);
+}, n.__r = function (n2) {
+    f && f(n2), t = 0;
+    var r2 = (u = n2.__c).__H;
+    r2 && (r2.__h.forEach(g), r2.__h.forEach(j), r2.__h = []);
+}, n.diffed = function (t2) {
+    e && e(t2);
+    var o2 = t2.__c;
+    o2 && o2.__H && o2.__H.__h.length && (i$1.push(o2) !== 1 && r$1 === n.requestAnimationFrame || ((r$1 = n.requestAnimationFrame) || function (n2) {
+        var t3, u2 = function () {
+            clearTimeout(r2), b && cancelAnimationFrame(t3), setTimeout(n2);
+        }, r2 = setTimeout(u2, 100);
+        b && (t3 = requestAnimationFrame(u2));
+    })(x)), u = void 0;
+}, n.__c = function (t2, u2) {
+    u2.some(function (t3) {
+        try {
+            t3.__h.forEach(g), t3.__h = t3.__h.filter(function (n2) {
+                return !n2.__ || j(n2);
+            });
+        }
+        catch (r2) {
+            u2.some(function (n2) {
+                n2.__h && (n2.__h = []);
+            }), u2 = [], n.__e(r2, t3.__v);
+        }
+    }), a && a(t2, u2);
+}, n.unmount = function (t2) {
+    v$1 && v$1(t2);
+    var u2 = t2.__c;
+    if (u2 && u2.__H)
+        try {
+            u2.__H.__.forEach(g);
+        }
+        catch (t3) {
+            n.__e(t3, u2.__v);
+        }
+};
+var b = typeof requestAnimationFrame == \\"function\\";
+function g(n2) {
+    var t2 = u;
+    typeof n2.__c == \\"function\\" && n2.__c(), u = t2;
 }
-catch (e) { } return t || e$1; }, a$1 = /(?:([a-z0-9-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(})/gi, l = /\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/|\\\\s{2,}|\\\\n/gm, o$1 = (e, t) => { let r, a = \\"\\", l = \\"\\", n = \\"\\"; for (let c in e) {
-    let s = e[c];
-    \\"object\\" == typeof s ? (r = t ? t.replace(/([^,])+/g, e => c.replace(/([^,])+/g, t => /&/g.test(t) ? t.replace(/&/g, e) : e ? e + \\" \\" + t : t)) : c, l += \\"@\\" == c[0] ? \\"f\\" == c[1] ? o$1(s, c) : c + \\"{\\" + o$1(s, \\"k\\" == c[1] ? \\"\\" : t) + \\"}\\" : o$1(s, r)) : \\"@\\" == c[0] && \\"i\\" == c[1] ? a = c + \\" \\" + s + \\";\\" : n += o$1.p ? o$1.p(c.replace(/[A-Z]/g, \\"-$&\\").toLowerCase(), s) : c.replace(/[A-Z]/g, \\"-$&\\").toLowerCase() + \\":\\" + s + \\";\\";
-} return n[0] ? (r = t ? t + \\"{\\" + n + \\"}\\" : n, a + r + l) : a + l; }, n$1 = {}, c$1 = e => { let t = \\"\\"; for (let r in e)
-    t += r + (\\"object\\" == typeof e[r] ? c$1(e[r]) : e[r]); return t; }, s = (e, t, r, s, p) => { let i = \\"object\\" == typeof e ? c$1(e) : e, u = n$1[i] || (n$1[i] = \\"go\\" + i.split(\\"\\").reduce((e, t) => 101 * e + t.charCodeAt(0) >>> 0, 11)); if (!n$1[u]) {
-    let t = \\"object\\" == typeof e ? e : (e => { let t, r = [{}]; for (; t = a$1.exec(e.replace(l, \\"\\"));)
-        t[4] && r.shift(), t[3] ? r.unshift(r[0][t[3]] = r[0][t[3]] || {}) : t[4] || (r[0][t[1]] = t[2]); return r[0]; })(e);
-    n$1[u] = o$1(p ? { [\\"@keyframes \\" + u]: t } : t, r ? \\"\\" : \\".\\" + u);
-} return ((e, t, r) => { t.data.indexOf(e) < 0 && (t.data = r ? e + t.data : t.data + e); })(n$1[u], t, s), u; }, p$2 = (e, t, r) => e.reduce((e, a, l) => { let o = t[l]; if (o && o.call) {
-    let e = o(r), t = e && e.props && e.props.className || /^go/.test(e) && e;
-    o = t ? \\".\\" + t : e && e.props ? \\"\\" : e;
-} return e + a + (null == o ? \\"\\" : o); }, \\"\\");
-function i$2(e) { let r = this || {}, a = e.call ? e(r.p) : e; return s(a.map ? p$2(a, [].slice.call(arguments, 1), r.p) : a, t$1(r.target), r.g, r.o, r.k); }
+function j(n2) {
+    var t2 = u;
+    n2.__c = n2.__(), u = t2;
+}
+function k(n2, t2) {
+    return !n2 || n2.length !== t2.length || t2.some(function (t3, u2) {
+        return t3 !== n2[u2];
+    });
+}
+function w(n2, t2) {
+    return typeof t2 == \\"function\\" ? t2(n2) : t2;
+}
+
+let e$1 = { data: \\"\\" }, t$1 = (t2) => {
+    try {
+        let e2 = t2 ? t2.querySelector(\\"#_goober\\") : self._goober;
+        return e2 || (e2 = (t2 || document.head).appendChild(document.createElement(\\"style\\")), e2.innerHTML = \\" \\", e2.id = \\"_goober\\"), e2.firstChild;
+    }
+    catch (e2) {
+    }
+    return t2 || e$1;
+}, a$1 = /(?:([a-z0-9-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(})/gi, l$1 = /\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/|\\\\s{2,}|\\\\n/gm, o$1 = (e2, t2) => {
+    let r2, a2 = \\"\\", l2 = \\"\\", c2 = \\"\\";
+    for (let n2 in e2) {
+        let s2 = e2[n2];
+        typeof s2 == \\"object\\" ? (r2 = t2 ? t2.replace(/([^,])+/g, (e3) => n2.replace(/([^,])+/g, (t3) => /&/g.test(t3) ? t3.replace(/&/g, e3) : e3 ? e3 + \\" \\" + t3 : t3)) : n2, l2 += n2[0] == \\"@\\" ? n2[1] == \\"f\\" ? o$1(s2, n2) : n2 + \\"{\\" + o$1(s2, n2[1] == \\"k\\" ? \\"\\" : t2) + \\"}\\" : o$1(s2, r2)) : n2[0] == \\"@\\" && n2[1] == \\"i\\" ? a2 = n2 + \\" \\" + s2 + \\";\\" : c2 += o$1.p ? o$1.p(n2.replace(/[A-Z]/g, \\"-$&\\").toLowerCase(), s2) : n2.replace(/[A-Z]/g, \\"-$&\\").toLowerCase() + \\":\\" + s2 + \\";\\";
+    }
+    return c2[0] ? (r2 = t2 ? t2 + \\"{\\" + c2 + \\"}\\" : c2, a2 + r2 + l2) : a2 + l2;
+}, c$1 = {}, n$1 = (e2) => {
+    let t2 = \\"\\";
+    for (let r2 in e2)
+        t2 += r2 + (typeof e2[r2] == \\"object\\" ? n$1(e2[r2]) : e2[r2]);
+    return t2;
+}, s = (e2, t2, r2, s2, p2) => {
+    let i2 = typeof e2 == \\"object\\" ? n$1(e2) : e2, u2 = c$1[i2] || (c$1[i2] = \\"go\\" + i2.split(\\"\\").reduce((e3, t3) => 101 * e3 + t3.charCodeAt(0) >>> 0, 11));
+    if (!c$1[u2]) {
+        let t3 = typeof e2 == \\"object\\" ? e2 : ((e3) => {
+            let t4, r3 = [{}];
+            for (; t4 = a$1.exec(e3.replace(l$1, \\"\\"));)
+                t4[4] && r3.shift(), t4[3] ? r3.unshift(r3[0][t4[3]] = r3[0][t4[3]] || {}) : t4[4] || (r3[0][t4[1]] = t4[2]);
+            return r3[0];
+        })(e2);
+        c$1[u2] = o$1(p2 ? { [\\"@keyframes \\" + u2]: t3 } : t3, r2 ? \\"\\" : \\".\\" + u2);
+    }
+    return ((e3, t3, r3) => {
+        t3.data.indexOf(e3) < 0 && (t3.data = r3 ? e3 + t3.data : t3.data + e3);
+    })(c$1[u2], t2, s2), u2;
+}, p$2 = (e2, t2, r2) => e2.reduce((e3, a2, l2) => {
+    let c2 = t2[l2];
+    if (c2 && c2.call) {
+        let e4 = c2(r2), t3 = e4 && e4.props && e4.props.className || /^go/.test(e4) && e4;
+        c2 = t3 ? \\".\\" + t3 : e4 && typeof e4 == \\"object\\" ? e4.props ? \\"\\" : o$1(e4, \\"\\") : e4;
+    }
+    return e3 + a2 + (c2 == null ? \\"\\" : c2);
+}, \\"\\");
+function i$2(e2) {
+    let r2 = this || {}, a2 = e2.call ? e2(r2.p) : e2;
+    return s(a2.map ? a2.raw ? p$2(a2, [].slice.call(arguments, 1), r2.p) : a2.reduce((e3, t2) => t2 ? Object.assign(e3, t2.call ? t2(r2.p) : t2) : e3, {}) : a2, t$1(r2.target), r2.g, r2.o, r2.k);
+}
 let u$1, f$1, d = i$2.bind({ g: 1 }), g$1 = i$2.bind({ k: 1 });
-function m$1(e, t) { let r = this || {}; return function () { let a = arguments; function l(o, n) { let c = Object.assign({}, o), s = c.className || l.className; return r.p = Object.assign({ theme: f$1  }, c), r.o = /\\\\s*go[0-9]+/g.test(s), c.className = i$2.apply(r, a) + (s ? \\" \\" + s : \\"\\"), t && (c.ref = n), u$1(); } return t ? t(l) : l; }; }
+function m$1(e2, t2) {
+    let r2 = this || {};
+    return function () {
+        let a2 = arguments;
+        function l2(o2, c2) {
+            let n2 = Object.assign({}, o2), s2 = n2.className || l2.className;
+            return r2.p = Object.assign({ theme: f$1  }, n2), r2.o = /\\\\s*go[0-9]+/g.test(s2), n2.className = i$2.apply(r2, a2) + (s2 ? \\" \\" + s2 : \\"\\"), t2 && (n2.ref = c2), u$1();
+        }
+        return t2 ? t2(l2) : l2;
+    };
+}
 
 const FaTimes = { \\"tag\\": \\"svg\\", \\"attr\\": { \\"viewBox\\": \\"0 0 352 512\\" }, \\"child\\": [{ \\"tag\\": \\"path\\", \\"attr\\": { \\"d\\": \\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" } }] };
 
@@ -90,37 +201,37 @@ var templateObject_1, templateObject_2, templateObject_3, templateObject_4, temp
 function createShadowRootStyled(n) { return m$1.bind({ target: n }); }
 function ensureModalRoot(n) { void 0 === n && (n = !0); var t = document.getElementById(KARTE_MODAL_ROOT); if (t)
     return n ? t.shadowRoot || t.attachShadow({ mode: \\"open\\" }) : t; var e = document.createElement(\\"div\\"); return e.id = KARTE_MODAL_ROOT, document.body.appendChild(e), n ? e.attachShadow({ mode: \\"open\\" }) : e; }
-var Position = function (n) { var t = \\"\\\\n    position: absolute;\\\\n    z-index: \\" + (n.zIndex || 1) + \\";\\\\n    display: block;\\\\n  \\"; return \\"center\\" === n.position ? t += \\"\\\\n      left: 50%;\\\\n      top: 50%;\\\\n      transform: translate(-50%, -50%);\\\\n    \\" : \\"left-bottom\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"left-top\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\" : \\"right-bottom\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"right-top\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      top: 0;\\\\n    \\" : \\"fix-bottom\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"fix-top\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\" : \\"fix-left\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"fix-right\\" === n.position && (t += \\"\\\\n      right: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\"), h(\\"div\\", { style: t }, n.children); };
-var Animation = function (n) { var t = \\"\\"; return \\"fade-in\\" == n.animation ? t = \\"\\\\n      animation-name: fadeIn;\\\\n      animation-duration: 1s;\\\\n      @keyframes fadeIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n        }\\\\n      }\\\\n    \\" : \\"slide-in\\" == n.animation && (t = \\"\\\\n      animation-name: slideIn;\\\\n      animation-duration: 0.6s;\\\\n      @keyframes slideIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n          transform: translateY(-32px);\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n          transform: translateY(0);\\\\n        }\\\\n      }\\\\n    \\"), h(\\"div\\", { style: t }, n.children); };
-var Fog = function (n) { return h(\\"div\\", { onClick: n.onClick, style: { position: \\"absolute\\", left: \\"0\\", bottom: \\"0\\", right: \\"0\\", top: 0, background: \\"rgba(128, 128, 128, 0.3)\\" } }); };
-var Icon = function (n) { return h(\\"svg\\", { width: n.width || 16, height: n.height || 16, viewBox: n.serialized.attr.viewBox, stroke: \\"currentColor\\", fill: \\"currentColor\\", strokeWidth: \\"0\\" }, h(\\"path\\", { d: n.serialized.child[0].attr.d })); };
-var Card = function (n) { var t = n.styled(\\"div\\")(templateObject_1 || (templateObject_1 = __makeTemplateObject([\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"], [\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))), e = n.styled(\\"div\\")(templateObject_2 || (templateObject_2 = __makeTemplateObject([\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"], [\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"]))), o = m(1), i = o[0], r = o[1]; return y(function () { if (0 != i) {
+var Position = function (n) { var t = \\"\\\\n    position: absolute;\\\\n    z-index: \\" + (n.zIndex || 1) + \\";\\\\n    display: block;\\\\n  \\"; return \\"center\\" === n.position ? t += \\"\\\\n      left: 50%;\\\\n      top: 50%;\\\\n      transform: translate(-50%, -50%);\\\\n    \\" : \\"left-bottom\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"left-top\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\" : \\"right-bottom\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"right-top\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      top: 0;\\\\n    \\" : \\"fix-bottom\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"fix-top\\" === n.position ? t += \\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\" : \\"fix-left\\" === n.position ? t += \\"\\\\n      left: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\" : \\"fix-right\\" === n.position && (t += \\"\\\\n      right: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\"), v(\\"div\\", { style: t }, n.children); };
+var Animation = function (n) { var t = \\"\\"; return \\"fade-in\\" == n.animation ? t = \\"\\\\n      animation-name: fadeIn;\\\\n      animation-duration: 1s;\\\\n      @keyframes fadeIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n        }\\\\n      }\\\\n    \\" : \\"slide-in\\" == n.animation && (t = \\"\\\\n      animation-name: slideIn;\\\\n      animation-duration: 0.6s;\\\\n      @keyframes slideIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n          transform: translateY(-32px);\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n          transform: translateY(0);\\\\n        }\\\\n      }\\\\n    \\"), v(\\"div\\", { style: t }, n.children); };
+var Fog = function (n) { return v(\\"div\\", { onClick: n.onClick, style: { position: \\"absolute\\", left: \\"0\\", bottom: \\"0\\", right: \\"0\\", top: 0, background: \\"rgba(128, 128, 128, 0.3)\\" } }); };
+var Icon = function (n) { return v(\\"svg\\", { width: n.width || 16, height: n.height || 16, viewBox: n.serialized.attr.viewBox, stroke: \\"currentColor\\", fill: \\"currentColor\\", strokeWidth: \\"0\\" }, v(\\"path\\", { d: n.serialized.child[0].attr.d })); };
+var Card = function (n) { var t = n.styled(\\"div\\")(templateObject_1 || (templateObject_1 = __makeTemplateObject([\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"], [\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))), e = n.styled(\\"div\\")(templateObject_2 || (templateObject_2 = __makeTemplateObject([\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"], [\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"]))), o = l(1), i = o[0], r = o[1]; return y(function () { if (0 != i) {
     var n = function (n) { Fog && \\"Escape\\" === n.key && r(0); };
     return window.addEventListener(\\"keydown\\", n), function () { return window.removeEventListener(\\"keydown\\", n); };
-} }, [i]), h(p, null, 1 == i && h(p, null, n.fog && h(Fog, { onClick: function () { r(0); } }), h(Position, { position: n.position, zIndex: n.zIndex }, h(t, null, h(CloseButton, { styled: n.styled, onClick: function () { n.track(\\"message_close\\"), r(0); } }), h(e, null, n.children))))); };
-var Board = function (n) { var t = n.styled(\\"div\\")(templateObject_3 || (templateObject_3 = __makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"], [\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"]))), e = n.styled(\\"div\\")(templateObject_4 || (templateObject_4 = __makeTemplateObject([\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"], [\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))), o = m(1), i = o[0], r = o[1]; return y(function () { if (0 != i) {
+} }, [i]), v(p, null, 1 == i && v(p, null, n.fog && v(Fog, { onClick: function () { r(0); } }), v(Position, { position: n.position, zIndex: n.zIndex }, v(t, null, v(CloseButton, { styled: n.styled, onClick: function () { n.track(\\"message_close\\"), r(0); } }), v(e, null, n.children))))); };
+var Board = function (n) { var t = n.styled(\\"div\\")(templateObject_3 || (templateObject_3 = __makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"], [\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"]))), e = n.styled(\\"div\\")(templateObject_4 || (templateObject_4 = __makeTemplateObject([\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"], [\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))), o = l(1), i = o[0], r = o[1]; return y(function () { if (0 != i) {
     var n = function (n) { Fog && \\"Escape\\" === n.key && r(0); };
     return window.addEventListener(\\"keydown\\", n), function () { return window.removeEventListener(\\"keydown\\", n); };
-} }, [i]), h(p, null, 1 == i && h(p, null, n.fog && h(Fog, { onClick: function () { r(0); } }), h(Position, { position: n.position, zIndex: n.zIndex }, h(t, null, h(CloseButton, { styled: n.styled, onClick: function () { n.track(\\"message_close\\"), r(0); } }), h(e, null, n.children))))); };
-var CloseButton = function (n) { var t = n.styled(\\"button\\")(templateObject_5 || (templateObject_5 = __makeTemplateObject([\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"], [\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"]))); return h(t, { onClick: n.onClick }, h(Icon, { serialized: FaTimes })); };
-var ButtonBlock = function (n) { var t = n.styled(\\"div\\")(templateObject_6 || (templateObject_6 = __makeTemplateObject([\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"], [\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"]))), e = n.styled(\\"a\\")(templateObject_7 || (templateObject_7 = __makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\", \\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"], [\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\", \\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"])), n.color); return h(t, null, h(e, { target: \\"_blank\\", href: n.link, onClick: n.onClick }, n.text)); };
-var OnOffButton = function (n) { var t = n.styled(\\"div\\")(templateObject_8 || (templateObject_8 = __makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '], ['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  ']))), e = n.styled(\\"div\\")(templateObject_9 || (templateObject_9 = __makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '], ['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  ']))); return n.valid ? h(t, { onClick: n.onClick }, n.textOk) : h(e, null, n.textOff); };
+} }, [i]), v(p, null, 1 == i && v(p, null, n.fog && v(Fog, { onClick: function () { r(0); } }), v(Position, { position: n.position, zIndex: n.zIndex }, v(t, null, v(CloseButton, { styled: n.styled, onClick: function () { n.track(\\"message_close\\"), r(0); } }), v(e, null, n.children))))); };
+var CloseButton = function (n) { var t = n.styled(\\"button\\")(templateObject_5 || (templateObject_5 = __makeTemplateObject([\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"], [\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"]))); return v(t, { onClick: n.onClick }, v(Icon, { serialized: FaTimes })); };
+var ButtonBlock = function (n) { var t = n.styled(\\"div\\")(templateObject_6 || (templateObject_6 = __makeTemplateObject([\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"], [\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"]))), e = n.styled(\\"a\\")(templateObject_7 || (templateObject_7 = __makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\", \\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"], [\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\", \\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"])), n.color); return v(t, null, v(e, { target: \\"_blank\\", href: n.link, onClick: n.onClick }, n.text)); };
+var OnOffButton = function (n) { var t = n.styled(\\"div\\")(templateObject_8 || (templateObject_8 = __makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '], ['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  ']))), e = n.styled(\\"div\\")(templateObject_9 || (templateObject_9 = __makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '], ['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  ']))); return n.valid ? v(t, { onClick: n.onClick }, n.textOk) : v(e, null, n.textOff); };
 
 var sdk = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	getTrack: getTrack,
-	detectElementOnViewport: detectElementOnViewport,
-	createShadowRootStyled: createShadowRootStyled,
-	ensureModalRoot: ensureModalRoot,
-	Position: Position,
-	Animation: Animation,
-	Fog: Fog,
-	Icon: Icon,
-	Card: Card,
-	Board: Board,
-	CloseButton: CloseButton,
-	ButtonBlock: ButtonBlock,
-	OnOffButton: OnOffButton
+  __proto__: null,
+  getTrack: getTrack,
+  detectElementOnViewport: detectElementOnViewport,
+  createShadowRootStyled: createShadowRootStyled,
+  ensureModalRoot: ensureModalRoot,
+  Position: Position,
+  Animation: Animation,
+  Fog: Fog,
+  Icon: Icon,
+  Card: Card,
+  Board: Board,
+  CloseButton: CloseButton,
+  ButtonBlock: ButtonBlock,
+  OnOffButton: OnOffButton
 });
 
 console.log(sdk);
@@ -1771,24 +1882,8 @@ console.log(sdk);
       ],
       "renderedLength": 537,
     },
-    "https://cdn.skypack.dev/-/goober@v2.0.8-RSwy1f2WcyBNakqddiH2/dist=es2020/goober.js": Object {
-      "originalLength": 2117,
-      "removedExports": Array [
-        "extractCss",
-        "setup",
-        "default",
-        "__esModule",
-      ],
-      "renderedExports": Array [
-        "css",
-        "glob",
-        "keyframes",
-        "styled",
-      ],
-      "renderedLength": 2507,
-    },
-    "https://cdn.skypack.dev/-/preact@v10.5.5-zWGbvQRMya5StgDc7dPs/dist=es2020/preact.js": Object {
-      "originalLength": 10272,
+    "https://cdn.skypack.dev/-/preact@v10.5.7-xX7vRkUFu3YZatNYMF7b/dist=es2020/preact.js": Object {
+      "originalLength": 14939,
       "removedExports": Array [
         "Component",
         "__u",
@@ -1800,7 +1895,6 @@ console.log(sdk);
         "render",
         "toChildArray",
         "default",
-        "__esModule",
       ],
       "renderedExports": Array [
         "Fragment",
@@ -1808,10 +1902,10 @@ console.log(sdk);
         "h",
         "options",
       ],
-      "renderedLength": 1303,
+      "renderedLength": 1508,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.5-zWGbvQRMya5StgDc7dPs/dist=es2020/preact/hooks.js": Object {
-      "originalLength": 2635,
+    "https://cdn.skypack.dev/-/preact@v10.5.7-xX7vRkUFu3YZatNYMF7b/dist=es2020/preact/hooks.js": Object {
+      "originalLength": 3686,
       "removedExports": Array [
         "useCallback",
         "useContext",
@@ -1822,14 +1916,28 @@ console.log(sdk);
         "useMemo",
         "useRef",
         "default",
-        "__esModule",
       ],
       "renderedExports": Array [
         "useEffect",
         "useReducer",
         "useState",
       ],
-      "renderedLength": 2047,
+      "renderedLength": 2674,
+    },
+    "https://cdn.skypack.dev/new/goober@v2.0.15/dist=es2020": Object {
+      "originalLength": 3151,
+      "removedExports": Array [
+        "extractCss",
+        "setup",
+        "default",
+      ],
+      "renderedExports": Array [
+        "css",
+        "glob",
+        "keyframes",
+        "styled",
+      ],
+      "renderedLength": 3125,
     },
   },
   "name": "index",

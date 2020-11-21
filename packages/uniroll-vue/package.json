@@ -11,11 +11,11 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "rollup-plugin-vue": "^6.0.0-beta.10",
+    "rollup-plugin-vue": "^6.0.0-beta.11",
     "uniroll": "^2.6.0"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/compiler-sfc": "^3.0.2",
     "crypto-browserify": "^3.12.0",
     "process": "^0.11.10",
     "querystring-browser": "^1.0.4"

@@ -17,7 +17,7 @@
     "lib"
   ],
   "devDependencies": {
-    "typescript": "^4.0.3"
+    "typescript": "^4.1.2"
   },
   "gitHead": "69ee2d62fb8f9e9b43be7af0e87db40c1deb772d"
 }

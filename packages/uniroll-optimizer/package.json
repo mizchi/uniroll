@@ -13,15 +13,15 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "autoprefixer": "^10.0.1",
+    "autoprefixer": "^10.0.2",
     "cssnano": "^4.1.10",
     "precss": "^4.0.0",
-    "terser": "^5.3.4",
+    "terser": "^5.5.0",
     "uniroll-linter": "^2.5.0"
   },
   "devDependencies": {
     "@types/cssnano": "^4.0.0",
-    "postcss": "^8.1.1"
+    "postcss": "^8.1.8"
   },
   "gitHead": "69ee2d62fb8f9e9b43be7af0e87db40c1deb772d"
 }

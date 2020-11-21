@@ -1,9 +1,320 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`build nested with skypack 1`] = `
-"var n,u,i,t,o,f={},e=[],c=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function s(n,l){for(var u in l)n[u]=l[u];return n}function a(n){var l=n.parentNode;l&&l.removeChild(n);}function v(n,l,u){var i,t=arguments,r={};for(i in l)\\"key\\"!==i&&\\"ref\\"!==i&&(r[i]=l[i]);if(arguments.length>3)for(u=[u],i=3;i<arguments.length;i++)u.push(t[i]);if(null!=u&&(r.children=u),\\"function\\"==typeof n&&null!=n.defaultProps)for(i in n.defaultProps)void 0===r[i]&&(r[i]=n.defaultProps[i]);return h(n,r,l&&l.key,l&&l.ref,null)}function h(l,u,i,t,r){var o={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,constructor:void 0,__v:r};return null==r&&(o.__v=o),n.vnode&&n.vnode(o),o}function p(n){return n.children}function d(n,l){this.props=n,this.context=l;}function _(n,l){if(null==l)return n.__?_(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return \\"function\\"==typeof n.type?_(n):null}function k(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return k(n)}}function w(l){(!l.__d&&(l.__d=!0)&&u.push(l)&&!m.__r++||t!==n.debounceRendering)&&((t=n.debounceRendering)||i)(m);}function m(){for(var n;m.__r=u.length;)n=u.sort(function(n,l){return n.__v.__b-l.__v.__b}),u=[],n.some(function(n){var l,u,i,t,r,o,f;n.__d&&(o=(r=(l=n).__v).__e,(f=l.__P)&&(u=[],(i=s({},r)).__v=i,t=T(f,r,i,l.__n,void 0!==f.ownerSVGElement,null,u,null==o?_(r):o),$(u,r),t!=o&&k(r)));});}function g(n,l,u,i,t,r,o,c,s,v){var y,d,k,w,m,g,b,A=i&&i.__k||e,P=A.length;for(s==f&&(s=null!=o?o[0]:P?_(i,0):null),u.__k=[],y=0;y<l.length;y++)if(null!=(w=u.__k[y]=null==(w=l[y])||\\"boolean\\"==typeof w?null:\\"string\\"==typeof w||\\"number\\"==typeof w?h(null,w,null,null,w):Array.isArray(w)?h(p,{children:w},null,null,null):null!=w.__e||null!=w.__c?h(w.type,w.props,w.key,null,w.__v):w)){if(w.__=u,w.__b=u.__b+1,null===(k=A[y])||k&&w.key==k.key&&w.type===k.type)A[y]=void 0;else for(d=0;d<P;d++){if((k=A[d])&&w.key==k.key&&w.type===k.type){A[d]=void 0;break}k=null;}m=T(n,w,k=k||f,t,r,o,c,s,v),(d=w.ref)&&k.ref!=d&&(b||(b=[]),k.ref&&b.push(k.ref,null,w),b.push(d,w.__c||m,w)),null!=m?(null==g&&(g=m),s=x(n,w,k,A,o,m,s),\\"option\\"==u.type?n.value=\\"\\":\\"function\\"==typeof u.type&&(u.__d=s)):s&&k.__e==s&&s.parentNode!=n&&(s=_(k));}if(u.__e=g,null!=o&&\\"function\\"!=typeof u.type)for(y=o.length;y--;)null!=o[y]&&a(o[y]);for(y=P;y--;)null!=A[y]&&I(A[y],A[y]);if(b)for(y=0;y<b.length;y++)H(b[y],b[++y],b[++y]);}function x(n,l,u,i,t,r,o){var f,e,c;if(void 0!==l.__d)f=l.__d,l.__d=void 0;else if(t==u||r!=o||null==r.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(r),f=null;else {for(e=o,c=0;(e=e.nextSibling)&&c<i.length;c+=2)if(e==r)break n;n.insertBefore(r,o),f=o;}return void 0!==f?f:r.nextSibling}function A(n,l,u,i,t){var r;for(r in u)\\"children\\"===r||\\"key\\"===r||r in l||C(n,r,null,u[r],i);for(r in l)t&&\\"function\\"!=typeof l[r]||\\"children\\"===r||\\"key\\"===r||\\"value\\"===r||\\"checked\\"===r||u[r]===l[r]||C(n,r,l[r],u[r],i);}function P(n,l,u){\\"-\\"===l[0]?n.setProperty(l,u):n[l]=\\"number\\"==typeof u&&!1===c.test(l)?u+\\"px\\":null==u?\\"\\":u;}function C(n,l,u,i,t){var r,o,f,e,c;if(t?\\"className\\"===l&&(l=\\"class\\"):\\"class\\"===l&&(l=\\"className\\"),\\"style\\"===l)if(r=n.style,\\"string\\"==typeof u)r.cssText=u;else {if(\\"string\\"==typeof i&&(r.cssText=\\"\\",i=null),i)for(e in i)u&&e in u||P(r,e,\\"\\");if(u)for(c in u)i&&u[c]===i[c]||P(r,c,u[c]);}else \\"o\\"===l[0]&&\\"n\\"===l[1]?(o=l!==(l=l.replace(/Capture$/,\\"\\")),f=l.toLowerCase(),l=(f in n?f:l).slice(2),u?(i||n.addEventListener(l,N,o),(n.l||(n.l={}))[l]=u):n.removeEventListener(l,N,o)):\\"list\\"!==l&&\\"tagName\\"!==l&&\\"form\\"!==l&&\\"type\\"!==l&&\\"size\\"!==l&&!t&&l in n?n[l]=null==u?\\"\\":u:\\"function\\"!=typeof u&&\\"dangerouslySetInnerHTML\\"!==l&&(l!==(l=l.replace(/^xlink:?/,\\"\\"))?null==u||!1===u?n.removeAttributeNS(\\"http://www.w3.org/1999/xlink\\",l.toLowerCase()):n.setAttributeNS(\\"http://www.w3.org/1999/xlink\\",l.toLowerCase(),u):null==u||!1===u&&!/^ar/.test(l)?n.removeAttribute(l):n.setAttribute(l,u));}function N(l){this.l[l.type](n.event?n.event(l):l);}function z(n,l,u){var i,t;for(i=0;i<n.__k.length;i++)(t=n.__k[i])&&(t.__=n,t.__e&&(\\"function\\"==typeof t.type&&t.__k.length>1&&z(t,l,u),l=x(u,t,t,n.__k,null,t.__e,l),\\"function\\"==typeof n.type&&(n.__d=l)));}function T(l,u,i,t,r,o,f,e,c){var a,v,h,y,_,k,w,m,b,x,A,P=u.type;if(void 0!==u.constructor)return null;(a=n.__b)&&a(u);try{n:if(\\"function\\"==typeof P){if(m=u.props,b=(a=P.contextType)&&t[a.__c],x=a?b?b.props.value:a.__:t,i.__c?w=(v=u.__c=i.__c).__=v.__E:(\\"prototype\\"in P&&P.prototype.render?u.__c=v=new P(m,x):(u.__c=v=new d(m,x),v.constructor=P,v.render=L),b&&b.sub(v),v.props=m,v.state||(v.state={}),v.context=x,v.__n=t,h=v.__d=!0,v.__h=[]),null==v.__s&&(v.__s=v.state),null!=P.getDerivedStateFromProps&&(v.__s==v.state&&(v.__s=s({},v.__s)),s(v.__s,P.getDerivedStateFromProps(m,v.__s))),y=v.props,_=v.state,h)null==P.getDerivedStateFromProps&&null!=v.componentWillMount&&v.componentWillMount(),null!=v.componentDidMount&&v.__h.push(v.componentDidMount);else {if(null==P.getDerivedStateFromProps&&m!==y&&null!=v.componentWillReceiveProps&&v.componentWillReceiveProps(m,x),!v.__e&&null!=v.shouldComponentUpdate&&!1===v.shouldComponentUpdate(m,v.__s,x)||u.__v===i.__v){v.props=m,v.state=v.__s,u.__v!==i.__v&&(v.__d=!1),v.__v=u,u.__e=i.__e,u.__k=i.__k,v.__h.length&&f.push(v),z(u,e,l);break n}null!=v.componentWillUpdate&&v.componentWillUpdate(m,v.__s,x),null!=v.componentDidUpdate&&v.__h.push(function(){v.componentDidUpdate(y,_,k);});}v.context=x,v.props=m,v.state=v.__s,(a=n.__r)&&a(u),v.__d=!1,v.__v=u,v.__P=l,a=v.render(v.props,v.state,v.context),v.state=v.__s,null!=v.getChildContext&&(t=s(s({},t),v.getChildContext())),h||null==v.getSnapshotBeforeUpdate||(k=v.getSnapshotBeforeUpdate(y,_)),A=null!=a&&a.type==p&&null==a.key?a.props.children:a,g(l,Array.isArray(A)?A:[A],u,i,t,r,o,f,e,c),v.base=u.__e,v.__h.length&&f.push(v),w&&(v.__E=v.__=null),v.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=j(i.__e,u,i,t,r,o,f,c);(a=n.diffed)&&a(u);}catch(l){u.__v=null,n.__e(l,u,i);}return u.__e}function $(l,u){n.__c&&n.__c(u,l),l.some(function(u){try{l=u.__h,u.__h=[],l.some(function(n){n.call(u);});}catch(l){n.__e(l,u.__v);}});}function j(n,l,u,i,t,r,o,c){var s,a,v,h,y,p=u.props,d=l.props;if(t=\\"svg\\"===l.type||t,null!=r)for(s=0;s<r.length;s++)if(null!=(a=r[s])&&((null===l.type?3===a.nodeType:a.localName===l.type)||n==a)){n=a,r[s]=null;break}if(null==n){if(null===l.type)return document.createTextNode(d);n=t?document.createElementNS(\\"http://www.w3.org/2000/svg\\",l.type):document.createElement(l.type,d.is&&{is:d.is}),r=null,c=!1;}if(null===l.type)p!==d&&n.data!=d&&(n.data=d);else {if(null!=r&&(r=e.slice.call(n.childNodes)),v=(p=u.props||f).dangerouslySetInnerHTML,h=d.dangerouslySetInnerHTML,!c){if(null!=r)for(p={},y=0;y<n.attributes.length;y++)p[n.attributes[y].name]=n.attributes[y].value;(h||v)&&(h&&v&&h.__html==v.__html||(n.innerHTML=h&&h.__html||\\"\\"));}A(n,d,p,t,c),h?l.__k=[]:(s=l.props.children,g(n,Array.isArray(s)?s:[s],l,u,i,\\"foreignObject\\"!==l.type&&t,r,o,f,c)),c||(\\"value\\"in d&&void 0!==(s=d.value)&&s!==n.value&&C(n,\\"value\\",s,p.value,!1),\\"checked\\"in d&&void 0!==(s=d.checked)&&s!==n.checked&&C(n,\\"checked\\",s,p.checked,!1));}return n}function H(l,u,i){try{\\"function\\"==typeof l?l(u):l.current=u;}catch(l){n.__e(l,i);}}function I(l,u,i){var t,r,o;if(n.unmount&&n.unmount(l),(t=l.ref)&&(t.current&&t.current!==l.__e||H(t,null,u)),i||\\"function\\"==typeof l.type||(i=null!=(r=l.__e)),l.__e=l.__d=void 0,null!=(t=l.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(l){n.__e(l,u);}t.base=t.__P=null;}if(t=l.__k)for(o=0;o<t.length;o++)t[o]&&I(t[o],u,i);null!=r&&a(r);}function L(n,l,u){return this.constructor(n,u)}n={__e:function(n,l){for(var u,i;l=l.__;)if((u=l.__c)&&!u.__)try{if(u.constructor&&null!=u.constructor.getDerivedStateFromError&&(i=!0,u.setState(u.constructor.getDerivedStateFromError(n))),null!=u.componentDidCatch&&(i=!0,u.componentDidCatch(n)),i)return w(u.__E=u)}catch(l){n=l;}throw n}},d.prototype.setState=function(n,l){var u;u=this.__s!==this.state?this.__s:this.__s=s({},this.state),\\"function\\"==typeof n&&(n=n(u,this.props)),n&&s(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),w(this));},d.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),w(this));},d.prototype.render=p,u=[],i=\\"function\\"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,m.__r=0,o=0;
+"var n, u, i, t, o, f = {}, e = [], c = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+function s(n2, l2) {
+  for (var u2 in l2)
+    n2[u2] = l2[u2];
+  return n2;
+}
+function a(n2) {
+  var l2 = n2.parentNode;
+  l2 && l2.removeChild(n2);
+}
+function v(n2, l2, u2) {
+  var i2, t2 = arguments, r2 = {};
+  for (i2 in l2)
+    i2 !== \\"key\\" && i2 !== \\"ref\\" && (r2[i2] = l2[i2]);
+  if (arguments.length > 3)
+    for (u2 = [u2], i2 = 3; i2 < arguments.length; i2++)
+      u2.push(t2[i2]);
+  if (u2 != null && (r2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
+    for (i2 in n2.defaultProps)
+      r2[i2] === void 0 && (r2[i2] = n2.defaultProps[i2]);
+  return h(n2, r2, l2 && l2.key, l2 && l2.ref, null);
+}
+function h(l2, u2, i2, t2, r2) {
+  var o2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, constructor: void 0, __v: r2};
+  return r2 == null && (o2.__v = o2), n.vnode && n.vnode(o2), o2;
+}
+function p(n2) {
+  return n2.children;
+}
+function d(n2, l2) {
+  this.props = n2, this.context = l2;
+}
+function _(n2, l2) {
+  if (l2 == null)
+    return n2.__ ? _(n2.__, n2.__.__k.indexOf(n2) + 1) : null;
+  for (var u2; l2 < n2.__k.length; l2++)
+    if ((u2 = n2.__k[l2]) != null && u2.__e != null)
+      return u2.__e;
+  return typeof n2.type == \\"function\\" ? _(n2) : null;
+}
+function k(n2) {
+  var l2, u2;
+  if ((n2 = n2.__) != null && n2.__c != null) {
+    for (n2.__e = n2.__c.base = null, l2 = 0; l2 < n2.__k.length; l2++)
+      if ((u2 = n2.__k[l2]) != null && u2.__e != null) {
+        n2.__e = n2.__c.base = u2.__e;
+        break;
+      }
+    return k(n2);
+  }
+}
+function w(l2) {
+  (!l2.__d && (l2.__d = true) && u.push(l2) && !m.__r++ || t !== n.debounceRendering) && ((t = n.debounceRendering) || i)(m);
+}
+function m() {
+  for (var n2; m.__r = u.length; )
+    n2 = u.sort(function(n3, l2) {
+      return n3.__v.__b - l2.__v.__b;
+    }), u = [], n2.some(function(n3) {
+      var l2, u2, i2, t2, r2, o2, f2;
+      n3.__d && (o2 = (r2 = (l2 = n3).__v).__e, (f2 = l2.__P) && (u2 = [], (i2 = s({}, r2)).__v = i2, t2 = T(f2, r2, i2, l2.__n, f2.ownerSVGElement !== void 0, null, u2, o2 == null ? _(r2) : o2), $(u2, r2), t2 != o2 && k(r2)));
+    });
+}
+function g(n2, l2, u2, i2, t2, r2, o2, c2, s2, v2) {
+  var y2, d2, k2, w2, m2, g2, b2, A2 = i2 && i2.__k || e, P2 = A2.length;
+  for (s2 == f && (s2 = o2 != null ? o2[0] : P2 ? _(i2, 0) : null), u2.__k = [], y2 = 0; y2 < l2.length; y2++)
+    if ((w2 = u2.__k[y2] = (w2 = l2[y2]) == null || typeof w2 == \\"boolean\\" ? null : typeof w2 == \\"string\\" || typeof w2 == \\"number\\" ? h(null, w2, null, null, w2) : Array.isArray(w2) ? h(p, {children: w2}, null, null, null) : w2.__e != null || w2.__c != null ? h(w2.type, w2.props, w2.key, null, w2.__v) : w2) != null) {
+      if (w2.__ = u2, w2.__b = u2.__b + 1, (k2 = A2[y2]) === null || k2 && w2.key == k2.key && w2.type === k2.type)
+        A2[y2] = void 0;
+      else
+        for (d2 = 0; d2 < P2; d2++) {
+          if ((k2 = A2[d2]) && w2.key == k2.key && w2.type === k2.type) {
+            A2[d2] = void 0;
+            break;
+          }
+          k2 = null;
+        }
+      m2 = T(n2, w2, k2 = k2 || f, t2, r2, o2, c2, s2, v2), (d2 = w2.ref) && k2.ref != d2 && (b2 || (b2 = []), k2.ref && b2.push(k2.ref, null, w2), b2.push(d2, w2.__c || m2, w2)), m2 != null ? (g2 == null && (g2 = m2), s2 = x(n2, w2, k2, A2, o2, m2, s2), u2.type == \\"option\\" ? n2.value = \\"\\" : typeof u2.type == \\"function\\" && (u2.__d = s2)) : s2 && k2.__e == s2 && s2.parentNode != n2 && (s2 = _(k2));
+    }
+  if (u2.__e = g2, o2 != null && typeof u2.type != \\"function\\")
+    for (y2 = o2.length; y2--; )
+      o2[y2] != null && a(o2[y2]);
+  for (y2 = P2; y2--; )
+    A2[y2] != null && I(A2[y2], A2[y2]);
+  if (b2)
+    for (y2 = 0; y2 < b2.length; y2++)
+      H(b2[y2], b2[++y2], b2[++y2]);
+}
+function x(n2, l2, u2, i2, t2, r2, o2) {
+  var f2, e2, c2;
+  if (l2.__d !== void 0)
+    f2 = l2.__d, l2.__d = void 0;
+  else if (t2 == u2 || r2 != o2 || r2.parentNode == null)
+    n:
+      if (o2 == null || o2.parentNode !== n2)
+        n2.appendChild(r2), f2 = null;
+      else {
+        for (e2 = o2, c2 = 0; (e2 = e2.nextSibling) && c2 < i2.length; c2 += 2)
+          if (e2 == r2)
+            break n;
+        n2.insertBefore(r2, o2), f2 = o2;
+      }
+  return f2 !== void 0 ? f2 : r2.nextSibling;
+}
+function A(n2, l2, u2, i2, t2) {
+  var r2;
+  for (r2 in u2)
+    r2 === \\"children\\" || r2 === \\"key\\" || r2 in l2 || C(n2, r2, null, u2[r2], i2);
+  for (r2 in l2)
+    t2 && typeof l2[r2] != \\"function\\" || r2 === \\"children\\" || r2 === \\"key\\" || r2 === \\"value\\" || r2 === \\"checked\\" || u2[r2] === l2[r2] || C(n2, r2, l2[r2], u2[r2], i2);
+}
+function P(n2, l2, u2) {
+  l2[0] === \\"-\\" ? n2.setProperty(l2, u2) : n2[l2] = typeof u2 == \\"number\\" && c.test(l2) === false ? u2 + \\"px\\" : u2 == null ? \\"\\" : u2;
+}
+function C(n2, l2, u2, i2, t2) {
+  var r2, o2, f2, e2, c2;
+  if (t2 ? l2 === \\"className\\" && (l2 = \\"class\\") : l2 === \\"class\\" && (l2 = \\"className\\"), l2 === \\"style\\")
+    if (r2 = n2.style, typeof u2 == \\"string\\")
+      r2.cssText = u2;
+    else {
+      if (typeof i2 == \\"string\\" && (r2.cssText = \\"\\", i2 = null), i2)
+        for (e2 in i2)
+          u2 && e2 in u2 || P(r2, e2, \\"\\");
+      if (u2)
+        for (c2 in u2)
+          i2 && u2[c2] === i2[c2] || P(r2, c2, u2[c2]);
+    }
+  else
+    l2[0] === \\"o\\" && l2[1] === \\"n\\" ? (o2 = l2 !== (l2 = l2.replace(/Capture$/, \\"\\")), f2 = l2.toLowerCase(), l2 = (f2 in n2 ? f2 : l2).slice(2), u2 ? (i2 || n2.addEventListener(l2, N, o2), (n2.l || (n2.l = {}))[l2] = u2) : n2.removeEventListener(l2, N, o2)) : l2 !== \\"list\\" && l2 !== \\"tagName\\" && l2 !== \\"form\\" && l2 !== \\"type\\" && l2 !== \\"size\\" && !t2 && l2 in n2 ? n2[l2] = u2 == null ? \\"\\" : u2 : typeof u2 != \\"function\\" && l2 !== \\"dangerouslySetInnerHTML\\" && (l2 !== (l2 = l2.replace(/^xlink:?/, \\"\\")) ? u2 == null || u2 === false ? n2.removeAttributeNS(\\"http://www.w3.org/1999/xlink\\", l2.toLowerCase()) : n2.setAttributeNS(\\"http://www.w3.org/1999/xlink\\", l2.toLowerCase(), u2) : u2 == null || u2 === false && !/^ar/.test(l2) ? n2.removeAttribute(l2) : n2.setAttribute(l2, u2));
+}
+function N(l2) {
+  this.l[l2.type](n.event ? n.event(l2) : l2);
+}
+function z(n2, l2, u2) {
+  var i2, t2;
+  for (i2 = 0; i2 < n2.__k.length; i2++)
+    (t2 = n2.__k[i2]) && (t2.__ = n2, t2.__e && (typeof t2.type == \\"function\\" && t2.__k.length > 1 && z(t2, l2, u2), l2 = x(u2, t2, t2, n2.__k, null, t2.__e, l2), typeof n2.type == \\"function\\" && (n2.__d = l2)));
+}
+function T(l2, u2, i2, t2, r2, o2, f2, e2, c2) {
+  var a2, v2, h2, y2, _2, k2, w2, m2, b2, x2, A2, P2 = u2.type;
+  if (u2.constructor !== void 0)
+    return null;
+  (a2 = n.__b) && a2(u2);
+  try {
+    n:
+      if (typeof P2 == \\"function\\") {
+        if (m2 = u2.props, b2 = (a2 = P2.contextType) && t2[a2.__c], x2 = a2 ? b2 ? b2.props.value : a2.__ : t2, i2.__c ? w2 = (v2 = u2.__c = i2.__c).__ = v2.__E : (\\"prototype\\" in P2 && P2.prototype.render ? u2.__c = v2 = new P2(m2, x2) : (u2.__c = v2 = new d(m2, x2), v2.constructor = P2, v2.render = L), b2 && b2.sub(v2), v2.props = m2, v2.state || (v2.state = {}), v2.context = x2, v2.__n = t2, h2 = v2.__d = true, v2.__h = []), v2.__s == null && (v2.__s = v2.state), P2.getDerivedStateFromProps != null && (v2.__s == v2.state && (v2.__s = s({}, v2.__s)), s(v2.__s, P2.getDerivedStateFromProps(m2, v2.__s))), y2 = v2.props, _2 = v2.state, h2)
+          P2.getDerivedStateFromProps == null && v2.componentWillMount != null && v2.componentWillMount(), v2.componentDidMount != null && v2.__h.push(v2.componentDidMount);
+        else {
+          if (P2.getDerivedStateFromProps == null && m2 !== y2 && v2.componentWillReceiveProps != null && v2.componentWillReceiveProps(m2, x2), !v2.__e && v2.shouldComponentUpdate != null && v2.shouldComponentUpdate(m2, v2.__s, x2) === false || u2.__v === i2.__v) {
+            v2.props = m2, v2.state = v2.__s, u2.__v !== i2.__v && (v2.__d = false), v2.__v = u2, u2.__e = i2.__e, u2.__k = i2.__k, v2.__h.length && f2.push(v2), z(u2, e2, l2);
+            break n;
+          }
+          v2.componentWillUpdate != null && v2.componentWillUpdate(m2, v2.__s, x2), v2.componentDidUpdate != null && v2.__h.push(function() {
+            v2.componentDidUpdate(y2, _2, k2);
+          });
+        }
+        v2.context = x2, v2.props = m2, v2.state = v2.__s, (a2 = n.__r) && a2(u2), v2.__d = false, v2.__v = u2, v2.__P = l2, a2 = v2.render(v2.props, v2.state, v2.context), v2.state = v2.__s, v2.getChildContext != null && (t2 = s(s({}, t2), v2.getChildContext())), h2 || v2.getSnapshotBeforeUpdate == null || (k2 = v2.getSnapshotBeforeUpdate(y2, _2)), A2 = a2 != null && a2.type == p && a2.key == null ? a2.props.children : a2, g(l2, Array.isArray(A2) ? A2 : [A2], u2, i2, t2, r2, o2, f2, e2, c2), v2.base = u2.__e, v2.__h.length && f2.push(v2), w2 && (v2.__E = v2.__ = null), v2.__e = false;
+      } else
+        o2 == null && u2.__v === i2.__v ? (u2.__k = i2.__k, u2.__e = i2.__e) : u2.__e = j(i2.__e, u2, i2, t2, r2, o2, f2, c2);
+    (a2 = n.diffed) && a2(u2);
+  } catch (l3) {
+    u2.__v = null, n.__e(l3, u2, i2);
+  }
+  return u2.__e;
+}
+function $(l2, u2) {
+  n.__c && n.__c(u2, l2), l2.some(function(u3) {
+    try {
+      l2 = u3.__h, u3.__h = [], l2.some(function(n2) {
+        n2.call(u3);
+      });
+    } catch (l3) {
+      n.__e(l3, u3.__v);
+    }
+  });
+}
+function j(n2, l2, u2, i2, t2, r2, o2, c2) {
+  var s2, a2, v2, h2, y2, p2 = u2.props, d2 = l2.props;
+  if (t2 = l2.type === \\"svg\\" || t2, r2 != null) {
+    for (s2 = 0; s2 < r2.length; s2++)
+      if ((a2 = r2[s2]) != null && ((l2.type === null ? a2.nodeType === 3 : a2.localName === l2.type) || n2 == a2)) {
+        n2 = a2, r2[s2] = null;
+        break;
+      }
+  }
+  if (n2 == null) {
+    if (l2.type === null)
+      return document.createTextNode(d2);
+    n2 = t2 ? document.createElementNS(\\"http://www.w3.org/2000/svg\\", l2.type) : document.createElement(l2.type, d2.is && {is: d2.is}), r2 = null, c2 = false;
+  }
+  if (l2.type === null)
+    p2 !== d2 && n2.data != d2 && (n2.data = d2);
+  else {
+    if (r2 != null && (r2 = e.slice.call(n2.childNodes)), v2 = (p2 = u2.props || f).dangerouslySetInnerHTML, h2 = d2.dangerouslySetInnerHTML, !c2) {
+      if (r2 != null)
+        for (p2 = {}, y2 = 0; y2 < n2.attributes.length; y2++)
+          p2[n2.attributes[y2].name] = n2.attributes[y2].value;
+      (h2 || v2) && (h2 && v2 && h2.__html == v2.__html || (n2.innerHTML = h2 && h2.__html || \\"\\"));
+    }
+    A(n2, d2, p2, t2, c2), h2 ? l2.__k = [] : (s2 = l2.props.children, g(n2, Array.isArray(s2) ? s2 : [s2], l2, u2, i2, l2.type !== \\"foreignObject\\" && t2, r2, o2, f, c2)), c2 || (\\"value\\" in d2 && (s2 = d2.value) !== void 0 && s2 !== n2.value && C(n2, \\"value\\", s2, p2.value, false), \\"checked\\" in d2 && (s2 = d2.checked) !== void 0 && s2 !== n2.checked && C(n2, \\"checked\\", s2, p2.checked, false));
+  }
+  return n2;
+}
+function H(l2, u2, i2) {
+  try {
+    typeof l2 == \\"function\\" ? l2(u2) : l2.current = u2;
+  } catch (l3) {
+    n.__e(l3, i2);
+  }
+}
+function I(l2, u2, i2) {
+  var t2, r2, o2;
+  if (n.unmount && n.unmount(l2), (t2 = l2.ref) && (t2.current && t2.current !== l2.__e || H(t2, null, u2)), i2 || typeof l2.type == \\"function\\" || (i2 = (r2 = l2.__e) != null), l2.__e = l2.__d = void 0, (t2 = l2.__c) != null) {
+    if (t2.componentWillUnmount)
+      try {
+        t2.componentWillUnmount();
+      } catch (l3) {
+        n.__e(l3, u2);
+      }
+    t2.base = t2.__P = null;
+  }
+  if (t2 = l2.__k)
+    for (o2 = 0; o2 < t2.length; o2++)
+      t2[o2] && I(t2[o2], u2, i2);
+  r2 != null && a(r2);
+}
+function L(n2, l2, u2) {
+  return this.constructor(n2, u2);
+}
+n = {__e: function(n2, l2) {
+  for (var u2, i2; l2 = l2.__; )
+    if ((u2 = l2.__c) && !u2.__)
+      try {
+        if (u2.constructor && u2.constructor.getDerivedStateFromError != null && (i2 = true, u2.setState(u2.constructor.getDerivedStateFromError(n2))), u2.componentDidCatch != null && (i2 = true, u2.componentDidCatch(n2)), i2)
+          return w(u2.__E = u2);
+      } catch (l3) {
+        n2 = l3;
+      }
+  throw n2;
+}}, d.prototype.setState = function(n2, l2) {
+  var u2;
+  u2 = this.__s !== this.state ? this.__s : this.__s = s({}, this.state), typeof n2 == \\"function\\" && (n2 = n2(u2, this.props)), n2 && s(u2, n2), n2 != null && this.__v && (l2 && this.__h.push(l2), w(this));
+}, d.prototype.forceUpdate = function(n2) {
+  this.__v && (this.__e = true, n2 && this.__h.push(n2), w(this));
+}, d.prototype.render = p, u = [], i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, m.__r = 0, o = 0;
 
-var t$1,u$1,r,o$1=0,i$1=[],c$1=n.__r,f$1=n.diffed,e$1=n.__c,a$1=n.unmount;function v$1(t,r){n.__h&&n.__h(u$1,t,o$1||r),o$1=0;var i=u$1.__H||(u$1.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({}),i.__[t]}function y(r,o){var i=v$1(t$1++,3);!n.__s&&j$1(i.__H,o)&&(i.__=r,i.__H=o,u$1.__H.__h.push(i));}function q(){i$1.some(function(t){if(t.__P)try{t.__H.__h.forEach(b),t.__H.__h.forEach(g$1),t.__H.__h=[];}catch(u){return t.__H.__h=[],n.__e(u,t.__v),!0}}),i$1=[];}n.__r=function(n){c$1&&c$1(n),t$1=0;var r=(u$1=n.__c).__H;r&&(r.__h.forEach(b),r.__h.forEach(g$1),r.__h=[]);},n.diffed=function(t){f$1&&f$1(t);var u=t.__c;u&&u.__H&&u.__H.__h.length&&(1!==i$1.push(u)&&r===n.requestAnimationFrame||((r=n.requestAnimationFrame)||function(n){var t,u=function(){clearTimeout(r),x$1&&cancelAnimationFrame(t),setTimeout(n);},r=setTimeout(u,100);x$1&&(t=requestAnimationFrame(u));})(q));},n.__c=function(t,u){u.some(function(t){try{t.__h.forEach(b),t.__h=t.__h.filter(function(n){return !n.__||g$1(n)});}catch(r){u.some(function(n){n.__h&&(n.__h=[]);}),u=[],n.__e(r,t.__v);}}),e$1&&e$1(t,u);},n.unmount=function(t){a$1&&a$1(t);var u=t.__c;if(u&&u.__H)try{u.__H.__.forEach(b);}catch(t){n.__e(t,u.__v);}};var x$1=\\"function\\"==typeof requestAnimationFrame;function b(n){\\"function\\"==typeof n.u&&n.u();}function g$1(n){n.u=n.__();}function j$1(n,t){return !n||t.some(function(t,u){return t!==n[u]})}
+var t$1, u$1, r, o$1 = 0, i$1 = [], c$1 = n.__r, f$1 = n.diffed, e$1 = n.__c, a$1 = n.unmount;
+function v$1(t2, r2) {
+  n.__h && n.__h(u$1, t2, o$1 || r2), o$1 = 0;
+  var i2 = u$1.__H || (u$1.__H = {__: [], __h: []});
+  return t2 >= i2.__.length && i2.__.push({}), i2.__[t2];
+}
+function y(r2, o2) {
+  var i2 = v$1(t$1++, 3);
+  !n.__s && j$1(i2.__H, o2) && (i2.__ = r2, i2.__H = o2, u$1.__H.__h.push(i2));
+}
+function q() {
+  i$1.some(function(t2) {
+    if (t2.__P)
+      try {
+        t2.__H.__h.forEach(b), t2.__H.__h.forEach(g$1), t2.__H.__h = [];
+      } catch (u2) {
+        return t2.__H.__h = [], n.__e(u2, t2.__v), true;
+      }
+  }), i$1 = [];
+}
+n.__r = function(n2) {
+  c$1 && c$1(n2), t$1 = 0;
+  var r2 = (u$1 = n2.__c).__H;
+  r2 && (r2.__h.forEach(b), r2.__h.forEach(g$1), r2.__h = []);
+}, n.diffed = function(t2) {
+  f$1 && f$1(t2);
+  var u2 = t2.__c;
+  u2 && u2.__H && u2.__H.__h.length && (i$1.push(u2) !== 1 && r === n.requestAnimationFrame || ((r = n.requestAnimationFrame) || function(n2) {
+    var t3, u3 = function() {
+      clearTimeout(r2), x$1 && cancelAnimationFrame(t3), setTimeout(n2);
+    }, r2 = setTimeout(u3, 100);
+    x$1 && (t3 = requestAnimationFrame(u3));
+  })(q));
+}, n.__c = function(t2, u2) {
+  u2.some(function(t3) {
+    try {
+      t3.__h.forEach(b), t3.__h = t3.__h.filter(function(n2) {
+        return !n2.__ || g$1(n2);
+      });
+    } catch (r2) {
+      u2.some(function(n2) {
+        n2.__h && (n2.__h = []);
+      }), u2 = [], n.__e(r2, t3.__v);
+    }
+  }), e$1 && e$1(t2, u2);
+}, n.unmount = function(t2) {
+  a$1 && a$1(t2);
+  var u2 = t2.__c;
+  if (u2 && u2.__H)
+    try {
+      u2.__H.__.forEach(b);
+    } catch (t3) {
+      n.__e(t3, u2.__v);
+    }
+};
+var x$1 = typeof requestAnimationFrame == \\"function\\";
+function b(n2) {
+  typeof n2.u == \\"function\\" && n2.u();
+}
+function g$1(n2) {
+  n2.u = n2.__();
+}
+function j$1(n2, t2) {
+  return !n2 || t2.some(function(t3, u2) {
+    return t3 !== n2[u2];
+  });
+}
 
 function App() {
       y(() => {
@@ -17,8 +328,35 @@ function App() {
 `;
 
 exports[`build with skypack 1`] = `
-"var n,i,r;function h(n,l,u){var i,t,o,r=arguments,f={};for(o in l)\\"key\\"==o?i=l[o]:\\"ref\\"==o?t=l[o]:f[o]=l[o];if(arguments.length>3)for(u=[u],o=3;o<arguments.length;o++)u.push(r[o]);if(null!=u&&(f.children=u),\\"function\\"==typeof n&&null!=n.defaultProps)for(o in n.defaultProps)void 0===f[o]&&(f[o]=n.defaultProps[o]);return v(n,f,i,t,null)}function v(l,u,i,t,o){var r={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:o};return null==o&&(r.__v=r),null!=n.vnode&&n.vnode(r),r}n={__e:function(n,l){for(var u,i,t,o=l.__h;l=l.__;)if((u=l.__c)&&!u.__)try{if((i=u.constructor)&&null!=i.getDerivedStateFromError&&(u.setState(i.getDerivedStateFromError(n)),t=u.__d),null!=u.componentDidCatch&&(u.componentDidCatch(n),t=u.__d),t)return l.__h=o,u.__E=u}catch(l){n=l;}throw n}},i=\\"function\\"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,r=0;
+"var n, i, r;
+function v(n2, l2, u2) {
+  var i2, t2, o2, r2 = arguments, f2 = {};
+  for (o2 in l2)
+    o2 == \\"key\\" ? i2 = l2[o2] : o2 == \\"ref\\" ? t2 = l2[o2] : f2[o2] = l2[o2];
+  if (arguments.length > 3)
+    for (u2 = [u2], o2 = 3; o2 < arguments.length; o2++)
+      u2.push(r2[o2]);
+  if (u2 != null && (f2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
+    for (o2 in n2.defaultProps)
+      f2[o2] === void 0 && (f2[o2] = n2.defaultProps[o2]);
+  return h(n2, f2, i2, t2, null);
+}
+function h(l2, u2, i2, t2, o2) {
+  var r2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o2 == null ? ++n.__v : o2};
+  return n.vnode != null && n.vnode(r2), r2;
+}
+n = {__e: function(n2, l2) {
+  for (var u2, i2, t2, o2 = l2.__h; l2 = l2.__; )
+    if ((u2 = l2.__c) && !u2.__)
+      try {
+        if ((i2 = u2.constructor) && i2.getDerivedStateFromError != null && (u2.setState(i2.getDerivedStateFromError(n2)), t2 = u2.__d), u2.componentDidCatch != null && (u2.componentDidCatch(n2), t2 = u2.__d), t2)
+          return l2.__h = o2, u2.__E = u2;
+      } catch (l3) {
+        n2 = l3;
+      }
+  throw n2;
+}, __v: 0}, i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
 
-console.log(h);
+console.log(v);
 "
 `;
