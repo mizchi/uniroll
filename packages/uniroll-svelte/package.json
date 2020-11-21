@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@tsconfig/svelte": "^1.0.10",
-    "uniroll": "^2.6.0"
+    "uniroll": "^2.6.1"
   },
   "devDependencies": {
     "svelte": "3.29.7"
