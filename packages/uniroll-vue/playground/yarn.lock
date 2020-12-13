@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@rollup/plugin-replace@^2.3.3":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.3.3.tgz#cd6bae39444de119f5d905322b91ebd4078562e7"
-  integrity sha512-XPmVXZ7IlaoWaJLkSCDaa0Y6uVo5XQYHhiMFzOd5qSv5rE+t/UJToPIOE56flKIxBFQI27ONsxb7dqHnwSsjKQ==
+"@rollup/plugin-replace@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.3.4.tgz#7dd84c17755d62b509577f2db37eb524d7ca88ca"
+  integrity sha512-waBhMzyAtjCL1GwZes2jaE9MjuQ/DQF2BatH3fRivUF3z0JBFrU0U6iBNC/4WR+2rLKhaAhPWDNPYp4mI6RqdQ==
   dependencies:
-    "@rollup/pluginutils" "^3.0.8"
-    magic-string "^0.25.5"
+    "@rollup/pluginutils" "^3.1.0"
+    magic-string "^0.25.7"
 
-"@rollup/pluginutils@^3.0.8":
+"@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
   integrity sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==
@@ -1482,9 +1482,9 @@ inherits@2.0.3:
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
 
 ini@^1.3.4, ini@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
-  integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
+  integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
 internal-ip@^4.3.0:
   version "4.3.0"
@@ -1821,7 +1821,7 @@ loglevel@^1.6.8:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.7.0.tgz#728166855a740d59d38db01cf46f042caa041bb0"
   integrity sha512-i2sY04nal5jDcagM3FMfG++T69GEEM8CYuOfeOIvmXzOIcwE9a/CJPR0MFM97pYMj/u10lzz7/zd7+qwhrBTqQ==
 
-magic-string@^0.25.5:
+magic-string@^0.25.7:
   version "0.25.7"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.7.tgz#3f497d6fd34c669c6798dcb821f2ef31f5445051"
   integrity sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==
@@ -2509,22 +2509,22 @@ rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rollup-plugin-http-resolve@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-http-resolve/-/rollup-plugin-http-resolve-2.4.3.tgz#85744b488391e379d70401f350fe4c1ba786159e"
-  integrity sha512-oCEvg0Jn9xsi8H1U9TsV2QVG9Svr0K6u3wIiAJtHTfYLZ+H0iWgIA6q/hgfDHgQW135AvZ2KY6alPpgvK0axmA==
+rollup-plugin-http-resolve@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-http-resolve/-/rollup-plugin-http-resolve-2.6.1.tgz#5a2acb0389d0bd240641e83ee5842393c97582dd"
+  integrity sha512-BTU0LrjjZul5PnYAuPwqabuWTDRwSHFxpTeb5Gg4AmI7bWV38WgMZWYxy8OleZTnKQl0TFW0fX4HMGCv1Lq+cg==
 
-rollup-plugin-memfs@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-memfs/-/rollup-plugin-memfs-2.4.3.tgz#5df8f9672a424c187d8d57a7d4e52103fd071051"
-  integrity sha512-wOc3OoacP8v8E65Xss1PFkHLJVqzZ3pSa96ctVA5uRAyq32/bU+e2dozmHjLhEtymdwwTr88ok2toqWKTo1o8w==
+rollup-plugin-memfs@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-memfs/-/rollup-plugin-memfs-2.6.1.tgz#9091b49c3633e9262305721a590133d3a938b998"
+  integrity sha512-nEHrY+rEAogk0tmaTSCNLKRQ7oPgbyju78N6nkOeBa4XG4sgFioRLNbZh9C6QvWrUD+/ZHfy2Q38UBkSC73/pg==
   dependencies:
     memfs "^3.2.0"
 
-rollup-plugin-vue@^6.0.0-beta.10:
-  version "6.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-vue/-/rollup-plugin-vue-6.0.0-beta.10.tgz#66d9b9a8dd2d085267d1cc398ea0113360879ac1"
-  integrity sha512-8TZJmROiSRjWoHRR6id0/ktOBOUGuI302xDBq4YBiA/tnnXdoY3oFGtvRWzT5ldX0jTJ8QX40rrJOw2SvcWwxQ==
+rollup-plugin-vue@^6.0.0-beta.11:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-vue/-/rollup-plugin-vue-6.0.0.tgz#e379e93e5ae9a8648522f698be2e452e8672aaf2"
+  integrity sha512-oVvUd84d5u73M2HYM3XsMDLtZRIA/tw2U0dmHlXU2UWP5JARYHzh/U9vcxaN/x/9MrepY7VH3pHFeOhrWpxs/Q==
   dependencies:
     debug "^4.1.1"
     hash-sum "^2.0.0"
@@ -3025,18 +3025,20 @@ union-value@^1.0.0:
     set-value "^2.0.1"
 
 "uniroll-vue@link:..":
-  version "0.0.0"
-  uid ""
-
-uniroll@^2.4.2:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/uniroll/-/uniroll-2.4.3.tgz#1b2da3cfdcdf063c651d06adb234190f09323e39"
-  integrity sha512-n3L5tmGgIOMPgbNRIVEt/IrvNCxmWY4d7dOXtz4TQa/JWDlHSWCv2On2uH97wntQrn2cQ1bDLASLQ/ViBQ9njA==
+  version "2.6.1"
   dependencies:
-    "@rollup/plugin-replace" "^2.3.3"
+    rollup-plugin-vue "^6.0.0-beta.11"
+    uniroll "^2.6.1"
+
+uniroll@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/uniroll/-/uniroll-2.6.1.tgz#18825d76d89e3e4c7dced64af14a4b73757d6096"
+  integrity sha512-r0Lqu/BoQtv0da2vuTvvsTbNIBW/CSX+sBMYL+f2EH5nCj/Kf/6V5hwHBYV0QdYuCevcP8OzTjbmTsn9+cvpEA==
+  dependencies:
+    "@rollup/plugin-replace" "^2.3.4"
     querystring-es3 "^0.2.1"
-    rollup-plugin-http-resolve "^2.4.3"
-    rollup-plugin-memfs "^2.4.3"
+    rollup-plugin-http-resolve "^2.6.1"
+    rollup-plugin-memfs "^2.6.1"
     url "^0.11.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
