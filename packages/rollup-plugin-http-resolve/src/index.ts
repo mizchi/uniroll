@@ -17,15 +17,18 @@ type HttpResolveOptions = {
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
+  transform?: (code: string) => string;
   fallback?: (
     id: string,
-    importer: string
-  ) => Promise<{ rewriten: string; warning: boolean } | void>;
+    importer: string,
+    onWarn: (warn: any) => void
+  ) => Promise<string | void> | void | string;
 };
 const defaultCache = new Map();
 export const httpResolve = function httpResolve_({
   cache = defaultCache,
   onRequest,
+  transform,
   onUseCache,
   fetcher,
   fallback,
@@ -34,7 +37,6 @@ export const httpResolve = function httpResolve_({
     name: "http-resolve",
     async resolveId(id: string, importer: string) {
       log("[http-resolve:resolveId:enter]", id, "from", importer);
-
       // on network resolve
       if (importer && isHttpProtocol(importer)) {
         if (id.startsWith("https://")) {
@@ -52,7 +54,6 @@ export const httpResolve = function httpResolve_({
         } else if (id.startsWith(".")) {
           // ./xxx/yyy
           // relative path
-
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
           log("[http-resolve:end] return with relativePath", newId);
@@ -60,15 +61,10 @@ export const httpResolve = function httpResolve_({
         }
       }
       if (fallback) {
-        log("[http-resolve:end] use fallback to", id);
-        const fallbacked = await fallback(id, importer);
-        if (fallbacked && fallbacked.rewriten) {
-          if (fallbacked.warning) {
-            this.warn(
-              `[http-resolve:fallback] ${id} => ${fallbacked.rewriten}`
-            );
-          }
-          return fallbacked.rewriten;
+        const fallbacked = await fallback(id, importer, this.warn);
+        log("[http-resolve:end] use fallback to", id, "=>", fallbacked);
+        if (fallbacked) {
+          return fallbacked;
         }
       }
     },
@@ -86,7 +82,8 @@ export const httpResolve = function httpResolve_({
         }
         onRequest?.(id);
         if (fetcher) {
-          const code = await fetcher(id);
+          let code = await fetcher(id);
+          code = transform?.(code) ?? code;
           await cache.set(id, code);
           return code;
         } else {
@@ -94,7 +91,8 @@ export const httpResolve = function httpResolve_({
           if (!res.ok) {
             throw res.statusText;
           }
-          const code = await res.text();
+          let code = await res.text();
+          code = transform?.(code) ?? code;
           await cache.set(id, code);
           return code;
         }
@@ -103,11 +101,16 @@ export const httpResolve = function httpResolve_({
   } as Plugin;
 };
 
-export function createFallback({ importmaps }: { importmaps?: ImportMaps }) {
-  return async (
+export function createImportMapsFallback({
+  importmaps,
+}: {
+  importmaps?: ImportMaps;
+}) {
+  return (
     id: string,
-    importer: string | void = undefined
-  ): Promise<void | { rewriten: string; warning: boolean }> => {
+    importer: string | void = undefined,
+    warn: (warning: any) => any
+  ): Promise<void | string> | void | string => {
     if (importer == null) {
       return;
     }
@@ -120,10 +123,10 @@ export function createFallback({ importmaps }: { importmaps?: ImportMaps }) {
 
     const mapped = importmaps?.imports[id];
     if (mapped) {
-      return { rewriten: mapped, warning: false };
+      return mapped;
     }
-
-    return { rewriten: `https://cdn.skypack.dev/${id}`, warning: true };
+    warn(`missed fallback to https://cdn.skypack.dev/${id}`);
+    return `https://cdn.skypack.dev/${id}`;
   };
 }
 

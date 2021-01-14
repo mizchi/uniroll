@@ -328,35 +328,8 @@ function App() {
 `;
 
 exports[`build with skypack 1`] = `
-"var n, i, r;
-function v(n2, l2, u2) {
-  var i2, t2, o2, r2 = arguments, f2 = {};
-  for (o2 in l2)
-    o2 == \\"key\\" ? i2 = l2[o2] : o2 == \\"ref\\" ? t2 = l2[o2] : f2[o2] = l2[o2];
-  if (arguments.length > 3)
-    for (u2 = [u2], o2 = 3; o2 < arguments.length; o2++)
-      u2.push(r2[o2]);
-  if (u2 != null && (f2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
-    for (o2 in n2.defaultProps)
-      f2[o2] === void 0 && (f2[o2] = n2.defaultProps[o2]);
-  return h(n2, f2, i2, t2, null);
-}
-function h(l2, u2, i2, t2, o2) {
-  var r2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o2 == null ? ++n.__v : o2};
-  return n.vnode != null && n.vnode(r2), r2;
-}
-n = {__e: function(n2, l2) {
-  for (var u2, i2, t2, o2 = l2.__h; l2 = l2.__; )
-    if ((u2 = l2.__c) && !u2.__)
-      try {
-        if ((i2 = u2.constructor) && i2.getDerivedStateFromError != null && (u2.setState(i2.getDerivedStateFromError(n2)), t2 = u2.__d), u2.componentDidCatch != null && (u2.componentDidCatch(n2), t2 = u2.__d), t2)
-          return l2.__h = o2, u2.__E = u2;
-      } catch (l3) {
-        n2 = l3;
-      }
-  throw n2;
-}, __v: 0}, i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
+"var a,F,O;function I(t,e,n){var r,l,_,i=arguments,c={};for(_ in e)_==\\"key\\"?r=e[_]:_==\\"ref\\"?l=e[_]:c[_]=e[_];if(arguments.length>3)for(n=[n],_=3;_<arguments.length;_++)n.push(i[_]);if(n!=null&&(c.children=n),typeof t==\\"function\\"&&t.defaultProps!=null)for(_ in t.defaultProps)c[_]===void 0&&(c[_]=t.defaultProps[_]);return P(t,c,r,l,null)}function P(t,e,n,r,l){var _={type:t,props:e,key:n,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:l??++a.__v};return a.vnode!=null&&a.vnode(_),_}a={__e:function(t,e){for(var n,r,l,_=e.__h;e=e.__;)if((n=e.__c)&&!n.__)try{if((r=n.constructor)&&r.getDerivedStateFromError!=null&&(n.setState(r.getDerivedStateFromError(t)),l=n.__d),n.componentDidCatch!=null&&(n.componentDidCatch(t),l=n.__d),l)return e.__h=_,n.__E=n}catch(i){t=i;}throw t},__v:0},F=typeof Promise==\\"function\\"?Promise.prototype.then.bind(Promise.resolve()):setTimeout,O=0;
 
-console.log(v);
+console.log(I);
 "
 `;
