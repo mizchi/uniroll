@@ -5,8 +5,8 @@ export type ImportMaps = {
   imports: { [k: string]: string };
 };
 
-function isHttpProtocol(id: string) {
-  return id.startsWith("http://") || id.startsWith("https://");
+function isHttpProtocol(id: string | undefined | null) {
+  return id?.startsWith("http://") || id?.startsWith("https://");
 }
 
 const DEBUG = false;
@@ -17,22 +17,20 @@ type HttpResolveOptions = {
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
-  transform?: (code: string) => string;
   fallback?: (
     id: string,
     importer: string,
-    onWarn: (warn: any) => void
+    warn: (warn: any) => void
   ) => Promise<string | void> | void | string;
 };
 const defaultCache = new Map();
 export const httpResolve = function httpResolve_({
   cache = defaultCache,
   onRequest,
-  transform,
   onUseCache,
   fetcher,
   fallback,
-}: HttpResolveOptions) {
+}: HttpResolveOptions = {}) {
   return {
     name: "http-resolve",
     async resolveId(id: string, importer: string) {
@@ -44,23 +42,22 @@ export const httpResolve = function httpResolve_({
           return id;
         }
         const { pathname, protocol, host } = new URL(importer);
+        // for skypack
         if (id.startsWith("/")) {
-          // /_/...
+          // pattern: /_/ in https://cdn.skypack.dev
           log(
             "[http-reslove:end] return with host root",
             `${protocol}//${host}${id}`
           );
           return `${protocol}//${host}${id}`;
         } else if (id.startsWith(".")) {
-          // ./xxx/yyy
-          // relative path
+          // pattern: ./xxx/yyy in https://esm.sh
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
           log("[http-resolve:end] return with relativePath", newId);
           return newId;
         }
-      }
-      if (fallback) {
+      } else if (fallback) {
         const fallbacked = await fallback(id, importer, this.warn);
         log("[http-resolve:end] use fallback to", id, "=>", fallbacked);
         if (fallbacked) {
@@ -71,7 +68,6 @@ export const httpResolve = function httpResolve_({
     async load(id: string) {
       log("[http-resolve:load]", id);
       if (id === null) {
-        this.warn("irregular missing id");
         return;
       }
       if (isHttpProtocol(id)) {
@@ -82,8 +78,7 @@ export const httpResolve = function httpResolve_({
         }
         onRequest?.(id);
         if (fetcher) {
-          let code = await fetcher(id);
-          code = transform?.(code) ?? code;
+          const code = await fetcher(id);
           await cache.set(id, code);
           return code;
         } else {
@@ -91,8 +86,7 @@ export const httpResolve = function httpResolve_({
           if (!res.ok) {
             throw res.statusText;
           }
-          let code = await res.text();
-          code = transform?.(code) ?? code;
+          const code = await res.text();
           await cache.set(id, code);
           return code;
         }
