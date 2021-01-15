@@ -1,5 +1,5 @@
 {
-  "name": "uniroll-svelte",
+  "name": "rollup-plugin-uniroll-svelte",
   "version": "2.6.1",
   "license": "MIT",
   "main": "lib/index",
