@@ -3,6 +3,7 @@
   "version": "2.6.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "module": "src/",
   "license": "MIT",
   "scripts": {
     "test": "jest",

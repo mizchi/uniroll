@@ -25,6 +25,7 @@ function searchFile(
   extensions: string[]
 ) {
   for (const ext of ["", ...extensions]) {
+    // console.log("searching...", filepath + ext);
     if (vfs.has(filepath + ext)) {
       return filepath + ext;
     }

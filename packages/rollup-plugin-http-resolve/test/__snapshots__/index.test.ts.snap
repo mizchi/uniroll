@@ -334,6 +334,13 @@ console.log(I);
 "
 `;
 
+exports[`build with esm.sh 2`] = `
+"var a,F,O;function I(t,e,n){var r,l,_,i=arguments,c={};for(_ in e)_==\\"key\\"?r=e[_]:_==\\"ref\\"?l=e[_]:c[_]=e[_];if(arguments.length>3)for(n=[n],_=3;_<arguments.length;_++)n.push(i[_]);if(n!=null&&(c.children=n),typeof t==\\"function\\"&&t.defaultProps!=null)for(_ in t.defaultProps)c[_]===void 0&&(c[_]=t.defaultProps[_]);return P(t,c,r,l,null)}function P(t,e,n,r,l){var _={type:t,props:e,key:n,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:l??++a.__v};return a.vnode!=null&&a.vnode(_),_}a={__e:function(t,e){for(var n,r,l,_=e.__h;e=e.__;)if((n=e.__c)&&!n.__)try{if((r=n.constructor)&&r.getDerivedStateFromError!=null&&(n.setState(r.getDerivedStateFromError(t)),l=n.__d),n.componentDidCatch!=null&&(n.componentDidCatch(t),l=n.__d),l)return e.__h=_,n.__E=n}catch(i){t=i;}throw t},__v:0},F=typeof Promise==\\"function\\"?Promise.prototype.then.bind(Promise.resolve()):setTimeout,O=0;
+
+console.log(I);
+"
+`;
+
 exports[`build with fallback 1`] = `
 "function notImplemented(msg){const message=msg?\`Not implemented: \${msg}\`:\\"Not implemented\\";throw new Error(message);}
 function intoCallbackAPIWithIntercept(func,interceptor,cb,...args){func(...args).then((value)=>cb&&cb(null,interceptor(value))).catch((err)=>cb&&cb(err,null));}

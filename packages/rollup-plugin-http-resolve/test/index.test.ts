@@ -61,7 +61,7 @@ test("build with skypack", async () => {
   expect(code).toMatchSnapshot();
 });
 
-test.only("build with fallback", async () => {
+test("build with fallback", async () => {
   const vol = Volume.fromJSON({
     "/index.js": `
     import {h} from "preact";
@@ -91,7 +91,7 @@ test.only("build with fallback", async () => {
 test("build nested with skypack", async () => {
   const vol = Volume.fromJSON({
     "/index.js": `
-    import {h} from "https://cdn.skypack.dev/preact@10.4.6";
+    import { h } from "https://cdn.skypack.dev/preact@10.4.6";
     import { useEffect } from "https://cdn.skypack.dev/preact@10.4.6/hooks";
     function App() {
       useEffect(() => {

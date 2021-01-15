@@ -94,34 +94,3 @@ export const httpResolve = function httpResolve_({
     },
   } as Plugin;
 };
-
-export function createImportMapsFallback({
-  importmaps,
-}: {
-  importmaps?: ImportMaps;
-}) {
-  return (
-    id: string,
-    importer: string | void = undefined,
-    warn: (warning: any) => any
-  ): Promise<void | string> | void | string => {
-    if (importer == null) {
-      return;
-    }
-    if (id.startsWith("http")) {
-      return;
-    }
-    if (id.startsWith(".")) {
-      return;
-    }
-
-    const mapped = importmaps?.imports[id];
-    if (mapped) {
-      return mapped;
-    }
-    warn(`missed fallback to https://cdn.skypack.dev/${id}`);
-    return `https://cdn.skypack.dev/${id}`;
-  };
-}
-
-// export default httpResolve;

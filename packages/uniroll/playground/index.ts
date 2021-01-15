@@ -47,7 +47,7 @@ render(<App />, document.body);
   });
   const out = await rolled.generate({
     file: "index.js",
-    format: "iife",
+    format: "es",
   });
   const code = out.output[0].code;
   eval(code);

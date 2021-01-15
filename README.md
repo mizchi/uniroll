@@ -6,7 +6,7 @@ Opinionated frontend compiler.
 
 - Run in browser and webworker.
 - TypeScript Support
-- Resolve `http://...` url modules like `deno`.
+- Resolve `https://...` url modules like `deno`.
 
 ## How it works
 

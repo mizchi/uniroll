@@ -1,7 +1,9 @@
 # rollup-plugin-virtual-fs
 
-```
-npm install rollup-plugin-memfs --save
+```bash
+$ npm install rollup-plugin-virtual-fs --save
+# or
+$ yarn add rollup-plugin-virtual-fs
 ```
 
 ## Example
@@ -11,13 +13,19 @@ npm install rollup-plugin-memfs --save
 import { virtualFs } from "rollup-plugin-virtual-fs";
 
 const files = {
-  "file:///index.js"
-}
+  "/index.js": `import foo from "./foo";export default () => console.log(foo);`,
+  "/foo.js": 'export default "foo"',
+};
 
 export default {
   input: "file:///index.js",
   plugins: [
-    virtualFs(files)
+    virtualFs({
+      extensions: [".ts", ".tsx", ".js", "/index.js"], // Optional
+      files: {
+        "/index.js": "export default () => console.log('xxx')",
+      },
+    }),
   ],
 };
 ```

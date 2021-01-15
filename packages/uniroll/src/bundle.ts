@@ -20,7 +20,7 @@ export function bundle({
   cache = defaultCache,
   define = defaultDefine,
   importmaps = defaultImportMaps,
-  compilerOptions = defaultCompilerOptions,
+  compilerOptions = {},
   extraPlugins = [],
   rollupOptions,
 }: CompileOptions) {
@@ -40,7 +40,10 @@ export function bundle({
       }),
       virtualFs({ files }),
       transform({
-        compilerOptions,
+        compilerOptions: {
+          ...defaultCompilerOptions,
+          ...compilerOptions,
+        },
       }),
       json(),
       ...extraPlugins,
