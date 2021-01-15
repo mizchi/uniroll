@@ -18,10 +18,12 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-replace": "^2.3.4",
     "querystring-es3": "^0.2.1",
     "rollup-plugin-http-resolve": "^2.6.1",
     "rollup-plugin-memfs": "^2.6.1",
+    "rollup-plugin-virtual-fs": "^2.6.1",
     "url": "^0.11.0"
   },
   "devDependencies": {

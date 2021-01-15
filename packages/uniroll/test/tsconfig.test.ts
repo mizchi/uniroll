@@ -1,6 +1,7 @@
 import "isomorphic-unfetch";
+import ts from "typescript";
 
-import { compile } from "../src/index";
+import { bundle } from "../src/bundle";
 const files = {
   "/import-map.json": JSON.stringify({
     imports: {},
@@ -10,15 +11,17 @@ const files = {
 
 test("transform with tsconfig", async () => {
   try {
-    const bundle = await compile({
+    const bundled = await bundle({
       files,
       input: "/index.tsx",
-      tsconfig: {
-        target: "es5",
+      compilerOptions: {
+        target: ts.ScriptTarget.ES5,
       },
-      onwarn() {},
+      rollupOptions: {
+        onwarn() {},
+      },
     });
-    const out = await bundle.generate({ format: "es" });
+    const out = await bundled.generate({ format: "es" });
     // console.log(out.output[0].code);
     expect(out.output[0]).toMatchSnapshot();
   } catch (err) {

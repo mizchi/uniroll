@@ -2,39 +2,35 @@
 
 exports[`build 1`] = `
 Object {
-  "code": "var foo = 1;
-var foo$1 = {
-	foo: foo
-};
+  "code": "import { render, h } from 'https://esm.sh/preact';
 
-console.log('hello', foo$1);
+/* @jsx h */
+render(h(\\"h1\\", null, \\"hello\\"), document.body);
 ",
   "dynamicImports": Array [],
   "exports": Array [],
   "facadeModuleId": "/index.tsx",
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
-  "importedBindings": Object {},
-  "imports": Array [],
+  "importedBindings": Object {
+    "https://esm.sh/preact": Array [
+      "render",
+      "h",
+    ],
+  },
+  "imports": Array [
+    "https://esm.sh/preact",
+  ],
   "isDynamicEntry": false,
   "isEntry": true,
   "isImplicitEntry": false,
   "map": null,
   "modules": Object {
-    "/foo.json": Object {
-      "originalLength": 12,
-      "removedExports": Array [],
-      "renderedExports": Array [
-        "foo",
-        "default",
-      ],
-      "renderedLength": 39,
-    },
     "/index.tsx": Object {
-      "originalLength": 50,
+      "originalLength": 88,
       "removedExports": Array [],
       "renderedExports": Array [],
-      "renderedLength": 28,
+      "renderedLength": 59,
     },
   },
   "name": "index",

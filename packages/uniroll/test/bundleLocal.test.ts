@@ -1,17 +1,20 @@
 import "isomorphic-unfetch";
-import { bundle } from "../src/bundle";
-
+import { bundleLocal } from "../src/bundleLocal";
 const files = {
-  "/foo.json": '{ "foo": 1 }',
-  "/index.tsx": "import foo from './foo';\nconsole.log('hello', foo)",
+  "/index.tsx": `/* @jsx h */
+import { h, render } from 'preact';
+render(<h1>hello</h1>, document.body);
+`,
 };
+jest.setTimeout(150000);
 
 test("build", async () => {
   try {
-    const warned = [];
-    const bundled = await bundle({
-      files,
+    const warned: any = [];
+    const bundled = await bundleLocal({
       input: "/index.tsx",
+      files,
+      rewriteCdnPrefix: "https://esm.sh/",
       rollupOptions: {
         onwarn(warnings, defaultHandler) {
           warned.push(warnings);
@@ -19,8 +22,9 @@ test("build", async () => {
         },
       },
     });
-    expect(warned.length).toBe(0);
+    expect(warned).toHaveLength(0);
     const out = await bundled.generate({ format: "es" });
+    expect(out.output[0].code).toContain("https://esm.sh/preact");
     expect(out.output[0]).toMatchSnapshot();
   } catch (err) {
     console.log(err);
