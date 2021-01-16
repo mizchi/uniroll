@@ -18,8 +18,8 @@ export function bundleLocal({
   compilerOptions = defaultCompilerOptions,
   extraPlugins = [],
   rollupOptions,
-  rewriteCdnPrefix = "https://esm.sh/",
-}: CompileOptions & { rewriteCdnPrefix?: string }) {
+  cdnPrefix = "https://esm.sh/",
+}: CompileOptions) {
   const external = extractImportSpecfiers(Object.values(files))
     .filter((ex) => !ex.startsWith("."))
     .map((p) => `https://esm.sh/${p}`);
@@ -31,7 +31,7 @@ export function bundleLocal({
       workerPlugin(),
       virtualFs({ files }),
       transform({
-        rewriteCdnPrefix,
+        cdnPrefix,
         compilerOptions,
       }),
       json(),

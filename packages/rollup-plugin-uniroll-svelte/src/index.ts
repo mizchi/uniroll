@@ -38,11 +38,13 @@ export const svelte = (opts: SveltePluginOptions) => {
               module: ts.ModuleKind.ESNext,
             },
           });
+          // debugger;
           return {
             code: ret.outputText,
             map: ret.sourceMapText,
           };
         } else {
+          // debugger;
           return result.js;
         }
       }

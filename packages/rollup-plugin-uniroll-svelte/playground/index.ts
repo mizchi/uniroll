@@ -1,14 +1,8 @@
-// import "regenerator-runtime";
 import "./pre";
 import ts from "typescript";
 import { bundle } from "uniroll";
 import { svelte } from "../src/index";
 import { Plugin } from "rollup";
-// import * as svelte$ from "svelte";
-// @ts-ignore
-// global.svelte = svelte$;
-
-// TODO: Need svelte Inlining?
 
 const appCode = `import App from './App.svelte';
 
@@ -24,12 +18,12 @@ const app = new App({
 
 const svelteTsCode = `
 <script lang="ts">
-  // import { onMount } from "svelte";
+  import { onMount } from "svelte";
   export let name: string;
   export let counter: number = 0;
-  // onMount(() => {
-  //   setInterval(() => counter++, 1000);
-  // })
+  onMount(() => {
+    setInterval(() => counter++, 1000);
+  })
 </script>
 <style>
   span {
@@ -44,6 +38,7 @@ const svelteTsCode = `
 `;
 
 (async () => {
+  const cdnPrefix = "https://cdn.skypack.dev/";
   const files = {
     "/index.tsx": appCode,
     "/App.svelte": svelteTsCode,
@@ -51,10 +46,7 @@ const svelteTsCode = `
   const rolled = await bundle({
     input: "/index.tsx",
     files,
-    // files: {
-    //   "/foo.js": `export default "foo";`,
-    //   "/index.tsx": `import foo from "./foo"; console.log(foo)`,
-    // },
+    cdnPrefix,
     compilerOptions: {
       target: ts.ScriptTarget.ES5,
     },
@@ -62,11 +54,10 @@ const svelteTsCode = `
       // @ts-ignore
       svelte({
         target: ts.ScriptTarget.ES5,
-        cdnPrefix: "https://esm.sh/",
+        // cdnPrefix: "https://esm.sh/",
+        cdnPrefix,
         // cdnPrefix: "https://skypack.cdn.dev/",
-        svelteOptions: {
-          // legacy: true,
-        },
+        svelteOptions: {},
       }) as Plugin,
       // @ts-ignore
       {

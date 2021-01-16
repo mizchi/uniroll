@@ -22,15 +22,15 @@ export function bundle({
   importmaps = defaultImportMaps,
   compilerOptions = {},
   extraPlugins = [],
+  cdnPrefix,
   rollupOptions,
 }: CompileOptions) {
   const fallback = createImportMapsFallback({
     importmaps,
-    cdnPrefix: "https://esm.sh/",
+    cdnPrefix: cdnPrefix,
   });
   return rollup({
     input,
-    external: [],
     plugins: [
       replace({ ...define }),
       workerPlugin(),
@@ -40,6 +40,7 @@ export function bundle({
       }),
       virtualFs({ files }),
       transform({
+        cdnPrefix,
         compilerOptions: {
           ...defaultCompilerOptions,
           ...compilerOptions,

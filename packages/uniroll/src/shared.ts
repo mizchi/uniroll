@@ -5,7 +5,7 @@ import { ImportMaps } from "./types";
 const defaultCdnPrefix = "https://esm.sh/";
 
 export function createImportMapsFallback(opts: {
-  cdnPrefix?: string;
+  cdnPrefix?: string | ((id: string) => string);
   importmaps: ImportMaps;
 }) {
   const cdnPrefix = opts.cdnPrefix ?? defaultCdnPrefix;
@@ -23,16 +23,18 @@ export function createImportMapsFallback(opts: {
       return mapped;
     }
     // fallback
-    warn(`[uniroll] missed fallback to ${cdnPrefix}${id}`);
-    return `${cdnPrefix}${id}`;
+    const newId =
+      typeof cdnPrefix === "string" ? `${cdnPrefix}${id}` : cdnPrefix(id);
+    warn(`[uniroll] missed fallback to ${newId}`);
+    return `${newId}`;
   };
 }
 
 export const transform = ({
-  rewriteCdnPrefix,
+  cdnPrefix,
   compilerOptions,
 }: {
-  rewriteCdnPrefix?: string;
+  cdnPrefix: string | ((specifier: string) => string);
   compilerOptions: ts.CompilerOptions;
 }) => {
   return {
@@ -42,9 +44,9 @@ export const transform = ({
         const compiled = ts.transpileModule(code, {
           fileName: id,
           compilerOptions: compilerOptions,
-          transformers: rewriteCdnPrefix
+          transformers: cdnPrefix
             ? {
-                before: [cdnRewriteTransformerFactory(rewriteCdnPrefix)],
+                before: [cdnRewriteTransformerFactory(cdnPrefix)],
               }
             : undefined,
         });
@@ -60,14 +62,17 @@ export const transform = ({
 // Example.
 //     import foo from "foo";
 // =>  import foo from "https://esm.sh/foo";
-export const cdnRewriteTransformerFactory = (cdnPrefix: string) => (
-  ctx: ts.TransformationContext
-) => {
+export const cdnRewriteTransformerFactory = (
+  cdnPrefix: string | ((specifier: string) => string)
+) => (ctx: ts.TransformationContext) => {
   function visitNode(node: ts.Node): ts.Node {
     if (ts.isImportDeclaration(node)) {
       const specifier = node.moduleSpecifier.getText();
       const trim = specifier.slice(1, specifier.length - 1);
-      const result = rewriteSpecifier(trim, cdnPrefix);
+      const result =
+        typeof cdnPrefix === "string"
+          ? rewriteSpecifier(trim, cdnPrefix)
+          : cdnPrefix(trim);
 
       return ts.factory.updateImportDeclaration(
         node,

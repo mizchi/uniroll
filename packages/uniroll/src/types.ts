@@ -22,4 +22,5 @@ export type CompileOptions = {
   define?: RollupReplaceOptions;
   importmaps?: ImportMaps;
   extraPlugins?: Plugin[];
+  cdnPrefix: string | ((t: string) => string);
 };
