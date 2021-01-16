@@ -1,0 +1,20 @@
+{
+  "name": "rollup-plugin-uniroll-worker",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "test": "echo wip # jest",
+    "build": "tsc -p .",
+    "prepare": "yarn build"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
+}
