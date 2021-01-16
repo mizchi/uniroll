@@ -1,6 +1,6 @@
 import { Preprocessor } from "svelte/types/compiler/preprocess";
 import ts from "typescript";
-import { cdnRewriteTransformerFactory } from "uniroll";
+import { cdnRewriteTransformerFactory } from "./helpers";
 
 export const createSveltePreprocessor = ({
   cdnPrefix = "https://esm.sh/",
