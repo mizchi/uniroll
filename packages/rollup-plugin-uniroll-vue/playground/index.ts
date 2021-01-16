@@ -1,4 +1,7 @@
-import { compile } from "uniroll-vue";
+import "./pre";
+import { bundle } from "uniroll";
+import vue from "rollup-plugin-vue";
+import { unirollVue } from "../src/index";
 
 const appCode = `import { createApp } from "vue";
 import App from "./App.vue";
@@ -7,7 +10,7 @@ createApp(App).mount("#app");
 `;
 
 const vueTsCode = `<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed } from "https://unpkg.com/vue@3.0.0/dist/vue.runtime.esm-browser.js";
 export default defineComponent({
   name: "App",
   setup() {
@@ -42,14 +45,17 @@ h1 {
     "/index.ts": appCode,
     "/App.vue": vueTsCode,
   };
-  const rolled = await compile({
+  const rolled = await bundle({
     files,
     input: "/index.ts",
-    importmaps: {
-      imports: {
-        vue: "https://unpkg.com/vue@3.0.0/dist/vue.runtime.esm-browser.js"
-      },
-    },
+    cdnPrefix: "https://esm.sh/",
+    // @ts-ignore
+    extraPlugins: [vue({}), unirollVue()],
+    // importmaps: {
+    //   imports: {
+    //     vue: "https://unpkg.com/vue@3.0.0/dist/vue.runtime.esm-browser.js",
+    //   },
+    // },
   });
   const out = await rolled.generate({
     file: "index.js",

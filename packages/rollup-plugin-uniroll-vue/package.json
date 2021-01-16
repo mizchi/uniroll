@@ -1,7 +1,8 @@
 {
-  "name": "uniroll-vue",
+  "name": "rollup-plugin-uniroll-vue",
   "version": "2.6.1",
   "license": "MIT",
+  "types": "lib/index.d.ts",
   "main": "lib/index",
   "scripts": {
     "test": "jest",
@@ -11,8 +12,7 @@
     "build:lib": "tsc -p ."
   },
   "dependencies": {
-    "rollup-plugin-vue": "^6.0.0-beta.11",
-    "uniroll": "^2.6.1"
+    "rollup-plugin-vue": "^6.0.0-beta.11"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.2",
@@ -21,6 +21,7 @@
     "querystring-browser": "^1.0.4"
   },
   "peerDependencies": {
+    "rollup-plugin-vue": "*",
     "@vue/compiler-sfc": "3.*",
     "rollup": "*",
     "typescript": "*"
