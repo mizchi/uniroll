@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uniroll-vue",
-  "version": "2.6.1",
+  "version": "3.0.0-alpha.0",
   "license": "MIT",
   "types": "lib/index.d.ts",
   "main": "lib/index",
@@ -21,9 +21,9 @@
     "querystring-browser": "^1.0.4"
   },
   "peerDependencies": {
-    "rollup-plugin-vue": "*",
     "@vue/compiler-sfc": "3.*",
     "rollup": "*",
+    "rollup-plugin-vue": "*",
     "typescript": "*"
   },
   "files": [
