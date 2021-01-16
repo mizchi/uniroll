@@ -14,7 +14,7 @@ test("build", async () => {
     const bundled = await bundleLocal({
       input: "/index.tsx",
       files,
-      rewriteCdnPrefix: "https://esm.sh/",
+      cdnPrefix: "https://esm.sh/",
       rollupOptions: {
         onwarn(warnings, defaultHandler) {
           warned.push(warnings);

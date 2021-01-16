@@ -22,7 +22,7 @@ export function bundle({
   importmaps = defaultImportMaps,
   compilerOptions = {},
   extraPlugins = [],
-  cdnPrefix,
+  cdnPrefix = "https://esm.sh/",
   rollupOptions,
 }: CompileOptions) {
   const fallback = createImportMapsFallback({

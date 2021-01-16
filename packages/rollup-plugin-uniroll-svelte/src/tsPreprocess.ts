@@ -67,7 +67,6 @@ function transpileSvelteTypeScript(
       ],
     },
   });
-  // debugger;
   return out;
 }
 

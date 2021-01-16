@@ -39,17 +39,23 @@ console.log(sdk);
 
 exports[`transform preact 1`] = `
 Object {
-  "code": "var a,F,O;function I(t,e,n){var r,l,_,i=arguments,c={};for(_ in e)_==\\"key\\"?r=e[_]:_==\\"ref\\"?l=e[_]:c[_]=e[_];if(arguments.length>3)for(n=[n],_=3;_<arguments.length;_++)n.push(i[_]);if(n!=null&&(c.children=n),typeof t==\\"function\\"&&t.defaultProps!=null)for(_ in t.defaultProps)c[_]===void 0&&(c[_]=t.defaultProps[_]);return P(t,c,r,l,null)}function P(t,e,n,r,l){var _={type:t,props:e,key:n,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:l??++a.__v};return a.vnode!=null&&a.vnode(_),_}a={__e:function(t,e){for(var n,r,l,_=e.__h;e=e.__;)if((n=e.__c)&&!n.__)try{if((r=n.constructor)&&r.getDerivedStateFromError!=null&&(n.setState(r.getDerivedStateFromError(t)),l=n.__d),n.componentDidCatch!=null&&(n.componentDidCatch(t),l=n.__d),l)return e.__h=_,n.__E=n}catch(i){t=i;}throw t},__v:0},F=typeof Promise==\\"function\\"?Promise.prototype.then.bind(Promise.resolve()):setTimeout,O=0;
+  "code": "import { h } from 'https://esm.sh/preact';
 
-console.log(I('div'));
+console.log(h('div'));
 ",
   "dynamicImports": Array [],
   "exports": Array [],
   "facadeModuleId": "/index.tsx",
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
-  "importedBindings": Object {},
-  "imports": Array [],
+  "importedBindings": Object {
+    "https://esm.sh/preact": Array [
+      "h",
+    ],
+  },
+  "imports": Array [
+    "https://esm.sh/preact",
+  ],
   "isDynamicEntry": false,
   "isEntry": true,
   "isImplicitEntry": false,
@@ -60,26 +66,6 @@ console.log(I('div'));
       "removedExports": Array [],
       "renderedExports": Array [],
       "renderedLength": 22,
-    },
-    "https://cdn.esm.sh/v14/preact@10.5.10/esnext/preact.js": Object {
-      "originalLength": 10246,
-      "removedExports": Array [
-        "Component",
-        "Fragment",
-        "cloneElement",
-        "createContext",
-        "createRef",
-        "hydrate",
-        "isValidElement",
-        "render",
-        "toChildArray",
-      ],
-      "renderedExports": Array [
-        "createElement",
-        "h",
-        "options",
-      ],
-      "renderedLength": 913,
     },
   },
   "name": "index",

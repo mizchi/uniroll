@@ -8,6 +8,18 @@ module.exports = {
       config: [__filename],
     },
   },
+  resolve: {
+    ...shared.resolve,
+    alias: {
+      ...shared.resolve.alias,
+      process: false,
+      fs: false,
+      "css-blank-pseudo/postcss": "css-blank-pseudo/postcss.js",
+      "css-has-pseudo/postcss": "css-has-pseudo/postcss.js",
+      "css-prefers-color-scheme/postcss": "css-prefers-color-scheme/postcss.js",
+    },
+  },
+
   module: {
     ...shared.module,
     rules: [

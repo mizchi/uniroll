@@ -1,4 +1,7 @@
-import { createStylePreprocessor } from "./stylePreprocess";
+import {
+  Preprocessor,
+  PreprocessorGroup,
+} from "svelte/types/compiler/preprocess";
 import type { Plugin } from "rollup";
 import { compile as svelteCompile, preprocess } from "svelte/compiler";
 import { createSveltePreprocessor } from "./tsPreprocess";
@@ -9,18 +12,18 @@ type SveltePluginOptions = {
   target: ts.ScriptTarget;
   cdnPrefix: string;
   svelteOptions?: CompileOptions;
+  extraPreprocess?: PreprocessorGroup[];
 };
 
 export const svelte = (opts: SveltePluginOptions) => {
   const tsPreprocess = createSveltePreprocessor(opts);
-  const stylePreprocess = createStylePreprocessor({});
   return {
     name: "uniroll-svelte",
     async transform(code: string, id: string) {
       if (id.endsWith(".svelte")) {
         const { code: preprocessed } = await preprocess(
           code,
-          [tsPreprocess, stylePreprocess],
+          [tsPreprocess, ...(opts.extraPreprocess ?? ([] as any))],
           {
             filename: id,
           }
@@ -38,13 +41,11 @@ export const svelte = (opts: SveltePluginOptions) => {
               module: ts.ModuleKind.ESNext,
             },
           });
-          // debugger;
           return {
             code: ret.outputText,
             map: ret.sourceMapText,
           };
         } else {
-          // debugger;
           return result.js;
         }
       }
