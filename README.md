@@ -1,93 +1,36 @@
 # uniroll
 
-Opinionated frontend compiler.
+Opinionated frontend compiler in browser.
 
-## Features
-
-- Run in browser and webworker.
-- TypeScript Support
-- Resolve `https://...` url modules like `deno`.
+- Bundle in browser for rapid prototyping
+- Resolve modules by `https://esm.sh`
+- Transpile `typescript`
 
 ## How it works
 
-- Create virtual fs with `memfs` by `rollup-plugin-memfs`
+- Create virtual fs by `rollup-plugin-virtual-fs`
 - Load npm modules via `rollup-plugin-http-resolve`
+- Compile with `typescript`
 - Compile with `rollup`
 
 ## Run in browser
 
 ```
-npm install uniroll --save
+npm install uniroll typescript rollup --save
 ```
 
 ```js
-import { compile } from "uniroll";
+import { bundle } from "uniroll";
 const files = {
   "/foo.tsx": "export default 1",
   "/index.tsx": "import foo from 'foo';\nconsole.log('hello', foo)",
 };
-const bundle = await compile({
+const bundled = await bundle({
   files,
   input: "/index.tsx",
 });
-const out = await bundle.generate({ format: "esm" });
+const out = await bundled.generate({ format: "esm" });
 console.log(out.output[0]);
-```
-
-As rollup plugin usage.
-
-```ts
-import { rollup } from "rollup";
-import { getBaseConfig } from "uniroll";
-
-const files = {
-  "/foo.ts": "export default 1",
-  "/index.tsx": 'import foo from "./foo";console.log(foo);',
-};
-const memfs = createMemoryFs(files);
-const { plugins } = getBaseConfig({ fs: memfs });
-const rolled = await rollup({
-  input: "/index.tsx",
-  plugins,
-});
-// use it as rollup modules
-```
-
-## Example: import npm modules via import-map.
-
-```ts
-import {compile} from "uniroll";
-const importmaps = {
-  imports: {
-    "preact": "https://cdn.skypack.dev/preact"
-    "goober": "https://cdn.skypack.dev/goober@2"
-  }
-}
-const rolled = await compile({fs, importmaps})
-```
-
-```tsx
-import { h, render } from "preact";
-import { styled, setPragma } from "goober";
-
-setPragma(h);
-
-const PopupWrapper = styled("div")`
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 200px;
-  height: 100px;
-  background-color: wheat;
-`;
-
-function Popup() {
-  return <PopupWrapper>Hello!</PopupWrapper>;
-}
-
-const el = document.createElement("div");
-render(<Popup value={text} />, el);
-document.body.appendChild(el);
 ```
 
 ## CLI
@@ -137,9 +80,12 @@ module.exports = {
 
 ## ChangeLog
 
-### v1 => v2
+### v3
 
-TBD
+- Drop `rollup-plugin-memfs` and add new `rollup-plugin-virtual-fs`
+- Use `https://esm.sh`
+
+### v2
 
 - Use `typescript` compiler instead of `@babel/core` and dorp babel plugins.
 - No more `useInMemory: true` option. Just take `fs` or `memfs`.
