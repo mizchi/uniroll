@@ -10,7 +10,7 @@ $ yarn add rollup-plugin-virtual-fs
 
 - `files: {[fpath: string]: string}`: in memory file system.
 - `extension: string`: ext search order
-- `memoryOnly: boolean`: Access your file system (default: false)
+- `memoryOnly: boolean`: Access your file system (default: true)
 
 ## Example
 
