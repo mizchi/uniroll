@@ -68,6 +68,9 @@ export const cdnRewriteTransformerFactory = (
 ) => (ctx: ts.TransformationContext) => {
   function visitNode(node: ts.Node): ts.Node {
     if (ts.isImportDeclaration(node)) {
+      if (node.importClause?.isTypeOnly) {
+        return ts.factory.createEmptyStatement();
+      }
       const specifier = node.moduleSpecifier.getText();
       const trim = specifier.slice(1, specifier.length - 1);
       const result = resolveIdFallback(trim, importer) || trim;
@@ -112,19 +115,6 @@ export function extractImportSpecfiers(codes: string[]) {
   return urls;
 }
 
-const rewriteSpecifier = (specifier: string, cdnPrefix: string) => {
-  // relative path
-  if (specifier.startsWith(".")) {
-    return specifier;
-  }
-
-  // https direct
-  if (specifier.startsWith("https://")) {
-    return specifier;
-  }
-  return `${cdnPrefix}${specifier}`;
-};
-
 export const defaultCompilerOptions: ts.CompilerOptions = {
   target: ts.ScriptTarget.ES2019,
   module: ts.ModuleKind.ESNext,
@@ -132,6 +122,7 @@ export const defaultCompilerOptions: ts.CompilerOptions = {
   esModuleInterop: true,
   jsx: ts.JsxEmit.React,
   resolveJsonModule: true,
+  importsNotUsedAsValues: ts.ImportsNotUsedAsValues.Error,
 };
 
 export const defaultDefine: RollupReplaceOptions = {

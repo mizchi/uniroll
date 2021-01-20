@@ -69,9 +69,6 @@ function transpileSvelteTypeScript(
 const importTransformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
   const visit: ts.Visitor = (node) => {
     if (ts.isImportDeclaration(node)) {
-      if (node.importClause?.isTypeOnly) {
-        return ts.factory.createEmptyStatement();
-      }
       return ts.factory.createImportDeclaration(
         node.decorators,
         node.modifiers,
@@ -79,7 +76,8 @@ const importTransformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
         node.moduleSpecifier
       );
     }
-    return ts.visitEachChild(node, (child) => visit(child), context);
+    return node;
+    // return ts.visitEachChild(node, (child) => visit(child), context);
   };
   return (node) => ts.visitNode(node, visit);
 };
@@ -93,6 +91,10 @@ const cdnRewriteTransformerFactory = (
 ) => (ctx: ts.TransformationContext) => {
   function visitNode(node: ts.Node): ts.Node {
     if (ts.isImportDeclaration(node)) {
+      if (node.importClause?.isTypeOnly) {
+        return ts.factory.createEmptyStatement();
+      }
+
       const specifier = node.moduleSpecifier.getText();
       const trim = specifier.slice(1, specifier.length - 1);
       const result = resolveIdFallback(trim, importer) || trim;

@@ -18,11 +18,8 @@ export type CompileOptions = {
   files: { [k: string]: string };
   rollupOptions?: Partial<Omit<RollupOptions, "plugins" | "input">>;
   compilerOptions?: Partial<ts.CompilerOptions>;
-  // fallback?: (id: string, importer: string) => string;
   resolveIdFallback?: ResolveIdFallback;
   cache?: Map<string, string> | any;
   define?: RollupReplaceOptions;
-  // importmaps?: ImportMaps;
   extraPlugins?: Plugin[];
-  cdnPrefix?: string | ((t: string) => string);
 };
