@@ -6,6 +6,12 @@ $ npm install rollup-plugin-virtual-fs --save
 $ yarn add rollup-plugin-virtual-fs
 ```
 
+## Options
+
+- `files: {[fpath: string]: string}`: in memory file system.
+- `extension: string`: ext search order
+- `memoryOnly: boolean`: Access your file system (default: false)
+
 ## Example
 
 ```ts

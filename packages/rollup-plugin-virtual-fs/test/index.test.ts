@@ -58,6 +58,7 @@ test("native and vfs mixed", async () => {
     input: "file:///index.js",
     plugins: [
       virtualFs({
+        memoryOnly: false,
         files: {
           "/index.js": `
 import x from '${x}';
@@ -72,6 +73,36 @@ console.log(x);
   });
   // console.log(result);
   assert.ok(result.output[0].code.includes("hhhhh"));
+  // assert.ok(result.output[0].code.includes("bar"));
+  // assert.ok(result.output[0].code.includes("xxx"));
+});
+
+test("throw native and vfs mixed without memoryOnly", async (done) => {
+  const x = path.join(__dirname, "fixtures/x.js");
+  try {
+    await rollup({
+      input: "file:///index.js",
+      plugins: [
+        virtualFs({
+          memoryOnly: true,
+          files: {
+            "/index.js": `
+  import x from '${x}';
+  console.log(x);
+        `,
+          },
+        }),
+      ],
+    });
+    done(new Error("should fail"));
+  } catch (err) {
+    done();
+  }
+  // const result = await rolled.generate({
+  //   format: "es",
+  // });
+  // console.log(result);
+  // assert.ok(result.output[0].code.includes("hhhhh"));
   // assert.ok(result.output[0].code.includes("bar"));
   // assert.ok(result.output[0].code.includes("xxx"));
 });

@@ -6,9 +6,6 @@ import path from "path";
 
 export type FS = IPromisesAPI | typeof _fs["promises"];
 
-const EXPLICIT_SCHEME = "file://";
-type VFS = Map<string, string>;
-
 const SEARCH_EXTENSIONS = [
   "/index.tsx",
   "/index.ts",
@@ -43,20 +40,25 @@ const isFileSchema = (id: string) =>
 const isRelativePath = (id: string) => stripSchema(id).startsWith(".");
 const stripSchema = (id: string) => id.replace(/^file\:(\/\/)?/, "");
 
-export const virtualFs = (options: {
+export const virtualFs = ({
+  files,
+  extensions = SEARCH_EXTENSIONS,
+  memoryOnly = true,
+}: {
   files: { [k: string]: string };
   extensions?: string[];
+  memoryOnly?: boolean;
 }) => {
-  const vfs = new Map(Object.entries(options.files));
+  const vfs = new Map(Object.entries(files));
   return {
     name: "virtual-fs",
     async resolveId(id: string, importer: string | undefined) {
-      const exts = options.extensions ?? SEARCH_EXTENSIONS;
+      // const exts = extensions ?;
       log("[rollup-plugin-virtual-fs]", id, importer);
       const normalized = stripSchema(id);
       // entry point
       if (isFileSchema(id) && importer == null) {
-        return searchFile(vfs, normalized, exts);
+        return searchFile(vfs, normalized, extensions);
       }
       // relative filepath
       if (importer && isFileSchema(importer) && isRelativePath(id)) {
@@ -64,7 +66,7 @@ export const virtualFs = (options: {
         const fullpath = rawImporter
           ? path.resolve(path.dirname(rawImporter), normalized)
           : id;
-        const reslovedWithExt = searchFile(vfs, fullpath, exts);
+        const reslovedWithExt = searchFile(vfs, fullpath, extensions);
         if (reslovedWithExt) return reslovedWithExt;
         this.warn(`[rollup-plugin-virtual-fs] can not resolve id: ${fullpath}`);
       }
@@ -73,6 +75,8 @@ export const virtualFs = (options: {
       const real = stripSchema(id);
       const ret = vfs.get(real);
       if (ret) return ret;
+      if (memoryOnly)
+        throw new Error(`[virtualFs] ${id} is not found on files`);
     },
   } as Plugin;
 };
