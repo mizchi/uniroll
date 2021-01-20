@@ -38,7 +38,24 @@ const svelteTsCode = `
 `;
 
 (async () => {
-  const cdnPrefix = "https://cdn.skypack.dev/";
+  const resolveIdFallback = (id: string) => {
+    if (id.startsWith(".")) {
+      return;
+    }
+    if (["svelte", "svelte/internal"].includes(id)) {
+      return "https://cdn.skypack.dev/" + id;
+    }
+
+    if (id.startsWith("https://")) {
+      return id;
+    }
+
+    if (id.startsWith("https://") || id.startsWith(".")) {
+      return id;
+    }
+    return `https://esm.sh/${id}`;
+  };
+
   const files = {
     "/index.tsx": appCode,
     "/App.svelte": svelteTsCode,
@@ -46,7 +63,7 @@ const svelteTsCode = `
   const rolled = await bundle({
     input: "/index.tsx",
     files,
-    cdnPrefix,
+    resolveIdFallback,
     compilerOptions: {
       target: ts.ScriptTarget.ES5,
     },
@@ -54,9 +71,7 @@ const svelteTsCode = `
       // @ts-ignore
       svelte({
         target: ts.ScriptTarget.ES5,
-        // cdnPrefix: "https://esm.sh/",
-        cdnPrefix,
-        // cdnPrefix: "https://skypack.cdn.dev/",
+        resolveIdFallback,
         svelteOptions: {},
       }) as Plugin,
       // @ts-ignore

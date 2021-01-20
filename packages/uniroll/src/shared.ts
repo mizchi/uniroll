@@ -1,40 +1,42 @@
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
+import { ResolveIdFallback } from "rollup-plugin-http-resolve";
 import ts from "typescript";
 import { ImportMaps } from "./types";
 
-const defaultCdnPrefix = "https://esm.sh/";
+const skypackTargetList = [
+  "svelte",
+  "svelte/internal",
+  "preact",
+  "preact/hooks",
+];
 
-export function createImportMapsFallback(opts: {
-  cdnPrefix?: string | ((id: string) => string);
-  importmaps: ImportMaps;
-}) {
-  const cdnPrefix = opts.cdnPrefix ?? defaultCdnPrefix;
-  return (
-    id: string,
-    importer: string | void = undefined,
-    warn: (warning: any) => any
-  ) => {
-    if (importer == null) return;
-    if (id.startsWith("http")) return;
-    if (id.startsWith(".")) return;
-    // importmaps
-    const mapped = opts.importmaps?.imports[id];
-    if (mapped) {
-      return mapped;
-    }
-    // fallback
-    const newId =
-      typeof cdnPrefix === "string" ? `${cdnPrefix}${id}` : cdnPrefix(id);
-    warn(`[uniroll] missed fallback to ${newId}`);
-    return `${newId}`;
-  };
-}
+export const defaultExtractExternal = (specifiers: string[]) =>
+  specifiers
+    .filter((s) => !s.startsWith("."))
+    .map((s) => {
+      if (skypackTargetList.includes(s)) {
+        return `https://cdn.skypack.dev/${s}`;
+      } else {
+        return `https://esm.sh/${s}`;
+      }
+    });
+
+export const defaultResolveIdFallback: ResolveIdFallback = (id, importer) => {
+  if (importer == null) return;
+  if (id.startsWith(".")) return;
+  if (id.startsWith("https://")) return id;
+  if (skypackTargetList.includes(id)) {
+    return `https://cdn.skypack.dev/${id}`;
+  }
+
+  return `https://esm.sh/${id}`;
+};
 
 export const transform = ({
-  cdnPrefix,
+  resolveIdFallback,
   compilerOptions,
 }: {
-  cdnPrefix: string | ((specifier: string) => string);
+  resolveIdFallback: ResolveIdFallback;
   compilerOptions: ts.CompilerOptions;
 }) => {
   return {
@@ -44,11 +46,9 @@ export const transform = ({
         const compiled = ts.transpileModule(code, {
           fileName: id,
           compilerOptions: compilerOptions,
-          transformers: cdnPrefix
-            ? {
-                before: [cdnRewriteTransformerFactory(cdnPrefix)],
-              }
-            : undefined,
+          transformers: {
+            before: [cdnRewriteTransformerFactory(resolveIdFallback, id)],
+          },
         });
         return {
           code: compiled.outputText,
@@ -63,16 +63,14 @@ export const transform = ({
 //     import foo from "foo";
 // =>  import foo from "https://esm.sh/foo";
 export const cdnRewriteTransformerFactory = (
-  cdnPrefix: string | ((specifier: string) => string)
+  resolveIdFallback: ResolveIdFallback,
+  importer: string
 ) => (ctx: ts.TransformationContext) => {
   function visitNode(node: ts.Node): ts.Node {
     if (ts.isImportDeclaration(node)) {
       const specifier = node.moduleSpecifier.getText();
       const trim = specifier.slice(1, specifier.length - 1);
-      const result =
-        typeof cdnPrefix === "string"
-          ? rewriteSpecifier(trim, cdnPrefix)
-          : cdnPrefix(trim);
+      const result = resolveIdFallback(trim, importer) || trim;
 
       return ts.factory.updateImportDeclaration(
         node,

@@ -4,6 +4,8 @@ import workerPlugin from "./plugins/worker-plugin";
 import {
   defaultCompilerOptions,
   defaultDefine,
+  defaultExtractExternal,
+  defaultResolveIdFallback,
   extractImportSpecfiers,
   transform,
 } from "./shared";
@@ -18,11 +20,13 @@ export function bundleLocal({
   compilerOptions = defaultCompilerOptions,
   extraPlugins = [],
   rollupOptions,
-  cdnPrefix = "https://esm.sh/",
-}: CompileOptions) {
-  const external = extractImportSpecfiers(Object.values(files))
-    .filter((ex) => !ex.startsWith("."))
-    .map((p) => `https://esm.sh/${p}`);
+  resolveIdFallback = defaultResolveIdFallback,
+  extractExternal = defaultExtractExternal,
+}: CompileOptions & {
+  extractExternal?: (specifiers: string[]) => string[];
+}) {
+  const spcefiers = extractImportSpecfiers(Object.values(files));
+  const external = extractExternal(spcefiers);
   return rollup({
     input,
     external,
@@ -31,7 +35,7 @@ export function bundleLocal({
       workerPlugin(),
       virtualFs({ files }),
       transform({
-        cdnPrefix,
+        resolveIdFallback,
         compilerOptions,
       }),
       json(),

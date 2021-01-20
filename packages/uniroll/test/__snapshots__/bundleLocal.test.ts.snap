@@ -1,11 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`build 1`] = `
+exports[`buildLocal 1`] = `
 Object {
-  "code": "import { render, h } from 'https://esm.sh/preact';
+  "code": "import { render, h } from 'https://cdn.skypack.dev/preact';
+import { useEffect } from 'https://cdn.skypack.dev/preact/hooks';
 
 /* @jsx h */
-render(h(\\"h1\\", null, \\"hello\\"), document.body);
+function App() {
+    useEffect(() => {
+        console.log('xxx');
+    }, []);
+    return h(\\"div\\", null, \\"xxx\\");
+}
+render(h(App, null), document.body);
 ",
   "dynamicImports": Array [],
   "exports": Array [],
@@ -13,13 +20,17 @@ render(h(\\"h1\\", null, \\"hello\\"), document.body);
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
   "importedBindings": Object {
-    "https://esm.sh/preact": Array [
+    "https://cdn.skypack.dev/preact": Array [
       "render",
       "h",
     ],
+    "https://cdn.skypack.dev/preact/hooks": Array [
+      "useEffect",
+    ],
   },
   "imports": Array [
-    "https://esm.sh/preact",
+    "https://cdn.skypack.dev/preact",
+    "https://cdn.skypack.dev/preact/hooks",
   ],
   "isDynamicEntry": false,
   "isEntry": true,
@@ -27,10 +38,10 @@ render(h(\\"h1\\", null, \\"hello\\"), document.body);
   "map": null,
   "modules": Object {
     "/index.tsx": Object {
-      "originalLength": 88,
+      "originalLength": 221,
       "removedExports": Array [],
       "renderedExports": Array [],
-      "renderedLength": 59,
+      "renderedLength": 164,
     },
   },
   "name": "index",

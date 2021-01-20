@@ -1,13 +1,12 @@
 import { virtualFs } from "rollup-plugin-virtual-fs";
-import { httpResolve } from "rollup-plugin-http-resolve";
+import { httpResolve, ResolveIdFallback } from "rollup-plugin-http-resolve";
 import replace from "@rollup/plugin-replace";
 import workerPlugin from "./plugins/worker-plugin";
 import {
-  createImportMapsFallback,
   defaultCache,
   defaultCompilerOptions,
   defaultDefine,
-  defaultImportMaps,
+  defaultResolveIdFallback,
   transform,
 } from "./shared";
 import { rollup } from "rollup";
@@ -19,16 +18,11 @@ export function bundle({
   files,
   cache = defaultCache,
   define = defaultDefine,
-  importmaps = defaultImportMaps,
+  resolveIdFallback = defaultResolveIdFallback,
   compilerOptions = {},
   extraPlugins = [],
-  cdnPrefix = "https://esm.sh/",
   rollupOptions,
 }: CompileOptions) {
-  const fallback = createImportMapsFallback({
-    importmaps,
-    cdnPrefix: cdnPrefix,
-  });
   return rollup({
     input,
     plugins: [
@@ -36,11 +30,11 @@ export function bundle({
       workerPlugin(),
       httpResolve({
         cache,
-        fallback,
+        resolveIdFallback,
       }),
       virtualFs({ files }),
       transform({
-        cdnPrefix,
+        resolveIdFallback,
         compilerOptions: {
           ...defaultCompilerOptions,
           ...compilerOptions,

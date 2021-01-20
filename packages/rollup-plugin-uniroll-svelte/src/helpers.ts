@@ -1,39 +1,5 @@
 import ts from "typescript";
 
-// Example.
-//     import foo from "foo";
-// =>  import foo from "https://esm.sh/foo";
-export const cdnRewriteTransformerFactory = (
-  cdnPrefix: string | ((specifier: string) => string)
-) => (ctx: ts.TransformationContext) => {
-  function visitNode(node: ts.Node): ts.Node {
-    if (ts.isImportDeclaration(node)) {
-      const specifier = node.moduleSpecifier.getText();
-      const trim = specifier.slice(1, specifier.length - 1);
-      const result =
-        typeof cdnPrefix === "string"
-          ? rewriteSpecifier(trim, cdnPrefix)
-          : cdnPrefix(trim);
-
-      return ts.factory.updateImportDeclaration(
-        node,
-        node.decorators,
-        node.modifiers,
-        node.importClause,
-        ts.factory.createStringLiteral(result)
-      );
-    }
-    // return node;
-    return ts.visitEachChild(node, visitNode, ctx);
-  }
-
-  return (source: ts.SourceFile) =>
-    ts.factory.updateSourceFile(
-      source,
-      ts.visitNodes(source.statements, visitNode)
-    );
-};
-
 export function extractImportSpecfiers(codes: string[]) {
   const urls: string[] = [];
   for (const code of codes) {
@@ -54,19 +20,6 @@ export function extractImportSpecfiers(codes: string[]) {
   }
   return urls;
 }
-
-const rewriteSpecifier = (specifier: string, cdnPrefix: string) => {
-  // relative path
-  if (specifier.startsWith(".")) {
-    return specifier;
-  }
-
-  // https direct
-  if (specifier.startsWith("https://")) {
-    return specifier;
-  }
-  return `${cdnPrefix}${specifier}`;
-};
 
 export const defaultCompilerOptions: ts.CompilerOptions = {
   target: ts.ScriptTarget.ES2019,

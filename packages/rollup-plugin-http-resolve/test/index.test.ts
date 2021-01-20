@@ -74,7 +74,7 @@ test("build with fallback", async () => {
     input: "/index.js",
     plugins: [
       httpResolve({
-        fallback(id) {
+        resolveIdFallback(id) {
           if (!id.startsWith(".")) {
             return `https://esm.sh/${id}`;
           }

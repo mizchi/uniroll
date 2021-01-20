@@ -1,3 +1,4 @@
+import { ResolveIdFallback } from "rollup-plugin-http-resolve";
 import { RollupReplaceOptions } from "@rollup/plugin-replace";
 import { RollupOptions, Plugin } from "rollup";
 import ts from "typescript";
@@ -17,10 +18,11 @@ export type CompileOptions = {
   files: { [k: string]: string };
   rollupOptions?: Partial<Omit<RollupOptions, "plugins" | "input">>;
   compilerOptions?: Partial<ts.CompilerOptions>;
-  fallback?: (id: string, importer: string) => string;
+  // fallback?: (id: string, importer: string) => string;
+  resolveIdFallback?: ResolveIdFallback;
   cache?: Map<string, string> | any;
   define?: RollupReplaceOptions;
-  importmaps?: ImportMaps;
+  // importmaps?: ImportMaps;
   extraPlugins?: Plugin[];
   cdnPrefix?: string | ((t: string) => string);
 };

@@ -1,9 +1,10 @@
 import { Plugin } from "rollup";
 import path from "path";
 
-export type ImportMaps = {
-  imports: { [k: string]: string };
-};
+export type ResolveIdFallback = (
+  specifier: string,
+  importer?: string
+) => string | void;
 
 function isHttpProtocol(id: string | undefined | null) {
   return id?.startsWith("http://") || id?.startsWith("https://");
@@ -17,11 +18,7 @@ type HttpResolveOptions = {
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
-  fallback?: (
-    id: string,
-    importer: string,
-    warn: (warn: any) => void
-  ) => Promise<string | void> | void | string;
+  resolveIdFallback?: ResolveIdFallback;
 };
 const defaultCache = new Map();
 export const httpResolve = function httpResolve_({
@@ -29,7 +26,7 @@ export const httpResolve = function httpResolve_({
   onRequest,
   onUseCache,
   fetcher,
-  fallback,
+  resolveIdFallback,
 }: HttpResolveOptions = {}) {
   return {
     name: "http-resolve",
@@ -57,8 +54,8 @@ export const httpResolve = function httpResolve_({
           log("[http-resolve:end] return with relativePath", newId);
           return newId;
         }
-      } else if (fallback) {
-        const fallbacked = await fallback(id, importer, this.warn);
+      } else if (resolveIdFallback) {
+        const fallbacked = resolveIdFallback(id, importer);
         log("[http-resolve:end] use fallback to", id, "=>", fallbacked);
         if (fallbacked) {
           return fallbacked;

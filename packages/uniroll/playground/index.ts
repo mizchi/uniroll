@@ -1,9 +1,10 @@
 // import type { Plugin } from "rollup";
 
 import "regenerator-runtime";
-import { rollup } from "rollup";
-import { getBaseConfig } from "../src/config/base";
-import { createMemoryFs } from "../src";
+// import { rollup } from "rollup";
+import { bundle } from "../src/index";
+// import { getBaseConfig } from "../src/config/base";
+// import { createMemoryFs } from "../src";
 
 const tsRaw = `
 /** @jsx h */
@@ -28,22 +29,23 @@ render(<App />, document.body);
     "/foo.tsx": "export default 1",
     "/index.tsx": tsRaw,
   };
-  const memfs = createMemoryFs(files);
-  const { plugins } = getBaseConfig({
-    fs: memfs,
-    importmaps: {
-      imports: {
-        preact: "https://cdn.skypack.dev/preact@10.5.3",
-        "preact/hooks": "https://cdn.skypack.dev/preact@10.5.3/hooks",
+  // const { plugins } = getBaseConfig({
+  //   fs: memfs,
+  //   importmaps: {
+  //     imports: {
+  //       preact: "https://cdn.skypack.dev/preact@10.5.3",
+  //       "preact/hooks": "https://cdn.skypack.dev/preact@10.5.3/hooks",
+  //     },
+  //   },
+  // });
+  const rolled = await bundle({
+    input: "/index.tsx",
+    files,
+    rollupOptions: {
+      onwarn(warnings) {
+        console.warn("[warn]", warnings);
       },
     },
-  });
-  const rolled = await rollup({
-    input: "/index.tsx",
-    onwarn(warnings) {
-      console.warn("[warn]", warnings);
-    },
-    plugins: [...plugins],
   });
   const out = await rolled.generate({
     file: "index.js",

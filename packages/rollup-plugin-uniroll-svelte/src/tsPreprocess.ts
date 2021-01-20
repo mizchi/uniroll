@@ -1,26 +1,21 @@
 import { Preprocessor } from "svelte/types/compiler/preprocess";
 import ts from "typescript";
-import { cdnRewriteTransformerFactory } from "./helpers";
+import { ResolveIdFallback } from "./types";
 
 export const createSveltePreprocessor = ({
-  cdnPrefix = "https://esm.sh/",
+  resolveIdFallback,
+  importer,
   target,
 }: {
-  cdnPrefix?: string;
+  resolveIdFallback: ResolveIdFallback;
+  importer: string;
   target: ts.ScriptTarget;
 }) => {
   const script: Preprocessor = async ({ content, attributes, filename }) => {
     const out = transpileSvelteTypeScript(content, {
       fileName: filename ?? "/$$.tsx",
-      cdnPrefix: (id: string) => {
-        if (id === "svelte" || id === "svelte/internal") {
-          return id;
-        }
-        if (id.startsWith(".")) {
-          return id;
-        }
-        return `${cdnPrefix}${id}`;
-      },
+      resolveIdFallback,
+      importer,
       target,
     });
     return { code: out.outputText, map: out.sourceMapText };
@@ -49,24 +44,24 @@ const svelteTSCompilerOptions: ts.CompilerOptions = {
 function transpileSvelteTypeScript(
   code: string,
   opts: {
+    importer?: string;
     fileName: string;
-    cdnPrefix: (id: string) => string;
+    resolveIdFallback: ResolveIdFallback;
     target: ts.ScriptTarget;
   }
 ): ts.TranspileOutput {
-  // 内部的に tsx 拡張子ということにする
   const out = ts.transpileModule(code, {
-    fileName: opts.fileName ?? "/_.tsx",
+    fileName: opts.fileName,
     compilerOptions: { ...svelteTSCompilerOptions, target: opts.target },
     transformers: {
       before: [
-        ...(opts.cdnPrefix
-          ? [cdnRewriteTransformerFactory(opts.cdnPrefix)]
-          : []),
+        cdnRewriteTransformerFactory(opts.resolveIdFallback, opts.importer),
         importTransformer,
       ],
     },
   });
+  // throw out.outputText;
+
   return out;
 }
 
@@ -87,4 +82,36 @@ const importTransformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
     return ts.visitEachChild(node, (child) => visit(child), context);
   };
   return (node) => ts.visitNode(node, visit);
+};
+
+// Example.
+//     import foo from "foo";
+// =>  import foo from "https://esm.sh/foo";
+const cdnRewriteTransformerFactory = (
+  resolveIdFallback: (specifier: string, importer?: string) => string | void,
+  importer?: string
+) => (ctx: ts.TransformationContext) => {
+  function visitNode(node: ts.Node): ts.Node {
+    if (ts.isImportDeclaration(node)) {
+      const specifier = node.moduleSpecifier.getText();
+      const trim = specifier.slice(1, specifier.length - 1);
+      const result = resolveIdFallback(trim, importer) || trim;
+
+      return ts.factory.updateImportDeclaration(
+        node,
+        node.decorators,
+        node.modifiers,
+        node.importClause,
+        ts.factory.createStringLiteral(result)
+      );
+    }
+    // return node;
+    return ts.visitEachChild(node, visitNode, ctx);
+  }
+
+  return (source: ts.SourceFile) =>
+    ts.factory.updateSourceFile(
+      source,
+      ts.visitNodes(source.statements, visitNode)
+    );
 };

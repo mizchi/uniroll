@@ -1,20 +1,27 @@
 import "isomorphic-unfetch";
+import type { ResolveIdFallback } from "rollup-plugin-http-resolve";
 import { bundleLocal } from "../src/bundleLocal";
 const files = {
   "/index.tsx": `/* @jsx h */
 import { h, render } from 'preact';
-render(<h1>hello</h1>, document.body);
+import { useEffect } from 'preact/hooks';
+function App () {
+  useEffect(() => {
+    console.log('xxx');
+  }, []);
+  return <div>xxx</div>
+}
+render(<App />, document.body);
 `,
 };
 jest.setTimeout(150000);
 
-test("build", async () => {
+test("buildLocal", async () => {
   try {
     const warned: any = [];
     const bundled = await bundleLocal({
       input: "/index.tsx",
       files,
-      cdnPrefix: "https://esm.sh/",
       rollupOptions: {
         onwarn(warnings, defaultHandler) {
           warned.push(warnings);
@@ -24,7 +31,7 @@ test("build", async () => {
     });
     expect(warned).toHaveLength(0);
     const out = await bundled.generate({ format: "es" });
-    expect(out.output[0].code).toContain("https://esm.sh/preact");
+    expect(out.output[0].code).toContain("https://cdn.skypack.dev/preact");
     expect(out.output[0]).toMatchSnapshot();
   } catch (err) {
     console.log(err);

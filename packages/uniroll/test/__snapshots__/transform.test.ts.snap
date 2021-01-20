@@ -2,7 +2,35 @@
 
 exports[`transform nested 1`] = `
 Object {
-  "code": "import * as sdk from 'https://cdn.jsdelivr.net/npm/@plaidev/karte-action-sdk@1.0.7';
+  "code": "import { h, Fragment } from 'preact';
+import { useState, useEffect } from 'preact/hooks';
+import { styled } from 'goober';
+import { FaTimes } from 'serialized-svg-icons/fa';
+
+/**
+ * Minified by jsDelivr using Terser v3.14.1.
+ * Original file: /npm/@plaidev/karte-action-sdk@1.0.7/dist/index.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+var __makeTemplateObject=undefined&&undefined.__makeTemplateObject||function(n,t){return Object.defineProperty?Object.defineProperty(n,\\"raw\\",{value:t}):n.raw=t,n},__assign=undefined&&undefined.__assign||function(){return (__assign=Object.assign||function(n){for(var t,e=1,o=arguments.length;e<o;e++)for(var i in t=arguments[e])Object.prototype.hasOwnProperty.call(t,i)&&(n[i]=t[i]);return n}).apply(this,arguments)};function getTrack(n){return function(t,e){return n.track(t,__assign({message:{campaign_id:n.variables.campaignId,shorten_id:n.variables.shortenId,is_cg:!1},date:Date.now()},e))}}function detectElementOnViewport(n,t){var e=new IntersectionObserver(function(o){for(var i=0,r=o;i<r.length;i++){r[i].isIntersecting&&(t.onAppear(),e.unobserve(n));}},t.intersection);e.observe(n);}var templateObject_1,templateObject_2,templateObject_3,templateObject_4,templateObject_5,templateObject_6,templateObject_7,templateObject_8,templateObject_9,KARTE_MODAL_ROOT=\\"karte-modal-root\\";function createShadowRootStyled(n){return styled.bind({target:n})}function ensureModalRoot(n){void 0===n&&(n=!0);var t=document.getElementById(KARTE_MODAL_ROOT);if(t)return n?t.shadowRoot||t.attachShadow({mode:\\"open\\"}):t;var e=document.createElement(\\"div\\");return e.id=KARTE_MODAL_ROOT,document.body.appendChild(e),n?e.attachShadow({mode:\\"open\\"}):e}var Position=function(n){var t=\\"\\\\n    position: absolute;\\\\n    z-index: \\"+(n.zIndex||1)+\\";\\\\n    display: block;\\\\n  \\";return \\"center\\"===n.position?t+=\\"\\\\n      left: 50%;\\\\n      top: 50%;\\\\n      transform: translate(-50%, -50%);\\\\n    \\":\\"left-bottom\\"===n.position?t+=\\"\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\":\\"left-top\\"===n.position?t+=\\"\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\":\\"right-bottom\\"===n.position?t+=\\"\\\\n      right: 0;\\\\n      bottom: 0;\\\\n    \\":\\"right-top\\"===n.position?t+=\\"\\\\n      right: 0;\\\\n      top: 0;\\\\n    \\":\\"fix-bottom\\"===n.position?t+=\\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      bottom: 0;\\\\n    \\":\\"fix-top\\"===n.position?t+=\\"\\\\n      right: 0;\\\\n      left: 0;\\\\n      top: 0;\\\\n    \\":\\"fix-left\\"===n.position?t+=\\"\\\\n      left: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\":\\"fix-right\\"===n.position&&(t+=\\"\\\\n      right: 0;\\\\n      top: 0;\\\\n      bottom: 0;\\\\n    \\"),h(\\"div\\",{style:t},n.children)};var Animation=function(n){var t=\\"\\";return \\"fade-in\\"==n.animation?t=\\"\\\\n      animation-name: fadeIn;\\\\n      animation-duration: 1s;\\\\n      @keyframes fadeIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n        }\\\\n      }\\\\n    \\":\\"slide-in\\"==n.animation&&(t=\\"\\\\n      animation-name: slideIn;\\\\n      animation-duration: 0.6s;\\\\n      @keyframes slideIn {\\\\n        0% {\\\\n          opacity: 0;\\\\n          transform: translateY(-32px);\\\\n        }\\\\n        100% {\\\\n          opacity: 1;\\\\n          transform: translateY(0);\\\\n        }\\\\n      }\\\\n    \\"),h(\\"div\\",{style:t},n.children)};var Fog=function(n){return h(\\"div\\",{onClick:n.onClick,style:{position:\\"absolute\\",left:\\"0\\",bottom:\\"0\\",right:\\"0\\",top:0,background:\\"rgba(128, 128, 128, 0.3)\\"}})};var Icon=function(n){return h(\\"svg\\",{width:n.width||16,height:n.height||16,viewBox:n.serialized.attr.viewBox,stroke:\\"currentColor\\",fill:\\"currentColor\\",strokeWidth:\\"0\\"},h(\\"path\\",{d:n.serialized.child[0].attr.d}))};var Card=function(n){var t=n.styled(\\"div\\")(templateObject_1||(templateObject_1=__makeTemplateObject([\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"],[\\"\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 320px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))),e=n.styled(\\"div\\")(templateObject_2||(templateObject_2=__makeTemplateObject([\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"],[\\"\\\\n    padding: 18px 20px 18px;\\\\n    overflow: auto;\\\\n    font-size: 12px;\\\\n  \\"]))),o=useState(1),i=o[0],r=o[1];return useEffect(function(){if(0!=i){var n=function(n){Fog&&\\"Escape\\"===n.key&&r(0);};return window.addEventListener(\\"keydown\\",n),function(){return window.removeEventListener(\\"keydown\\",n)}}},[i]),h(Fragment,null,1==i&&h(Fragment,null,n.fog&&h(Fog,{onClick:function(){r(0);}}),h(Position,{position:n.position,zIndex:n.zIndex},h(t,null,h(CloseButton,{styled:n.styled,onClick:function(){n.track(\\"message_close\\"),r(0);}}),h(e,null,n.children)))))};var Board=function(n){var t=n.styled(\\"div\\")(templateObject_3||(templateObject_3=__makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"],[\\"\\\\n    box-sizing: border-box;\\\\n    position: relative;\\\\n    text-align: left;\\\\n    box-sizing: border-box;\\\\n  \\"]))),e=n.styled(\\"div\\")(templateObject_4||(templateObject_4=__makeTemplateObject([\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"],[\\"\\\\n    display: -webkit-flex;\\\\n    display: -ms-flexbox;\\\\n    display: flex;\\\\n    -webkit-flex-direction: column;\\\\n    -ms-flex-direction: column;\\\\n    flex-direction: column;\\\\n    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05), 0 8px 14px rgba(0, 0, 0, 0.08);\\\\n    border-radius: 8px;\\\\n    width: 350px;\\\\n    max-width: 90vw;\\\\n    max-height: 94.4vh;\\\\n    overflow-y: auto;\\\\n    background: #fff no-repeat 50%;\\\\n    background-size: cover;\\\\n    color: #333;\\\\n  \\"]))),o=useState(1),i=o[0],r=o[1];return useEffect(function(){if(0!=i){var n=function(n){Fog&&\\"Escape\\"===n.key&&r(0);};return window.addEventListener(\\"keydown\\",n),function(){return window.removeEventListener(\\"keydown\\",n)}}},[i]),h(Fragment,null,1==i&&h(Fragment,null,n.fog&&h(Fog,{onClick:function(){r(0);}}),h(Position,{position:n.position,zIndex:n.zIndex},h(t,null,h(CloseButton,{styled:n.styled,onClick:function(){n.track(\\"message_close\\"),r(0);}}),h(e,null,n.children)))))};var CloseButton=function(n){var t=n.styled(\\"button\\")(templateObject_5||(templateObject_5=__makeTemplateObject([\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"],[\\"\\\\n    /* position */\\\\n    position: absolute;\\\\n    top: 7px;\\\\n    right: 7px;\\\\n    padding: 6px;\\\\n\\\\n    border: solid 1px transparent;\\\\n    background: 0;\\\\n    color: #999;\\\\n    cursor: pointer;\\\\n\\\\n    /* animation */\\\\n    transition: 0.25s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n      transform: rotate(90deg);\\\\n    }\\\\n  \\"])));return h(t,{onClick:n.onClick},h(Icon,{serialized:FaTimes}))};var ButtonBlock=function(n){var t=n.styled(\\"div\\")(templateObject_6||(templateObject_6=__makeTemplateObject([\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"],[\\"\\\\n    text-align: left;\\\\n    line-height: 1.66667;\\\\n  \\"]))),e=n.styled(\\"a\\")(templateObject_7||(templateObject_7=__makeTemplateObject([\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\",\\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"],[\\"\\\\n    box-sizing: border-box;\\\\n    display: inline-block;\\\\n    border-radius: 4px;\\\\n    padding: 13px 16px;\\\\n    background-color: \\",\\";\\\\n    color: #eee;\\\\n    text-decoration: none;\\\\n    text-align: center;\\\\n    width: 100%;\\\\n\\\\n    transition: 0.2s;\\\\n    &:hover,\\\\n    &:focus {\\\\n      opacity: 0.75;\\\\n    }\\\\n  \\"])),n.color);return h(t,null,h(e,{target:\\"_blank\\",href:n.link,onClick:n.onClick},n.text))};var OnOffButton=function(n){var t=n.styled(\\"div\\")(templateObject_8||(templateObject_8=__makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '],['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #2aab9f;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:focus {\\\\n      outline: 0;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  ']))),e=n.styled(\\"div\\")(templateObject_9||(templateObject_9=__makeTemplateObject(['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '],['\\\\n    display: block;\\\\n    width: 100%;\\\\n    padding: 10px;\\\\n    border: none;\\\\n    background: #cccccc;\\\\n    color: #ffffff;\\\\n    font-size: 16px;\\\\n    text-align: center;\\\\n    border-radius: 5px;\\\\n    -webkit-border-radius: 5px;\\\\n    -moz-border-radius: 5px;\\\\n    -webkit-appearance: none;\\\\n\\\\n    cursor: pointer;\\\\n    -webkit-transition: 0.3s ease-in-out;\\\\n    -moz-transition: 0.3s ease-in-out;\\\\n    -o-transition: 0.3s ease-in-out;\\\\n    transition: 0.3s ease-in-out;\\\\n    -webkit-transform: translate3d(0, 0, 0);\\\\n    text-decoration: none;\\\\n\\\\n    * {\\\\n      cursor: pointer;\\\\n    }\\\\n    &:hover {\\\\n      opacity: 0.8;\\\\n      filter: alpha(opacity=80);\\\\n      -ms-filter: \\"alpha(opacity=80)\\";\\\\n      text-decoration: none;\\\\n    }\\\\n  '])));return n.valid?h(t,{onClick:n.onClick},n.textOk):h(e,null,n.textOff)};
+
+var sdk = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	getTrack: getTrack,
+	detectElementOnViewport: detectElementOnViewport,
+	createShadowRootStyled: createShadowRootStyled,
+	ensureModalRoot: ensureModalRoot,
+	Position: Position,
+	Animation: Animation,
+	Fog: Fog,
+	Icon: Icon,
+	Card: Card,
+	Board: Board,
+	CloseButton: CloseButton,
+	ButtonBlock: ButtonBlock,
+	OnOffButton: OnOffButton
+});
 
 console.log(sdk);
 ",
@@ -12,12 +40,26 @@ console.log(sdk);
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
   "importedBindings": Object {
-    "https://cdn.jsdelivr.net/npm/@plaidev/karte-action-sdk@1.0.7": Array [
-      "*",
+    "goober": Array [
+      "styled",
+    ],
+    "preact": Array [
+      "h",
+      "Fragment",
+    ],
+    "preact/hooks": Array [
+      "useState",
+      "useEffect",
+    ],
+    "serialized-svg-icons/fa": Array [
+      "FaTimes",
     ],
   },
   "imports": Array [
-    "https://cdn.jsdelivr.net/npm/@plaidev/karte-action-sdk@1.0.7",
+    "preact",
+    "preact/hooks",
+    "goober",
+    "serialized-svg-icons/fa",
   ],
   "isDynamicEntry": false,
   "isEntry": true,
@@ -30,6 +72,26 @@ console.log(sdk);
       "renderedExports": Array [],
       "renderedLength": 17,
     },
+    "https://cdn.jsdelivr.net/npm/@plaidev/karte-action-sdk@1.0.7": Object {
+      "originalLength": 12174,
+      "removedExports": Array [],
+      "renderedExports": Array [
+        "getTrack",
+        "detectElementOnViewport",
+        "createShadowRootStyled",
+        "ensureModalRoot",
+        "Position",
+        "Animation",
+        "Fog",
+        "Icon",
+        "Card",
+        "Board",
+        "CloseButton",
+        "ButtonBlock",
+        "OnOffButton",
+      ],
+      "renderedLength": 11860,
+    },
   },
   "name": "index",
   "referencedFiles": Array [],
@@ -39,23 +101,44 @@ console.log(sdk);
 
 exports[`transform preact 1`] = `
 Object {
-  "code": "import { h } from 'https://esm.sh/preact';
+  "code": "var n, i, r;
+function v(n2, l2, u2) {
+  var i2, t2, o2, r2 = arguments, f2 = {};
+  for (o2 in l2)
+    o2 == \\"key\\" ? i2 = l2[o2] : o2 == \\"ref\\" ? t2 = l2[o2] : f2[o2] = l2[o2];
+  if (arguments.length > 3)
+    for (u2 = [u2], o2 = 3; o2 < arguments.length; o2++)
+      u2.push(r2[o2]);
+  if (u2 != null && (f2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
+    for (o2 in n2.defaultProps)
+      f2[o2] === void 0 && (f2[o2] = n2.defaultProps[o2]);
+  return h(n2, f2, i2, t2, null);
+}
+function h(l2, u2, i2, t2, o2) {
+  var r2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o2 == null ? ++n.__v : o2};
+  return n.vnode != null && n.vnode(r2), r2;
+}
+n = {__e: function(n2, l2) {
+  for (var u2, i2, t2, o2 = l2.__h; l2 = l2.__; )
+    if ((u2 = l2.__c) && !u2.__)
+      try {
+        if ((i2 = u2.constructor) && i2.getDerivedStateFromError != null && (u2.setState(i2.getDerivedStateFromError(n2)), t2 = u2.__d), u2.componentDidCatch != null && (u2.componentDidCatch(n2), t2 = u2.__d), t2)
+          return l2.__h = o2, u2.__E = u2;
+      } catch (l3) {
+        n2 = l3;
+      }
+  throw n2;
+}, __v: 0}, i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
 
-console.log(h('div'));
+console.log(v('div'));
 ",
   "dynamicImports": Array [],
   "exports": Array [],
   "facadeModuleId": "/index.tsx",
   "fileName": "index.js",
   "implicitlyLoadedBefore": Array [],
-  "importedBindings": Object {
-    "https://esm.sh/preact": Array [
-      "h",
-    ],
-  },
-  "imports": Array [
-    "https://esm.sh/preact",
-  ],
+  "importedBindings": Object {},
+  "imports": Array [],
   "isDynamicEntry": false,
   "isEntry": true,
   "isImplicitEntry": false,
@@ -66,6 +149,27 @@ console.log(h('div'));
       "removedExports": Array [],
       "renderedExports": Array [],
       "renderedLength": 22,
+    },
+    "https://cdn.skypack.dev/-/preact@v10.5.10-49WVFen66J7dCk2zibWk/dist=es2020/preact.js": Object {
+      "originalLength": 15055,
+      "removedExports": Array [
+        "Component",
+        "Fragment",
+        "cloneElement",
+        "createContext",
+        "createRef",
+        "hydrate",
+        "isValidElement",
+        "render",
+        "toChildArray",
+        "default",
+      ],
+      "renderedExports": Array [
+        "createElement",
+        "h",
+        "options",
+      ],
+      "renderedLength": 1315,
     },
   },
   "name": "index",

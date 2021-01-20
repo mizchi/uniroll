@@ -6,6 +6,16 @@ import { Plugin } from "rollup";
 import { createStylePreprocessor } from "../src/server/stylePreprocessor";
 global.fetch = fetch;
 
+const resolveIdFallback = (id: string) => {
+  if (["svelte", "svelte/internal"].includes(id)) {
+    return id;
+  }
+  if (id.startsWith("https://") || id.startsWith(".")) {
+    return id;
+  }
+  return `https://esm.sh/${id}`;
+};
+
 it("bundle with svelte", async () => {
   const bundled = await bundle({
     cdnPrefix: "https://cdn.skypack.dev/",
@@ -30,11 +40,12 @@ new App({target: document.body});
     extraPlugins: [
       svelte({
         target: ts.ScriptTarget.ES2019,
-        cdnPrefix: "https://esm.sh/",
+        resolveIdFallback,
         svelteOptions: {},
       }) as any,
     ],
   });
+
   const out = await bundled.generate({ format: "es" });
   expect(out.output[0].code).toMatchSnapshot();
 });
@@ -74,7 +85,7 @@ new App({target: document.body});
     extraPlugins: [
       svelte({
         target: ts.ScriptTarget.ES5,
-        cdnPrefix: "https://esm.sh/",
+        resolveIdFallback,
         extraPreprocess: [
           createStylePreprocessor({
             autoprefixer: {

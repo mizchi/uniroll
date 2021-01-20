@@ -24,15 +24,15 @@ test("transform preact", async () => {
 test("transform nested", async () => {
   try {
     const bundled = await bundle({
-      importmaps: {
-        imports: {
-          preact: "https://cdn.skypack.dev/preact",
-          "preact/hooks": "https://cdn.skypack.dev/preact/hooks",
-          goober: "https://cdn.skypack.dev/goober@2",
-          "serialized-svg-icons/fa":
-            "https://cdn.jsdelivr.net/npm/serialized-svg-icons/fa/index.js",
-        },
-      },
+      // importmaps: {
+      //   imports: {
+      //     preact: "https://cdn.skypack.dev/preact",
+      //     "preact/hooks": "https://cdn.skypack.dev/preact/hooks",
+      //     goober: "https://cdn.skypack.dev/goober@2",
+      //     "serialized-svg-icons/fa":
+      //       "https://cdn.jsdelivr.net/npm/serialized-svg-icons/fa/index.js",
+      //   },
+      // },
       files: {
         "/index.tsx": `
 import * as sdk from "https://cdn.jsdelivr.net/npm/@plaidev/karte-action-sdk@1.0.7";
