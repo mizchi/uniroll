@@ -1,10 +1,6 @@
-import type _fs from "fs";
 import type { Plugin } from "rollup";
-import type { IPromisesAPI } from "memfs/lib/promises";
 
 import path from "path";
-
-export type FS = IPromisesAPI | typeof _fs["promises"];
 
 const SEARCH_EXTENSIONS = [
   "/index.tsx",

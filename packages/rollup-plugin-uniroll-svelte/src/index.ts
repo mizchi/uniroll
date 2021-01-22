@@ -43,7 +43,6 @@ export const svelte = (opts: SveltePluginOptions) => {
         if (result.warnings.length > 0) {
           this.warn(result.warnings.map((t) => t.message).join("\n"));
         }
-        // return result.js;
         if (opts.target === ts.ScriptTarget.ES5) {
           const ret = ts.transpileModule(result.js.code, {
             fileName: "$$temp.tsx",
