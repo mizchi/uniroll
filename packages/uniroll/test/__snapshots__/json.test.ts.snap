@@ -2,9 +2,17 @@
 
 exports[`build 1`] = `
 Object {
-  "code": "var foo = {\\"foo\\":1};
+  "code": "var foo = 1;
+var foo$1 = {
+	foo: foo
+};
 
-console.log('hello', foo);
+var bar = 1;
+var bar$1 = {
+	bar: bar
+};
+
+console.log('hello', foo$1, bar$1);
 ",
   "dynamicImports": Array [],
   "exports": Array [],
@@ -18,19 +26,29 @@ console.log('hello', foo);
   "isImplicitEntry": false,
   "map": null,
   "modules": Object {
+    "/bar.json": Object {
+      "originalLength": 12,
+      "removedExports": Array [],
+      "renderedExports": Array [
+        "bar",
+        "default",
+      ],
+      "renderedLength": 39,
+    },
     "/foo.json": Object {
       "originalLength": 12,
       "removedExports": Array [],
       "renderedExports": Array [
+        "foo",
         "default",
       ],
-      "renderedLength": 20,
+      "renderedLength": 39,
     },
     "/index.tsx": Object {
-      "originalLength": 50,
+      "originalLength": 84,
       "removedExports": Array [],
       "renderedExports": Array [],
-      "renderedLength": 26,
+      "renderedLength": 35,
     },
   },
   "name": "index",

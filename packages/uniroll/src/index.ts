@@ -1,14 +1,5 @@
-import {
-  createCompiler,
-  createMemoryFs,
-  createCompilerOptionBuilder,
-} from "./helpers";
-import { getBaseConfig } from "./config/base";
-export { UnirollConfigBuilderResult, UnirollOptions } from "./config/base";
-export const compile = createCompiler(getBaseConfig);
-export {
-  createMemoryFs,
-  getBaseConfig,
-  createCompilerOptionBuilder,
-  createCompiler,
-};
+export { bundle } from "./bundle";
+export { bundleLocal } from "./bundleLocal";
+export * from "./shared";
+export * from "./types";
+export { ResolveIdFallback } from "rollup-plugin-http-resolve";

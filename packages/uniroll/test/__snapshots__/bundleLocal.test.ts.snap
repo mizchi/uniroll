@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buildLocal 1`] = `
+Object {
+  "code": "import { render, h } from 'https://cdn.skypack.dev/preact';
+import { useEffect } from 'https://cdn.skypack.dev/preact/hooks';
+
+/* @jsx h */
+function App() {
+    useEffect(() => {
+        console.log('xxx');
+    }, []);
+    return h(\\"div\\", null, \\"xxx\\");
+}
+render(h(App, null), document.body);
+",
+  "dynamicImports": Array [],
+  "exports": Array [],
+  "facadeModuleId": "/index.tsx",
+  "fileName": "index.js",
+  "implicitlyLoadedBefore": Array [],
+  "importedBindings": Object {
+    "https://cdn.skypack.dev/preact": Array [
+      "render",
+      "h",
+    ],
+    "https://cdn.skypack.dev/preact/hooks": Array [
+      "useEffect",
+    ],
+  },
+  "imports": Array [
+    "https://cdn.skypack.dev/preact",
+    "https://cdn.skypack.dev/preact/hooks",
+  ],
+  "isDynamicEntry": false,
+  "isEntry": true,
+  "isImplicitEntry": false,
+  "map": null,
+  "modules": Object {
+    "/index.tsx": Object {
+      "originalLength": 221,
+      "removedExports": Array [],
+      "renderedExports": Array [],
+      "renderedLength": 164,
+    },
+  },
+  "name": "index",
+  "referencedFiles": Array [],
+  "type": "chunk",
+}
+`;

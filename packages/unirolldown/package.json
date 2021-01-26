@@ -1,0 +1,16 @@
+{
+  "name": "unirolldown",
+  "version": "3.0.3",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "mdast-util-to-hast": "^10.1.1",
+    "refractor": "^3.3.1",
+    "remark-breaks": "^2.0.1",
+    "remark-frontmatter": "^3.0.0",
+    "remark-parse": "^9.0.0",
+    "unified": "^9.2.0",
+    "unist-util-visit": "^2.0.3",
+    "yaml": "^1.10.0"
+  }
+}

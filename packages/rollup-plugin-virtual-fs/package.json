@@ -1,0 +1,19 @@
+{
+  "name": "rollup-plugin-virtual-fs",
+  "version": "3.0.3",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc -p .",
+    "prepare": "yarn build"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
+}

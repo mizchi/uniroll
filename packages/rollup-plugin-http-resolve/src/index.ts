@@ -1,12 +1,13 @@
 import { Plugin } from "rollup";
 import path from "path";
 
-export type ImportMaps = {
-  imports: { [k: string]: string };
-};
+export type ResolveIdFallback = (
+  specifier: string,
+  importer?: string
+) => string | void;
 
-function isHttpProtocol(id: string) {
-  return id.startsWith("http://") || id.startsWith("https://");
+function isHttpProtocol(id: string | undefined | null) {
+  return id?.startsWith("http://") || id?.startsWith("https://");
 }
 
 const DEBUG = false;
@@ -17,10 +18,7 @@ type HttpResolveOptions = {
   fetcher?: (url: string) => Promise<string>;
   onRequest?: (url: string) => void;
   onUseCache?: (url: string) => void;
-  fallback?: (
-    id: string,
-    importer: string
-  ) => Promise<{ rewriten: string; warning: boolean } | void>;
+  resolveIdFallback?: ResolveIdFallback;
 };
 const defaultCache = new Map();
 export const httpResolve = function httpResolve_({
@@ -28,13 +26,12 @@ export const httpResolve = function httpResolve_({
   onRequest,
   onUseCache,
   fetcher,
-  fallback,
-}: HttpResolveOptions) {
+  resolveIdFallback,
+}: HttpResolveOptions = {}) {
   return {
     name: "http-resolve",
     async resolveId(id: string, importer: string) {
       log("[http-resolve:resolveId:enter]", id, "from", importer);
-
       // on network resolve
       if (importer && isHttpProtocol(importer)) {
         if (id.startsWith("https://")) {
@@ -42,40 +39,32 @@ export const httpResolve = function httpResolve_({
           return id;
         }
         const { pathname, protocol, host } = new URL(importer);
+        // for skypack
         if (id.startsWith("/")) {
-          // /_/...
+          // pattern: /_/ in https://cdn.skypack.dev
           log(
             "[http-reslove:end] return with host root",
             `${protocol}//${host}${id}`
           );
           return `${protocol}//${host}${id}`;
         } else if (id.startsWith(".")) {
-          // ./xxx/yyy
-          // relative path
-
+          // pattern: ./xxx/yyy in https://esm.sh
           const resolvedPathname = path.join(path.dirname(pathname), id);
           const newId = `${protocol}//${host}${resolvedPathname}`;
           log("[http-resolve:end] return with relativePath", newId);
           return newId;
         }
-      }
-      if (fallback) {
-        log("[http-resolve:end] use fallback to", id);
-        const fallbacked = await fallback(id, importer);
-        if (fallbacked && fallbacked.rewriten) {
-          if (fallbacked.warning) {
-            this.warn(
-              `[http-resolve:fallback] ${id} => ${fallbacked.rewriten}`
-            );
-          }
-          return fallbacked.rewriten;
+      } else if (resolveIdFallback) {
+        const fallbacked = resolveIdFallback(id, importer);
+        log("[http-resolve:end] use fallback to", id, "=>", fallbacked);
+        if (fallbacked) {
+          return fallbacked;
         }
       }
     },
     async load(id: string) {
       log("[http-resolve:load]", id);
       if (id === null) {
-        this.warn("irregular missing id");
         return;
       }
       if (isHttpProtocol(id)) {
@@ -102,29 +91,3 @@ export const httpResolve = function httpResolve_({
     },
   } as Plugin;
 };
-
-export function createFallback({ importmaps }: { importmaps?: ImportMaps }) {
-  return async (
-    id: string,
-    importer: string | void = undefined
-  ): Promise<void | { rewriten: string; warning: boolean }> => {
-    if (importer == null) {
-      return;
-    }
-    if (id.startsWith("http")) {
-      return;
-    }
-    if (id.startsWith(".")) {
-      return;
-    }
-
-    const mapped = importmaps?.imports[id];
-    if (mapped) {
-      return { rewriten: mapped, warning: false };
-    }
-
-    return { rewriten: `https://cdn.skypack.dev/${id}`, warning: true };
-  };
-}
-
-// export default httpResolve;
