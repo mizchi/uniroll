@@ -1,3 +1,4 @@
+import { ResolveIdFallback } from "rollup-plugin-http-resolve";
 import fetch from "isomorphic-unfetch";
 import { bundle } from "uniroll";
 import { svelte } from "../src";
@@ -6,9 +7,18 @@ import { Plugin } from "rollup";
 import { createStylePreprocessor } from "../src/server/stylePreprocessor";
 global.fetch = fetch;
 
-const resolveIdFallback = (id: string) => {
+const resolveIdFallback: ResolveIdFallback = (
+  id: string,
+  importer?: string
+) => {
+  if (importer == null) {
+    return;
+  }
+  if (id.startsWith(".")) {
+    return;
+  }
   if (["svelte", "svelte/internal"].includes(id)) {
-    return id;
+    return `https://cdn.skypack.dev/${id}`;
   }
   if (id.startsWith("https://") || id.startsWith(".")) {
     return id;
@@ -18,7 +28,8 @@ const resolveIdFallback = (id: string) => {
 
 it("bundle with svelte", async () => {
   const bundled = await bundle({
-    cdnPrefix: "https://cdn.skypack.dev/",
+    // resolveIdFallback: "https://cdn.skypack.dev/",
+    resolveIdFallback,
     input: "/index.tsx",
     files: {
       "/index.tsx": `
@@ -52,7 +63,7 @@ new App({target: document.body});
 
 it("bundle for es5", async () => {
   const bundled = await bundle({
-    cdnPrefix: "https://cdn.skypack.dev/",
+    resolveIdFallback,
     input: "/index.tsx",
     files: {
       "/index.tsx": `

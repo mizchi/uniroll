@@ -20,10 +20,14 @@ const svelteCode = `
 <span class="text">{x}</span>
 `;
 
-it("bundle with svelte", async () => {
+it.only("bundle with svelte", async () => {
   const resolveIdFallback = (id: string) => {
+    console.log("id", id);
+    if (id.startsWith(".")) {
+      return;
+    }
     if (["svelte", "svelte/internal"].includes(id)) {
-      return id;
+      return `https://cdn.skypack.dev/${id}`;
     }
     if (id.startsWith("https://") || id.startsWith(".")) {
       return id;

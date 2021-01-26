@@ -85,7 +85,7 @@ const importTransformer: ts.TransformerFactory<ts.SourceFile> = (context) => {
 // Example.
 //     import foo from "foo";
 // =>  import foo from "https://esm.sh/foo";
-const cdnRewriteTransformerFactory = (
+export const cdnRewriteTransformerFactory = (
   resolveIdFallback: (specifier: string, importer?: string) => string | void,
   importer?: string
 ) => (ctx: ts.TransformationContext) => {

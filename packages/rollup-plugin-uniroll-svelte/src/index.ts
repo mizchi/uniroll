@@ -1,7 +1,10 @@
 import { PreprocessorGroup } from "svelte/types/compiler/preprocess";
 import type { Plugin } from "rollup";
 import { compile as svelteCompile, preprocess } from "svelte/compiler";
-import { createSveltePreprocessor } from "./tsPreprocess";
+import {
+  cdnRewriteTransformerFactory,
+  createSveltePreprocessor,
+} from "./tsPreprocess";
 import ts from "typescript";
 import { CompileOptions } from "svelte/types/compiler/interfaces";
 import { ResolveIdFallback } from "./types";
@@ -38,26 +41,25 @@ export const svelte = (opts: SveltePluginOptions) => {
             filename: id,
           }
         );
-        // throw preprocessed;
         const result = svelteCompile(preprocessed, opts.svelteOptions);
         if (result.warnings.length > 0) {
           this.warn(result.warnings.map((t) => t.message).join("\n"));
         }
-        if (opts.target === ts.ScriptTarget.ES5) {
-          const ret = ts.transpileModule(result.js.code, {
-            fileName: "$$temp.tsx",
-            compilerOptions: {
-              target: opts.target,
-              module: ts.ModuleKind.ESNext,
-            },
-          });
-          return {
-            code: ret.outputText,
-            map: ret.sourceMapText,
-          };
-        } else {
-          return result.js;
-        }
+        const ret = ts.transpileModule(result.js.code, {
+          fileName: "$temp.tsx",
+          compilerOptions: {
+            target: opts.target,
+            module: ts.ModuleKind.ESNext,
+          },
+          transformers: {
+            before: [cdnRewriteTransformerFactory(opts.resolveIdFallback!, id)],
+          },
+        });
+
+        return {
+          code: ret.outputText,
+          map: ret.sourceMapText,
+        };
       }
     },
   } as Plugin;
