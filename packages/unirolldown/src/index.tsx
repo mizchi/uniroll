@@ -2,7 +2,6 @@ export { parse } from "./parser";
 export { compile } from "./compiler";
 
 export function run({ target }: { target: HTMLElement }) {
-  const targets = Array.from(target.querySelectorAll(".js-unirolldown-iframe"));
   Array.from(target.querySelectorAll(".js-unirolldown-iframe")).forEach(
     (dom) => {
       runInIframe(dom as HTMLIFrameElement);
