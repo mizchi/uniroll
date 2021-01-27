@@ -4,7 +4,7 @@ import visit from "unist-util-visit";
 import type { VFileExtended } from "./types";
 import qs from "querystring";
 
-export const codeExtractor: unified.Plugin = (options: any = {}) => {
+export const extractor: unified.Plugin = (options: any = {}) => {
   return (tree, _file: VFile) => {
     const file = _file as VFileExtended;
     visit(tree, "code", (node: any, index, parent) => {

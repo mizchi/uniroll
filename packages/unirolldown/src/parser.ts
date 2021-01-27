@@ -1,20 +1,18 @@
-import { codeExtractor } from "./extractor";
-import unified from "unified";
-import parser from "remark-parse";
 import breaks from "remark-breaks";
 import frontmatterPlugin from "remark-frontmatter";
-import yaml from "yaml";
 import html from "remark-html";
-import { bundleLocal } from "uniroll";
-import vfile, { VFile } from "vfile";
+import parser from "remark-parse";
+import unified from "unified";
+import vfile from "vfile";
+import yaml from "yaml";
+import { extractor } from "./extractor";
 import { VFileExtended } from "./types";
-import qs from "querystring";
 
 const parserFn = unified()
   .use(parser as any, { footnotes: true } as any)
   .use(frontmatterPlugin, [{ type: "yaml", marker: "-" }])
   .use(breaks)
-  .use(codeExtractor)
+  .use(extractor)
   .use(html);
 
 function parseFileToAst(file: any) {
