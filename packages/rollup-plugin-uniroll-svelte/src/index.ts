@@ -24,8 +24,21 @@ const defaultResolveIdFallback: ResolveIdFallback = (
 };
 
 export const svelte = (opts: SveltePluginOptions) => {
+  /**
+   * if css is set to false, then output css file instead of js injection.
+   */
+  const willOutptuCss = !opts.svelteOptions?.css;
+  const cssFiles = new Map<string, any>();
+
   return {
     name: "uniroll-svelte",
+    buildStart() {
+      cssFiles.clear();
+    },
+    load(id: string) {
+      if (!cssFiles.has(id)) return;
+      return cssFiles.get(id);
+    },
     async transform(code: string, id: string) {
       if (id.endsWith(".svelte")) {
         const tsPreprocess = createSveltePreprocessor({
@@ -45,6 +58,13 @@ export const svelte = (opts: SveltePluginOptions) => {
         if (result.warnings.length > 0) {
           this.warn(result.warnings.map((t) => t.message).join("\n"));
         }
+
+        if (willOutptuCss && result.css.code) {
+          const cssFileName = `/svelte-generated-css/${Math.random().toString(16)}.css`;
+          result.js.code += `\nimport "${cssFileName}";\n`;
+          cssFiles.set(cssFileName, result.css);
+        }
+
         const ret = ts.transpileModule(result.js.code, {
           fileName: "$temp.tsx",
           compilerOptions: {
