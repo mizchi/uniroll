@@ -9,7 +9,7 @@ export const css = (options: Options = {}) => {
   let cssFiles: string[] = [];
 
   return {
-    name: 'css',
+    name: 'uniroll-css',
     buildStart() {
       cssFiles = [];
     },
