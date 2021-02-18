@@ -5,6 +5,7 @@ import { svelte } from "../src";
 import ts from "typescript";
 import { Plugin } from "rollup";
 import { createStylePreprocessor } from "../src/server/stylePreprocessor";
+import { css } from 'rollup-plugin-uniroll-css';
 global.fetch = fetch;
 
 const resolveIdFallback: ResolveIdFallback = (
@@ -132,4 +133,45 @@ new App({target: document.body});
   const out = await bundled.generate({ format: "es" });
   expect(out.output[0].code).toContain("-ms-grid");
   expect(out.output[0].code).toContain("/** @class */");
+});
+
+it("bundle with svelte and output css", async () => {
+  const bundled = await bundle({
+    // resolveIdFallback: "https://cdn.skypack.dev/",
+    resolveIdFallback,
+    input: "/index.tsx",
+    files: {
+      "/index.tsx": `
+import App from "./App.svelte";
+new App({target: document.body});
+      `,
+      "/App.svelte": `
+<script lang="ts">
+  let x = 1;
+</script>
+<style>
+  .text {
+    color: red;
+  }
+</style>
+<span class="text">{x}</span>
+      `,
+    },
+    extraPlugins: [
+      svelte({
+        target: ts.ScriptTarget.ES2019,
+        resolveIdFallback,
+        svelteOptions: {
+          css: false,
+        },
+      }) as any,
+      css({
+        output: 'bundled.css',
+      })
+    ],
+  });
+
+  const out = await bundled.generate({ format: "es" });
+  expect(out.output[1].fileName).toBe('bundled.css');
+  expect(out.output[1].code).toMatchSnapshot();
 });
