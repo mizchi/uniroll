@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`bundle with svelte 1`] = `
-"import './svelte-generated-css/0.f09cea195ed3a.css';
-
-function noop() {
+"function noop() {
 }
 function run(fn) {
   return fn();

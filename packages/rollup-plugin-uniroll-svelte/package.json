@@ -13,9 +13,12 @@
   "dependencies": {
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
-    "precss": "^4.0.0"
+    "precss": "^4.0.0",
+    "rollup-plugin-uniroll-css": "3.0.3",
+    "string-hash": "^1.1.3"
   },
   "devDependencies": {
+    "@types/string-hash": "^1.1.1",
     "svelte": "3.29.7",
     "uniroll": "^3.0.3"
   },

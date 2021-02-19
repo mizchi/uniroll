@@ -3,6 +3,11 @@
   "version": "3.0.3",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc -p .",
+    "prepublishOnly": "yarn build",
+    "test": "echo wip"
+  },
   "dependencies": {
     "mdast-util-to-hast": "^10.1.1",
     "refractor": "^3.3.1",

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "outDir": "lib",
+    "rootDir": "src",
+    "declaration": true,
+    "resolveJsonModule": true
+  }
+}

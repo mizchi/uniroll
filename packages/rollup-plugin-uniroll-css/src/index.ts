@@ -3,20 +3,21 @@ import { Plugin } from "rollup";
 import { transformCss } from "./transformCss";
 import { wrapWithStyleInjector } from "./wrapWithInjector";
 
-export const css = (options: Options = {}) => {
+export { wrapWithStyleInjector };
 
+export const css = (options: Options = {}) => {
   const willOutputFile = !!options.output;
   let cssFiles: string[] = [];
 
   return {
-    name: 'uniroll-css',
+    name: "uniroll-css",
     buildStart() {
       cssFiles = [];
     },
     async transform(code: string, id: string): Promise<string | void> {
-      if (!id.endsWith('.css')) return;
+      if (!id.endsWith(".css")) return;
       const css = await transformCss(code, options);
-      
+
       if (willOutputFile) {
         cssFiles.push(css);
         return;
@@ -32,6 +33,6 @@ export const css = (options: Options = {}) => {
         fileName: options.output,
         source: cssFiles.join(""),
       });
-    }
+    },
   } as Plugin;
 };
