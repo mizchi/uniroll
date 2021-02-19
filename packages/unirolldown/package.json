@@ -1,6 +1,6 @@
 {
   "name": "unirolldown",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -23,5 +23,5 @@
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1"
   },
-  "gitHead": "5cdc5f07fa4c9efb88ddac2e807a278013e0e8df"
+  "gitHead": "89875616a7a6945ca3b425d4b01aeae2bd25d0e4"
 }
