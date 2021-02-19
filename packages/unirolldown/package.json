@@ -23,5 +23,8 @@
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.1"
   },
+  "files": [
+    "lib"
+  ],
   "gitHead": "89875616a7a6945ca3b425d4b01aeae2bd25d0e4"
 }
