@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte-ssr",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "license": "MIT",
   "sideEffects": false,
   "typings": "lib/index.d.ts",
@@ -20,5 +20,6 @@
     "rollup-plugin-uniroll-svelte": "*",
     "typescript": "*",
     "uniroll": "*"
-  }
+  },
+  "gitHead": "5cdc5f07fa4c9efb88ddac2e807a278013e0e8df"
 }

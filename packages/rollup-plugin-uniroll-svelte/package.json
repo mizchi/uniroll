@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uniroll-svelte",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "license": "MIT",
   "main": "lib/index",
   "scripts": {
@@ -14,13 +14,13 @@
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
     "precss": "^4.0.0",
-    "rollup-plugin-uniroll-css": "^3.1.0",
+    "rollup-plugin-uniroll-css": "^3.1.1",
     "string-hash": "^1.1.3"
   },
   "devDependencies": {
     "@types/string-hash": "^1.1.1",
     "svelte": "3.29.7",
-    "uniroll": "^3.1.0"
+    "uniroll": "^3.1.1"
   },
   "peerDependencies": {
     "rollup": "*",
@@ -35,5 +35,5 @@
   "browserslist": [
     "last 2 Chrome versions"
   ],
-  "gitHead": "69ee2d62fb8f9e9b43be7af0e87db40c1deb772d"
+  "gitHead": "5cdc5f07fa4c9efb88ddac2e807a278013e0e8df"
 }
