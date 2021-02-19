@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`build 1`] = `
+exports[`build 1 1`] = `
 Object {
   "code": "console.log(1);
 ",
@@ -18,6 +18,45 @@ Object {
   "modules": Object {
     "/index.tsx": Object {
       "originalLength": 57,
+      "removedExports": Array [],
+      "renderedExports": Array [],
+      "renderedLength": 15,
+    },
+  },
+  "name": "index",
+  "referencedFiles": Array [],
+  "type": "chunk",
+}
+`;
+
+exports[`build 2 1`] = `
+Object {
+  "code": "const x = 1;
+
+console.log(x);
+",
+  "dynamicImports": Array [],
+  "exports": Array [],
+  "facadeModuleId": "/index.tsx",
+  "fileName": "index.js",
+  "implicitlyLoadedBefore": Array [],
+  "importedBindings": Object {},
+  "imports": Array [],
+  "isDynamicEntry": false,
+  "isEntry": true,
+  "isImplicitEntry": false,
+  "map": null,
+  "modules": Object {
+    "/foo.ts": Object {
+      "originalLength": 42,
+      "removedExports": Array [],
+      "renderedExports": Array [
+        "x",
+      ],
+      "renderedLength": 12,
+    },
+    "/index.tsx": Object {
+      "originalLength": 42,
       "removedExports": Array [],
       "renderedExports": Array [],
       "renderedLength": 15,

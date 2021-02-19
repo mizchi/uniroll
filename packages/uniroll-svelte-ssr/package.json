@@ -1,0 +1,24 @@
+{
+  "name": "uniroll-svelte-ssr",
+  "version": "3.0.3",
+  "license": "MIT",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "main": "lib/index",
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "test": "jest --testTimeout 15000",
+    "prepublishOnly": "yarn build",
+    "build": "tsc -p ."
+  },
+  "peerDependencies": {
+    "rollup": "*",
+    "typescript": "*",
+    "uniroll": "*",
+    "rollup-plugin-uniroll-svelte": "*"
+  }
+}

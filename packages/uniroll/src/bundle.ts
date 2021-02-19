@@ -26,6 +26,8 @@ export function bundle({
   return rollup({
     input,
     plugins: [
+      ...extraPlugins,
+      json(),
       replace({ ...define }),
       workerPlugin(),
       httpResolve({
@@ -40,8 +42,6 @@ export function bundle({
           ...compilerOptions,
         },
       }),
-      json(),
-      ...extraPlugins,
     ],
     ...rollupOptions,
   });
