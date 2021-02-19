@@ -57,7 +57,8 @@ new App({
 
 (async () => {
   const { html, css, js } = await renderToStaticContents({
-    target: "/App.svelte",
+    input: "/index.ts",
+    ssrTarget: "/App.svelte",
     files,
     props,
   });

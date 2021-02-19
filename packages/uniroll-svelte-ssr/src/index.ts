@@ -4,17 +4,17 @@ import { svelte } from "rollup-plugin-uniroll-svelte";
 import vm from "vm";
 import path from "path";
 
-type RenderStaticOptions = Omit<CompileOptions, "input"> & {
-  target: string;
+type RenderStaticOptions = CompileOptions & {
+  ssrTarget: string;
   props: any;
 };
 
 async function renderToStaticAssets({
-  target,
+  ssrTarget,
   props,
   ...options
 }: RenderStaticOptions): Promise<{ html: string; css: string }> {
-  let rel = path.relative("/", target);
+  let rel = path.relative("/", ssrTarget);
   rel = rel.startsWith(".") ? rel : "./" + rel;
   const bundled = await bundle({
     ...options,
@@ -69,7 +69,6 @@ export async function renderToStaticContents(
 }> {
   const { html, css } = await renderToStaticAssets(opts);
   const bundled = await bundle({
-    input: "/index.ts",
     extraPlugins: [
       svelte({
         emitCss: false,
