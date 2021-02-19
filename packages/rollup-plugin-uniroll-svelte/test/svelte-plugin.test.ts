@@ -5,6 +5,7 @@ import { svelte } from "../src";
 import ts from "typescript";
 import { Plugin } from "rollup";
 import { createStylePreprocessor } from "../src/server/stylePreprocessor";
+import { css } from "rollup-plugin-uniroll-css";
 global.fetch = fetch;
 
 const resolveIdFallback: ResolveIdFallback = (
@@ -12,6 +13,9 @@ const resolveIdFallback: ResolveIdFallback = (
   importer?: string
 ) => {
   if (importer == null) {
+    return;
+  }
+  if (id.startsWith("/svelte-generated-css")) {
     return;
   }
   if (id.startsWith(".")) {

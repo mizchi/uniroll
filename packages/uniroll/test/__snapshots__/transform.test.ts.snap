@@ -102,35 +102,35 @@ console.log(sdk);
 exports[`transform preact 1`] = `
 Object {
   "code": "var n, i, r;
-function v(n2, l2, u2) {
-  var i2, t2, o2, r2 = arguments, f2 = {};
-  for (o2 in l2)
-    o2 == \\"key\\" ? i2 = l2[o2] : o2 == \\"ref\\" ? t2 = l2[o2] : f2[o2] = l2[o2];
+function a(n2, l2, u2) {
+  var i2, t2, r2, o2 = arguments, f2 = {};
+  for (r2 in l2)
+    r2 == \\"key\\" ? i2 = l2[r2] : r2 == \\"ref\\" ? t2 = l2[r2] : f2[r2] = l2[r2];
   if (arguments.length > 3)
-    for (u2 = [u2], o2 = 3; o2 < arguments.length; o2++)
-      u2.push(r2[o2]);
+    for (u2 = [u2], r2 = 3; r2 < arguments.length; r2++)
+      u2.push(o2[r2]);
   if (u2 != null && (f2.children = u2), typeof n2 == \\"function\\" && n2.defaultProps != null)
-    for (o2 in n2.defaultProps)
-      f2[o2] === void 0 && (f2[o2] = n2.defaultProps[o2]);
-  return h(n2, f2, i2, t2, null);
+    for (r2 in n2.defaultProps)
+      f2[r2] === void 0 && (f2[r2] = n2.defaultProps[r2]);
+  return v(n2, f2, i2, t2, null);
 }
-function h(l2, u2, i2, t2, o2) {
-  var r2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: o2 == null ? ++n.__v : o2};
-  return n.vnode != null && n.vnode(r2), r2;
+function v(l2, u2, i2, t2, r2) {
+  var o2 = {type: l2, props: u2, key: i2, ref: t2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, __h: null, constructor: void 0, __v: r2 == null ? ++n.__v : r2};
+  return n.vnode != null && n.vnode(o2), o2;
 }
 n = {__e: function(n2, l2) {
-  for (var u2, i2, t2, o2 = l2.__h; l2 = l2.__; )
+  for (var u2, i2, t2; l2 = l2.__; )
     if ((u2 = l2.__c) && !u2.__)
       try {
         if ((i2 = u2.constructor) && i2.getDerivedStateFromError != null && (u2.setState(i2.getDerivedStateFromError(n2)), t2 = u2.__d), u2.componentDidCatch != null && (u2.componentDidCatch(n2), t2 = u2.__d), t2)
-          return l2.__h = o2, u2.__E = u2;
+          return u2.__E = u2;
       } catch (l3) {
         n2 = l3;
       }
   throw n2;
 }, __v: 0}, i = typeof Promise == \\"function\\" ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, r = 0;
 
-console.log(v('div'));
+console.log(a('div'));
 ",
   "dynamicImports": Array [],
   "exports": Array [],
@@ -150,8 +150,8 @@ console.log(v('div'));
       "renderedExports": Array [],
       "renderedLength": 22,
     },
-    "https://cdn.skypack.dev/-/preact@v10.5.10-49WVFen66J7dCk2zibWk/dist=es2020/preact.js": Object {
-      "originalLength": 15055,
+    "https://cdn.skypack.dev/-/preact@v10.5.12-AUHDlG9c8v865CiuCz34/dist=es2020,mode=imports/optimized/preact.js": Object {
+      "originalLength": 14812,
       "removedExports": Array [
         "Component",
         "Fragment",
@@ -169,7 +169,7 @@ console.log(v('div'));
         "h",
         "options",
       ],
-      "renderedLength": 1315,
+      "renderedLength": 1289,
     },
   },
   "name": "index",

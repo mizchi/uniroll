@@ -31,6 +31,8 @@ export function bundleLocal({
     input,
     external,
     plugins: [
+      ...extraPlugins,
+      json(),
       replace({ ...defaultDefine, ...define }),
       workerPlugin(),
       virtualFs({ files }),
@@ -38,8 +40,6 @@ export function bundleLocal({
         resolveIdFallback,
         compilerOptions,
       }),
-      json(),
-      ...extraPlugins,
     ],
     ...rollupOptions,
   });

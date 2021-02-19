@@ -124,6 +124,43 @@ const rolled = await bundle({
 });
 ```
 
+## Output css instead of css injection code
+```ts
+import type { Plugin } from "rollup";
+import ts from "typescript";
+import { bundle } from "uniroll";
+import { svelte } from "rollup-plugin-uniroll-svelte";
+import { css } from 'rollup-plugin-uniroll-css';
+const files = {
+  /* ... */
+};
+const cdnPrefix = "https://cdn.skypack.dev/";
+const rolled = await bundle({
+  input: "/index.tsx",
+  files,
+  cdnPrefix,
+  compilerOptions: {
+    target: ts.ScriptTarget.ES5,
+  },
+  extraPlugins: [
+    svelte({
+      target: ts.ScriptTarget.ES5,
+      cdnPrefix,
+      svelteOptions: {
+        /**
+         * output css instead of js injection
+         */
+        css: false,
+      },
+    }),
+    /**
+     * bundle css files including css that svelte emitted
+     */
+    css({ output: 'bundle.css' });
+  ]
+});
+```
+
 ## LICENSE
 
 MIT

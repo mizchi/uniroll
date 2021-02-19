@@ -22,7 +22,6 @@ const svelteCode = `
 
 it.only("bundle with svelte", async () => {
   const resolveIdFallback = (id: string) => {
-    console.log("id", id);
     if (id.startsWith(".")) {
       return;
     }

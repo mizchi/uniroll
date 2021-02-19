@@ -144,7 +144,6 @@ function make_dirty(component, i) {
 function init(component, options, instance, create_fragment, not_equal2, props, dirty = [-1]) {
   const parent_component = current_component;
   set_current_component(component);
-  const prop_values = options.props || {};
   const $$ = component.$$ = {
     fragment: null,
     ctx: null,
@@ -162,7 +161,7 @@ function init(component, options, instance, create_fragment, not_equal2, props, 
     skip_bound: false
   };
   let ready = false;
-  $$.ctx = instance ? instance(component, prop_values, (i, ret, ...rest) => {
+  $$.ctx = instance ? instance(component, options.props || {}, (i, ret, ...rest) => {
     const value = rest.length ? rest[0] : ret;
     if ($$.ctx && not_equal2($$.ctx[i], $$.ctx[i] = value)) {
       if (!$$.skip_bound && $$.bound[i])

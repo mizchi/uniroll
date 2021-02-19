@@ -1,7 +1,7 @@
 import "isomorphic-unfetch";
 import { bundle } from "../src/bundle";
 
-test("build", async () => {
+test("build 1", async () => {
   const warned = [];
   const files = {
     "/foo.ts": "export type Foo = any;",
@@ -24,11 +24,12 @@ test("build", async () => {
   expect(out.output[0]).toMatchSnapshot();
 });
 
-test("build", async () => {
+test("build 2", async () => {
   const warned = [];
   const files = {
-    "/foo.ts": "export type Foo = any; const x = 1;",
-    "/index.tsx": "import { Foo, x }  from './foo'; console.log(x as Foo);",
+    "/foo.ts": "export type Foo = any; export const x = 1;",
+    // "/index.tsx": "import { Foo, x }  from './foo'; console.log(x as Foo);",
+    "/index.tsx": "import { x } from './foo'; console.log(x);",
   };
 
   const bundled = await bundle({
@@ -43,6 +44,6 @@ test("build", async () => {
   });
   expect(warned.length).toBe(0);
   const out = await bundled.generate({ format: "es" });
-  console.log(out.output[0].code);
+  // console.log(out.output[0].code);
   expect(out.output[0]).toMatchSnapshot();
 });
