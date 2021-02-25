@@ -126,7 +126,7 @@ export const defaultCompilerOptions: ts.CompilerOptions = {
 };
 
 export const defaultDefine: RollupReplaceOptions = {
-  "process.env.NODE_ENV": JSON.stringify("development"),
+  // "process.env.NODE_ENV": JSON.stringify("development"),
   delimiters: ["", ""],
 };
 
