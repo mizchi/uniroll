@@ -10,10 +10,22 @@ import { terser } from "rollup-plugin-terser";
 import { extFallback } from "./extFallbackPlugin";
 import { svelte } from "rollup-plugin-uniroll-svelte";
 import ts from "typescript";
+import { transformCdnPlugin } from "./transformCdnPlugin";
 
 global.fetch = fetch;
 
 const defaultConfig = {};
+
+const TargetMap = {
+  es5: ts.ScriptTarget.ES5,
+  es2015: ts.ScriptTarget.ES2015,
+  es2016: ts.ScriptTarget.ES2016,
+  es2017: ts.ScriptTarget.ES2017,
+  es2018: ts.ScriptTarget.ES2018,
+  es2019: ts.ScriptTarget.ES2019,
+  es2020: ts.ScriptTarget.ES2020,
+  latest: ts.ScriptTarget.Latest,
+};
 
 class UnirollCommand extends Command {
   static description = "uniroll cli builder";
@@ -22,6 +34,7 @@ class UnirollCommand extends Command {
     watch: flags.boolean({ char: "w" }),
     minify: flags.boolean({ char: "m" }),
     help: flags.help({ char: "h" }),
+    target: flags.string({ char: "t", description: "build target" }),
     output: flags.string({ char: "o", description: "output dir" }),
     format: flags.string({ char: "f", description: "output format" }),
     config: flags.string({ char: "c", description: "config path" }),
@@ -47,6 +60,10 @@ class UnirollCommand extends Command {
       ? args.input
       : path.join(process.cwd(), args.input);
 
+    // target
+    // @ts-ignore
+    const target = TargetMap[flags.target] ?? ts.ScriptTarget.ES2019;
+
     const { rollupOptions, input, ...others } = {
       ...config,
       input: inputPath,
@@ -55,6 +72,11 @@ class UnirollCommand extends Command {
       useNativeFs: true,
     } as CompileOptions;
 
+    others.compilerOptions = {
+      target,
+      ...others.compilerOptions,
+    };
+
     let plugins: Plugin[] = getBundlePlugins(others) as Plugin[];
 
     if (flags.minify) {
@@ -62,14 +84,16 @@ class UnirollCommand extends Command {
     }
     plugins.push(extFallback({}));
 
+    if (flags.target) {
+      plugins.push(transformCdnPlugin(target));
+    }
     // include svelte default
     plugins.push(
       svelte({
+        target,
         resolveIdFallback: others.resolveIdFallback,
-        // target: ts.ScriptTarget.ES5,
       }) as Plugin
     );
-
     // output
     const format = (flags.format as any) ?? "es";
     let output = null;

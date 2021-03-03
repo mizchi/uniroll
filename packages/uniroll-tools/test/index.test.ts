@@ -24,11 +24,11 @@ test("chunks", () => {
 });
 
 test("with-config", () => {
-  execSync(`node ../../../bin/uniroll index.ts -o out`, {
+  execSync(`node ../../../bin/uniroll index.ts -o out -t es5`, {
     cwd: path.join(__dirname, "fixtures/with-config"),
   });
   const exsited = fs.existsSync(
-    path.join(__dirname, "fixtures/simple/out/index.js")
+    path.join(__dirname, "fixtures/with-config/out/index.js")
   );
   expect(exsited).toBeTruthy();
 });
