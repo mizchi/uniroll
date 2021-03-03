@@ -1,5 +1,5 @@
 import { virtualFs } from "rollup-plugin-virtual-fs";
-import { httpResolve, ResolveIdFallback } from "rollup-plugin-http-resolve";
+import { httpResolve } from "rollup-plugin-http-resolve";
 import replace from "@rollup/plugin-replace";
 import workerPlugin from "./plugins/worker-plugin";
 import {
@@ -13,36 +13,40 @@ import { rollup } from "rollup";
 import json from "@rollup/plugin-json";
 import { CompileOptions } from "./types";
 
-export function bundle({
-  input,
+export function getBundlePlugins({
   files,
   cache = defaultCache,
   define = defaultDefine,
   resolveIdFallback = defaultResolveIdFallback,
   compilerOptions = {},
   extraPlugins = [],
-  rollupOptions,
-}: CompileOptions) {
+  useVirtualFs = true,
+  useNativeFs = false,
+}: Omit<CompileOptions, "input" | "rollupOptions">) {
+  return [
+    ...extraPlugins,
+    json(),
+    replace({ ...define }),
+    workerPlugin(),
+    httpResolve({
+      cache,
+      resolveIdFallback,
+    }),
+    ...(useVirtualFs ? [virtualFs({ files, memoryOnly: !useNativeFs })] : []),
+    transform({
+      resolveIdFallback,
+      compilerOptions: {
+        ...defaultCompilerOptions,
+        ...compilerOptions,
+      },
+    }),
+  ];
+}
+
+export function bundle(options: CompileOptions) {
   return rollup({
-    input,
-    plugins: [
-      ...extraPlugins,
-      json(),
-      replace({ ...define }),
-      workerPlugin(),
-      httpResolve({
-        cache,
-        resolveIdFallback,
-      }),
-      virtualFs({ files }),
-      transform({
-        resolveIdFallback,
-        compilerOptions: {
-          ...defaultCompilerOptions,
-          ...compilerOptions,
-        },
-      }),
-    ],
-    ...rollupOptions,
+    input: options.input,
+    plugins: getBundlePlugins(options),
+    ...options.rollupOptions,
   });
 }
