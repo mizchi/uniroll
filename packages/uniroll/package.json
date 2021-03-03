@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "3.2.0",
+  "version": "3.2.5",
   "license": "MIT",
   "sideEffects": false,
   "typings": "lib/index.d.ts",
