@@ -1,5 +1,6 @@
 import { Plugin } from "rollup";
 import path from "path";
+import fetch from "node-fetch";
 
 export type ResolveIdFallback = (
   specifier: string,
