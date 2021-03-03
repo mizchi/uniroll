@@ -7,14 +7,15 @@
   },
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "echo wip # yarn --cwd ../uniroll run build:lib && tsc -p .",
-    "test": "echo wip # jest"
+    "build": "tsc -p .",
+    "test": "jest"
   },
   "dependencies": {
-    "esm": "^3.2.25",
-    "glob": "^7.1.6",
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
     "isomorphic-unfetch": "^3.1.0",
-    "meow": "^8.0.0",
+    "rollup": "^2.40.0",
+    "typescript": "^4.2.2",
     "uniroll": "^3.1.4",
     "uniroll-linter": "^3.1.2",
     "uniroll-optimizer": "^3.1.2",
@@ -24,5 +25,9 @@
     "lib",
     "bin"
   ],
-  "gitHead": "89875616a7a6945ca3b425d4b01aeae2bd25d0e4"
+  "gitHead": "89875616a7a6945ca3b425d4b01aeae2bd25d0e4",
+  "devDependencies": {
+    "@oclif/errors": "^1.3.4",
+    "terser": "^5.6.0"
+  }
 }
