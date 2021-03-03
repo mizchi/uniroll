@@ -125,11 +125,6 @@ export const defaultCompilerOptions: ts.CompilerOptions = {
   importsNotUsedAsValues: ts.ImportsNotUsedAsValues.Error,
 };
 
-export const defaultDefine: RollupReplaceOptions = {
-  // "process.env.NODE_ENV": JSON.stringify("development"),
-  delimiters: ["", ""],
-};
-
 export const defaultImportMaps: ImportMaps = {
   imports: {},
 };

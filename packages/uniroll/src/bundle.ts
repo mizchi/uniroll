@@ -5,7 +5,6 @@ import workerPlugin from "./plugins/worker-plugin";
 import {
   defaultCache,
   defaultCompilerOptions,
-  defaultDefine,
   defaultResolveIdFallback,
   transform,
 } from "./shared";
@@ -16,7 +15,6 @@ import { CompileOptions } from "./types";
 export function getBundlePlugins({
   files,
   cache = defaultCache,
-  define = defaultDefine,
   resolveIdFallback = defaultResolveIdFallback,
   compilerOptions = {},
   extraPlugins = [],
@@ -26,7 +24,7 @@ export function getBundlePlugins({
   return [
     ...extraPlugins,
     json(),
-    replace({ ...define }),
+    // replace({ ...define }),
     workerPlugin(),
     httpResolve({
       cache,

@@ -20,7 +20,6 @@ export type CompileOptions = {
   compilerOptions?: Partial<ts.CompilerOptions>;
   resolveIdFallback?: ResolveIdFallback;
   cache?: Map<string, string> | any;
-  define?: RollupReplaceOptions;
   extraPlugins?: Plugin[];
   useVirtualFs?: boolean;
   useNativeFs?: boolean;

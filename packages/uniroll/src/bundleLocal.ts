@@ -3,7 +3,6 @@ import replace from "@rollup/plugin-replace";
 import workerPlugin from "./plugins/worker-plugin";
 import {
   defaultCompilerOptions,
-  defaultDefine,
   defaultExtractExternal,
   defaultResolveIdFallback,
   extractImportSpecfiers,
@@ -19,7 +18,6 @@ type BundleLocalOptions = CompileOptions & {
 
 export function getBundleLocalPlugins({
   files,
-  define = defaultDefine,
   compilerOptions = defaultCompilerOptions,
   extraPlugins = [],
   useVirtualFs = true,
@@ -29,7 +27,6 @@ export function getBundleLocalPlugins({
   return [
     ...extraPlugins,
     json(),
-    replace({ ...defaultDefine, ...define }),
     workerPlugin(),
     ...(useVirtualFs ? [virtualFs({ files, memoryOnly: !useNativeFs })] : []),
     transform({
