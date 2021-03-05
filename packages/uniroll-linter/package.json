@@ -1,6 +1,6 @@
 {
   "name": "uniroll-linter",
-  "version": "3.0.3",
+  "version": "3.1.2",
   "main": "dist/uniroll-linter.js",
   "types": "index.d.ts",
   "license": "MIT",
@@ -20,5 +20,5 @@
     "@eslint/eslintrc": "^0.2.1",
     "eslint4b": "^7.14.0"
   },
-  "gitHead": "69ee2d62fb8f9e9b43be7af0e87db40c1deb772d"
+  "gitHead": "89875616a7a6945ca3b425d4b01aeae2bd25d0e4"
 }

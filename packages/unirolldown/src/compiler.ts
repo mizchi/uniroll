@@ -2,6 +2,7 @@ import html from "remark-html";
 import unified from "unified";
 import { bundleLocal } from "uniroll";
 import u from "unist-builder";
+// @ts-ignore
 import refractor from "refractor/core.js";
 
 refractor.register(require("refractor/lang/javascript.js"));

@@ -44,7 +44,8 @@ new App({
 jest.setTimeout(30 * 1000);
 it("render", async () => {
   const { html, css, js } = await renderToStaticContents({
-    target: "/App.svelte",
+    input: "/index.ts",
+    ssrTarget: "/App.svelte",
     files,
     props,
   });

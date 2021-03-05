@@ -13,34 +13,40 @@ import { rollup } from "rollup";
 import json from "@rollup/plugin-json";
 import { CompileOptions } from "./types";
 
-export function bundleLocal({
-  input,
+type BundleLocalOptions = CompileOptions & {
+  extractExternal?: (specifiers: string[]) => string[];
+};
+
+export function getBundleLocalPlugins({
   files,
   define = defaultDefine,
   compilerOptions = defaultCompilerOptions,
   extraPlugins = [],
-  rollupOptions,
+  useVirtualFs = true,
+  useNativeFs = false,
   resolveIdFallback = defaultResolveIdFallback,
-  extractExternal = defaultExtractExternal,
-}: CompileOptions & {
-  extractExternal?: (specifiers: string[]) => string[];
-}) {
-  const spcefiers = extractImportSpecfiers(Object.values(files));
+}: Omit<BundleLocalOptions, "rollupOptions" | "input" | "extractExternal">) {
+  return [
+    ...extraPlugins,
+    json(),
+    replace({ ...defaultDefine, ...define }),
+    workerPlugin(),
+    ...(useVirtualFs ? [virtualFs({ files, memoryOnly: !useNativeFs })] : []),
+    transform({
+      resolveIdFallback,
+      compilerOptions,
+    }),
+  ];
+}
+
+export function bundleLocal(options: BundleLocalOptions) {
+  const spcefiers = extractImportSpecfiers(Object.values(options.files));
+  const extractExternal = options.extractExternal ?? defaultExtractExternal;
   const external = extractExternal(spcefiers);
   return rollup({
-    input,
+    input: options.input,
     external,
-    plugins: [
-      ...extraPlugins,
-      json(),
-      replace({ ...defaultDefine, ...define }),
-      workerPlugin(),
-      virtualFs({ files }),
-      transform({
-        resolveIdFallback,
-        compilerOptions,
-      }),
-    ],
-    ...rollupOptions,
+    plugins: getBundleLocalPlugins(options),
+    ...options.rollupOptions,
   });
 }
