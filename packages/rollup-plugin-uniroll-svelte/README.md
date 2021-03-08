@@ -15,11 +15,9 @@ const files = {
 };
 
 // NOTE: esm.sh can not resorve svelte/internal
-const cdnPrefix = "https://cdn.skypack.dev/";
 const rolled = await bundle({
   input: "/index.tsx",
   files,
-  cdnPrefix,
   extraPlugins: [
     svelte({
       target: ts.ScriptTarget.ES2019,
@@ -45,7 +43,6 @@ const cdnPrefix = "https://cdn.skypack.dev/";
 const rolled = await bundle({
   input: "/index.tsx",
   files,
-  cdnPrefix,
   compilerOptions: {
     target: ts.ScriptTarget.ES5,
   },
@@ -125,6 +122,7 @@ const rolled = await bundle({
 ```
 
 ## Output css instead of css injection code
+
 ```ts
 import type { Plugin } from "rollup";
 import ts from "typescript";
