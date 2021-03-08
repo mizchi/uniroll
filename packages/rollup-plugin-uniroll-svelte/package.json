@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uniroll-svelte",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "license": "MIT",
   "main": "lib/index",
   "module": "dist/index.js",
