@@ -3,9 +3,11 @@
   "version": "3.2.5",
   "license": "MIT",
   "sideEffects": false,
-  "typings": "lib/index.d.ts",
+  "typings": "dist/index.d.ts",
   "main": "lib/index",
+  "module": "dist/index.js",
   "files": [
+    "rollup-plugin.js",
     "dist",
     "lib",
     "src"
@@ -14,23 +16,31 @@
     "test": "jest --testTimeout 15000",
     "prepublishOnly": "yarn build",
     "build": "run-p build:*",
-    "build:dist": "webpack --mode production",
+    "build:dist": "NODE_ENV=production rollup -c",
     "build:lib": "tsc -p ."
   },
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-replace": "^2.3.4",
+    "buffer-es6": "^4.9.3",
     "querystring-es3": "^0.2.1",
     "rollup-plugin-http-resolve": "^3.1.2",
     "rollup-plugin-virtual-fs": "^3.2.0",
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-html": "^0.2.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-typescript": "^8.2.0",
     "@types/autoprefixer": "^9.7.2",
+    "@wessberg/rollup-plugin-ts": "^1.3.8",
     "autoprefixer": "^10.0.2",
     "precss": "^4.0.0",
     "rollup": "^2.33.3",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "rollup-plugin-polyfill-node": "^0.6.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-uniroll-css": "^3.1.2",
     "terser": "^5.5.0"

@@ -1,7 +1,7 @@
 import { virtualFs } from "rollup-plugin-virtual-fs";
 import { httpResolve } from "rollup-plugin-http-resolve";
-import replace from "@rollup/plugin-replace";
-import workerPlugin from "./plugins/worker-plugin";
+// import replace from "@rollup/plugin-replace";
+// import workerPlugin from "./plugins/worker-plugin";
 import {
   defaultCache,
   defaultCompilerOptions,
@@ -10,7 +10,7 @@ import {
 } from "./shared";
 import { rollup } from "rollup";
 import json from "@rollup/plugin-json";
-import { CompileOptions } from "./types";
+import type { CompileOptions } from "./types";
 
 export function getBundlePlugins({
   files,
@@ -25,7 +25,7 @@ export function getBundlePlugins({
     ...extraPlugins,
     json(),
     // replace({ ...define }),
-    workerPlugin(),
+    // workerPlugin(),
     httpResolve({
       cache,
       resolveIdFallback,

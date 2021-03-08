@@ -1,0 +1,10 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "rollup": "^2.40.0",
+    "typescript": "^4.2.3"
+  }
+}

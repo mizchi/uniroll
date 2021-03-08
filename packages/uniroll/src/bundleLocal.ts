@@ -1,5 +1,4 @@
 import { virtualFs } from "rollup-plugin-virtual-fs";
-import replace from "@rollup/plugin-replace";
 import workerPlugin from "./plugins/worker-plugin";
 import {
   defaultCompilerOptions,

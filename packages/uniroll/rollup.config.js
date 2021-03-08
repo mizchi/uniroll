@@ -1,41 +1,45 @@
-import typescript from "@rollup/plugin-typescript";
+import ts from "@wessberg/rollup-plugin-ts";
 import { terser } from "rollup-plugin-terser";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import filesize from "rollup-plugin-filesize";
 import commonjs from "@rollup/plugin-commonjs";
 import alias from "@rollup/plugin-alias";
+import replace from "@rollup/plugin-replace";
 
 const ENV = process.env.NODE_ENV || "production";
 
 export default [
   {
-    input: "src/dev.ts",
+    input: "src/index.ts",
     output: {
       dir: "dist",
       format: "es",
     },
+    external: ["typescript"],
     plugins: [
-      // nodeBuiltins(),
-      // builtins(),
+      replace({
+        "process.platform": JSON.stringify("browser"),
+      }),
       alias({
-        entries: {
-          path: "path-browserify",
-          rollup: "rollup/dist/es/rollup.browser.js",
-        },
+        entries: [
+          {
+            find: "path",
+            replacement: "path-browserify",
+          },
+        ],
       }),
-      nodeResolve(),
+      nodeResolve({
+        browser: true,
+        preferBuiltins: false,
+      }),
       commonjs({
-        include: ["../../node_modules/**/*.js"],
+        include: [
+          "../../node_modules/**/*.js",
+          "../rollup-plugin-http-resolve/lib/index.js",
+          "../rollup-plugin-virtual-fs/lib/index.js",
+        ],
       }),
-      typescript({
-        target: "es2019",
-        module: "esnext",
-        include: ["../**/*.ts"],
-      }),
-      // replace({
-      //   "process.env.NODE_ENV": JSON.stringify(ENV),
-      // }),
-      ...(ENV === "production" ? [terser(), filesize()] : []),
+      ts({}),
+      ...(ENV === "production" ? [terser({ module: true })] : []),
     ],
   },
 ];
