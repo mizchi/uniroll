@@ -1,11 +1,6 @@
-// patch
-module.exports = {
+// patch typescript
+module.exports = (_opts) => ({
   name: "uniroll-self-builder",
-  // resolveId(id) {
-  //   if (id === "rollup") {
-  //     return "rollup/dist/es/rollup.browser.js";
-  //   }
-  // },
   transform(code, id) {
     if (id.endsWith("typescript.js")) {
       return code
@@ -14,4 +9,4 @@ module.exports = {
     }
     return;
   },
-};
+});

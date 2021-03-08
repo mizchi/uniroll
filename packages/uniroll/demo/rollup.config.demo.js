@@ -11,7 +11,7 @@ export default [
       format: "es",
     },
     plugins: [
-      plugin,
+      plugin(),
       commonjs({
         include: ["node_modules/**/*.js", "../../../node_modules/**/*.js"],
       }),
