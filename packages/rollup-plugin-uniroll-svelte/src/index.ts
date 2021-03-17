@@ -42,9 +42,16 @@ export const svelte = ({
           }
         );
         const result = svelteCompile(preprocessed, svelteOptions);
-        if (result.warnings.length > 0) {
-          this.warn(result.warnings.map((t) => t.message).join("\n"));
-        }
+        result.warnings.forEach(warning => {
+          const start = warning.start;
+          if (start !== undefined) {
+            const line = start.line;
+            const column = start.column;
+            this.warn(warning.message + " (" + line + ":" + column + ")");
+          } else {
+            this.warn(warning.message);
+          }
+        });
 
         if (emitCss && result.css.code) {
           const hash = Math.random().toString(32).substring(2);
