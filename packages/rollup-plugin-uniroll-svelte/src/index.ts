@@ -1,14 +1,15 @@
-import { PreprocessorGroup } from "svelte/types/compiler/preprocess";
 import type { EmittedAsset, Plugin } from "rollup";
+import type { ResolveIdFallback } from "./types";
+import type { CompileOptions } from "svelte/types/compiler/interfaces";
+import type { PreprocessorGroup } from "svelte/types/compiler/preprocess";
+
 import { compile as svelteCompile, preprocess } from "svelte/compiler";
 import {
   cdnRewriteTransformerFactory,
   createSveltePreprocessor,
 } from "./tsPreprocess";
 import ts from "typescript";
-import { CompileOptions } from "svelte/types/compiler/interfaces";
 import { defaultResolveIdFallback } from "uniroll";
-import { ResolveIdFallback } from "./types";
 
 type SveltePluginOptions = {
   target?: ts.ScriptTarget;
