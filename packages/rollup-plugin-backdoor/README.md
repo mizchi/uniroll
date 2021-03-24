@@ -4,15 +4,15 @@ Open backdoor to access instance via global vars.
 
 CAUTION: Only for rollup in browser(main-thread).
 
-```bash
+````bash
 $ npm install rollup-plugin-backdoor --save
 # or
 $ yarn add rollup-plugin-virtual-fs
-```
+```g
 
 ## Options
 
-- `instances: {[name: string]: any}`: in memory file system.
+- `instances: {[name: string]: any}`
 
 ## Example
 
@@ -20,14 +20,13 @@ $ yarn add rollup-plugin-virtual-fs
 // runner code
 import Foo from "backdoor:Foo";
 new Foo();
-```
+````
 
 ```ts
 // rollup.config.js
 import { backdoor } from "rollup-plugin-backdoor";
 
 export default {
-  input: "file:///index.js",
   plugins: [
     backdoor({
       instances: {
