@@ -1,4 +1,7 @@
-import { svelte } from "../src";
+// import { svelte } from "../src";
+// @ts-ignore
+import { svelte } from "../lib/index";
+
 import ts from "typescript";
 
 const svelteCode = `

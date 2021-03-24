@@ -110,18 +110,20 @@ function transition_in(block, local) {
     block.i(local);
   }
 }
-function mount_component(component, target, anchor) {
+function mount_component(component, target, anchor, customElement) {
   const {fragment, on_mount, on_destroy: on_destroy2, after_update} = component.$$;
   fragment && fragment.m(target, anchor);
-  add_render_callback(() => {
-    const new_on_destroy = on_mount.map(run).filter(is_function);
-    if (on_destroy2) {
-      on_destroy2.push(...new_on_destroy);
-    } else {
-      run_all(new_on_destroy);
-    }
-    component.$$.on_mount = [];
-  });
+  if (!customElement) {
+    add_render_callback(() => {
+      const new_on_destroy = on_mount.map(run).filter(is_function);
+      if (on_destroy2) {
+        on_destroy2.push(...new_on_destroy);
+      } else {
+        run_all(new_on_destroy);
+      }
+      component.$$.on_mount = [];
+    });
+  }
   after_update.forEach(add_render_callback);
 }
 function destroy_component(component, detaching) {
@@ -153,6 +155,7 @@ function init(component, options, instance, create_fragment, not_equal2, props, 
     bound: blank_object(),
     on_mount: [],
     on_destroy: [],
+    on_disconnect: [],
     before_update: [],
     after_update: [],
     context: new Map(parent_component ? parent_component.$$.context : []),
@@ -185,7 +188,7 @@ function init(component, options, instance, create_fragment, not_equal2, props, 
     }
     if (options.intro)
       transition_in(component.$$.fragment);
-    mount_component(component, options.target, options.anchor);
+    mount_component(component, options.target, options.anchor, options.customElement);
     flush();
   }
   set_current_component(parent_component);
