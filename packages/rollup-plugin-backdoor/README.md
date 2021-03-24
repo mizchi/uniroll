@@ -2,13 +2,13 @@
 
 Open backdoor to access instance via global vars.
 
-CAUTION: Only for rollup in browser(main-thread).
+CAUTION: Only for rollup in browser(main-thread)
 
-````bash
+```bash
 $ npm install rollup-plugin-backdoor --save
 # or
-$ yarn add rollup-plugin-virtual-fs
-```g
+$ yarn add rollup-plugin-backdoor
+```
 
 ## Options
 
@@ -20,7 +20,7 @@ $ yarn add rollup-plugin-virtual-fs
 // runner code
 import Foo from "backdoor:Foo";
 new Foo();
-````
+```
 
 ```ts
 // rollup.config.js
@@ -41,3 +41,7 @@ export default {
 ## LICENSE
 
 MIT
+
+```
+
+```
