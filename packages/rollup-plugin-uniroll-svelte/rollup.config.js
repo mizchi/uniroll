@@ -45,7 +45,7 @@ export default [
       }),
       ts({
         tsconfig: {
-          target: tsService.ScriptTarget.ES2019,
+          target: tsService.ScriptTarget.ES2018,
           allowSyntheticDefaultImports: true,
           allowJs: true,
         },
