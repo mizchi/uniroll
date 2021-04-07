@@ -13,7 +13,8 @@ export const createSveltePreprocessor = ({
 }) => {
   const script: Preprocessor = async ({ content, attributes, filename }) => {
     const out = transpileSvelteTypeScript(content, {
-      fileName: filename ?? "/$$.tsx",
+      // fileName: filename ?? "/$$.tsx",
+      fileName: (filename !== null && filename !== undefined) ? filename : 'default string',
       resolveIdFallback,
       importer,
       target,
@@ -91,8 +92,11 @@ export const cdnRewriteTransformerFactory = (
 ) => (ctx: ts.TransformationContext) => {
   function visitNode(node: ts.Node): ts.Node {
     if (ts.isImportDeclaration(node)) {
-      if (node.importClause?.isTypeOnly) {
-        return ts.factory.createEmptyStatement();
+      // if (node.importClause?.isTypeOnly) {
+      //   return ts.factory.createEmptyStatement();
+      // }
+      if (node.importClause !== undefined && node.importClause.isTypeOnly) {
+          return ts.factory.createEmptyStatement();
       }
 
       const specifier = node.moduleSpecifier.getText();

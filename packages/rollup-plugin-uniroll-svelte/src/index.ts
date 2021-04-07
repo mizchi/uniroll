@@ -33,7 +33,8 @@ export const svelte = ({
         const tsPreprocess = createSveltePreprocessor({
           target,
           importer: id,
-          resolveIdFallback: resolveIdFallback ?? defaultResolveIdFallback,
+          resolveIdFallback: 
+            (resolveIdFallback !== null && resolveIdFallback !== undefined) ? resolveIdFallback : defaultResolveIdFallback,
         });
         const { code: preprocessed } = await preprocess(
           code,
