@@ -1,6 +1,6 @@
 {
   "name": "uniroll",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "license": "MIT",
   "sideEffects": false,
   "typings": "dist/index.d.ts",
@@ -25,7 +25,7 @@
     "buffer-es6": "^4.9.3",
     "querystring-es3": "^0.2.1",
     "rollup-plugin-http-resolve": "^3.1.2",
-    "rollup-plugin-virtual-fs": "^3.4.0",
+    "rollup-plugin-virtual-fs": "^3.4.1",
     "url": "^0.11.0"
   },
   "devDependencies": {
