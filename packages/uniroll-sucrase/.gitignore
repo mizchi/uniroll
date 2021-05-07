@@ -1,0 +1,3 @@
+prebuild/svelte_internal.*
+dist
+public
