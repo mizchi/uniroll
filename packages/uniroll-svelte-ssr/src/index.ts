@@ -1,10 +1,11 @@
-import { bundle, CompileOptions } from "uniroll";
-import ts from "typescript";
-import { svelte } from "rollup-plugin-uniroll-svelte";
+import type { RollupOptions } from "rollup";
+import { bundle } from "uniroll-light/dist/index.cjs.js";
+import { svelte, svelteResolve } from "rollup-plugin-uniroll-svelte";
 import vm from "vm";
 import path from "path";
 
-type RenderStaticOptions = CompileOptions & {
+type RenderStaticOptions = RollupOptions & {
+  files: any;
   ssrTarget: string;
   props: any;
 };
@@ -16,22 +17,18 @@ async function renderToStaticAssets({
 }: RenderStaticOptions): Promise<{ html: string; css: string }> {
   let rel = path.relative("/", ssrTarget);
   rel = rel.startsWith(".") ? rel : "./" + rel;
-  const bundled = await bundle({
-    ...options,
+  const out = await bundle({
     input: "/__ssr__.ts",
-    resolveIdFallback: options.resolveIdFallback,
-    extraPlugins: [
+    plugins: [
+      { ...svelteResolve(), enforce: "pre" },
       svelte({
         emitCss: true,
-        target: ts.ScriptTarget.ES5,
-        resolveIdFallback: options.resolveIdFallback,
-        svelteOptions: {
+        svelte: {
           hydratable: true,
           generate: "ssr",
           css: false,
         },
       }),
-      ...(options.extraPlugins ?? []),
     ],
     files: {
       ...options.files,
@@ -39,7 +36,6 @@ async function renderToStaticAssets({
 out = App.render(${JSON.stringify(props)});`,
     },
   });
-  const out = await bundled.generate({ format: "es" });
   const code = out.output[0].code;
   const sandbox: any = { out: Object.create(null) };
 
@@ -68,24 +64,20 @@ export async function renderToStaticContents(
   js: string;
 }> {
   const { html, css } = await renderToStaticAssets(opts);
-  const bundled = await bundle({
-    extraPlugins: [
+  const out = await bundle({
+    ...opts,
+    plugins: [
+      { ...svelteResolve(), enforce: "pre" },
       svelte({
         emitCss: false,
-        target: ts.ScriptTarget.Latest,
-        resolveIdFallback: opts.resolveIdFallback,
-        svelteOptions: {
+        svelte: {
           hydratable: true,
           generate: "dom",
           css: false,
         },
       }),
-      ...(opts.extraPlugins ?? []),
     ],
-    ...opts,
   });
-
-  const out = await bundled.generate({ format: "iife" });
   const js = out.output[0].code;
   return {
     html,

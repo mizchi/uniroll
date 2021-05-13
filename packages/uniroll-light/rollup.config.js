@@ -21,10 +21,16 @@ function onwarn(warn, next) {
 export default [
   {
     input: "src/index.ts",
-    output: {
-      dir: "dist",
-      format: "es",
-    },
+    output: [
+      {
+        dir: "dist",
+        format: "es",
+      },
+      {
+        file: "dist/index.cjs.js",
+        format: "commonjs",
+      },
+    ],
     onwarn,
     plugins: [
       nodeResolve({

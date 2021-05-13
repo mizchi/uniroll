@@ -1,7 +1,7 @@
 {
   "name": "uniroll-light",
   "version": "3.4.2",
-  "type": "module",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "license": "MIT",
   "dependencies": {
@@ -17,5 +17,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "gitHead": "b613ef4cd96830b6c146c9fc8fd1412f8c983f8d"
 }

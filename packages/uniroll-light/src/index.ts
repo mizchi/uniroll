@@ -64,11 +64,6 @@ function defineConfig(
 
   newPlugins.sort(pluginSortFunc);
 
-  console.log(
-    "plugin order",
-    newPlugins.map((t) => t.name)
-  );
-
   return {
     ...rollupOptions,
     onwarn: rollupOptions.onwarn ?? defaultOnwarn,
