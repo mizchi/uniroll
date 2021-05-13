@@ -2,55 +2,57 @@ import ts from "@wessberg/rollup-plugin-ts";
 import { terser } from "rollup-plugin-terser";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import alias from "@rollup/plugin-alias";
-import replace from "@rollup/plugin-replace";
-import tsService from "typescript";
+import path from "path";
+import { string } from "rollup-plugin-string";
 
-const ENV = process.env.NODE_ENV || "production";
+const tsPlugin = ts({
+  include: [
+    "src/*.ts",
+    "../rollup-plugin-http-resolve/lib/index.js",
+    "../rollup-plugin-virtual-fs/lib/index.js",
+    "../../node_modules/**/*.js",
+  ],
+});
+
+function onwarn(warn, next) {
+  if (warn.code === "CIRCULAR_DEPENDENCY") {
+    return;
+  }
+  next(warn);
+}
+
+const svelteModulePath = path.join(__dirname, "node_modules/svelte");
 
 export default [
   {
     input: "src/index.ts",
-    output: {
-      dir: "dist",
-      format: "es",
-    },
-    external: ["typescript", "svelte", "uniroll"],
+    output: [
+      {
+        dir: "dist",
+        format: "es",
+      },
+      {
+        // dir: "dist",
+        file: "dist/index.cjs.js",
+        format: "commonjs",
+      },
+    ],
+    onwarn,
+    inlineDynamicImports: true,
     plugins: [
-      replace({
-        "process.platform": JSON.stringify("browser"),
-      }),
-      alias({
-        entries: [
-          {
-            find: "path",
-            replacement: "path-browserify",
-          },
-          {
-            find: "rollup-plugin-http-resolve",
-            replacement: "../rollup-plugin-http-resolve/lib/index.js",
-          },
-        ],
+      string({
+        include: [svelteModulePath + "/*.mjs", svelteModulePath + "/**/*.mjs"],
+        exclude: [svelteModulePath + "/compiler.mjs"],
       }),
       nodeResolve({
         browser: true,
         preferBuiltins: false,
       }),
       commonjs({
-        include: [
-          "../../node_modules/**/*.js",
-          "../rollup-plugin-http-resolve/lib/index.js",
-          "../rollup-plugin-virtual-fs/lib/index.js",
-        ],
+        include: ["../../node_modules/**/*.js"],
       }),
-      ts({
-        tsconfig: {
-          target: tsService.ScriptTarget.ES2019,
-          allowSyntheticDefaultImports: true,
-          allowJs: true,
-        },
-      }),
-      ...(ENV === "production" ? [terser({ module: true })] : []),
+      tsPlugin,
+      terser({ module: true }),
     ],
   },
 ];
