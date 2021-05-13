@@ -1,6 +1,6 @@
 {
   "name": "uniroll-svelte-ssr",
-  "version": "4.0.0",
+  "version": "4.0.1-alpha.0",
   "license": "MIT",
   "sideEffects": false,
   "typings": "lib/index.d.ts",
