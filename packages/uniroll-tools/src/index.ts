@@ -8,7 +8,7 @@ import { rollup, watch } from "rollup";
 import fetch from "isomorphic-unfetch";
 import { terser } from "rollup-plugin-terser";
 import { extFallback } from "./extFallbackPlugin";
-import { svelte } from "rollup-plugin-uniroll-svelte";
+import { svelte, svelteResolve } from "rollup-plugin-uniroll-svelte";
 import ts from "typescript";
 import { transformCdnPlugin } from "./transformCdnPlugin";
 
@@ -89,10 +89,10 @@ class UnirollCommand extends Command {
     }
     // include svelte default
     plugins.push(
+      svelteResolve(),
       svelte({
-        target,
-        resolveIdFallback: others.resolveIdFallback,
-      }) as Plugin
+        emitCss: false,
+      })
     );
     // output
     const format = (flags.format as any) ?? "es";
