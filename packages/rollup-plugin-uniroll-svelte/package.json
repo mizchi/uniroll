@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-uniroll-svelte",
-  "version": "3.4.2",
+  "version": "4.0.0",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "dist/index.js",
@@ -16,14 +16,14 @@
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
     "precss": "^4.0.0",
-    "rollup-plugin-uniroll-css": "^3.4.2",
+    "rollup-plugin-uniroll-css": "^4.0.0",
     "string-hash": "^1.1.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/string-hash": "^1.1.1",
     "svelte": "3.29.7",
-    "uniroll": "^3.4.2"
+    "uniroll": "^4.0.0"
   },
   "peerDependencies": {
     "rollup": "*",
