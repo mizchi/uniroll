@@ -1,13 +1,9 @@
 <script lang="ts">
-  import { wrap } from "comlink";
-
   import { onMount } from "svelte";
-  import type { WorkerApi } from "./uniroll";
-
   import { api } from "./api";
-
+  // import {} from "./"
   onMount(async () => {
-    const x = await api.foo();
+    const x = await api.bundle(`console.log('hello from bundle')`);
     console.log(x);
   });
 </script>
