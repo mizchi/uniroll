@@ -1,4 +1,4 @@
-import { bundle } from "../dist/index.js";
+import { bundle } from "../dist/index.mjs";
 
 console.log(bundle);
 async function main() {

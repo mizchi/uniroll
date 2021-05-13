@@ -1,8 +1,6 @@
 import ts from "@wessberg/rollup-plugin-ts";
-import { terser } from "rollup-plugin-terser";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import { string } from "rollup-plugin-string";
 
 const tsPlugin = ts({
   include: [
@@ -22,25 +20,6 @@ function onwarn(warn, next) {
 
 export default [
   {
-    input: "src/svelte_internal.js",
-    output: {
-      dir: "prebuild",
-      format: "es",
-    },
-    onwarn,
-    plugins: [
-      nodeResolve({
-        browser: true,
-        preferBuiltins: false,
-      }),
-      ts({
-        include: ["src/*.js"],
-        allowJs: true,
-        target: "es5",
-      }),
-    ],
-  },
-  {
     input: "src/index.ts",
     output: {
       dir: "dist",
@@ -48,12 +27,6 @@ export default [
     },
     onwarn,
     plugins: [
-      string({
-        include: ["prebuild/*.js"],
-      }),
-      // replace({
-      //   "process.platform": JSON.stringify("browser"),
-      // }),
       nodeResolve({
         browser: true,
         preferBuiltins: false,
@@ -66,7 +39,7 @@ export default [
         ],
       }),
       tsPlugin,
-      terser({ module: true }),
+      // terser({ module: true }),
     ],
   },
 ];

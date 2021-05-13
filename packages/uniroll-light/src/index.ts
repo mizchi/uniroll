@@ -8,7 +8,6 @@ import { transform } from "sucrase";
 import { rollup } from "rollup";
 import { virtualFs } from "rollup-plugin-virtual-fs";
 import type { RollupOptions, Plugin } from "rollup";
-import { sveltePlugin } from "./plugin_svelte";
 
 type UnirollPlugin = Plugin & {
   enforce?: "pre" | "post";
@@ -55,15 +54,20 @@ function defineConfig(
   const newPlugins = [
     ...(rollupOptions.plugins ?? []),
     base(),
-    sveltePlugin({
-      emitCss: false,
-    }),
+    // sveltePlugin({
+    //   emitCss: false,
+    // }),
     virtualFs({
       files,
     }),
   ] as UnirollPlugin[];
 
   newPlugins.sort(pluginSortFunc);
+
+  console.log(
+    "plugin order",
+    newPlugins.map((t) => t.name)
+  );
 
   return {
     ...rollupOptions,
