@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/string-hash": "^1.1.1",
-    "svelte": "3.29.7",
+    "svelte": "3.49.0",
     "uniroll": "^4.0.1-alpha.0"
   },
   "peerDependencies": {
